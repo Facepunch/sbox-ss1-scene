@@ -10,6 +10,12 @@
         {
           "__type": "Manager",
           "__guid": "c823a972-1936-4122-838c-17354fc27486",
+          "Camera2D": {
+            "_type": "component",
+            "component_id": "1230d863-8f42-4adf-a478-eaefa8fbafa2",
+            "go": "2dae15f1-83ec-4e7f-ac1e-5487524a3567",
+            "component_type": "Camera2D"
+          },
           "PlayerPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/player.prefab"
@@ -28,12 +34,12 @@
         {
           "__type": "Sandbox.CameraComponent",
           "__guid": "72c6dbcd-cb02-4717-852c-dea61fa2659d",
-          "BackgroundColor": "0.16009,0.34419,0.23679,1",
+          "BackgroundColor": "0,0,0,1",
           "ClearFlags": "All",
           "FieldOfView": 60,
           "IsMainCamera": true,
-          "Orthographic": false,
-          "OrthographicHeight": 1204,
+          "Orthographic": true,
+          "OrthographicHeight": 500,
           "Priority": 1,
           "RenderExcludeTags": "",
           "RenderTags": "",
@@ -41,6 +47,10 @@
           "Viewport": "0,0,1,1",
           "ZFar": 10000,
           "ZNear": 10
+        },
+        {
+          "__type": "Camera2D",
+          "__guid": "1230d863-8f42-4adf-a478-eaefa8fbafa2"
         }
       ]
     },
@@ -61,6 +71,42 @@
           "LightColor": "0.91373,0.98039,1,1",
           "Shadows": true,
           "SkyColor": "0.05882,0.07451,0.08235,1"
+        }
+      ]
+    },
+    {
+      "__guid": "b887f6e3-ea39-48b4-a2c6-5bd28d2769a1",
+      "Name": "Cube",
+      "Position": "282.6658,397.3252,-100",
+      "Rotation": "-0.007534361,0.002217483,-0.2823328,0.9592844",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "2b156be0-a31f-457c-afa3-70f417866bed",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/dev/box.vmdl",
+          "RenderType": "On",
+          "Tint": "0.0689,0.42326,0.11024,1"
+        }
+      ]
+    },
+    {
+      "__guid": "c13b0129-7c1f-4c62-868f-f751f9b228eb",
+      "Name": "bg",
+      "Position": "0,0,-200",
+      "Scale": "25,25,1",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "8b288391-3b7e-401b-8c3f-de784836d826",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/dev/box.vmdl",
+          "RenderType": "On",
+          "Tint": "0.03029,0.09302,0.03761,1"
         }
       ]
     }
@@ -88,7 +134,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-04-29T20:34:11.4968824-07:00",
+  "LastSaved": "2024-04-30T01:12:25.7774515-07:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

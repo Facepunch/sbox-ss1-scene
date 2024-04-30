@@ -1,33 +1,31 @@
 {
   "RootObject": {
-    "__guid": "faf484d3-1d54-4209-8c7d-e4020b578ede",
+    "__guid": "0dc58072-cd61-40f6-a54d-523ad00d8643",
     "Name": "player",
-    "Position": "0,0,100",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "Player",
-        "__guid": "7c118c6f-ac94-428f-8627-26634faf86fa",
+        "__guid": "ee2c48e7-aec7-468f-8276-021facf8c225",
         "Sprite": {
           "_type": "component",
-          "component_id": "9a8d2e22-c3e4-4376-84fe-e1e720b36db7",
-          "go": "d7d03ee9-4550-411a-9b07-407fb0d9efc0",
+          "component_id": "b1e03c37-1798-4ccf-bab7-7cfc61d903d6",
+          "go": "6d82dcef-32fa-4a15-aabe-90afeed2fe52",
           "component_type": "SpriteRenderer"
         }
       }
     ],
     "Children": [
       {
-        "__guid": "d7d03ee9-4550-411a-9b07-407fb0d9efc0",
+        "__guid": "6d82dcef-32fa-4a15-aabe-90afeed2fe52",
         "Name": "sprite",
-        "Position": "0,0,0",
         "Enabled": true,
         "NetworkMode": 2,
         "Components": [
           {
             "__type": "Sandbox.SpriteRenderer",
-            "__guid": "9a8d2e22-c3e4-4376-84fe-e1e720b36db7",
+            "__guid": "b1e03c37-1798-4ccf-bab7-7cfc61d903d6",
             "Additive": false,
             "CastShadows": false,
             "Color": "1,1,1,1",
@@ -36,7 +34,7 @@
             "FlipVertical": false,
             "FogStrength": 1,
             "Opaque": false,
-            "Size": "16,16",
+            "Size": "50,50",
             "Texture": "textures/sprites/player.vtex"
           }
         ]

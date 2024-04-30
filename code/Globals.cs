@@ -5,5 +5,5 @@ global using System.Linq;
 
 public class Globals
 {
-
+	public const float MOVE_FACTOR = 75f;
 }
