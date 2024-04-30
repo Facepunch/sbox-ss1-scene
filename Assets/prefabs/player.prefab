@@ -1,0 +1,52 @@
+{
+  "RootObject": {
+    "__guid": "faf484d3-1d54-4209-8c7d-e4020b578ede",
+    "Name": "player",
+    "Position": "0,0,100",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "Player",
+        "__guid": "7c118c6f-ac94-428f-8627-26634faf86fa",
+        "Sprite": {
+          "_type": "component",
+          "component_id": "9a8d2e22-c3e4-4376-84fe-e1e720b36db7",
+          "go": "d7d03ee9-4550-411a-9b07-407fb0d9efc0",
+          "component_type": "SpriteRenderer"
+        }
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "d7d03ee9-4550-411a-9b07-407fb0d9efc0",
+        "Name": "sprite",
+        "Position": "0,0,0",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "Sandbox.SpriteRenderer",
+            "__guid": "9a8d2e22-c3e4-4376-84fe-e1e720b36db7",
+            "Additive": false,
+            "CastShadows": false,
+            "Color": "1,1,1,1",
+            "DepthFeather": 0,
+            "FlipHorizontal": false,
+            "FlipVertical": false,
+            "FogStrength": 1,
+            "Opaque": false,
+            "Size": "16,16",
+            "Texture": "textures/sprites/player.vtex"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

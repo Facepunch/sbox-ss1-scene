@@ -1,0 +1,27 @@
+{
+  "Title": "ss1",
+  "Type": "game",
+  "Org": "local",
+  "Ident": "ss1",
+  "Tags": null,
+  "Schema": 1,
+  "Resources": null,
+  "PackageReferences": [],
+  "EditorReferences": null,
+  "Metadata": {
+    "MaxPlayers": 4,
+    "MinPlayers": 1,
+    "TickRate": 50,
+    "GameNetworkType": "Multiplayer",
+    "MapSelect": "Unrestricted",
+    "MapList": [
+      "facepunch.flatgrass"
+    ],
+    "RankType": "None",
+    "PerMapRanking": false,
+    "LeaderboardType": "None",
+    "CsProjName": "",
+    "StartupScene": "scenes/game.scene",
+    "LaunchMode": "Normal"
+  }
+}
