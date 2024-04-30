@@ -31,10 +31,11 @@ public enum DamageType { Melee, Ranged, Explosion, Fire, }
 public class Player : Thing
 {
 	[Property] public SpriteRenderer Sprite { get; set; }
+	[Property] public GameObject ArrowAimerPrefab { get; set;  }
 
 	public float Health { get; set; }
 
-	//public Arrow ArrowAimer { get; private set; }
+	public GameObject ArrowAimer { get; private set; }
 	public Vector2 AimDir { get; private set; }
 
 	[Sync] public bool IsDead { get; private set; }
@@ -97,6 +98,9 @@ public class Player : Thing
 		Statuses = new Dictionary<int, Status>();
 
 		InitializeStats();
+
+		ArrowAimer = ArrowAimerPrefab.Clone(Transform.Position);
+		ArrowAimer.SetParent( GameObject );
 	}
 
 	public void InitializeStats()
@@ -147,7 +151,7 @@ public class Player : Thing
 		IsDead = false;
 		Radius = 0.1f;
 		GridPos = Manager.Instance.GetGridSquareForPos( Position2D );
-		AimDir = Vector2.Up;
+		AimDir = new Vector2(0f, 1f);
 		NumRerollAvailable = 2;
 
 		Stats[PlayerStat.FireDamage] = 1.0f;
@@ -224,6 +228,9 @@ public class Player : Thing
 
 	protected override void OnUpdate()
 	{
+		Gizmo.Draw.Color = Color.White;
+		Gizmo.Draw.Text( $"MouseWorldPos: {Manager.Instance.MouseWorldPos}", new global::Transform( Transform.Position + new Vector3(0f, -35f, 0f) ) );
+
 		if ( IsProxy )
 			return;
 
@@ -246,8 +253,22 @@ public class Player : Thing
 		else if(Velocity.x < 0f)
 			Sprite.FlipHorizontal = false;
 
-
 		Manager.Instance.Camera2D.TargetPos = Position2D;
+
+		if(Input.UsingController)
+		{
+
+		}
+		else
+		{
+			AimDir = (Manager.Instance.MouseWorldPos - Position2D).Normal;
+		}
+
+		if ( ArrowAimer != null )
+		{
+			//ArrowAimer.LocalRotation = (MathF.Atan2( AimDir.y, AimDir.x ) * (180f / MathF.PI));
+			ArrowAimer.Transform.LocalPosition = AimDir * 35f;
+		}
 	}
 
 	public int GetExperienceReqForLevel( int level )

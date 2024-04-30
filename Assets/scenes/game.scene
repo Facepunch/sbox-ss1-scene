@@ -10,6 +10,12 @@
         {
           "__type": "Manager",
           "__guid": "c823a972-1936-4122-838c-17354fc27486",
+          "Camera": {
+            "_type": "component",
+            "component_id": "72c6dbcd-cb02-4717-852c-dea61fa2659d",
+            "go": "2dae15f1-83ec-4e7f-ac1e-5487524a3567",
+            "component_type": "CameraComponent"
+          },
           "Camera2D": {
             "_type": "component",
             "component_id": "1230d863-8f42-4adf-a478-eaefa8fbafa2",
@@ -20,6 +26,18 @@
             "_type": "gameobject",
             "prefab": "prefabs/player.prefab"
           }
+        },
+        {
+          "__type": "Sandbox.ScreenPanel",
+          "__guid": "ca3fcce6-2a42-45ad-b61e-abde732d8fd0",
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ZIndex": 100
+        },
+        {
+          "__type": "Hud",
+          "__guid": "a061b61e-8861-4c19-8dfe-a6ac8e281bb6"
         }
       ]
     },
@@ -58,7 +76,7 @@
       "__guid": "42e851a4-43f5-4ae6-8e3a-002ae1ffc459",
       "Name": "Directional Light",
       "Position": "0,0,200",
-      "Rotation": "-0.2459842,0.5938582,0.2931525,0.7077327",
+      "Rotation": "-0.2764369,0.6673765,0.2646312,0.6388752",
       "Tags": "light_directional,light",
       "Enabled": true,
       "NetworkMode": 2,
@@ -75,28 +93,10 @@
       ]
     },
     {
-      "__guid": "b887f6e3-ea39-48b4-a2c6-5bd28d2769a1",
-      "Name": "Cube",
-      "Position": "282.6658,397.3252,-100",
-      "Rotation": "-0.007534361,0.002217483,-0.2823328,0.9592844",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "Components": [
-        {
-          "__type": "Sandbox.ModelRenderer",
-          "__guid": "2b156be0-a31f-457c-afa3-70f417866bed",
-          "BodyGroups": 18446744073709551615,
-          "Model": "models/dev/box.vmdl",
-          "RenderType": "On",
-          "Tint": "0.0689,0.42326,0.11024,1"
-        }
-      ]
-    },
-    {
       "__guid": "c13b0129-7c1f-4c62-868f-f751f9b228eb",
       "Name": "bg",
-      "Position": "0,0,-200",
-      "Scale": "25,25,1",
+      "Position": "0,0,-100",
+      "Scale": "25,20,1",
       "Enabled": true,
       "NetworkMode": 2,
       "Components": [
@@ -107,6 +107,115 @@
           "Model": "models/dev/box.vmdl",
           "RenderType": "On",
           "Tint": "0.03029,0.09302,0.03761,1"
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "db30b7f3-ef83-4294-9e77-f875fb051db2",
+          "Center": "0,0,0",
+          "IsTrigger": false,
+          "Scale": "50,50,50",
+          "Static": true,
+          "Surface": "surfaces/default.surface"
+        }
+      ]
+    },
+    {
+      "__guid": "f686c6ef-6fda-4ef0-89cf-4ecadaeba4d1",
+      "Name": "bg_cubes",
+      "Position": "10.60519,-279.1306,0",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Children": [
+        {
+          "__guid": "b887f6e3-ea39-48b4-a2c6-5bd28d2769a1",
+          "Name": "Cube",
+          "Position": "272.0606,676.4558,-78.492",
+          "Rotation": "-0.007534361,0.002217483,-0.2823328,0.9592844",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "2b156be0-a31f-457c-afa3-70f417866bed",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/dev/box.vmdl",
+              "RenderType": "Off",
+              "Tint": "0.0689,0.42326,0.11024,1"
+            }
+          ]
+        },
+        {
+          "__guid": "a4e667c4-ec21-4a6b-aa5a-bfa67a4785b0",
+          "Name": "Cube",
+          "Position": "64.39557,109.366,-78.492",
+          "Rotation": "-0.006345876,-0.004627491,0.5891781,0.8079651",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "6354470f-f6a0-488d-851a-7911c1ff0419",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/dev/box.vmdl",
+              "RenderType": "Off",
+              "Tint": "0.0689,0.42326,0.11024,1"
+            }
+          ]
+        },
+        {
+          "__guid": "a29cf4b2-25a5-448c-9da6-7a209b996fd9",
+          "Name": "Cube",
+          "Position": "-215.4633,535.1688,-78.492",
+          "Rotation": "-0.004091961,-0.006703706,0.8535244,0.5209938",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "d4559e71-29fa-4065-9d1e-d17b8f6290e7",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/dev/box.vmdl",
+              "RenderType": "Off",
+              "Tint": "0.0689,0.42326,0.11024,1"
+            }
+          ]
+        },
+        {
+          "__guid": "759e2b80-ebf8-474e-9305-4f2a8c047f39",
+          "Name": "Cube",
+          "Position": "-458.4445,109.366,-78.492",
+          "Rotation": "-0.007809436,-0.0008345875,0.1062608,0.9943074",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "8b6688a7-79a5-4001-89e6-1328868d5db8",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/dev/box.vmdl",
+              "RenderType": "Off",
+              "Tint": "0.0689,0.42326,0.11024,1"
+            }
+          ]
+        },
+        {
+          "__guid": "d6112a99-b9c4-4398-a511-0a21ae9c067f",
+          "Name": "Cube",
+          "Position": "-458.4445,397.4714,-78.492",
+          "Rotation": "-0.006345877,-0.004627492,0.5891782,0.8079651",
+          "Scale": "0.5141221,0.5141221,0.5141221",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "5e55f554-de87-413f-baac-51a0549823f9",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/dev/box.vmdl",
+              "RenderType": "Off",
+              "Tint": "0.0689,0.42326,0.11024,1"
+            }
+          ]
         }
       ]
     }
@@ -134,7 +243,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-04-30T01:12:25.7774515-07:00",
+  "LastSaved": "2024-04-30T02:44:27.4207982-07:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

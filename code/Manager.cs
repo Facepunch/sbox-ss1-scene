@@ -7,10 +7,13 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	[Property] public GameObject PlayerPrefab { get; set; }
 
+	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
 
 	public record struct GridSquare( int x, int y );
 	public Dictionary<GridSquare, List<Thing>> ThingGridPositions = new Dictionary<GridSquare, List<Thing>>();
+
+	public Vector2 MouseWorldPos { get; private set; }
 
 	protected override void OnAwake()
 	{
@@ -30,7 +33,11 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	protected override void OnUpdate()
 	{
-
+		var tr = Scene.Trace.Ray( Camera.ScreenPixelToRay( Mouse.Position ), 1000f ).Run();
+		if ( tr.Hit )
+		{
+			MouseWorldPos = (Vector2)tr.HitPosition;
+		}
 	}
 
 	public void OnActive( Connection channel )
