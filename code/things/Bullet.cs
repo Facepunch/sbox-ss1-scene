@@ -17,18 +17,18 @@ public class Bullet : Thing
 
 	public Vector2 Velocity { get; set; }
 
-	public TimeSince SpawnTime { get; private set; }
+	public TimeSince TimeSinceSpawn { get; private set; }
 	public Player Shooter { get; set; }
 	public int NumHits { get; private set; }
 
-	public IDictionary<BulletStat, float> Stats { get; private set; }
+	public Dictionary<BulletStat, float> Stats { get; private set; }
 
 	public List<Thing> _hitThings = new List<Thing>();
 	private float _scaleFactor;
 
-	protected override void OnStart()
+	protected override void OnAwake()
 	{
-		base.OnStart();
+		base.OnAwake();
 
 		//SpawnShadow( Radius * 3f );
 
@@ -36,7 +36,7 @@ public class Bullet : Thing
 			return;
 
 		//Scale = new Vector2( 0.1f, 0.1f );
-		SpawnTime = 0f;
+		TimeSinceSpawn = 0f;
 		NumHits = 0;
 		Radius = 0.1f;
 
@@ -82,8 +82,11 @@ public class Bullet : Thing
 		//ShadowScale = scale * 1.2f;
 	}
 
-	public override void Update( float dt )
+	protected override void OnUpdate()
 	{
+		//Gizmo.Draw.Color = Color.White;
+		//Gizmo.Draw.Text( $"Stats[BulletStat.Damage]: {Stats[BulletStat.Damage]}\nStats[BulletStat.Lifetime]: {Stats[BulletStat.Lifetime]}", new global::Transform( Transform.Position + new Vector3( 0f, -35f, 0f ) ) );
+
 		if ( Shooter == null || Shooter.IsDead )
 		{
 			Remove();
@@ -93,10 +96,10 @@ public class Bullet : Thing
 		if ( Manager.Instance.IsGameOver )
 			return;
 
-		base.Update( dt );
-
 		if ( IsProxy )
 			return;
+
+		float dt = Time.Delta;
 
 		Position2D += Velocity * dt;
 		//Depth = -Position.y * 10f;
@@ -130,7 +133,7 @@ public class Bullet : Thing
 		if ( changedDamage )
 			DetermineSize();
 
-		if ( SpawnTime > Stats[BulletStat.Lifetime] )
+		if ( TimeSinceSpawn > Stats[BulletStat.Lifetime] )
 		{
 			Remove();
 			return;

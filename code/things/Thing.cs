@@ -32,10 +32,10 @@ public class Thing : Component
 		TimeScale = 1f;
 	}
 
-	public virtual void Update( float dt )
-	{
+	//public virtual void Update( float dt )
+	//{
 
-	}
+	//}
 
 	public virtual void Colliding( Thing other, float percent, float dt )
 	{

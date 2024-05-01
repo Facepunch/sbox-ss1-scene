@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "8a01aa51-f2b6-4e72-ab79-c0b679f98f0f",
+    "__guid": "63339c18-d526-4be3-a9b4-d9145e243c7c",
     "Name": "player",
     "Enabled": true,
     "NetworkMode": 2,
@@ -8,22 +8,26 @@
     "Components": [
       {
         "__type": "Player",
-        "__guid": "38fd321e-3f2c-4f24-8e19-3139fccfaace",
+        "__guid": "80241f1e-0370-480e-b308-e87d21be102b",
         "ArrowAimerPrefab": {
           "_type": "gameobject",
           "prefab": "prefabs/arrow.prefab"
         },
+        "BulletPrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/bullet.prefab"
+        },
         "Sprite": {
           "_type": "component",
-          "component_id": "4a6311c8-e868-4a24-bbc6-f7501d1066ce",
-          "go": "7ea89106-988f-4a5d-a58b-7dcf8e0b14c7",
+          "component_id": "e2e13fbe-430a-46f0-8638-d36b15a70f34",
+          "go": "c91eb95a-3bf5-4488-b3d6-287f9c2dfb4c",
           "component_type": "SpriteRenderer"
         }
       }
     ],
     "Children": [
       {
-        "__guid": "7ea89106-988f-4a5d-a58b-7dcf8e0b14c7",
+        "__guid": "c91eb95a-3bf5-4488-b3d6-287f9c2dfb4c",
         "Name": "sprite",
         "Enabled": true,
         "NetworkMode": 2,
@@ -31,7 +35,7 @@
         "Components": [
           {
             "__type": "Sandbox.SpriteRenderer",
-            "__guid": "4a6311c8-e868-4a24-bbc6-f7501d1066ce",
+            "__guid": "e2e13fbe-430a-46f0-8638-d36b15a70f34",
             "Additive": false,
             "CastShadows": false,
             "Color": "1,1,1,1",

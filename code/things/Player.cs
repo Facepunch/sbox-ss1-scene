@@ -33,6 +33,7 @@ public class Player : Thing
 {
 	[Property] public SpriteRenderer Sprite { get; set; }
 	[Property] public GameObject ArrowAimerPrefab { get; set;  }
+	[Property] public GameObject BulletPrefab { get; set; }
 
 	[Sync] public float Health { get; set; }
 	[Sync] public Vector2 Velocity { get; set; }
@@ -78,10 +79,10 @@ public class Player : Thing
 	[Sync] public int NumRerollAvailable { get; set; }
 
 	// STATS
-	[Sync] public IDictionary<PlayerStat, float> Stats { get; private set; }
+	public Dictionary<PlayerStat, float> Stats { get; private set; }
 
 	// STATUS
-	[Sync] public IDictionary<int, Status> Statuses { get; private set; }
+	public Dictionary<int, Status> Statuses { get; private set; }
 
 	private Dictionary<Status, Dictionary<PlayerStat, ModifierData>> _modifiers_stat = new Dictionary<Status, Dictionary<PlayerStat, ModifierData>>();
 	private Dictionary<PlayerStat, float> _original_properties_stat = new Dictionary<PlayerStat, float>();
@@ -231,8 +232,8 @@ public class Player : Thing
 
 	protected override void OnUpdate()
 	{
-		//Gizmo.Draw.Color = Color.White;
-		//Gizmo.Draw.Text( $"Position2D: {Position2D}\nGridPos: {GridPos}", new global::Transform( Transform.Position + new Vector3(0f, -35f, 0f) ) );
+		Gizmo.Draw.Color = Color.White;
+		Gizmo.Draw.Text( $"AmmoCount: {AmmoCount}\nGridPos: {GridPos}", new global::Transform( Transform.Position + new Vector3(0f, -35f, 0f) ) );
 
 		//Gizmo.Draw.LineSphere( Transform.Position, Radius );
 
@@ -301,9 +302,9 @@ public class Player : Thing
 
 		if ( !IsDead )
 		{
-			//HandleStatuses( dt );
-			//HandleShooting( dt );
-			//HandleFlashing( dt );
+			HandleStatuses( dt );
+			HandleShooting( dt );
+			HandleFlashing( dt );
 			HandleRegen( dt );
 		}
 	}
@@ -710,5 +711,156 @@ public class Player : Thing
 		{
 			action( status );
 		}
+	}
+
+	void HandleStatuses( float dt )
+	{
+		string debug = "";
+
+		foreach ( KeyValuePair<int, Status> pair in Statuses )
+		{
+			Status status = pair.Value;
+			if ( status.ShouldUpdate )
+				status.Update( dt );
+
+			debug += status.ToString() + "\n";
+		}
+
+		//DebugText(debug);
+	}
+
+	void HandleShooting( float dt )
+	{
+		if ( IsReloading )
+		{
+			ReloadProgress = Utils.Map( Timer, Stats[PlayerStat.ReloadTime], 0f, 0f, 1f );
+			Timer -= dt * Stats[PlayerStat.ReloadSpeed];
+			if ( Timer <= 0f )
+			{
+				Reload();
+			}
+		}
+		else
+		{
+			Timer -= dt * Stats[PlayerStat.AttackSpeed] * (IsMoving ? 1f : Stats[PlayerStat.AttackSpeedStill]);
+			if ( Timer <= 0f )
+			{
+				Shoot( isLastAmmo: AmmoCount == 1 );
+				AmmoCount--;
+
+				if ( AmmoCount <= 0 )
+				{
+					IsReloading = true;
+
+					Timer += Stats[PlayerStat.ReloadTime];
+				}
+				else
+				{
+					Timer += Stats[PlayerStat.AttackTime];
+				}
+			}
+		}
+
+		//DebugText(AmmoCount.ToString() + "\nreloading: " + IsReloading + "\ntimer: " + Timer + "\nShotDelay: " + AttackTime + "\nReloadTime: " + ReloadTime + "\nAttackSpeed: " + AttackSpeed);
+	}
+
+	public void Shoot( bool isLastAmmo = false )
+	{
+		float start_angle = MathF.Sin( -_shotNum * 2f ) * Stats[PlayerStat.BulletInaccuracy];
+
+		int num_bullets_int = (int)Stats[PlayerStat.NumProjectiles];
+		float currAngleOffset = num_bullets_int == 1 ? 0f : -Stats[PlayerStat.BulletSpread] * 0.5f;
+		float increment = num_bullets_int == 1 ? 0f : Stats[PlayerStat.BulletSpread] / (float)(num_bullets_int - 1);
+
+		var pos = Position2D + AimDir * 15f;
+
+		for ( int i = 0; i < num_bullets_int; i++ )
+		{
+			var dir = Utils.RotateVector( AimDir, start_angle + currAngleOffset + increment * i );
+				SpawnBullet( pos, dir, isLastAmmo );
+		}
+
+		//Game.PlaySfxNearby( "shoot", pos, pitch: Utils.Map( _shotNum, 0f, (float)Stats[PlayerStat.MaxAmmoCount], 1f, 1.25f ), volume: 1f, maxDist: 4f );
+
+		Velocity -= AimDir * Stats[PlayerStat.Recoil] * Globals.MOVE_FACTOR;
+
+		_shotNum++;
+	}
+
+	void SpawnBullet( Vector2 pos, Vector2 dir, bool isLastAmmo = false )
+	{
+		var damage = (Stats[PlayerStat.BulletDamage] * Stats[PlayerStat.BulletDamageMultiplier] + Stats[PlayerStat.BulletFlatDamageAddition]) * GetDamageMultiplier();
+		if ( isLastAmmo )
+			damage *= Stats[PlayerStat.LastAmmoDamageMultiplier];
+
+		if ( Stats[PlayerStat.DamagePerEarlierShot] > 0f )
+			damage += _shotNum * Stats[PlayerStat.DamagePerEarlierShot];
+
+		if ( Stats[PlayerStat.DamageForSpeed] > 0f )
+		{
+			damage += Stats[PlayerStat.DamageForSpeed] * Velocity.Length;
+
+			if ( IsDashing )
+				damage += Stats[PlayerStat.DamageForSpeed] * DashVelocity.Length;
+		}
+
+		var bulletObj = BulletPrefab.Clone( (Vector3)pos );
+		var bullet = bulletObj.Components.Get<Bullet>();
+
+		//bullet.Depth = -1f;
+		bullet.Velocity = dir * Stats[PlayerStat.BulletSpeed] * Globals.MOVE_FACTOR;
+		bullet.Shooter = this;
+		bullet.TempWeight = 3f;
+		//bullet.BasePivotY = Utils.Map( damage, 5f, 30f, -1.2f, -0.3f );
+
+		bullet.Stats[BulletStat.Damage] = damage;
+		bullet.Stats[BulletStat.Force] = Stats[PlayerStat.BulletForce];
+		bullet.Stats[BulletStat.Lifetime] = Stats[PlayerStat.BulletLifetime];
+		bullet.Stats[BulletStat.NumPiercing] = (int)MathF.Round( Stats[PlayerStat.BulletNumPiercing] );
+		bullet.Stats[BulletStat.FireIgniteChance] = Stats[PlayerStat.ShootFireIgniteChance];
+		bullet.Stats[BulletStat.FreezeChance] = Stats[PlayerStat.ShootFreezeChance];
+		bullet.Stats[BulletStat.GrowDamageAmount] = Stats[PlayerStat.BulletDamageGrow];
+		bullet.Stats[BulletStat.ShrinkDamageAmount] = Stats[PlayerStat.BulletDamageShrink];
+		bullet.Stats[BulletStat.DistanceDamageAmount] = Stats[PlayerStat.BulletDistanceDamage];
+		bullet.Stats[BulletStat.HealTeammateAmount] = Stats[PlayerStat.BulletHealTeammateAmount];
+
+		if ( Stats[PlayerStat.GrenadesCanCrit] <= 0f )
+		{
+			bullet.Stats[BulletStat.CriticalChance] = Stats[PlayerStat.CritChance];
+			bullet.Stats[BulletStat.CriticalMultiplier] = Stats[PlayerStat.CritMultiplier];
+		}
+
+		bullet.Init();
+
+		bullet.GameObject.NetworkSpawn();
+
+		//bullet.HeightZ = 0f;
+
+		//Game.AddThing( bullet );
+	}
+
+	void Reload()
+	{
+		AmmoCount = (int)Stats[PlayerStat.MaxAmmoCount];
+		IsReloading = false;
+		_shotNum = 0;
+		ReloadProgress = 0f;
+
+		ForEachStatus( status => status.OnReload() );
+
+		//Game.PlaySfxTarget(To.Single(Client), "reload.end", Position, pitch: 1f, volume: 0.5f);
+	}
+
+	public float GetDamageMultiplier()
+	{
+		float damageMultiplier = Stats[PlayerStat.OverallDamageMultiplier];
+
+		if ( Stats[PlayerStat.LowHealthDamageMultiplier] > 1f )
+			damageMultiplier *= Utils.Map( Health, Stats[PlayerStat.MaxHp], 0f, 1f, Stats[PlayerStat.LowHealthDamageMultiplier] );
+
+		if ( Stats[PlayerStat.FullHealthDamageMultiplier] > 1f && !(Health < Stats[PlayerStat.MaxHp]) )
+			damageMultiplier *= Stats[PlayerStat.FullHealthDamageMultiplier];
+
+		return damageMultiplier;
 	}
 }
