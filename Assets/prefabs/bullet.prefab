@@ -1,0 +1,41 @@
+{
+  "RootObject": {
+    "__guid": "779c246f-3ef2-4b70-a008-11f660c9e3c0",
+    "Name": "bullet",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SpriteRenderer",
+        "__guid": "c0884f9d-8193-492a-a7af-df0e29c5950a",
+        "Additive": false,
+        "CastShadows": false,
+        "Color": "1,1,1,1",
+        "DepthFeather": 0,
+        "FlipHorizontal": false,
+        "FlipVertical": false,
+        "FogStrength": 1,
+        "Opaque": false,
+        "Size": "10,10",
+        "Texture": "textures/sprites/bullet.vtex"
+      },
+      {
+        "__type": "Bullet",
+        "__guid": "a8e317ef-4da7-4e11-a561-9ca439d87760",
+        "Sprite": {
+          "_type": "component",
+          "component_id": "c0884f9d-8193-492a-a7af-df0e29c5950a",
+          "go": "779c246f-3ef2-4b70-a008-11f660c9e3c0",
+          "component_type": "SpriteRenderer"
+        }
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

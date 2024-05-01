@@ -6,6 +6,7 @@
       "Name": "Manager",
       "Enabled": true,
       "NetworkMode": 1,
+      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Manager",
@@ -48,6 +49,7 @@
       "Rotation": "-0.5,0.5,0.5,0.5",
       "Enabled": true,
       "NetworkMode": 2,
+      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.CameraComponent",
@@ -80,6 +82,7 @@
       "Tags": "light_directional,light",
       "Enabled": true,
       "NetworkMode": 2,
+      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.DirectionalLight",
@@ -99,6 +102,7 @@
       "Scale": "25,20,1",
       "Enabled": true,
       "NetworkMode": 2,
+      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.ModelRenderer",
@@ -125,6 +129,7 @@
       "Position": "10.60519,-279.1306,0",
       "Enabled": true,
       "NetworkMode": 2,
+      "NetworkInterpolation": true,
       "Children": [
         {
           "__guid": "b887f6e3-ea39-48b4-a2c6-5bd28d2769a1",
@@ -133,6 +138,7 @@
           "Rotation": "-0.007534361,0.002217483,-0.2823328,0.9592844",
           "Enabled": true,
           "NetworkMode": 2,
+          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -151,6 +157,7 @@
           "Rotation": "-0.006345876,-0.004627491,0.5891781,0.8079651",
           "Enabled": true,
           "NetworkMode": 2,
+          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -169,6 +176,7 @@
           "Rotation": "-0.004091961,-0.006703706,0.8535244,0.5209938",
           "Enabled": true,
           "NetworkMode": 2,
+          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -187,6 +195,7 @@
           "Rotation": "-0.007809436,-0.0008345875,0.1062608,0.9943074",
           "Enabled": true,
           "NetworkMode": 2,
+          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -206,6 +215,7 @@
           "Scale": "0.5141221,0.5141221,0.5141221",
           "Enabled": true,
           "NetworkMode": 2,
+          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Sandbox.ModelRenderer",
@@ -218,13 +228,46 @@
           ]
         }
       ]
+    },
+    {
+      "__guid": "779c246f-3ef2-4b70-a008-11f660c9e3c0",
+      "Name": "bullet",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SpriteRenderer",
+          "__guid": "c0884f9d-8193-492a-a7af-df0e29c5950a",
+          "Additive": false,
+          "CastShadows": false,
+          "Color": "1,1,1,1",
+          "DepthFeather": 0,
+          "FlipHorizontal": false,
+          "FlipVertical": false,
+          "FogStrength": 1,
+          "Opaque": false,
+          "Size": "10,10",
+          "Texture": "textures/sprites/bullet.vtex"
+        },
+        {
+          "__type": "Bullet",
+          "__guid": "a8e317ef-4da7-4e11-a561-9ca439d87760",
+          "Sprite": {
+            "_type": "component",
+            "component_id": "c0884f9d-8193-492a-a7af-df0e29c5950a",
+            "go": "779c246f-3ef2-4b70-a008-11f660c9e3c0",
+            "component_type": "SpriteRenderer"
+          }
+        }
+      ]
     }
   ],
   "SceneProperties": {
     "FixedUpdateFrequency": 50,
-    "Lerping": true,
     "MaxFixedUpdates": 5,
     "NetworkFrequency": 30,
+    "NetworkInterpolation": true,
     "ThreadedAnimation": true,
     "TimeScale": 1,
     "UseFixedUpdate": true,
@@ -243,7 +286,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-04-30T02:44:27.4207982-07:00",
+  "LastSaved": "2024-04-30T22:45:58.0720723-07:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
