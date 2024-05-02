@@ -228,12 +228,23 @@ public class Player : Thing
 
 		//InitializeStatsClient();
 		//RefreshStatusHud( To.Single( Client ) );
+
+		
+		AddStatus( TypeLibrary.GetType( typeof( MovespeedStatus ) ) );
 	}
 
 	protected override void OnUpdate()
 	{
+		string debug = "";
+
+		foreach ( KeyValuePair<int, Status> pair in Statuses )
+		{
+			Status status = pair.Value;
+			debug += status.ToString() + "\n";
+		}
+
 		Gizmo.Draw.Color = Color.White;
-		Gizmo.Draw.Text( $"AmmoCount: {AmmoCount}\nGridPos: {GridPos}", new global::Transform( Transform.Position + new Vector3(0f, 0f, 0f) ) );
+		Gizmo.Draw.Text( $"{debug}\nGridPos: {GridPos}", new global::Transform( Transform.Position + new Vector3(0f, 0f, 0f) ) );
 
 		Gizmo.Draw.Color = Color.White.WithAlpha(0.2f);
 		Gizmo.Draw.LineSphere( Transform.Position, Radius );
@@ -759,18 +770,12 @@ public class Player : Thing
 
 	void HandleStatuses( float dt )
 	{
-		string debug = "";
-
 		foreach ( KeyValuePair<int, Status> pair in Statuses )
 		{
 			Status status = pair.Value;
 			if ( status.ShouldUpdate )
 				status.Update( dt );
-
-			debug += status.ToString() + "\n";
 		}
-
-		//DebugText(debug);
 	}
 
 	void HandleShooting( float dt )
