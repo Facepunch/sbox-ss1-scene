@@ -31,6 +31,10 @@
             "_type": "gameobject",
             "prefab": "prefabs/enemy.prefab"
           },
+          "MagnetPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/magnet.prefab"
+          },
           "PlayerPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/player.prefab"
@@ -122,7 +126,7 @@
           "BodyGroups": 18446744073709551615,
           "Model": "models/dev/box.vmdl",
           "RenderType": "On",
-          "Tint": "0.03029,0.09302,0.03761,1"
+          "Tint": "0.04056,0.05581,0.01921,1"
         },
         {
           "__type": "Sandbox.BoxCollider",
@@ -132,111 +136,6 @@
           "Scale": "50,50,50",
           "Static": true,
           "Surface": "surfaces/default.surface"
-        }
-      ]
-    },
-    {
-      "__guid": "f686c6ef-6fda-4ef0-89cf-4ecadaeba4d1",
-      "Name": "bg_cubes",
-      "Position": "10.60519,-279.1306,0",
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
-      "Children": [
-        {
-          "__guid": "b887f6e3-ea39-48b4-a2c6-5bd28d2769a1",
-          "Name": "Cube",
-          "Position": "272.0606,676.4558,-78.492",
-          "Rotation": "-0.007534361,0.002217483,-0.2823328,0.9592844",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
-          "Components": [
-            {
-              "__type": "Sandbox.ModelRenderer",
-              "__guid": "2b156be0-a31f-457c-afa3-70f417866bed",
-              "BodyGroups": 18446744073709551615,
-              "Model": "models/dev/box.vmdl",
-              "RenderType": "Off",
-              "Tint": "0.0689,0.42326,0.11024,1"
-            }
-          ]
-        },
-        {
-          "__guid": "a4e667c4-ec21-4a6b-aa5a-bfa67a4785b0",
-          "Name": "Cube",
-          "Position": "64.39557,109.366,-78.492",
-          "Rotation": "-0.006345876,-0.004627491,0.5891781,0.8079651",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
-          "Components": [
-            {
-              "__type": "Sandbox.ModelRenderer",
-              "__guid": "6354470f-f6a0-488d-851a-7911c1ff0419",
-              "BodyGroups": 18446744073709551615,
-              "Model": "models/dev/box.vmdl",
-              "RenderType": "Off",
-              "Tint": "0.0689,0.42326,0.11024,1"
-            }
-          ]
-        },
-        {
-          "__guid": "a29cf4b2-25a5-448c-9da6-7a209b996fd9",
-          "Name": "Cube",
-          "Position": "-215.4633,535.1688,-78.492",
-          "Rotation": "-0.004091961,-0.006703706,0.8535244,0.5209938",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
-          "Components": [
-            {
-              "__type": "Sandbox.ModelRenderer",
-              "__guid": "d4559e71-29fa-4065-9d1e-d17b8f6290e7",
-              "BodyGroups": 18446744073709551615,
-              "Model": "models/dev/box.vmdl",
-              "RenderType": "Off",
-              "Tint": "0.0689,0.42326,0.11024,1"
-            }
-          ]
-        },
-        {
-          "__guid": "759e2b80-ebf8-474e-9305-4f2a8c047f39",
-          "Name": "Cube",
-          "Position": "-458.4445,109.366,-78.492",
-          "Rotation": "-0.007809436,-0.0008345875,0.1062608,0.9943074",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
-          "Components": [
-            {
-              "__type": "Sandbox.ModelRenderer",
-              "__guid": "8b6688a7-79a5-4001-89e6-1328868d5db8",
-              "BodyGroups": 18446744073709551615,
-              "Model": "models/dev/box.vmdl",
-              "RenderType": "Off",
-              "Tint": "0.0689,0.42326,0.11024,1"
-            }
-          ]
-        },
-        {
-          "__guid": "d6112a99-b9c4-4398-a511-0a21ae9c067f",
-          "Name": "Cube",
-          "Position": "-458.4445,397.4714,-78.492",
-          "Rotation": "-0.006345877,-0.004627492,0.5891782,0.8079651",
-          "Scale": "0.5141221,0.5141221,0.5141221",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
-          "Components": [
-            {
-              "__type": "Sandbox.ModelRenderer",
-              "__guid": "5e55f554-de87-413f-baac-51a0549823f9",
-              "BodyGroups": 18446744073709551615,
-              "Model": "models/dev/box.vmdl",
-              "RenderType": "Off",
-              "Tint": "0.0689,0.42326,0.11024,1"
-            }
-          ]
         }
       ]
     }
@@ -264,7 +163,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-05-02T01:13:26.9030962-07:00",
+  "LastSaved": "2024-05-02T15:41:39.0667561-07:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

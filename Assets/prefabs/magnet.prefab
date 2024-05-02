@@ -1,0 +1,41 @@
+{
+  "RootObject": {
+    "__guid": "03bedbdb-ea98-417a-ad41-fecab99658d2",
+    "Name": "magnet",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SpriteRenderer",
+        "__guid": "6b0a736a-9535-4178-bf9f-f9f82d4f4292",
+        "Additive": false,
+        "CastShadows": false,
+        "Color": "1,1,1,1",
+        "DepthFeather": 0,
+        "FlipHorizontal": false,
+        "FlipVertical": false,
+        "FogStrength": 1,
+        "Opaque": false,
+        "Size": "0.5,0.5",
+        "Texture": "textures/sprites/magnet.vtex"
+      },
+      {
+        "__type": "Magnet",
+        "__guid": "bbef656b-d4f0-45a9-b5af-4cf566b498e1",
+        "Sprite": {
+          "_type": "component",
+          "component_id": "6b0a736a-9535-4178-bf9f-f9f82d4f4292",
+          "go": "03bedbdb-ea98-417a-ad41-fecab99658d2",
+          "component_type": "SpriteRenderer"
+        }
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

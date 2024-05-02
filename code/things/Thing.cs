@@ -52,8 +52,6 @@ public class Thing : Component
 
 	protected void SpawnShadow( float size, float opacity )
 	{
-		Log.Info( "shadow" );
-
 		var shadowObj = Manager.Instance.ShadowPrefab.Clone( Transform.Position );
 		shadowObj.SetParent( GameObject );
 		shadowObj.Transform.LocalPosition = new Vector3(0f, OffsetY, Globals.SHADOW_DEPTH_OFFSET );

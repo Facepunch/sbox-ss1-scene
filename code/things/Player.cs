@@ -234,7 +234,7 @@ public class Player : Thing
 		//InitializeStatsClient();
 		//RefreshStatusHud( To.Single( Client ) );
 
-		AddStatus( TypeLibrary.GetType( typeof( MovespeedStatus ) ) );
+		//AddStatus( TypeLibrary.GetType( typeof( MovespeedStatus ) ) );
 	}
 
 	protected override void OnUpdate()

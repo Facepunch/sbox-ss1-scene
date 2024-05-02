@@ -10,8 +10,9 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	[Property] public GameObject PlayerPrefab { get; set; }
 	[Property] public GameObject EnemyPrefab { get; set; }
-	[Property] public GameObject CoinPrefab { get; set; }
 	[Property] public GameObject ShadowPrefab { get; set; }
+	[Property] public GameObject CoinPrefab { get; set; }
+	[Property] public GameObject MagnetPrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
@@ -72,6 +73,9 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		if ( Networking.IsHost )
 			Network.TakeOwnership();
+
+		SpawnMagnet( new Vector2( 3f, 3f ) );
+		SpawnCoin( new Vector2( 4f, 4f ) );
 	}
 
 	protected override void OnUpdate()
@@ -246,6 +250,16 @@ public sealed class Manager : Component, Component.INetworkListener
 		CoinCount++;
 
 		return coin;
+	}
+
+	public Magnet SpawnMagnet( Vector2 pos )
+	{
+		var magnetObj = MagnetPrefab.Clone( new Vector3( pos.x, pos.y, 0f ) );
+		var magnet = magnetObj.Components.Get<Magnet>();
+
+		AddThing( magnet );
+
+		return magnet;
 	}
 
 	public void SpawnBoss( Vector2 pos )
