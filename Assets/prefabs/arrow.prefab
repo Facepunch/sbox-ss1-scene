@@ -1,13 +1,14 @@
 {
   "RootObject": {
-    "__guid": "736e14f9-35e0-4656-ab3b-8e8786d7faf5",
+    "__guid": "a8ce8cc2-34ec-4f3e-9f41-2a958d144601",
     "Name": "arrow",
     "Enabled": true,
     "NetworkMode": 2,
+    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.SpriteRenderer",
-        "__guid": "7a626444-4579-425a-8ba7-0fccb090d168",
+        "__guid": "b89e02e3-0e08-4486-963b-ca2a778f53b0",
         "Additive": false,
         "CastShadows": false,
         "Color": "1,1,1,1",
@@ -16,10 +17,11 @@
         "FlipVertical": false,
         "FogStrength": 1,
         "Opaque": false,
-        "Size": "20,20",
+        "Size": "0.5,0.5",
         "Texture": "textures/sprites/arrow.vtex"
       }
-    ]
+    ],
+    "Children": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

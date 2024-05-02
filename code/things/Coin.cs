@@ -20,13 +20,14 @@ public class Coin : Thing
 	{
 		base.OnAwake();
 
+		OffsetY = -0.1f;
+
 		//SpawnShadow( 0.4f );
 
 		if ( IsProxy )
 			return;
 
 		//BasePivotY = 0.225f;
-		//HeightZ = 0f;
 
 		//Scale = new Vector2( 1f, 1f ) * 0.4f;
 		SpawnTime = 0f;
@@ -43,10 +44,10 @@ public class Coin : Thing
 	protected override void OnUpdate()
 	{
 		//Gizmo.Draw.Color = Color.White;
-		//Gizmo.Draw.Text( $"Stats[BulletStat.Damage]: {Stats[BulletStat.Damage]}\nStats[BulletStat.Lifetime]: {Stats[BulletStat.Lifetime]}", new global::Transform( Transform.Position + new Vector3( 0f, -35f, 0f ) ) );
+		//Gizmo.Draw.Text( $"Stats[BulletStat.Damage]: {Stats[BulletStat.Damage]}\nStats[BulletStat.Lifetime]: {Stats[BulletStat.Lifetime]}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.4f, 0f ) ) );
 
-		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.4f );
-		//Gizmo.Draw.LineSphere( Transform.Position, Radius );
+		Gizmo.Draw.Color = Color.White.WithAlpha( 0.1f );
+		Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
 		if ( Manager.Instance.IsGameOver )
 			return;
@@ -70,7 +71,7 @@ public class Coin : Thing
 			}
 		}
 
-		Transform.Position += (Vector3)Velocity * dt;
+		Position2D += Velocity * dt;
 		Position2D = new Vector2( MathX.Clamp( Position2D.x, Manager.Instance.BOUNDS_MIN.x + Radius, Manager.Instance.BOUNDS_MAX.x - Radius ), MathX.Clamp( Position2D.y, Manager.Instance.BOUNDS_MIN.y + Radius, Manager.Instance.BOUNDS_MAX.y - Radius ) );
 		Velocity *= (1f - dt * 0.92f);
 
@@ -172,8 +173,6 @@ public class Coin : Thing
 		//		BasePivotY = 0.05f;
 		//		break;
 		//}
-
-		//HeightZ = 0f;
 
 		switch ( tier_color )
 		{

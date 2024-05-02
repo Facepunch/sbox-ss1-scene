@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "6b981d6f-9d15-4ce9-a2fc-6c9b102b6eb4",
+    "__guid": "fb6101d9-a5d0-4c65-9af7-800fb66e4a7c",
     "Name": "coin",
     "Enabled": true,
     "NetworkMode": 2,
@@ -8,7 +8,7 @@
     "Components": [
       {
         "__type": "Sandbox.SpriteRenderer",
-        "__guid": "1171ded6-f3d1-4558-be39-66789c32be0f",
+        "__guid": "1289a588-4f39-4737-80fc-c630bd1cd24e",
         "Additive": false,
         "CastShadows": false,
         "Color": "1,1,1,1",
@@ -22,15 +22,16 @@
       },
       {
         "__type": "Coin",
-        "__guid": "f1d47543-3e6f-4395-9285-ba774549fc7e",
+        "__guid": "0842ef2b-86f2-459f-9a11-33deeb658a5e",
         "Sprite": {
           "_type": "component",
-          "component_id": "1171ded6-f3d1-4558-be39-66789c32be0f",
-          "go": "6b981d6f-9d15-4ce9-a2fc-6c9b102b6eb4",
+          "component_id": "1289a588-4f39-4737-80fc-c630bd1cd24e",
+          "go": "fb6101d9-a5d0-4c65-9af7-800fb66e4a7c",
           "component_type": "SpriteRenderer"
         }
       }
-    ]
+    ],
+    "Children": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

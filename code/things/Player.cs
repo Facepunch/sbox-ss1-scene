@@ -91,6 +91,8 @@ public class Player : Thing
 	{
 		base.OnStart();
 
+		OffsetY = -0.38f;
+
 		if ( IsProxy )
 			return;
 
@@ -228,7 +230,6 @@ public class Player : Thing
 
 		//InitializeStatsClient();
 		//RefreshStatusHud( To.Single( Client ) );
-
 		
 		AddStatus( TypeLibrary.GetType( typeof( MovespeedStatus ) ) );
 	}
@@ -244,10 +245,10 @@ public class Player : Thing
 		}
 
 		Gizmo.Draw.Color = Color.White;
-		Gizmo.Draw.Text( $"{debug}\nHealth: {Health}/{Stats[PlayerStat.MaxHp]}\nExperienceTotal: {ExperienceTotal}\nGridPos: {GridPos}", new global::Transform( Transform.Position + new Vector3(0f, -1f, 0f) ) );
+		Gizmo.Draw.Text( $"{debug}\nHealth: {Health}/{Stats[PlayerStat.MaxHp]}\nExperienceTotal: {ExperienceTotal}\nGridPos: {GridPos}", new global::Transform( (Vector3)Position2D + new Vector3(0f, -0.7f, 0f) ) );
 
 		Gizmo.Draw.Color = Color.White.WithAlpha(0.2f);
-		Gizmo.Draw.LineSphere( Transform.Position, Radius );
+		Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
 		if ( Velocity.x > 0f )
 			Sprite.FlipHorizontal = true;
@@ -264,10 +265,8 @@ public class Player : Thing
 		if ( inputVector.LengthSquared > 0f )
 			Velocity += inputVector.Normal * Stats[PlayerStat.MoveSpeed] * BASE_MOVE_SPEED * dt;
 
-		Transform.Position += (Vector3)Velocity * dt;
-
-		if ( IsDashing )
-			Transform.Position += (Vector3)DashVelocity * dt;
+		var velocity = Velocity + (IsDashing ? DashVelocity : Vector2.Zero);
+		Position2D += velocity * dt;
 
 		Velocity = Utils.DynamicEaseTo( Velocity, Vector2.Zero, 0.2f, dt );
 		TempWeight *= (1f - dt * 4.7f);
@@ -288,7 +287,7 @@ public class Player : Thing
 		if ( ArrowAimer != null )
 		{
 			//ArrowAimer.LocalRotation = (MathF.Atan2( AimDir.y, AimDir.x ) * (180f / MathF.PI));
-			ArrowAimer.Transform.LocalPosition = AimDir * 35f;
+			ArrowAimer.Transform.LocalPosition = new Vector2( 0f, 0.4f + OffsetY ) + AimDir * 0.65f;
 		}
 
 		if ( !IsDead )
@@ -838,7 +837,7 @@ public class Player : Thing
 		float currAngleOffset = num_bullets_int == 1 ? 0f : -Stats[PlayerStat.BulletSpread] * 0.5f;
 		float increment = num_bullets_int == 1 ? 0f : Stats[PlayerStat.BulletSpread] / (float)(num_bullets_int - 1);
 
-		var pos = Position2D + AimDir * 0.5f;
+		var pos = Position2D + AimDir * 0.5f + new Vector2(0f, -OffsetY);
 
 		for ( int i = 0; i < num_bullets_int; i++ )
 		{
@@ -899,8 +898,6 @@ public class Player : Thing
 		bullet.Init();
 
 		bullet.GameObject.NetworkSpawn();
-
-		//bullet.HeightZ = 0f;
 
 		//Game.AddThing( bullet );
 	}

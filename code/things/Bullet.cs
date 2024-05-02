@@ -30,6 +30,8 @@ public class Bullet : Thing
 	{
 		base.OnAwake();
 
+		OffsetY = -0.45f;
+
 		//SpawnShadow( Radius * 3f );
 
 		if ( IsProxy )
@@ -85,10 +87,10 @@ public class Bullet : Thing
 	protected override void OnUpdate()
 	{
 		//Gizmo.Draw.Color = Color.White;
-		//Gizmo.Draw.Text( $"Stats[BulletStat.Damage]: {Stats[BulletStat.Damage]}\nStats[BulletStat.Lifetime]: {Stats[BulletStat.Lifetime]}", new global::Transform( Transform.Position + new Vector3( 0f, -35f, 0f ) ) );
+		//Gizmo.Draw.Text( $"Stats[BulletStat.Damage]: {Stats[BulletStat.Damage]}\nStats[BulletStat.Lifetime]: {Stats[BulletStat.Lifetime]}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -35f, 0f ) ) );
 
 		Gizmo.Draw.Color = Color.White.WithAlpha( 0.4f );
-		Gizmo.Draw.LineSphere( Transform.Position, Radius );
+		Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
 		if ( Shooter == null || Shooter.IsDead )
 		{

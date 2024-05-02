@@ -99,11 +99,11 @@ public abstract class Enemy : Thing
 
 	protected override void OnUpdate()
 	{
-		Gizmo.Draw.Color = Color.White;
-		Gizmo.Draw.Text( $"IsAttacking: {IsAttacking}\nHealth: {Health}/{MaxHealth}\nGridPos: {GridPos}", new global::Transform( Transform.Position + new Vector3( 0f, -1f, 0f ) ) );
+		//Gizmo.Draw.Color = Color.White;
+		//Gizmo.Draw.Text( $"IsAttacking: {IsAttacking}\nHealth: {Health}/{MaxHealth}\nGridPos: {GridPos}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
 
-		Gizmo.Draw.Color = Color.White.WithAlpha( 0.2f );
-		Gizmo.Draw.LineSphere( Transform.Position, Radius );
+		Gizmo.Draw.Color = Color.White.WithAlpha( 0.1f );
+		Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
 		if ( Manager.Instance.IsGameOver )
 			return;
@@ -140,7 +140,7 @@ public abstract class Enemy : Thing
 
 		TempWeight *= (1f - dt * 4.7f);
 
-		var closestPlayer = Manager.Instance.GetClosestPlayer( Transform.Position );
+		var closestPlayer = Manager.Instance.GetClosestPlayer( (Vector3)Position2D );
 		if ( closestPlayer == null )
 			return;
 

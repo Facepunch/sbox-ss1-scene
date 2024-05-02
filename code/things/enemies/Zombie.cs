@@ -12,13 +12,14 @@ public class Zombie : Enemy
 	{
 		base.OnStart();
 
+		OffsetY = -0.4f;
+
 		if ( IsProxy )
 			return;
 
 		//SpriteTexture = SpriteTexture.Atlas( "textures/sprites/zombie.png", 5, 6 );
 		//AnimSpeed = 2f;
 		//BasePivotY = 0.05f;
-		//HeightZ = 0f;
 		PushStrength = 10f;
 
 		Radius = 0.25f;

@@ -14,16 +14,17 @@ public class Thing : Component
 	public bool IsRemoved { get; private set; }
 	public List<Type> CollideWith = new List<Type>();
 	public float TimeScale { get; set; }
+	public float OffsetY { get; set; }
 
 	public Vector2 Position2D
 	{
 		get
 		{
-			return (Vector2)Transform.Position;
+			return (Vector2)Transform.Position + new Vector2(0f, OffsetY);
 		}
 		set
 		{
-			Transform.Position = new Vector3( value.x, value.y, Transform.Position.z );
+			Transform.Position = new Vector3( value.x, value.y - OffsetY, Transform.Position.z );
 		}
 	}
 
