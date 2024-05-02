@@ -1,15 +1,21 @@
 using Microsoft.VisualBasic;
 using Sandbox;
 using Sandbox.Network;
+using System.Runtime.InteropServices;
+using System.Text;
 
 public sealed class Manager : Component, Component.INetworkListener
 {
 	public static Manager Instance { get; private set; }
 
 	[Property] public GameObject PlayerPrefab { get; set; }
+	[Property] public GameObject EnemyPrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
+
+	public int EnemyCount { get; private set; }
+	public const float MAX_ENEMY_COUNT = 350;
 
 	public record struct GridSquare( int x, int y );
 	public Dictionary<GridSquare, List<Thing>> ThingGridPositions = new Dictionary<GridSquare, List<Thing>>();
@@ -27,6 +33,10 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public Vector2 MouseWorldPos { get; private set; }
 
+	public bool HasSpawnedBoss { get; private set; }
+
+	public TimeSince TimeSinceMagnet { get; set; }
+
 	protected override void OnAwake()
 	{
 		base.OnAwake();
@@ -35,8 +45,8 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		BOUNDS_MIN = new Vector2( -610f, -474f );
 		BOUNDS_MAX = new Vector2( 610f, 474f );
-		BOUNDS_MIN_SPAWN = BOUNDS_MIN * 0.9f;
-		BOUNDS_MAX_SPAWN = BOUNDS_MAX * 0.9f;
+		BOUNDS_MIN_SPAWN = BOUNDS_MIN * 0.95f;
+		BOUNDS_MAX_SPAWN = BOUNDS_MAX * 0.95f;
 
 		for ( float x = BOUNDS_MIN.x; x < BOUNDS_MAX.x; x += GRID_SIZE )
 		{
@@ -75,6 +85,17 @@ public sealed class Manager : Component, Component.INetworkListener
 		{
 			MouseWorldPos = (Vector2)tr.HitPosition;
 		}
+
+		if ( IsProxy )
+			return;
+
+		HandleEnemySpawn();
+
+		if ( !HasSpawnedBoss && !IsGameOver && ElapsedTime > 15f * 60f )
+		{
+			SpawnBoss( new Vector2( 0f, 0f ) );
+			HasSpawnedBoss = true;
+		}
 	}
 
 	public void OnActive( Connection channel )
@@ -85,6 +106,150 @@ public sealed class Manager : Component, Component.INetworkListener
 		var player = playerObj.Components.Get<Player>();
 
 		playerObj.NetworkSpawn( channel );
+	}
+
+	void HandleEnemySpawn()
+	{
+		var spawnTime = Utils.Map( EnemyCount, 0, MAX_ENEMY_COUNT, 0.05f, 0.33f, EasingType.QuadOut ) * Utils.Map( ElapsedTime, 0f, 80f, 1.5f, 1f ) * Utils.Map( ElapsedTime, 0f, 250f, 3f, 1f ) * Utils.Map( ElapsedTime, 0f, 900f, 1.2f, 1f );
+		if ( _enemySpawnTime > spawnTime )
+		{
+			SpawnEnemy();
+			_enemySpawnTime = 0f;
+		}
+	}
+
+	void SpawnEnemy()
+	{
+		if ( EnemyCount >= MAX_ENEMY_COUNT )
+			return;
+
+		var pos = new Vector2( Game.Random.Float( BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x ), Game.Random.Float( BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y ) );
+
+		//// ZOMBIE (DEFAULT)
+		//TypeDescription type = TypeLibrary.GetType( typeof( Zombie ) );
+
+		//// CRATE
+		//if ( CrateCount < MAX_CRATE_COUNT )
+		//{
+		//	float crateChance = ElapsedTime < 20f ? 0f : Utils.Map( ElapsedTime, 20f, 200f, 0.005f, 0.01f );
+		//	float additionalCrateChance = 0f;
+		//	foreach ( PlayerCitizen player in AlivePlayers )
+		//	{
+		//		if ( player.Stats[PlayerStat.CrateChanceAdditional] > 0f )
+		//			additionalCrateChance += player.Stats[PlayerStat.CrateChanceAdditional];
+		//	}
+		//	crateChance *= (1f + additionalCrateChance);
+
+		//	if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < crateChance )
+		//		type = TypeLibrary.GetType( typeof( Crate ) );
+		//}
+
+		//// EXPLODER
+		//float exploderChance = ElapsedTime < 35f ? 0f : Utils.Map( ElapsedTime, 35f, 700f, 0.022f, 0.08f );
+		//if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < exploderChance )
+		//{
+		//	float eliteChance = ElapsedTime < 480f ? 0f : Utils.Map( ElapsedTime, 480f, 1200f, 0.025f, 1f, EasingType.SineIn );
+		//	type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( ExploderElite ) ) : TypeLibrary.GetType( typeof( Exploder ) );
+		//}
+
+		//// SPITTER
+		//float spitterChance = ElapsedTime < 100f ? 0f : Utils.Map( ElapsedTime, 100f, 800f, 0.015f, 0.1f );
+		//if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < spitterChance )
+		//{
+		//	float eliteChance = ElapsedTime < 540f ? 0f : Utils.Map( ElapsedTime, 540f, 1200f, 0.025f, 1f, EasingType.QuadIn );
+		//	type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( SpitterElite ) ) : TypeLibrary.GetType( typeof( Spitter ) );
+		//}
+
+		//// SPIKER
+		//float spikerChance = ElapsedTime < 320f ? 0f : Utils.Map( ElapsedTime, 320f, 800f, 0.018f, 0.1f, EasingType.SineIn );
+		//if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < spikerChance )
+		//{
+		//	float eliteChance = ElapsedTime < 580f ? 0f : Utils.Map( ElapsedTime, 580f, 1300f, 0.008f, 1f, EasingType.SineIn );
+		//	type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( SpikerElite ) ) : TypeLibrary.GetType( typeof( Spiker ) );
+		//}
+
+		//// CHARGER
+		//float chargerChance = ElapsedTime < 420f ? 0f : Utils.Map( ElapsedTime, 420f, 800f, 0.022f, 0.075f );
+		//if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < chargerChance )
+		//{
+		//	float eliteChance = ElapsedTime < 660f ? 0f : Utils.Map( ElapsedTime, 660f, 1400f, 0.008f, 1f, EasingType.SineIn );
+		//	type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( ChargerElite ) ) : TypeLibrary.GetType( typeof( Charger ) );
+		//}
+
+		//// RUNNER
+		//float runnerChance = ElapsedTime < 500f ? 0f : Utils.Map( ElapsedTime, 500f, 900f, 0.035f, 0.15f, EasingType.QuadIn );
+		//if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < runnerChance )
+		//{
+		//	float eliteChance = ElapsedTime < 720f ? 0f : Utils.Map( ElapsedTime, 720f, 1500f, 0.01f, 1f, EasingType.QuadIn );
+		//	type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( RunnerElite ) ) : TypeLibrary.GetType( typeof( Runner ) );
+		//}
+
+		//// ZOMBIE ELITE
+		//var zombieEliteChance = ElapsedTime < 400f ? 0f : Utils.Map( ElapsedTime, 400f, 1200f, 0.0175f, 1f, EasingType.SineIn );
+		//if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < zombieEliteChance )
+		//{
+		//	type = TypeLibrary.GetType( typeof( ZombieElite ) );
+		//}
+
+		//type = Game.Random.Int(0, 2) == 0 ? TypeLibrary.GetType(typeof(RunnerElite)) : TypeLibrary.GetType(typeof(Runner));
+
+		//SpawnEnemy( type, pos );
+		SpawnEnemy( pos );
+	}
+
+	//void SpawnEnemy( TypeDescription type, Vector2 pos, bool forceSpawn = false )
+	void SpawnEnemy( Vector2 pos, bool forceSpawn = false )
+	{
+		if ( EnemyCount >= MAX_ENEMY_COUNT && !forceSpawn )
+			return;
+
+		var enemyObj = EnemyPrefab.Clone( new Vector3( pos.x, pos.y, 0f ) );
+		enemyObj.Name = "zombie";
+		var enemy = enemyObj.Components.Create<Zombie>();
+
+		//var enemy = type.Create<Enemy>();
+
+		//var closestPlayer = GetClosestPlayer( pos );
+		//if ( closestPlayer?.Position2D.x > pos.x )
+		//	enemy.Scale = new Vector2( -1f, 1f ) * enemy.ScaleFactor;
+
+		AddThing( enemy );
+		EnemyCount++;
+
+		//if ( type == TypeLibrary.GetType( typeof( Crate ) ) )
+		//	CrateCount++;
+
+		//PlaySfxNearby( "zombie.dirt", pos, pitch: Game.Random.Float( 0.6f, 0.8f ), volume: 0.7f, maxDist: 7.5f );
+
+		enemyObj.NetworkSpawn();
+	}
+
+	public void SpawnBoss( Vector2 pos )
+	{
+		//SpawnEnemy( TypeLibrary.GetType( typeof( Boss ) ), pos, forceSpawn: true );
+		//PlaySfxNearby( "boss.fanfare", pos, pitch: 1.0f, volume: 1.3f, maxDist: 30f );
+	}
+
+	private T GetClosest<T>( IEnumerable<T> enumerable, Vector3 pos, float maxRange, bool ignoreZ, T except )
+		where T : Thing
+	{
+		var dists = ignoreZ
+			? enumerable.Select( x => (Thing: x, DistSq: (x.Transform.Position - pos).WithZ( 0f ).LengthSquared) )
+			: enumerable.Select( x => (Thing: x, DistSq: (x.Transform.Position - pos).LengthSquared) );
+
+		return dists.OrderBy( x => x.DistSq )
+			//.FirstOrDefault( x => x.DistSq <= maxRange * maxRange && x.Thing != except && (!ignoreZ || x.Thing.Parent == null) )
+			.FirstOrDefault( x => x.DistSq <= maxRange * maxRange && x.Thing != except )
+			.Thing;
+	}
+
+	public Player GetClosestPlayer( Vector3 pos, float maxRange = float.PositiveInfinity, bool alive = true, bool ignoreZ = true, Player except = null )
+	{
+		var players = alive
+			? Scene.GetAllComponents<Player>().Where( x => !x.IsDead )
+			: Scene.GetAllComponents<Player>();
+
+		return GetClosest( players, pos, maxRange, ignoreZ, except );
 	}
 
 	public GridSquare GetGridSquareForPos( Vector2 pos )

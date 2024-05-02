@@ -94,7 +94,7 @@ public class Player : Thing
 		if ( IsProxy )
 			return;
 
-		//CollideWith.Add( typeof( Enemy ) );
+		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );
 
 		Stats = new Dictionary<PlayerStat, float>();
@@ -232,10 +232,11 @@ public class Player : Thing
 
 	protected override void OnUpdate()
 	{
-		Gizmo.Draw.Color = Color.White;
-		Gizmo.Draw.Text( $"AmmoCount: {AmmoCount}\nGridPos: {GridPos}", new global::Transform( Transform.Position + new Vector3(0f, -35f, 0f) ) );
+		//Gizmo.Draw.Color = Color.White;
+		//Gizmo.Draw.Text( $"AmmoCount: {AmmoCount}\nGridPos: {GridPos}", new global::Transform( Transform.Position + new Vector3(0f, -35f, 0f) ) );
 
-		//Gizmo.Draw.LineSphere( Transform.Position, Radius );
+		Gizmo.Draw.Color = Color.White.WithAlpha(0.2f);
+		Gizmo.Draw.LineSphere( Transform.Position, Radius );
 
 		if ( Velocity.x > 0f )
 			Sprite.FlipHorizontal = true;
@@ -354,9 +355,9 @@ public class Player : Thing
 			else
 			{
 				if ( IsInvulnerable )
-					Sprite.Color = new Color( Sandbox.Game.Random.Float( 0.1f, 0.25f ), Sandbox.Game.Random.Float( 0.1f, 0.25f ), 1f );
+					Sprite.Color = new Color( Game.Random.Float( 0.1f, 0.25f ), Game.Random.Float( 0.1f, 0.25f ), 1f );
 
-				if ( _dashCloudTime > Sandbox.Game.Random.Float( 0.1f, 0.2f ) )
+				if ( _dashCloudTime > Game.Random.Float( 0.1f, 0.2f ) )
 				{
 					//SpawnCloudClient();
 					_dashCloudTime = 0f;
@@ -640,6 +641,49 @@ public class Player : Thing
 		IsChoosingLevelUpReward = true;
 	}
 
+	// returns actual damage amount taken
+	public float Damage( float damage, DamageType damageType )
+	{
+		if ( IsInvulnerable )
+		{
+			// show DODGED! floater
+			return 0f;
+		}
+
+		//if ( HasStatus( TypeLibrary.GetType( typeof( ShieldStatus ) ) ) )
+		//{
+		//	var shieldStatus = GetStatus( TypeLibrary.GetType( typeof( ShieldStatus ) ) ) as ShieldStatus;
+		//	if ( shieldStatus != null && shieldStatus.IsShielded )
+		//	{
+		//		shieldStatus.LoseShield();
+		//		return 0f;
+		//	}
+		//}
+
+		TimeSinceHurt = 0f;
+
+		if ( Stats[PlayerStat.DamageReductionPercent] > 0f )
+			damage *= (1f - MathX.Clamp( Stats[PlayerStat.DamageReductionPercent], 0f, 1f ));
+
+		if ( damageType == DamageType.Explosion && Stats[PlayerStat.ExplosionDamageReductionPercent] > 0f )
+			damage *= (1f - MathX.Clamp( Stats[PlayerStat.ExplosionDamageReductionPercent], 0f, 1f ));
+
+		if ( damageType != DamageType.Explosion && Stats[PlayerStat.NonExplosionDamageIncreasePercent] > 0f )
+			damage *= (1f + Stats[PlayerStat.NonExplosionDamageIncreasePercent]);
+
+		ForEachStatus( status => status.OnHurt( damage ) );
+
+		Health -= damage;
+		//DamageNumbers.Create( Position + new Vector2( Game.Random.Float( 2.5f, 5.5f ), Game.Random.Float( 8.5f, 10.5f ) ) * 0.1f, damage, DamageNumberType.Player );
+		Flash( 0.125f );
+
+		//SpawnBloodClient( damage );
+
+		if ( Health <= 0f )
+			Die();
+
+		return damage;
+	}
 	public void Die()
 	{
 		if ( IsDead )
@@ -654,7 +698,7 @@ public class Player : Thing
 		_isFlashing = false;
 		IsReloading = false;
 
-		//Game.PlaySfxNearby( "die", Position, pitch: Sandbox.Game.Random.Float( 1f, 1.2f ), volume: 1.5f, maxDist: 12f );
+		//Game.PlaySfxNearby( "die", Position, pitch: Game.Random.Float( 1f, 1.2f ), volume: 1.5f, maxDist: 12f );
 		//DieClient();
 		//DieClientSingle( To.Single( Client ) );
 	}
@@ -862,5 +906,31 @@ public class Player : Thing
 			damageMultiplier *= Stats[PlayerStat.FullHealthDamageMultiplier];
 
 		return damageMultiplier;
+	}
+
+	public override void Colliding( Thing other, float percent, float dt )
+	{
+		base.Colliding( other, percent, dt );
+
+		if ( IsDead )
+			return;
+
+		ForEachStatus( status => status.Colliding( other, percent, dt ) );
+
+		if ( other is Enemy enemy && !enemy.IsDying )
+		{
+			if ( !Position2D.Equals( other.Position2D ) )
+			{
+				var spawnFactor = Utils.Map( enemy.ElapsedTime, 0f, enemy.SpawnTime, 0f, 1f, EasingType.QuadIn );
+				Velocity += (Position2D - other.Position2D).Normal * Utils.Map( percent, 0f, 1f, 0f, 100f ) * (1f + other.TempWeight) * spawnFactor * dt * 20f;// * Globals.MOVE_FACTOR;
+			}
+		}
+		else if ( other is Player player )
+		{
+			if ( !player.IsDead && !Position2D.Equals( other.Position2D ) )
+			{
+				Velocity += (Position2D - other.Position2D).Normal * Utils.Map( percent, 0f, 1f, 0f, 100f ) * (1f + other.TempWeight) * dt;
+			}
+		}
 	}
 }

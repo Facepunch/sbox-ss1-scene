@@ -54,7 +54,7 @@ public class Bullet : Thing
 		//ShadowOpacity = 0.8f;
 		//ShadowScale = 0.3f;
 
-		//CollideWith.Add( typeof( Enemy ) );
+		CollideWith.Add( typeof( Enemy ) );
 	}
 
 	public void Init()
@@ -78,7 +78,7 @@ public class Bullet : Thing
 			: Utils.Map( damage, 30f, 150f, 0.5f, 1.75f, EasingType.QuadIn );
 
 		//Scale = new Vector2( scale, scale );
-		Radius = 0.07f + scale * 0.2f;
+		Radius = 3f + scale * 2f;
 		//ShadowScale = scale * 1.2f;
 	}
 
@@ -86,6 +86,9 @@ public class Bullet : Thing
 	{
 		//Gizmo.Draw.Color = Color.White;
 		//Gizmo.Draw.Text( $"Stats[BulletStat.Damage]: {Stats[BulletStat.Damage]}\nStats[BulletStat.Lifetime]: {Stats[BulletStat.Lifetime]}", new global::Transform( Transform.Position + new Vector3( 0f, -35f, 0f ) ) );
+
+		Gizmo.Draw.Color = Color.White.WithAlpha( 0.4f );
+		Gizmo.Draw.LineSphere( Transform.Position, Radius );
 
 		if ( Shooter == null || Shooter.IsDead )
 		{
@@ -166,71 +169,71 @@ public class Bullet : Thing
 		if ( Shooter == null )
 			return;
 
-		//if ( typeof( Enemy ).IsAssignableFrom( other.GetType() ) )
-		//{
-		//	var enemy = (Enemy)other;
 
-		//	if ( !enemy.IsDying && (!enemy.IsSpawning || enemy.ElapsedTime > 1.5f) )
-		//	{
-		//		if ( _hitThings.Contains( enemy ) )
-		//			return;
 
-		//		Game.PlaySfxNearby( "enemy.hit", Position, pitch: Utils.Map( enemy.Health, enemy.MaxHealth, 0f, 0.9f, 1.3f, EasingType.SineIn ), volume: 1f, maxDist: 4f );
+		if ( other is Enemy enemy )
+		{
+			if ( !enemy.IsDying && (!enemy.IsSpawning || enemy.ElapsedTime > 1.5f) )
+			{
+				if ( _hitThings.Contains( enemy ) )
+					return;
 
-		//		if ( Sandbox.Game.Random.Float( 0f, 1f ) < Stats[BulletStat.FireIgniteChance] )
-		//		{
-		//			if ( !enemy.HasEnemyStatus<BurningEnemyStatus>() )
-		//				Game.PlaySfxNearby( "burn", Position, pitch: Sandbox.Game.Random.Float( 0.95f, 1.05f ), volume: 1f, maxDist: 5f );
+				//Game.PlaySfxNearby( "enemy.hit", Position, pitch: Utils.Map( enemy.Health, enemy.MaxHealth, 0f, 0.9f, 1.3f, EasingType.SineIn ), volume: 1f, maxDist: 4f );
 
-		//			enemy.Burn( Shooter, Shooter.Stats[PlayerStat.FireDamage] * Shooter.GetDamageMultiplier(), Shooter.Stats[PlayerStat.FireLifetime], Shooter.Stats[PlayerStat.FireSpreadChance] );
-		//		}
+				if ( Game.Random.Float( 0f, 1f ) < Stats[BulletStat.FireIgniteChance] )
+				{
+					//if ( !enemy.HasEnemyStatus<BurningEnemyStatus>() )
+					//	Game.PlaySfxNearby( "burn", Position, pitch: Game.Random.Float( 0.95f, 1.05f ), volume: 1f, maxDist: 5f );
 
-		//		if ( Sandbox.Game.Random.Float( 0f, 1f ) < Stats[BulletStat.FreezeChance] )
-		//		{
-		//			if ( !enemy.HasEnemyStatus<FrozenEnemyStatus>() )
-		//				Game.PlaySfxNearby( "frozen", Position, pitch: Sandbox.Game.Random.Float( 1.2f, 1.3f ), volume: 1.6f, maxDist: 6f );
+					//enemy.Burn( Shooter, Shooter.Stats[PlayerStat.FireDamage] * Shooter.GetDamageMultiplier(), Shooter.Stats[PlayerStat.FireLifetime], Shooter.Stats[PlayerStat.FireSpreadChance] );
+				}
 
-		//			enemy.Freeze( Shooter );
-		//		}
+				if ( Game.Random.Float( 0f, 1f ) < Stats[BulletStat.FreezeChance] )
+				{
+					//if ( !enemy.HasEnemyStatus<FrozenEnemyStatus>() )
+					//	Game.PlaySfxNearby( "frozen", Position, pitch: Game.Random.Float( 1.2f, 1.3f ), volume: 1.6f, maxDist: 6f );
 
-		//		bool isCrit = Sandbox.Game.Random.Float( 0f, 1f ) < Stats[BulletStat.CriticalChance];
-		//		float damage = Stats[BulletStat.Damage] * (isCrit ? Stats[BulletStat.CriticalMultiplier] : 1f);
-		//		enemy.Damage( damage, Shooter, isCrit );
+					//enemy.Freeze( Shooter );
+				}
 
-		//		enemy.Velocity += Velocity.Normal * Stats[BulletStat.Force] * (8f / enemy.PushStrength);
-		//		enemy.TempWeight += Stats[BulletStat.AddTempWeight];
+				bool isCrit = Game.Random.Float( 0f, 1f ) < Stats[BulletStat.CriticalChance];
+				float damage = Stats[BulletStat.Damage] * (isCrit ? Stats[BulletStat.CriticalMultiplier] : 1f);
+				enemy.Damage( damage, Shooter, isCrit );
 
-		//		NumHits++;
+				enemy.Velocity += Velocity.Normal * Stats[BulletStat.Force] * (8f / enemy.PushStrength);
+				enemy.TempWeight += Stats[BulletStat.AddTempWeight];
 
-		//		if ( NumHits > (int)Stats[BulletStat.NumPiercing] )
-		//		{
-		//			Remove();
-		//			return;
-		//		}
-		//		else
-		//		{
-		//			_hitThings.Add( enemy );
-		//		}
-		//	}
-		//}
-		//else if ( other is PlayerCitizen player && player != Shooter && !player.IsDead )
-		//{
-		//	if ( _hitThings.Contains( player ) )
-		//		return;
+				NumHits++;
 
-		//	player.Heal( Stats[BulletStat.HealTeammateAmount], 0.05f );
+				if ( NumHits > (int)Stats[BulletStat.NumPiercing] )
+				{
+					Remove();
+					return;
+				}
+				else
+				{
+					_hitThings.Add( enemy );
+				}
+			}
+		}
+		else if ( other is Player player && player != Shooter && !player.IsDead )
+		{
+			if ( _hitThings.Contains( player ) )
+				return;
 
-		//	NumHits++;
+			player.Heal( Stats[BulletStat.HealTeammateAmount], 0.05f );
 
-		//	if ( NumHits > (int)Stats[BulletStat.NumPiercing] )
-		//	{
-		//		Remove();
-		//		return;
-		//	}
-		//	else
-		//	{
-		//		_hitThings.Add( player );
-		//	}
-		//}
+			NumHits++;
+
+			if ( NumHits > (int)Stats[BulletStat.NumPiercing] )
+			{
+				Remove();
+				return;
+			}
+			else
+			{
+				_hitThings.Add( player );
+			}
+		}
 	}
 }
