@@ -77,6 +77,11 @@ public abstract class Enemy : Thing
 		//_animSpeedModifier = 1f;
 		Sprite = Components.Get<SpriteRenderer>();
 
+		ShadowScale = 0.95f;
+		ShadowFullOpacity = 0.8f;
+		ShadowOpacity = 0f;
+		SpawnShadow( ShadowScale, ShadowOpacity );
+
 		if ( IsProxy )
 			return;
 
@@ -91,7 +96,6 @@ public abstract class Enemy : Thing
 		CanAttack = true;
 		CanAttackAnim = true;
 		CanTurn = true;
-		ShadowFullOpacity = 0.8f;
 
 		CoinValueMin = 1;
 		CoinValueMax = 1;
@@ -102,8 +106,8 @@ public abstract class Enemy : Thing
 		//Gizmo.Draw.Color = Color.White;
 		//Gizmo.Draw.Text( $"IsAttacking: {IsAttacking}\nHealth: {Health}/{MaxHealth}\nGridPos: {GridPos}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
 
-		Gizmo.Draw.Color = Color.White.WithAlpha( 0.1f );
-		Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
+		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
+		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
 		if ( Manager.Instance.IsGameOver )
 			return;
@@ -114,6 +118,8 @@ public abstract class Enemy : Thing
 		ElapsedTime += dt;
 
 		HandleFlashing( Time.Delta );
+
+		ShadowSprite.Color = Color.Black.WithAlpha( ShadowOpacity );
 
 		if ( IsProxy )
 			return;
@@ -262,7 +268,7 @@ public abstract class Enemy : Thing
 		else
 		{
 			DeathProgress = Utils.Map( DeathTimeElapsed, 0f, DeathTime, 0f, 1f );
-			//ShadowOpacity = Utils.Map( DeathProgress, 0f, 1f, ShadowFullOpacity, 0f, EasingType.QuadIn );
+			ShadowOpacity = Utils.Map( DeathProgress, 0f, 1f, ShadowFullOpacity, 0f, EasingType.QuadIn );
 		}
 	}
 
@@ -274,7 +280,7 @@ public abstract class Enemy : Thing
 		{
 			IsSpawning = false;
 			//AnimationPath = AnimIdlePath;
-			//ShadowOpacity = ShadowFullOpacity;
+			ShadowOpacity = ShadowFullOpacity;
 		}
 		else
 		{
@@ -284,7 +290,7 @@ public abstract class Enemy : Thing
 				_spawnCloudTime = Game.Random.Float( 0f, 0.15f );
 			}
 
-			//ShadowOpacity = Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, ShadowFullOpacity );
+			ShadowOpacity = Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, ShadowFullOpacity );
 		}
 	}
 

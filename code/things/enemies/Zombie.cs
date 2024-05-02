@@ -10,9 +10,9 @@ public class Zombie : Enemy
 
 	protected override void OnStart()
 	{
-		base.OnStart();
-
 		OffsetY = -0.4f;
+
+		base.OnStart();
 
 		if ( IsProxy )
 			return;

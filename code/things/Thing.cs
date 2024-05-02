@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sandbox.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -14,7 +15,11 @@ public class Thing : Component
 	public bool IsRemoved { get; private set; }
 	public List<Type> CollideWith = new List<Type>();
 	public float TimeScale { get; set; }
+
 	public float OffsetY { get; set; }
+	[Sync] public float ShadowOpacity { get; set; }
+	[Sync] public float ShadowScale { get; set; }
+	public SpriteRenderer ShadowSprite { get; set; }
 
 	public Vector2 Position2D
 	{
@@ -33,11 +38,6 @@ public class Thing : Component
 		TimeScale = 1f;
 	}
 
-	//public virtual void Update( float dt )
-	//{
-
-	//}
-
 	public virtual void Colliding( Thing other, float percent, float dt )
 	{
 
@@ -48,5 +48,19 @@ public class Thing : Component
 		IsRemoved = true;
 		//Game.RemoveThing( this );
 		GameObject.Destroy();
+	}
+
+	protected void SpawnShadow( float size, float opacity )
+	{
+		Log.Info( "shadow" );
+
+		var shadowObj = Manager.Instance.ShadowPrefab.Clone( Transform.Position );
+		shadowObj.SetParent( GameObject );
+		shadowObj.Transform.LocalPosition = new Vector3(0f, OffsetY, Globals.SHADOW_DEPTH_OFFSET );
+		//shadowObj.NetworkMode = NetworkMode.Never;
+		
+		ShadowSprite = shadowObj.Components.Get<SpriteRenderer>();
+		ShadowSprite.Size = new Vector2( size );
+		ShadowSprite.Color = Color.Black.WithAlpha( opacity );
 	}
 }

@@ -32,7 +32,11 @@ public class Bullet : Thing
 
 		OffsetY = -0.45f;
 
-		//SpawnShadow( Radius * 3f );
+		Radius = 0.1f;
+
+		ShadowOpacity = 0.8f;
+		ShadowScale = 0.3f;
+		SpawnShadow( ShadowScale, ShadowOpacity );
 
 		if ( IsProxy )
 			return;
@@ -40,7 +44,6 @@ public class Bullet : Thing
 		//Scale = new Vector2( 0.1f, 0.1f );
 		TimeSinceSpawn = 0f;
 		NumHits = 0;
-		Radius = 0.1f;
 
 		Stats = new Dictionary<BulletStat, float>();
 
@@ -52,9 +55,6 @@ public class Bullet : Thing
 		Stats[BulletStat.CriticalChance] = 0;
 		Stats[BulletStat.CriticalMultiplier] = 1f;
 		Stats[BulletStat.HealTeammateAmount] = 0f;
-
-		//ShadowOpacity = 0.8f;
-		//ShadowScale = 0.3f;
 
 		CollideWith.Add( typeof( Enemy ) );
 	}
@@ -89,8 +89,8 @@ public class Bullet : Thing
 		//Gizmo.Draw.Color = Color.White;
 		//Gizmo.Draw.Text( $"Stats[BulletStat.Damage]: {Stats[BulletStat.Damage]}\nStats[BulletStat.Lifetime]: {Stats[BulletStat.Lifetime]}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -35f, 0f ) ) );
 
-		Gizmo.Draw.Color = Color.White.WithAlpha( 0.4f );
-		Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
+		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
+		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
 		if ( Shooter == null || Shooter.IsDead )
 		{

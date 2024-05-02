@@ -34,6 +34,10 @@
           "PlayerPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/player.prefab"
+          },
+          "ShadowPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/shadow.prefab"
           }
         },
         {
@@ -106,7 +110,7 @@
     {
       "__guid": "c13b0129-7c1f-4c62-868f-f751f9b228eb",
       "Name": "bg",
-      "Position": "0,0,-100",
+      "Position": "0,0,-1000",
       "Scale": "0.65,0.5,1",
       "Enabled": true,
       "NetworkMode": 2,
@@ -135,7 +139,6 @@
       "__guid": "f686c6ef-6fda-4ef0-89cf-4ecadaeba4d1",
       "Name": "bg_cubes",
       "Position": "10.60519,-279.1306,0",
-      "Enabled": true,
       "NetworkMode": 2,
       "NetworkInterpolation": true,
       "Children": [
@@ -261,7 +264,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-05-01T22:13:23.3839727-07:00",
+  "LastSaved": "2024-05-02T00:41:28.307294-07:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

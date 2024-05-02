@@ -22,7 +22,10 @@ public class Coin : Thing
 
 		OffsetY = -0.1f;
 
-		//SpawnShadow( 0.4f );
+		ShadowOpacity = 0.8f;
+		ShadowScale = 0.4f;
+
+		SpawnShadow( ShadowScale, ShadowOpacity );
 
 		if ( IsProxy )
 			return;
@@ -36,9 +39,6 @@ public class Coin : Thing
 		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );
 		CollideWith.Add( typeof( Coin ) );
-
-		//ShadowOpacity = 0.8f;
-		//ShadowScale = 0.4f;
 	}
 
 	protected override void OnUpdate()
@@ -46,8 +46,8 @@ public class Coin : Thing
 		//Gizmo.Draw.Color = Color.White;
 		//Gizmo.Draw.Text( $"Stats[BulletStat.Damage]: {Stats[BulletStat.Damage]}\nStats[BulletStat.Lifetime]: {Stats[BulletStat.Lifetime]}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.4f, 0f ) ) );
 
-		Gizmo.Draw.Color = Color.White.WithAlpha( 0.1f );
-		Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
+		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
+		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
 		if ( Manager.Instance.IsGameOver )
 			return;

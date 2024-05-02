@@ -11,6 +11,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public GameObject PlayerPrefab { get; set; }
 	[Property] public GameObject EnemyPrefab { get; set; }
 	[Property] public GameObject CoinPrefab { get; set; }
+	[Property] public GameObject ShadowPrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
@@ -87,7 +88,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		//	}
 		//}
 
-		var tr = Scene.Trace.Ray( Camera.ScreenPixelToRay( Mouse.Position ), 1000f ).Run();
+		var tr = Scene.Trace.Ray( Camera.ScreenPixelToRay( Mouse.Position ), 1500f ).Run();
 		if ( tr.Hit )
 		{
 			MouseWorldPos = (Vector2)tr.HitPosition;

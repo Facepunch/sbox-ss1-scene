@@ -91,7 +91,11 @@ public class Player : Thing
 	{
 		base.OnStart();
 
-		OffsetY = -0.38f;
+		OffsetY = -0.42f;
+
+		ShadowOpacity = 0.8f;
+		ShadowScale = 1.12f;
+		SpawnShadow( ShadowScale, ShadowOpacity );
 
 		if ( IsProxy )
 			return;
@@ -224,13 +228,12 @@ public class Player : Thing
 		TempWeight = 0f;
 		_shotNum = 0;
 		TimeSinceHurt = 999f;
-
 		//ShadowOpacity = 0.8f;
 		//ShadowScale = 1.12f;
 
 		//InitializeStatsClient();
 		//RefreshStatusHud( To.Single( Client ) );
-		
+
 		AddStatus( TypeLibrary.GetType( typeof( MovespeedStatus ) ) );
 	}
 
@@ -244,16 +247,18 @@ public class Player : Thing
 			debug += status.ToString() + "\n";
 		}
 
-		Gizmo.Draw.Color = Color.White;
-		Gizmo.Draw.Text( $"{debug}\nHealth: {Health}/{Stats[PlayerStat.MaxHp]}\nExperienceTotal: {ExperienceTotal}\nGridPos: {GridPos}", new global::Transform( (Vector3)Position2D + new Vector3(0f, -0.7f, 0f) ) );
+		//Gizmo.Draw.Color = Color.White;
+		//Gizmo.Draw.Text( $"{debug}\nHealth: {Health}/{Stats[PlayerStat.MaxHp]}\nExperienceTotal: {ExperienceTotal}\nGridPos: {GridPos}", new global::Transform( (Vector3)Position2D + new Vector3(0f, -0.7f, 0f) ) );
 
-		Gizmo.Draw.Color = Color.White.WithAlpha(0.2f);
-		Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
+		//Gizmo.Draw.Color = Color.White.WithAlpha(0.05f);
+		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
 		if ( Velocity.x > 0f )
 			Sprite.FlipHorizontal = true;
 		else if ( Velocity.x < 0f )
 			Sprite.FlipHorizontal = false;
+
+		ShadowSprite.Color = Color.Black.WithAlpha( ShadowOpacity );
 
 		if ( IsProxy )
 			return;
@@ -726,7 +731,7 @@ public class Player : Thing
 		Manager.Instance.PlayerDied( this );
 		//EnableDrawing = false;
 		Sprite.Color = new Color( 1f, 1f, 1f, 0.05f );
-		//ShadowOpacity = 0.1f;
+		ShadowOpacity = 0.1f;
 		_isFlashing = false;
 		IsReloading = false;
 

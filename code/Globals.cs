@@ -5,5 +5,5 @@ global using System.Linq;
 
 public class Globals
 {
-	
+	public const float SHADOW_DEPTH_OFFSET = -200f;
 }
