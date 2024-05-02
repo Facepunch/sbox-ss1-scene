@@ -273,6 +273,8 @@ public class Player : Thing
 		var velocity = Velocity + (IsDashing ? DashVelocity : Vector2.Zero);
 		Position2D += velocity * dt;
 
+		Transform.Position = Transform.Position.WithZ( -Position2D.y * 10f );
+
 		Velocity = Utils.DynamicEaseTo( Velocity, Vector2.Zero, 0.2f, dt );
 		TempWeight *= (1f - dt * 4.7f);
 

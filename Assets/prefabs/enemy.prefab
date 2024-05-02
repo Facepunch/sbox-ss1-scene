@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "e19e3ade-69d1-4547-845b-6d5398b744b7",
+    "__guid": "46f6d07a-1c22-48d7-b8e4-5bb6c7c43a38",
     "Name": "enemy",
     "Enabled": true,
     "NetworkMode": 2,
@@ -8,10 +8,10 @@
     "Components": [
       {
         "__type": "Sandbox.SpriteRenderer",
-        "__guid": "47e13070-22aa-4512-85a3-820158e9b4f4",
+        "__guid": "cce0e30e-a511-4e9e-b05e-cb60ea7ee607",
         "Additive": false,
         "CastShadows": false,
-        "Color": "1,1,1,1",
+        "Color": "1,1,1,0",
         "DepthFeather": 0,
         "FlipHorizontal": false,
         "FlipVertical": false,

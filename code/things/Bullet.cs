@@ -107,7 +107,7 @@ public class Bullet : Thing
 		float dt = Time.Delta;
 
 		Position2D += Velocity * dt;
-		//Depth = -Position.y * 10f;
+		Transform.Position = Transform.Position.WithZ( -Position2D.y * 10f );
 
 		bool changedDamage = false;
 

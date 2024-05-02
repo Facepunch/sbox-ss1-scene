@@ -76,6 +76,7 @@ public abstract class Enemy : Thing
 		//_animSpeed = 1f;
 		//_animSpeedModifier = 1f;
 		Sprite = Components.Get<SpriteRenderer>();
+		Sprite.Color = Color.White.WithAlpha( 0f );
 
 		ShadowScale = 0.95f;
 		ShadowFullOpacity = 0.8f;
@@ -137,6 +138,7 @@ public abstract class Enemy : Thing
 		}
 
 		UpdatePosition( dt );
+		Transform.Position = Transform.Position.WithZ( -Position2D.y * 10f );
 		ClampToBounds();
 		HandleDeceleration( dt );
 		//Depth = -Position.y * 10f;
@@ -250,7 +252,7 @@ public abstract class Enemy : Thing
 			if ( _flashTimer < 0f )
 			{
 				_isFlashing = false;
-				Sprite.Color = Color.Lerp( Color.White, Color.Black, Utils.Map(Health, MaxHealth, 0f, 0f, 0.5f) );
+				Sprite.Color = Color.Lerp( Color.White, Color.Black, Utils.Map(Health, MaxHealth, 0f, 0f, 0.7f) );
 			}
 		}
 	}
@@ -281,6 +283,7 @@ public abstract class Enemy : Thing
 			IsSpawning = false;
 			//AnimationPath = AnimIdlePath;
 			ShadowOpacity = ShadowFullOpacity;
+			Sprite.Color = Color.White.WithAlpha( 1f );
 		}
 		else
 		{
@@ -291,6 +294,7 @@ public abstract class Enemy : Thing
 			}
 
 			ShadowOpacity = Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, ShadowFullOpacity );
+			Sprite.Color = Color.White.WithAlpha( Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, 1f, EasingType.SineIn ) );
 		}
 	}
 
