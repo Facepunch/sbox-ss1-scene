@@ -20,7 +20,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	public record struct GridSquare( int x, int y );
 	public Dictionary<GridSquare, List<Thing>> ThingGridPositions = new Dictionary<GridSquare, List<Thing>>();
 
-	public float GRID_SIZE = 100f;
+	public float GRID_SIZE = 1f;
 	public Vector2 BOUNDS_MIN;
 	public Vector2 BOUNDS_MAX;
 	public Vector2 BOUNDS_MIN_SPAWN;
@@ -43,10 +43,10 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		Instance = this;
 
-		BOUNDS_MIN = new Vector2( -610f, -474f );
-		BOUNDS_MAX = new Vector2( 610f, 474f );
-		BOUNDS_MIN_SPAWN = BOUNDS_MIN * 0.95f;
-		BOUNDS_MAX_SPAWN = BOUNDS_MAX * 0.95f;
+		BOUNDS_MIN = new Vector2( -16f, -12f );
+		BOUNDS_MAX = new Vector2( 16f, 12f );
+		BOUNDS_MIN_SPAWN = new Vector2( -15.5f, -11.5f );
+		BOUNDS_MAX_SPAWN = new Vector2( 15.5f, 11.5f );
 
 		for ( float x = BOUNDS_MIN.x; x < BOUNDS_MAX.x; x += GRID_SIZE )
 		{
@@ -254,7 +254,7 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public GridSquare GetGridSquareForPos( Vector2 pos )
 	{
-		return new GridSquare( (int)MathF.Floor( pos.x / GRID_SIZE ), (int)MathF.Floor( pos.y / GRID_SIZE ) );
+		return new GridSquare( (int)MathF.Floor( pos.x ), (int)MathF.Floor( pos.y ) );
 	}
 
 	public List<Thing> GetThingsInGridSquare( GridSquare gridSquare )

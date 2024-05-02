@@ -1,15 +1,14 @@
 {
   "RootObject": {
-    "__guid": "b820aa06-7778-4c53-b271-ded20db36b69",
+    "__guid": "e19e3ade-69d1-4547-845b-6d5398b744b7",
     "Name": "enemy",
-    "Position": "115.7924,-233.2793,4.877899",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Sandbox.SpriteRenderer",
-        "__guid": "1a1f97db-82b9-4dc1-851e-30c64e9644b0",
+        "__guid": "47e13070-22aa-4512-85a3-820158e9b4f4",
         "Additive": false,
         "CastShadows": false,
         "Color": "1,1,1,1",
@@ -18,10 +17,11 @@
         "FlipVertical": false,
         "FogStrength": 1,
         "Opaque": false,
-        "Size": "50,50",
+        "Size": "1,1",
         "Texture": "textures/sprites/zombie.vtex"
       }
-    ]
+    ],
+    "Children": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

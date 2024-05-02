@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "63339c18-d526-4be3-a9b4-d9145e243c7c",
+    "__guid": "6cbb1db3-3c5c-4fc3-b143-0c95c8984656",
     "Name": "player",
     "Enabled": true,
     "NetworkMode": 2,
@@ -8,7 +8,7 @@
     "Components": [
       {
         "__type": "Player",
-        "__guid": "80241f1e-0370-480e-b308-e87d21be102b",
+        "__guid": "939bff54-09fa-4cb0-843b-f9324217ec16",
         "ArrowAimerPrefab": {
           "_type": "gameobject",
           "prefab": "prefabs/arrow.prefab"
@@ -19,15 +19,15 @@
         },
         "Sprite": {
           "_type": "component",
-          "component_id": "e2e13fbe-430a-46f0-8638-d36b15a70f34",
-          "go": "c91eb95a-3bf5-4488-b3d6-287f9c2dfb4c",
+          "component_id": "f91ee2ca-4a01-4b2c-8aea-56b045069334",
+          "go": "f45f7cab-0fd1-4590-86c0-ea7a817143d0",
           "component_type": "SpriteRenderer"
         }
       }
     ],
     "Children": [
       {
-        "__guid": "c91eb95a-3bf5-4488-b3d6-287f9c2dfb4c",
+        "__guid": "f45f7cab-0fd1-4590-86c0-ea7a817143d0",
         "Name": "sprite",
         "Enabled": true,
         "NetworkMode": 2,
@@ -35,7 +35,7 @@
         "Components": [
           {
             "__type": "Sandbox.SpriteRenderer",
-            "__guid": "e2e13fbe-430a-46f0-8638-d36b15a70f34",
+            "__guid": "f91ee2ca-4a01-4b2c-8aea-56b045069334",
             "Additive": false,
             "CastShadows": false,
             "Color": "1,1,1,1",
@@ -44,7 +44,7 @@
             "FlipVertical": false,
             "FogStrength": 1,
             "Opaque": false,
-            "Size": "50,50",
+            "Size": "1,1",
             "Texture": "textures/sprites/player.vtex"
           }
         ]

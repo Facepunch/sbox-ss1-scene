@@ -78,7 +78,7 @@ public class Bullet : Thing
 			: Utils.Map( damage, 30f, 150f, 0.5f, 1.75f, EasingType.QuadIn );
 
 		//Scale = new Vector2( scale, scale );
-		Radius = 3f + scale * 2f;
+		Radius = 0.07f + scale * 0.2f;
 		//ShadowScale = scale * 1.2f;
 	}
 

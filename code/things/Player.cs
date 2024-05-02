@@ -153,7 +153,7 @@ public class Player : Thing
 		Health = 100f;
 		Stats[PlayerStat.MaxHp] = 100f;
 		IsDead = false;
-		Radius = 10f;
+		Radius = 0.1f;
 		GridPos = Manager.Instance.GetGridSquareForPos( Position2D );
 		AimDir = new Vector2(0f, 1f);
 		NumRerollAvailable = 2;
@@ -232,8 +232,8 @@ public class Player : Thing
 
 	protected override void OnUpdate()
 	{
-		//Gizmo.Draw.Color = Color.White;
-		//Gizmo.Draw.Text( $"AmmoCount: {AmmoCount}\nGridPos: {GridPos}", new global::Transform( Transform.Position + new Vector3(0f, -35f, 0f) ) );
+		Gizmo.Draw.Color = Color.White;
+		Gizmo.Draw.Text( $"AmmoCount: {AmmoCount}\nGridPos: {GridPos}", new global::Transform( Transform.Position + new Vector3(0f, 0f, 0f) ) );
 
 		Gizmo.Draw.Color = Color.White.WithAlpha(0.2f);
 		Gizmo.Draw.LineSphere( Transform.Position, Radius );
@@ -251,12 +251,12 @@ public class Player : Thing
 		Vector2 inputVector = new Vector2( -Input.AnalogMove.y, Input.AnalogMove.x );
 
 		if ( inputVector.LengthSquared > 0f )
-			Velocity += inputVector.Normal * Stats[PlayerStat.MoveSpeed] * BASE_MOVE_SPEED * Globals.MOVE_FACTOR * dt;
+			Velocity += inputVector.Normal * Stats[PlayerStat.MoveSpeed] * BASE_MOVE_SPEED * dt;
 
 		Transform.Position += (Vector3)Velocity * dt;
 
 		if ( IsDashing )
-			Transform.Position += (Vector3)DashVelocity * Globals.MOVE_FACTOR * dt;
+			Transform.Position += (Vector3)DashVelocity * dt;
 
 		Velocity = Utils.DynamicEaseTo( Velocity, Vector2.Zero, 0.2f, dt );
 		TempWeight *= (1f - dt * 4.7f);
@@ -816,7 +816,7 @@ public class Player : Thing
 		float currAngleOffset = num_bullets_int == 1 ? 0f : -Stats[PlayerStat.BulletSpread] * 0.5f;
 		float increment = num_bullets_int == 1 ? 0f : Stats[PlayerStat.BulletSpread] / (float)(num_bullets_int - 1);
 
-		var pos = Position2D + AimDir * 15f;
+		var pos = Position2D + AimDir * 0.5f;
 
 		for ( int i = 0; i < num_bullets_int; i++ )
 		{
@@ -826,7 +826,7 @@ public class Player : Thing
 
 		//Game.PlaySfxNearby( "shoot", pos, pitch: Utils.Map( _shotNum, 0f, (float)Stats[PlayerStat.MaxAmmoCount], 1f, 1.25f ), volume: 1f, maxDist: 4f );
 
-		Velocity -= AimDir * Stats[PlayerStat.Recoil] * Globals.MOVE_FACTOR;
+		Velocity -= AimDir * Stats[PlayerStat.Recoil];
 
 		_shotNum++;
 	}
@@ -852,7 +852,7 @@ public class Player : Thing
 		var bullet = bulletObj.Components.Get<Bullet>();
 
 		//bullet.Depth = -1f;
-		bullet.Velocity = dir * Stats[PlayerStat.BulletSpeed] * Globals.MOVE_FACTOR;
+		bullet.Velocity = dir * Stats[PlayerStat.BulletSpeed];
 		bullet.Shooter = this;
 		bullet.TempWeight = 3f;
 		//bullet.BasePivotY = Utils.Map( damage, 5f, 30f, -1.2f, -0.3f );
@@ -922,7 +922,7 @@ public class Player : Thing
 			if ( !Position2D.Equals( other.Position2D ) )
 			{
 				var spawnFactor = Utils.Map( enemy.ElapsedTime, 0f, enemy.SpawnTime, 0f, 1f, EasingType.QuadIn );
-				Velocity += (Position2D - other.Position2D).Normal * Utils.Map( percent, 0f, 1f, 0f, 100f ) * (1f + other.TempWeight) * spawnFactor * dt * 20f;// * Globals.MOVE_FACTOR;
+				Velocity += (Position2D - other.Position2D).Normal * Utils.Map( percent, 0f, 1f, 0f, 100f ) * (1f + other.TempWeight) * spawnFactor * dt;
 			}
 		}
 		else if ( other is Player player )

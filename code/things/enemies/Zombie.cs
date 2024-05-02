@@ -21,7 +21,7 @@ public class Zombie : Enemy
 		//HeightZ = 0f;
 		PushStrength = 10f;
 
-		Radius = 15f;
+		Radius = 0.25f;
 		Health = 30f;
 		MaxHealth = Health;
 		DamageToPlayer = 7f;
@@ -52,7 +52,7 @@ public class Zombie : Enemy
 
 		if ( HasTarget )
 		{
-			Velocity += (closestPlayer.Position2D - Position2D).Normal * dt * (IsFeared ? -1f : 1f) * Globals.MOVE_FACTOR;
+			Velocity += (closestPlayer.Position2D - Position2D).Normal * dt * (IsFeared ? -1f : 1f);
 		}
 		else
 		{
@@ -62,7 +62,7 @@ public class Zombie : Enemy
 				_wanderPos = new Vector2( MathX.Clamp( closestPlayer.Position2D.x + Game.Random.Float( -30f, 30f ), Manager.Instance.BOUNDS_MIN.x + 10f, Manager.Instance.BOUNDS_MAX.x - 1f ), MathX.Clamp( closestPlayer.Position2D.y + Game.Random.Float( -30f, 30f ), Manager.Instance.BOUNDS_MIN.y + 10f, Manager.Instance.BOUNDS_MAX.y - 10f ) );
 			}
 
-			Velocity += (_wanderPos - Position2D).Normal * dt * Globals.MOVE_FACTOR;
+			Velocity += (_wanderPos - Position2D).Normal * dt;
 
 			var player_dist_sqr = (closestPlayer.Position2D - Position2D).LengthSquared;
 			if ( player_dist_sqr < 3.5f * 3.5f )
@@ -86,13 +86,13 @@ public class Zombie : Enemy
 		if ( other is Enemy enemy && !enemy.IsDying )
 		{
 			var spawnFactor = Utils.Map( enemy.ElapsedTime, 0f, enemy.SpawnTime, 0f, 1f, EasingType.QuadIn );
-			Velocity += (Position2D - enemy.Position2D).Normal * Utils.Map( percent, 0f, 1f, 0f, 1f ) * enemy.PushStrength * (1f + enemy.TempWeight) * spawnFactor * dt * Globals.MOVE_FACTOR;
+			Velocity += (Position2D - enemy.Position2D).Normal * Utils.Map( percent, 0f, 1f, 0f, 1f ) * enemy.PushStrength * (1f + enemy.TempWeight) * spawnFactor * dt;
 		}
 		else if ( other is Player player )
 		{
 			if ( !player.IsDead )
 			{
-				Velocity += (Position2D - player.Position2D).Normal * Utils.Map( percent, 0f, 1f, 0f, 1f ) * player.Stats[PlayerStat.PushStrength] * (1f + player.TempWeight) * dt;// * Globals.MOVE_FACTOR;
+				Velocity += (Position2D - player.Position2D).Normal * Utils.Map( percent, 0f, 1f, 0f, 1f ) * player.Stats[PlayerStat.PushStrength] * (1f + player.TempWeight) * dt;
 
 				if ( IsAttacking && _damageTime > (DAMAGE_TIME / TimeScale) )
 				{
