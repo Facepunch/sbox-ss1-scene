@@ -1,0 +1,41 @@
+{
+  "RootObject": {
+    "__guid": "6b981d6f-9d15-4ce9-a2fc-6c9b102b6eb4",
+    "Name": "coin",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SpriteRenderer",
+        "__guid": "1171ded6-f3d1-4558-be39-66789c32be0f",
+        "Additive": false,
+        "CastShadows": false,
+        "Color": "1,1,1,1",
+        "DepthFeather": 0,
+        "FlipHorizontal": false,
+        "FlipVertical": false,
+        "FogStrength": 1,
+        "Opaque": false,
+        "Size": "0.5,0.5",
+        "Texture": "textures/sprites/coin.vtex"
+      },
+      {
+        "__type": "Coin",
+        "__guid": "f1d47543-3e6f-4395-9285-ba774549fc7e",
+        "Sprite": {
+          "_type": "component",
+          "component_id": "1171ded6-f3d1-4558-be39-66789c32be0f",
+          "go": "6b981d6f-9d15-4ce9-a2fc-6c9b102b6eb4",
+          "component_type": "SpriteRenderer"
+        }
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

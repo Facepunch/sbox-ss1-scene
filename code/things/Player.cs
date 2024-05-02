@@ -244,7 +244,7 @@ public class Player : Thing
 		}
 
 		Gizmo.Draw.Color = Color.White;
-		Gizmo.Draw.Text( $"{debug}\nGridPos: {GridPos}", new global::Transform( Transform.Position + new Vector3(0f, 0f, 0f) ) );
+		Gizmo.Draw.Text( $"{debug}\nHealth: {Health}/{Stats[PlayerStat.MaxHp]}\nExperienceTotal: {ExperienceTotal}\nGridPos: {GridPos}", new global::Transform( Transform.Position + new Vector3(0f, -1f, 0f) ) );
 
 		Gizmo.Draw.Color = Color.White.WithAlpha(0.2f);
 		Gizmo.Draw.LineSphere( Transform.Position, Radius );
@@ -650,6 +650,19 @@ public class Player : Thing
 		ForEachStatus( status => status.OnLevelUp() );
 
 		IsChoosingLevelUpReward = true;
+		//Game.Hud.SpawnChoicePanel();
+		//Game.PlaySfxTarget( To.Single( Sandbox.Game.LocalClient ), "levelup", Position, Sandbox.Game.Random.Float( 0.95f, 1.05f ), 0.66f );
+
+	}
+
+	public void UseReroll()
+	{
+		NumRerollAvailable--;
+
+		//Game.Hud.SpawnChoicePanel();
+		//Game.PlaySfxTarget( To.Single( Sandbox.Game.LocalClient ), "levelup", Position, Sandbox.Game.Random.Float( 0.95f, 1.05f ), 0.66f );
+
+		ForEachStatus( status => status.OnReroll() );
 	}
 
 	// returns actual damage amount taken
@@ -695,6 +708,15 @@ public class Player : Thing
 
 		return damage;
 	}
+
+	//[ClientRpc]
+	//public void SpawnBloodClient( float damage )
+	//{
+	//	var blood = Game.SpawnBloodSplatter( Position );
+	//	blood.Scale *= Utils.Map( damage, 1f, 20f, 0.3f, 0.5f, EasingType.QuadIn ) * Sandbox.Game.Random.Float( 0.8f, 1.2f );
+	//	blood.Lifetime *= 0.3f;
+	//}
+
 	public void Die()
 	{
 		if ( IsDead )
@@ -745,17 +767,12 @@ public class Player : Thing
 		Sprite.Color = Color.White;
 
 		IsDead = false;
-		//ReviveClient();
+
+		//Nametag.SetVisible( true );
+
+		//if ( ArrowAimer != null )
+		//	ArrowAimer.Opacity = 1f;
 	}
-
-	//[Broadcast]
-	//public void ReviveClient()
-	//{
-	//	Nametag.SetVisible( true );
-
-	//	if ( ArrowAimer != null )
-	//		ArrowAimer.Opacity = 1f;
-	//}
 
 	public void ForEachStatus( Action<Status> action )
 	{

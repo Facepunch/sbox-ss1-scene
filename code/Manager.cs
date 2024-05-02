@@ -10,12 +10,19 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	[Property] public GameObject PlayerPrefab { get; set; }
 	[Property] public GameObject EnemyPrefab { get; set; }
+	[Property] public GameObject CoinPrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
 
 	public int EnemyCount { get; private set; }
 	public const float MAX_ENEMY_COUNT = 350;
+
+	public int CrateCount { get; private set; }
+	public const float MAX_CRATE_COUNT = 7;
+
+	public int CoinCount { get; private set; }
+	public const float MAX_COIN_COUNT = 200;
 
 	public record struct GridSquare( int x, int y );
 	public Dictionary<GridSquare, List<Thing>> ThingGridPositions = new Dictionary<GridSquare, List<Thing>>();
@@ -222,6 +229,22 @@ public sealed class Manager : Component, Component.INetworkListener
 		//PlaySfxNearby( "zombie.dirt", pos, pitch: Game.Random.Float( 0.6f, 0.8f ), volume: 0.7f, maxDist: 7.5f );
 
 		enemyObj.NetworkSpawn();
+	}
+
+	public Coin SpawnCoin( Vector2 pos, int value = 1 )
+	{
+		// todo: spawn larger amounts less often if reaching max coin cap
+		if ( CoinCount >= MAX_COIN_COUNT )
+			return null;
+
+		var coinObj = CoinPrefab.Clone( new Vector3( pos.x, pos.y, 0f ) );
+		var coin = coinObj.Components.Get<Coin>();
+		coin.SetValue( value );
+
+		AddThing( coin );
+		CoinCount++;
+
+		return coin;
 	}
 
 	public void SpawnBoss( Vector2 pos )

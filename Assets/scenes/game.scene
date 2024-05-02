@@ -23,6 +23,10 @@
             "go": "2dae15f1-83ec-4e7f-ac1e-5487524a3567",
             "component_type": "Camera2D"
           },
+          "CoinPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/coin.prefab"
+          },
           "EnemyPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/enemy.prefab"
@@ -58,7 +62,7 @@
         {
           "__type": "Sandbox.CameraComponent",
           "__guid": "72c6dbcd-cb02-4717-852c-dea61fa2659d",
-          "BackgroundColor": "0,0,0,1",
+          "BackgroundColor": "0.05062,0.16744,0.08177,1",
           "ClearFlags": "All",
           "FieldOfView": 60,
           "IsMainCamera": true,
@@ -257,7 +261,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-05-01T19:48:02.4262801-07:00",
+  "LastSaved": "2024-05-01T22:05:23.4467775-07:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

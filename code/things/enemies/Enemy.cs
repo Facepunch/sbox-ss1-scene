@@ -99,6 +99,9 @@ public abstract class Enemy : Thing
 
 	protected override void OnUpdate()
 	{
+		Gizmo.Draw.Color = Color.White;
+		Gizmo.Draw.Text( $"IsAttacking: {IsAttacking}\nHealth: {Health}/{MaxHealth}\nGridPos: {GridPos}", new global::Transform( Transform.Position + new Vector3( 0f, -1f, 0f ) ) );
+
 		Gizmo.Draw.Color = Color.White.WithAlpha( 0.2f );
 		Gizmo.Draw.LineSphere( Transform.Position, Radius );
 
@@ -349,19 +352,19 @@ public abstract class Enemy : Thing
 
 		//_deathScale = Scale;
 
-		//if ( player is not null )
-		//{
-		//	player.ForEachStatus( status => status.OnKill( this ) );
+		if ( player is not null )
+		{
+			player.ForEachStatus( status => status.OnKill( this ) );
 
-		//	if ( this is not Crate )
-		//	{
-		//		Sandbox.Services.Stats.Increment( player.Client, "kills", 1, $"{GetType().Name.ToLowerInvariant()}" );
-		//	}
-		//	else
-		//	{
-		//		Sandbox.Services.Stats.Increment( player.Client, "crates", 1 );
-		//	}
-		//}
+			//if ( this is not Crate )
+			//{
+			//	Sandbox.Services.Stats.Increment( player.Client, "kills", 1, $"{GetType().Name.ToLowerInvariant()}" );
+			//}
+			//else
+			//{
+			//	Sandbox.Services.Stats.Increment( player.Client, "crates", 1 );
+			//}
+		}
 
 		DropLoot( player );
 
@@ -377,7 +380,7 @@ public abstract class Enemy : Thing
 		var coin_chance = player != null ? Utils.Map( player.Stats[PlayerStat.Luck], 0f, 10f, 0.5f, 1f ) : 0.5f;
 		if ( Game.Random.Float( 0f, 1f ) < coin_chance )
 		{
-			//Game.SpawnCoin( Position, Game.Random.Int( CoinValueMin, CoinValueMax ) );
+			Manager.Instance.SpawnCoin( Position2D, Game.Random.Int( CoinValueMin, CoinValueMax ) );
 		}
 		else
 		{
