@@ -78,9 +78,8 @@ public abstract class Enemy : Thing
 		Sprite = Components.Get<SpriteRenderer>();
 		Sprite.Color = Color.White.WithAlpha( 0f );
 
-		ShadowScale = 0.95f;
 		ShadowFullOpacity = 0.8f;
-		ShadowOpacity = 0f;
+
 		SpawnShadow( ShadowScale, ShadowOpacity );
 
 		if ( IsProxy )
@@ -139,6 +138,7 @@ public abstract class Enemy : Thing
 
 		UpdatePosition( dt );
 		Transform.Position = Transform.Position.WithZ( -Position2D.y * 10f );
+
 		ClampToBounds();
 		HandleDeceleration( dt );
 		//Depth = -Position.y * 10f;

@@ -11,15 +11,21 @@ public class Zombie : Enemy
 	protected override void OnStart()
 	{
 		OffsetY = -0.4f;
+		ShadowScale = 0.95f;
+		ShadowFullOpacity = 0.8f;
+		ShadowOpacity = 0f;
 
 		base.OnStart();
-
-		if ( IsProxy )
-			return;
 
 		//SpriteTexture = SpriteTexture.Atlas( "textures/sprites/zombie.png", 5, 6 );
 		//AnimSpeed = 2f;
 		//BasePivotY = 0.05f;
+
+		Sprite.Texture = Texture.Load("textures/sprites/zombie.vtex");
+
+		if ( IsProxy )
+			return;
+		
 		PushStrength = 10f;
 
 		Radius = 0.25f;

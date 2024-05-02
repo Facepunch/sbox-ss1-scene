@@ -657,7 +657,7 @@ public class Player : Thing
 
 		IsChoosingLevelUpReward = true;
 		//Game.Hud.SpawnChoicePanel();
-		//Game.PlaySfxTarget( To.Single( Sandbox.Game.LocalClient ), "levelup", Position, Sandbox.Game.Random.Float( 0.95f, 1.05f ), 0.66f );
+		//Game.PlaySfxTarget( To.Single( Sandbox.Game.LocalClient ), "levelup", Position, Game.Random.Float( 0.95f, 1.05f ), 0.66f );
 
 	}
 
@@ -666,7 +666,7 @@ public class Player : Thing
 		NumRerollAvailable--;
 
 		//Game.Hud.SpawnChoicePanel();
-		//Game.PlaySfxTarget( To.Single( Sandbox.Game.LocalClient ), "levelup", Position, Sandbox.Game.Random.Float( 0.95f, 1.05f ), 0.66f );
+		//Game.PlaySfxTarget( To.Single( Sandbox.Game.LocalClient ), "levelup", Position, Game.Random.Float( 0.95f, 1.05f ), 0.66f );
 
 		ForEachStatus( status => status.OnReroll() );
 	}
@@ -719,7 +719,7 @@ public class Player : Thing
 	//public void SpawnBloodClient( float damage )
 	//{
 	//	var blood = Game.SpawnBloodSplatter( Position );
-	//	blood.Scale *= Utils.Map( damage, 1f, 20f, 0.3f, 0.5f, EasingType.QuadIn ) * Sandbox.Game.Random.Float( 0.8f, 1.2f );
+	//	blood.Scale *= Utils.Map( damage, 1f, 20f, 0.3f, 0.5f, EasingType.QuadIn ) * Game.Random.Float( 0.8f, 1.2f );
 	//	blood.Lifetime *= 0.3f;
 	//}
 

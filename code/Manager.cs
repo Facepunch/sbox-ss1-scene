@@ -74,8 +74,30 @@ public sealed class Manager : Component, Component.INetworkListener
 		if ( Networking.IsHost )
 			Network.TakeOwnership();
 
-		SpawnMagnet( new Vector2( 3f, 3f ) );
-		SpawnCoin( new Vector2( 4f, 4f ) );
+		if ( IsProxy )
+			return;
+
+		SpawnStartingThings();
+	}
+
+	public void SpawnStartingThings()
+	{
+		for ( int i = 0; i < 3; i++ )
+		{
+			var pos = new Vector2( Sandbox.Game.Random.Float( BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x ), Sandbox.Game.Random.Float( BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y ) );
+			SpawnEnemy( TypeLibrary.GetType( typeof( Crate ) ), pos );
+		}
+
+		//SpawnMagnet( new Vector2( 3f, 3f ) );
+		//SpawnCoin( new Vector2( 4f, 4f ) );
+
+		//for(int i = 0; i < 555; i++)
+		//{
+		//	var pos = new Vector2(Sandbox.Game.Random.Float(BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x), Sandbox.Game.Random.Float(BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y));
+		//	SpawnEnemy(TypeLibrary.GetType(typeof(Zombie)), pos);
+		//}
+
+		//SpawnBoss(new Vector2(3, 3f));
 	}
 
 	protected override void OnUpdate()
@@ -138,23 +160,23 @@ public sealed class Manager : Component, Component.INetworkListener
 		var pos = new Vector2( Game.Random.Float( BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x ), Game.Random.Float( BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y ) );
 
 		//// ZOMBIE (DEFAULT)
-		//TypeDescription type = TypeLibrary.GetType( typeof( Zombie ) );
+		TypeDescription type = TypeLibrary.GetType( typeof( Zombie ) );
 
-		//// CRATE
-		//if ( CrateCount < MAX_CRATE_COUNT )
-		//{
-		//	float crateChance = ElapsedTime < 20f ? 0f : Utils.Map( ElapsedTime, 20f, 200f, 0.005f, 0.01f );
-		//	float additionalCrateChance = 0f;
-		//	foreach ( PlayerCitizen player in AlivePlayers )
-		//	{
-		//		if ( player.Stats[PlayerStat.CrateChanceAdditional] > 0f )
-		//			additionalCrateChance += player.Stats[PlayerStat.CrateChanceAdditional];
-		//	}
-		//	crateChance *= (1f + additionalCrateChance);
+		// CRATE
+		if ( CrateCount < MAX_CRATE_COUNT )
+		{
+			float crateChance = ElapsedTime < 20f ? 0f : Utils.Map( ElapsedTime, 20f, 200f, 0.005f, 0.01f );
+			float additionalCrateChance = 0f;
+			foreach ( Player player in Scene.GetAllComponents<Player>().Where(x => !x.IsDead) )
+			{
+				if ( player.Stats[PlayerStat.CrateChanceAdditional] > 0f )
+					additionalCrateChance += player.Stats[PlayerStat.CrateChanceAdditional];
+			}
+			crateChance *= (1f + additionalCrateChance);
 
-		//	if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < crateChance )
-		//		type = TypeLibrary.GetType( typeof( Crate ) );
-		//}
+			if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < crateChance )
+				type = TypeLibrary.GetType( typeof( Crate ) );
+		}
 
 		//// EXPLODER
 		//float exploderChance = ElapsedTime < 35f ? 0f : Utils.Map( ElapsedTime, 35f, 700f, 0.022f, 0.08f );
@@ -205,21 +227,18 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		//type = Game.Random.Int(0, 2) == 0 ? TypeLibrary.GetType(typeof(RunnerElite)) : TypeLibrary.GetType(typeof(Runner));
 
-		//SpawnEnemy( type, pos );
-		SpawnEnemy( pos );
+		SpawnEnemy( type, pos );
 	}
 
 	//void SpawnEnemy( TypeDescription type, Vector2 pos, bool forceSpawn = false )
-	void SpawnEnemy( Vector2 pos, bool forceSpawn = false )
+	void SpawnEnemy( TypeDescription type, Vector2 pos, bool forceSpawn = false )
 	{
 		if ( EnemyCount >= MAX_ENEMY_COUNT && !forceSpawn )
 			return;
 
 		var enemyObj = EnemyPrefab.Clone( new Vector3( pos.x, pos.y, 0f ) );
-		enemyObj.Name = "zombie";
-		var enemy = enemyObj.Components.Create<Zombie>();
-
-		//var enemy = type.Create<Enemy>();
+		enemyObj.Name = type.ToString();
+		var enemy = enemyObj.Components.Create( type ) as Enemy;
 
 		//var closestPlayer = GetClosestPlayer( pos );
 		//if ( closestPlayer?.Position2D.x > pos.x )
@@ -228,8 +247,8 @@ public sealed class Manager : Component, Component.INetworkListener
 		AddThing( enemy );
 		EnemyCount++;
 
-		//if ( type == TypeLibrary.GetType( typeof( Crate ) ) )
-		//	CrateCount++;
+		if ( type == TypeLibrary.GetType( typeof( Crate ) ) )
+			CrateCount++;
 
 		//PlaySfxNearby( "zombie.dirt", pos, pitch: Game.Random.Float( 0.6f, 0.8f ), volume: 0.7f, maxDist: 7.5f );
 
@@ -249,15 +268,21 @@ public sealed class Manager : Component, Component.INetworkListener
 		AddThing( coin );
 		CoinCount++;
 
+		coinObj.NetworkSpawn();
+
 		return coin;
 	}
 
-	public Magnet SpawnMagnet( Vector2 pos )
+	public Magnet SpawnMagnet( Vector2 pos, Vector2 vel)
 	{
 		var magnetObj = MagnetPrefab.Clone( new Vector3( pos.x, pos.y, 0f ) );
 		var magnet = magnetObj.Components.Get<Magnet>();
+		magnet.Velocity = vel;
+		TimeSinceMagnet = 0f;
 
 		AddThing( magnet );
+
+		magnetObj.NetworkSpawn();
 
 		return magnet;
 	}
