@@ -12,6 +12,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public GameObject CoinPrefab { get; set; }
 	[Property] public GameObject MagnetPrefab { get; set; }
 	[Property] public GameObject BloodSplatterPrefab { get; set; }
+	[Property] public GameObject CloudPrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
@@ -47,6 +48,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	public TimeSince TimeSinceMagnet { get; set; }
 
 	public List<BloodSplatter> _bloodSplatters;
+	public List<Cloud> _clouds;
 
 	protected override void OnAwake()
 	{
@@ -71,6 +73,7 @@ public sealed class Manager : Component, Component.INetworkListener
 			return;
 
 		_bloodSplatters = new List<BloodSplatter>();
+		_clouds = new List<Cloud>();
 	}
 
 	protected override void OnStart()
@@ -91,7 +94,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	{
 		for ( int i = 0; i < 3; i++ )
 		{
-			var pos = new Vector2( Sandbox.Game.Random.Float( BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x ), Sandbox.Game.Random.Float( BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y ) );
+			var pos = new Vector2( Game.Random.Float( BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x ), Game.Random.Float( BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y ) );
 			SpawnEnemy( TypeLibrary.GetType( typeof( Crate ) ), pos );
 		}
 
@@ -100,7 +103,7 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		//for(int i = 0; i < 555; i++)
 		//{
-		//	var pos = new Vector2(Sandbox.Game.Random.Float(BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x), Sandbox.Game.Random.Float(BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y));
+		//	var pos = new Vector2(Game.Random.Float(BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x), Game.Random.Float(BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y));
 		//	SpawnEnemy(TypeLibrary.GetType(typeof(Zombie)), pos);
 		//}
 
@@ -120,6 +123,9 @@ public sealed class Manager : Component, Component.INetworkListener
 		//		//Gizmo.Draw.Text( (new Vector2( gridSquare.x, gridSquare.y )).ToString(), new global::Transform( new Vector3( x + 7f, y + 7f, 0f ) ) );
 		//	}
 		//}
+
+		if ( IsGameOver )
+			return;
 
 		var tr = Scene.Trace.Ray( Camera.ScreenPixelToRay( Mouse.Position ), 1500f ).Run();
 		if ( tr.Hit )
@@ -469,11 +475,31 @@ public sealed class Manager : Component, Component.INetworkListener
 			_bloodSplatters.Remove( blood );
 	}
 
+	public Cloud SpawnCloud( Vector2 pos )
+	{
+		var cloudObj = CloudPrefab.Clone( new Vector3( pos.x, pos.y, Globals.BLOOD_DEPTH ) );
+		var cloud = cloudObj.Components.Get<Cloud>();
+		cloud.Lifetime = 0.7f * Game.Random.Float( 0.8f, 1.2f );
+
+		_clouds.Add( cloud );
+		return cloud;
+	}
+
+	public void RemoveCloud( Cloud cloud )
+	{
+		if ( _clouds.Contains( cloud ) )
+			_clouds.Remove( cloud );
+	}
+
 	[Broadcast]
 	public void Restart()
 	{
 		foreach ( var blood in _bloodSplatters )
 			blood.GameObject.Destroy();
 		_bloodSplatters.Clear();
+
+		foreach ( var cloud in _clouds )
+			cloud.GameObject.Destroy();
+		_clouds.Clear();
 	}
 }

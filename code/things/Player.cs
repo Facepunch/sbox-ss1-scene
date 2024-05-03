@@ -374,7 +374,7 @@ public class Player : Thing
 
 				if ( _dashCloudTime > Game.Random.Float( 0.1f, 0.2f ) )
 				{
-					//SpawnCloudClient();
+					SpawnDashCloudClient();
 					_dashCloudTime = 0f;
 				}
 			}
@@ -403,7 +403,7 @@ public class Player : Thing
 		DashRechargeProgress = 0f;
 
 		//Game.PlaySfxNearby( "player.dash", Position + dashDir * 0.5f, pitch: Utils.Map( NumDashesAvailable, 0, 5, 1f, 0.9f ), volume: 1f, maxDist: 4f );
-		//SpawnCloudClient();
+		SpawnDashCloudClient();
 		_dashCloudTime = 0f;
 
 		ForEachStatus( status => status.OnDashStarted() );
@@ -956,5 +956,11 @@ public class Player : Thing
 				Velocity += (Position2D - other.Position2D).Normal * Utils.Map( percent, 0f, 1f, 0f, 100f ) * (1f + other.TempWeight) * dt;
 			}
 		}
+	}
+
+	[Broadcast]
+	public void SpawnDashCloudClient()
+	{
+		Manager.Instance.SpawnCloud( Position2D + new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) ) * 0.05f );
 	}
 }

@@ -1,0 +1,41 @@
+{
+  "RootObject": {
+    "__guid": "98732f20-bd83-4c30-b31a-1807a982432e",
+    "Name": "cloud",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SpriteRenderer",
+        "__guid": "b294cb51-535c-4573-877b-24be086e13e1",
+        "Additive": false,
+        "CastShadows": false,
+        "Color": "1,1,1,1",
+        "DepthFeather": 0,
+        "FlipHorizontal": false,
+        "FlipVertical": false,
+        "FogStrength": 1,
+        "Opaque": false,
+        "Size": "0.8,0.7",
+        "Texture": "textures/sprites/cloud.vtex"
+      },
+      {
+        "__type": "Cloud",
+        "__guid": "e5af5ecd-c34b-4f28-bd0f-fcf2fc81ceb9",
+        "Sprite": {
+          "_type": "component",
+          "component_id": "b294cb51-535c-4573-877b-24be086e13e1",
+          "go": "98732f20-bd83-4c30-b31a-1807a982432e",
+          "component_type": "SpriteRenderer"
+        }
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

@@ -80,4 +80,11 @@ public class Thing : Component
 			GridPos = gridPos;
 		}
 	}
+
+	[Broadcast]
+	public void SpawnCloudClient( Vector2 pos, Vector2 vel )
+	{
+		var cloud = Manager.Instance.SpawnCloud( pos );
+		cloud.Velocity = vel;
+	}
 }

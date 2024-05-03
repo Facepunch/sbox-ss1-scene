@@ -124,7 +124,7 @@ public class Coin : Thing
 		else if ( other is Coin coin )
 		{
 			SetValue( Value + coin.Value );
-			//SpawnCloudClient( coin.Position, Vector2.Zero );
+			SpawnCloudClient( coin.Position2D, Vector2.Zero );
 
 			if ( !IsMagnetized && coin.IsMagnetized )
 			{

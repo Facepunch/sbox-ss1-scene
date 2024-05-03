@@ -288,7 +288,7 @@ public abstract class Enemy : Thing
 		{
 			if ( _spawnCloudTime > (0.3f / TimeScale) )
 			{
-				//SpawnCloudClient( Position + new Vector2( 0f, 0.25f ), new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) ).Normal * Game.Random.Float( 0.2f, 0.6f ) );
+				SpawnCloudClient( Position2D + new Vector2( 0f, 0.05f ), new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) ).Normal * Game.Random.Float( 0.2f, 0.6f ) );
 				_spawnCloudTime = Game.Random.Float( 0f, 0.15f );
 			}
 
