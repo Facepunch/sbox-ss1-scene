@@ -19,6 +19,7 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public int EnemyCount { get; private set; }
 	public const float MAX_ENEMY_COUNT = 350;
+	//public const float MAX_ENEMY_COUNT = 3;
 
 	public int CrateCount { get; private set; }
 	public const float MAX_CRATE_COUNT = 7;

@@ -147,8 +147,8 @@ public class Bullet : Thing
 
 		if ( TimeSinceSpawn > Stats[BulletStat.Lifetime] )
 		{
-			Remove();
-			return;
+			//Remove();
+			//return;
 		}
 
 		for ( int dx = -1; dx <= 1; dx++ )

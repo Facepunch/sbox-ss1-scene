@@ -63,8 +63,8 @@ public class Thing : Component
 		var shadowObj = Manager.Instance.ShadowPrefab.Clone( Transform.Position );
 		shadowObj.SetParent( GameObject );
 		shadowObj.Transform.LocalPosition = new Vector3(0f, OffsetY, Globals.SHADOW_DEPTH_OFFSET );
-		//shadowObj.NetworkMode = NetworkMode.Never;
-		
+		shadowObj.NetworkMode = NetworkMode.Never;
+
 		ShadowSprite = shadowObj.Components.Get<SpriteRenderer>();
 		ShadowSprite.Size = new Vector2( size );
 		ShadowSprite.Color = Color.Black.WithAlpha( opacity );

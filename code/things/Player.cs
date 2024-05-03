@@ -1,4 +1,5 @@
 using Sandbox;
+using System.Drawing;
 using static Manager;
 
 public enum ModifierType { Set, Add, Mult }
@@ -263,6 +264,7 @@ public class Player : Thing
 			Sprite.FlipHorizontal = false;
 
 		ShadowSprite.Color = Color.Black.WithAlpha( ShadowOpacity );
+		ShadowSprite.Size = new Vector2( ShadowScale );
 
 		if ( IsProxy )
 			return;
