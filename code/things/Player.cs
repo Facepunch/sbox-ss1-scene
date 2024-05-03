@@ -127,7 +127,6 @@ public class Player : Thing
 		ExperienceTotal = 0;
 		ExperienceCurrent = 0;
 		Stats[PlayerStat.AttackTime] = 0.15f;
-		Timer = Stats[PlayerStat.AttackTime];
 		AmmoCount = 5;
 		Stats[PlayerStat.MaxAmmoCount] = AmmoCount;
 		Stats[PlayerStat.ReloadTime] = 1.5f;
@@ -221,7 +220,8 @@ public class Player : Thing
 		//EnableDrawing = true;
 		IsChoosingLevelUpReward = false;
 		IsDashing = false;
-		IsReloading = false;
+		IsReloading = true;
+		Timer = Stats[PlayerStat.ReloadTime];
 		ReloadProgress = 0f;
 		DashProgress = 0f;
 		DashRechargeProgress = 1f;
@@ -252,7 +252,7 @@ public class Player : Thing
 			}
 
 			Gizmo.Draw.Color = Color.White;
-			Gizmo.Draw.Text( $"{debug}\nHealth: {Health}/{Stats[PlayerStat.MaxHp]}\nExperienceTotal: {ExperienceTotal}\nGridPos: {GridPos}\nRadius: {Radius}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
+			Gizmo.Draw.Text( $"{debug}\nIsGameOver: {Manager.Instance.IsGameOver}\nIsReloading: {IsReloading}\nHealth: {Health}/{Stats[PlayerStat.MaxHp]}\nExperienceTotal: {ExperienceTotal}\nGridPos: {GridPos}\nRadius: {Radius}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
 		}
 
 		//Gizmo.Draw.Color = Color.White.WithAlpha(0.05f);
@@ -762,7 +762,8 @@ public class Player : Thing
 
 		IsChoosingLevelUpReward = false;
 		IsDashing = false;
-		IsReloading = false;
+		IsReloading = true;
+		Timer = Stats[PlayerStat.ReloadTime];
 		ReloadProgress = 0f;
 		DashProgress = 0f;
 		ExperienceCurrent = 0;

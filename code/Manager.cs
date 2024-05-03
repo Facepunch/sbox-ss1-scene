@@ -56,9 +56,9 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		Instance = this;
 
-		BOUNDS_MIN = new Vector2( -16f, -12f );
+		BOUNDS_MIN = new Vector2( -16f, -12.35f );
 		BOUNDS_MAX = new Vector2( 16f, 12f );
-		BOUNDS_MIN_SPAWN = new Vector2( -15.5f, -11.5f );
+		BOUNDS_MIN_SPAWN = new Vector2( -15.5f, -11.75f );
 		BOUNDS_MAX_SPAWN = new Vector2( 15.5f, 11.5f );
 
 		for ( float x = BOUNDS_MIN.x; x < BOUNDS_MAX.x; x += GRID_SIZE )
@@ -445,9 +445,9 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public void PlayerDied( Player player )
 	{
-		//int numPlayersAlive = Players.Where( x => !x.IsDead ).Count();
-		//if ( numPlayersAlive == 0 )
-		//	GameOver();
+		int numPlayersAlive = Scene.GetAllComponents<Player>().Where( x => !x.IsDead ).Count();
+		if ( numPlayersAlive == 0 )
+			GameOver();
 	}
 
 	public void GameOver()

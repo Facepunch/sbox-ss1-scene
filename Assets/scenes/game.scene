@@ -89,7 +89,7 @@
           "RenderTags": "",
           "TargetEye": "None",
           "Viewport": "0,0,1,1",
-          "ZFar": 10000,
+          "ZFar": 1000,
           "ZNear": 10
         },
         {
@@ -121,9 +121,9 @@
     },
     {
       "__guid": "c13b0129-7c1f-4c62-868f-f751f9b228eb",
-      "Name": "bg",
+      "Name": "bg_front",
       "Position": "0,0,-500",
-      "Scale": "0.65,0.5,1",
+      "Scale": "0.65,0.5,0.01",
       "Enabled": true,
       "NetworkMode": 2,
       "NetworkInterpolation": true,
@@ -133,12 +133,31 @@
           "__guid": "8b288391-3b7e-401b-8c3f-de784836d826",
           "BodyGroups": 18446744073709551615,
           "Model": "models/dev/box.vmdl",
-          "RenderType": "On",
+          "RenderType": "Off",
           "Tint": "0.04056,0.05581,0.01921,1"
+        }
+      ]
+    },
+    {
+      "__guid": "cf4c92f3-aec7-41ef-bfcf-ab2500938bcc",
+      "Name": "bg",
+      "Position": "0,0,-501",
+      "Scale": "0.8,0.8,0.01",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "4c204f22-e80c-4833-8187-065543ed155d",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/dev/box.vmdl",
+          "RenderType": "Off",
+          "Tint": "0.0026,0.0093,0.00461,1"
         },
         {
           "__type": "Sandbox.BoxCollider",
-          "__guid": "db30b7f3-ef83-4294-9e77-f875fb051db2",
+          "__guid": "a905b834-6912-4eab-bc20-e7cc0a0590f9",
           "Center": "0,0,0",
           "IsTrigger": false,
           "Scale": "50,50,50",
@@ -171,7 +190,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-05-02T22:17:14.4991655-07:00",
+  "LastSaved": "2024-05-03T01:41:04.9049921-07:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

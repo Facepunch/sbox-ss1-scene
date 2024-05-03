@@ -229,8 +229,9 @@ public abstract class Enemy : Thing
 		{
 			//AnimSpeed = Utils.Map( Utils.FastSin( MoveTimeOffset + Time.Now * 7.5f ), -1f, 1f, 0.75f, 3f, EasingType.ExpoIn );
 
-			//if ( MathF.Abs( Velocity.x ) > 0.175f && !IsFrozen && CanTurn )
-			//	Scale = new Vector2( 1f * Velocity.x < 0f ? 1f : -1f, 1f ) * ScaleFactor;
+			if ( MathF.Abs( Velocity.x ) > 0.175f && !IsFrozen && CanTurn )
+				Sprite.FlipHorizontal = Velocity.x > 0f;
+				//Scale = new Vector2( 1f * Velocity.x < 0f ? 1f : -1f, 1f ) * ScaleFactor;
 		}
 		else
 		{
@@ -238,8 +239,14 @@ public abstract class Enemy : Thing
 			//float attack_dist_sqr = MathF.Pow( AggroRange, 2f );
 			//AnimSpeed = Utils.Map( dist_sqr, attack_dist_sqr, 0f, 1f, 4f, EasingType.Linear );
 
-			//if ( !IsFrozen && CanTurn )
-			//	Scale = new Vector2( (IsFeared ? -1f : 1f) * (targetPlayer.Position.x < Position.x ? 1f : -1f), 1f ) * ScaleFactor;
+			if ( !IsFrozen && CanTurn )
+			{
+				Sprite.FlipHorizontal = (targetPlayer.Position2D.x < Position2D.x ? false : true);
+				if ( IsFeared )
+					Sprite.FlipHorizontal = !Sprite.FlipHorizontal;
+			}
+				
+			//Scale = new Vector2( (IsFeared ? -1f : 1f) * (targetPlayer.Position.x < Position.x ? 1f : -1f), 1f ) * ScaleFactor;
 		}
 	}
 
