@@ -31,7 +31,7 @@ public abstract class Enemy : Thing
 	public bool CanAttack { get; set; }
 	public bool CanAttackAnim { get; set; }
 	public bool CanTurn { get; set; }
-	public bool CanBleedClient { get; set; }
+	public virtual bool CanBleed => true;
 	public float AggroRange { get; protected set; }
 	protected const float AGGRO_START_TIME = 0.2f;
 	protected const float AGGRO_LOSE_TIME = 0.4f;
@@ -313,7 +313,7 @@ public abstract class Enemy : Thing
 
 	public virtual void Damage( float damage, Player player, bool isCrit = false )
 	{
-		if ( IsDying )
+		if ( IsProxy || IsDying )
 			return;
 
 		if ( player != null )
@@ -382,6 +382,15 @@ public abstract class Enemy : Thing
 
 		//Game.PlaySfxNearby( "enemy.die", Position, pitch: 1f, volume: 1f, maxDist: 5.5f );
 		//StartDyingClient();
+
+		if ( CanBleed )
+			SpawnBloodClient();
+	}
+
+	[Broadcast]
+	public void SpawnBloodClient()
+	{
+		Manager.Instance.SpawnBloodSplatter( Position2D );
 	}
 
 	public virtual void DropLoot( Player player )
@@ -406,13 +415,6 @@ public abstract class Enemy : Thing
 		}
 	}
 
-	//[ClientRpc]
-	//public virtual void StartDyingClient()
-	//{
-	//	if ( CanBleedClient )
-	//		Game.SpawnBloodSplatter( Position );
-	//}
-
 	public virtual void FinishDying()
 	{
 		Remove();
@@ -428,6 +430,7 @@ public abstract class Enemy : Thing
 		base.Remove();
 	}
 
+	[Broadcast]
 	public void Flash( float time )
 	{
 		if ( _isFlashing )

@@ -1,8 +1,6 @@
-using Microsoft.VisualBasic;
 using Sandbox;
 using Sandbox.Network;
-using System.Runtime.InteropServices;
-using System.Text;
+using System.Reflection;
 
 public sealed class Manager : Component, Component.INetworkListener
 {
@@ -13,6 +11,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public GameObject ShadowPrefab { get; set; }
 	[Property] public GameObject CoinPrefab { get; set; }
 	[Property] public GameObject MagnetPrefab { get; set; }
+	[Property] public GameObject BloodSplatterPrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
@@ -47,6 +46,8 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public TimeSince TimeSinceMagnet { get; set; }
 
+	public List<BloodSplatter> _bloodSplatters;
+
 	protected override void OnAwake()
 	{
 		base.OnAwake();
@@ -65,6 +66,11 @@ public sealed class Manager : Component, Component.INetworkListener
 				ThingGridPositions.Add( GetGridSquareForPos( new Vector2( x, y ) ), new List<Thing>() );
 			}
 		}
+
+		if ( IsProxy )
+			return;
+
+		_bloodSplatters = new List<BloodSplatter>();
 	}
 
 	protected override void OnStart()
@@ -445,5 +451,29 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		IsGameOver = true;
 		//GameOverClient();
+	}
+
+	public BloodSplatter SpawnBloodSplatter( Vector2 pos )
+	{
+		var bloodObj = BloodSplatterPrefab.Clone( new Vector3( pos.x, pos.y, Globals.BLOOD_DEPTH ) );
+		var bloodSplatter = bloodObj.Components.Get<BloodSplatter>();
+		bloodSplatter.Lifetime = Utils.Map( _bloodSplatters.Count, 0, 100, 10f, 1f ) * Game.Random.Float( 0.8f, 1.2f );
+
+		_bloodSplatters.Add( bloodSplatter );
+		return bloodSplatter;
+	}
+
+	public void RemoveBloodSplatter( BloodSplatter blood )
+	{
+		if ( _bloodSplatters.Contains( blood ) )
+			_bloodSplatters.Remove( blood );
+	}
+
+	[Broadcast]
+	public void Restart()
+	{
+		foreach ( var blood in _bloodSplatters )
+			blood.GameObject.Destroy();
+		_bloodSplatters.Clear();
 	}
 }

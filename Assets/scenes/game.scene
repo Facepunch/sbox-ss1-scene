@@ -11,6 +11,10 @@
         {
           "__type": "Manager",
           "__guid": "c823a972-1936-4122-838c-17354fc27486",
+          "BloodSplatterPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/blood.prefab"
+          },
           "Camera": {
             "_type": "component",
             "component_id": "72c6dbcd-cb02-4717-852c-dea61fa2659d",
@@ -114,7 +118,7 @@
     {
       "__guid": "c13b0129-7c1f-4c62-868f-f751f9b228eb",
       "Name": "bg",
-      "Position": "0,0,-400",
+      "Position": "0,0,-500",
       "Scale": "0.65,0.5,1",
       "Enabled": true,
       "NetworkMode": 2,
@@ -163,7 +167,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-05-02T15:41:39.0667561-07:00",
+  "LastSaved": "2024-05-02T19:36:17.2816927-07:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

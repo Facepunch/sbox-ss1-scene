@@ -705,7 +705,7 @@ public class Player : Thing
 		//DamageNumbers.Create( Position + new Vector2( Game.Random.Float( 2.5f, 5.5f ), Game.Random.Float( 8.5f, 10.5f ) ) * 0.1f, damage, DamageNumberType.Player );
 		Flash( 0.125f );
 
-		//SpawnBloodClient( damage );
+		SpawnBloodClient( damage );
 
 		if ( Health <= 0f )
 			Die();
@@ -713,13 +713,13 @@ public class Player : Thing
 		return damage;
 	}
 
-	//[ClientRpc]
-	//public void SpawnBloodClient( float damage )
-	//{
-	//	var blood = Game.SpawnBloodSplatter( Position );
-	//	blood.Scale *= Utils.Map( damage, 1f, 20f, 0.3f, 0.5f, EasingType.QuadIn ) * Game.Random.Float( 0.8f, 1.2f );
-	//	blood.Lifetime *= 0.3f;
-	//}
+	[Broadcast]
+	public void SpawnBloodClient( float damage )
+	{
+		var blood = Manager.Instance.SpawnBloodSplatter( Position2D );
+		blood.Sprite.Size *= Utils.Map( damage, 1f, 20f, 0.3f, 0.5f, EasingType.QuadIn ) * Game.Random.Float( 0.8f, 1.2f );
+		blood.Lifetime *= 0.3f;
+	}
 
 	public void Die()
 	{

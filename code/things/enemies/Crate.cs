@@ -2,6 +2,8 @@
 
 public class Crate : Enemy
 {
+	public override bool CanBleed => false;
+
 	protected override void OnStart()
 	{
 		OffsetY = -0.4f;
