@@ -143,7 +143,6 @@ public abstract class Enemy : Thing
 		HandleDeceleration( dt );
 		//Depth = -Position.y * 10f;
 
-		UpdateGridPos();
 		CheckCollisions( dt );
 
 		TempWeight *= (1f - dt * 4.7f);
@@ -437,17 +436,6 @@ public abstract class Enemy : Thing
 		Sprite.Color = Color.Red;
 		_isFlashing = true;
 		_flashTimer = time;
-	}
-
-	void UpdateGridPos()
-	{
-		var gridPos = Manager.Instance.GetGridSquareForPos( Position2D );
-		if ( gridPos != GridPos )
-		{
-			Manager.Instance.DeregisterThingGridSquare( this, GridPos );
-			Manager.Instance.RegisterThingGridSquare( this, gridPos );
-			GridPos = gridPos;
-		}
 	}
 
 	void CheckCollisions( float dt )

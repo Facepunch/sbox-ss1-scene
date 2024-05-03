@@ -86,23 +86,30 @@ public class Bullet : Thing
 
 	protected override void OnUpdate()
 	{
-		//Gizmo.Draw.Color = Color.White;
-		//Gizmo.Draw.Text( $"Stats[BulletStat.Damage]: {Stats[BulletStat.Damage]}\nStats[BulletStat.Lifetime]: {Stats[BulletStat.Lifetime]}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -35f, 0f ) ) );
+		base.OnUpdate();
+
+		//Log.Info( $"Stats: {Stats}" );
+
+		if (!IsProxy)
+		{
+			//Gizmo.Draw.Color = Color.White;
+			//Gizmo.Draw.Text( $"TimeSinceSpawn: {TimeSinceSpawn}\nStats[BulletStat.Damage]: {Stats[BulletStat.Damage]}\nStats[BulletStat.Lifetime]: {Stats[BulletStat.Lifetime]}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.2f, 0f ) ) );
+		}
 
 		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
 		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
-
-		if ( Shooter == null || Shooter.IsDead )
-		{
-			Remove();
-			return;
-		}
 
 		if ( Manager.Instance.IsGameOver )
 			return;
 
 		if ( IsProxy )
 			return;
+
+		if ( Shooter == null || Shooter.IsDead )
+		{
+			Remove();
+			return;
+		}
 
 		float dt = Time.Delta;
 
@@ -142,14 +149,6 @@ public class Bullet : Thing
 		{
 			Remove();
 			return;
-		}
-
-		var gridPos = Manager.Instance.GetGridSquareForPos( Position2D );
-		if ( gridPos != GridPos )
-		{
-			Manager.Instance.DeregisterThingGridSquare( this, GridPos );
-			Manager.Instance.RegisterThingGridSquare( this, gridPos );
-			GridPos = gridPos;
 		}
 
 		for ( int dx = -1; dx <= 1; dx++ )

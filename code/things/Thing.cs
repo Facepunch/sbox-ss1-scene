@@ -38,6 +38,14 @@ public class Thing : Component
 		TimeScale = 1f;
 	}
 
+	protected override void OnUpdate()
+	{
+		base.OnUpdate();
+
+		// todo: optimize?
+		UpdateGridPos();
+	}
+
 	public virtual void Colliding( Thing other, float percent, float dt )
 	{
 
@@ -60,5 +68,16 @@ public class Thing : Component
 		ShadowSprite = shadowObj.Components.Get<SpriteRenderer>();
 		ShadowSprite.Size = new Vector2( size );
 		ShadowSprite.Color = Color.Black.WithAlpha( opacity );
+	}
+
+	protected void UpdateGridPos()
+	{
+		var gridPos = Manager.Instance.GetGridSquareForPos( Position2D );
+		if ( gridPos != GridPos )
+		{
+			Manager.Instance.DeregisterThingGridSquare( this, GridPos );
+			Manager.Instance.RegisterThingGridSquare( this, gridPos );
+			GridPos = gridPos;
+		}
 	}
 }

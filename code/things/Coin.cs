@@ -43,6 +43,8 @@ public class Coin : Thing
 
 	protected override void OnUpdate()
 	{
+		base.OnUpdate();
+
 		//Gizmo.Draw.Color = Color.White;
 		//Gizmo.Draw.Text( $"Stats[BulletStat.Damage]: {Stats[BulletStat.Damage]}\nStats[BulletStat.Lifetime]: {Stats[BulletStat.Lifetime]}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.4f, 0f ) ) );
 
@@ -77,14 +79,6 @@ public class Coin : Thing
 		Velocity *= (1f - dt * 0.92f);
 
 		//Depth = -Position.y * 10f;
-
-		var gridPos = Manager.Instance.GetGridSquareForPos( Position2D );
-		if ( gridPos != GridPos )
-		{
-			Manager.Instance.DeregisterThingGridSquare( this, GridPos );
-			Manager.Instance.RegisterThingGridSquare( this, gridPos );
-			GridPos = gridPos;
-		}
 
 		foreach ( Player player in Scene.GetAllComponents<Player>() )
 		{

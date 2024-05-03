@@ -79,7 +79,7 @@ public class Player : Thing
 	[Sync] public int NumRerollAvailable { get; set; }
 
 	// STATS
-	public Dictionary<PlayerStat, float> Stats { get; private set; }
+	[Sync] public NetDictionary<PlayerStat, float> Stats { get; private set; } = new();
 
 	// STATUS
 	public Dictionary<int, Status> Statuses { get; private set; }
@@ -103,7 +103,6 @@ public class Player : Thing
 		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );
 
-		Stats = new Dictionary<PlayerStat, float>();
 		Statuses = new Dictionary<int, Status>();
 
 		InitializeStats();
@@ -239,16 +238,21 @@ public class Player : Thing
 
 	protected override void OnUpdate()
 	{
+		base.OnUpdate();
+
 		string debug = "";
 
-		foreach ( KeyValuePair<int, Status> pair in Statuses )
+		if(!IsProxy )
 		{
-			Status status = pair.Value;
-			debug += status.ToString() + "\n";
-		}
+			foreach ( KeyValuePair<int, Status> pair in Statuses )
+			{
+				Status status = pair.Value;
+				debug += status.ToString() + "\n";
+			}
 
-		//Gizmo.Draw.Color = Color.White;
-		//Gizmo.Draw.Text( $"{debug}\nHealth: {Health}/{Stats[PlayerStat.MaxHp]}\nExperienceTotal: {ExperienceTotal}\nGridPos: {GridPos}", new global::Transform( (Vector3)Position2D + new Vector3(0f, -0.7f, 0f) ) );
+			Gizmo.Draw.Color = Color.White;
+			Gizmo.Draw.Text( $"{debug}\nHealth: {Health}/{Stats[PlayerStat.MaxHp]}\nExperienceTotal: {ExperienceTotal}\nGridPos: {GridPos}\nRadius: {Radius}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
+		}
 
 		//Gizmo.Draw.Color = Color.White.WithAlpha(0.05f);
 		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
@@ -300,14 +304,6 @@ public class Player : Thing
 		if ( !IsDead )
 		{
 			HandleDashing( dt );
-		}
-
-		var gridPos = Manager.Instance.GetGridSquareForPos( Position2D );
-		if ( gridPos != GridPos )
-		{
-			Manager.Instance.DeregisterThingGridSquare( this, GridPos );
-			Manager.Instance.RegisterThingGridSquare( this, gridPos );
-			GridPos = gridPos;
 		}
 
 		for ( int dx = -1; dx <= 1; dx++ )
@@ -904,7 +900,7 @@ public class Player : Thing
 
 		bullet.Init();
 
-		bullet.GameObject.NetworkSpawn();
+		bullet.GameObject.NetworkSpawn(Network.OwnerConnection);
 
 		//Game.AddThing( bullet );
 	}
