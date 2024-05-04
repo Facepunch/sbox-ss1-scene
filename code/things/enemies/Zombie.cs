@@ -103,12 +103,16 @@ public class Zombie : Enemy
 
 				if ( IsAttacking && _damageTime > (DAMAGE_TIME / TimeScale) )
 				{
-					float damageDealt = player.Damage( DamageToPlayer, DamageType.Melee );
+					float dmg = player.CheckDamageAmount( DamageToPlayer, DamageType.Melee );
 
-					if ( damageDealt > 0f )
+					if ( !player.IsInvulnerable )
 					{
 						//Game.PlaySfxNearby( "zombie.attack.player", Position, pitch: Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.95f, 1.15f, EasingType.QuadIn ), volume: 1f, maxDist: 5.5f );
-						OnDamagePlayer( player, damageDealt );
+
+						player.Damage( dmg );
+
+						if( dmg > 0f )
+							OnDamagePlayer( player, dmg );
 					}
 
 					_damageTime = 0f;

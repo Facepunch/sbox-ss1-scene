@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "cac742fc-a984-4f28-996c-4a992435b6f5",
+    "__guid": "12613e0a-d7bd-42e3-bddd-023ae5f754e6",
     "Name": "blood",
     "Enabled": true,
     "NetworkMode": 2,
@@ -8,10 +8,10 @@
     "Components": [
       {
         "__type": "Sandbox.SpriteRenderer",
-        "__guid": "a3678083-c9cb-4007-83a5-06c5009cb65e",
+        "__guid": "26eaae8a-778a-4387-b784-f2a5ca5e47b8",
         "Additive": false,
         "CastShadows": false,
-        "Color": "1,1,1,1",
+        "Color": "1,1,1,0",
         "DepthFeather": 0,
         "FlipHorizontal": false,
         "FlipVertical": false,
@@ -22,11 +22,11 @@
       },
       {
         "__type": "BloodSplatter",
-        "__guid": "629f3f2e-6fd7-44d0-8775-9b219753527b",
+        "__guid": "ea48415f-8b27-4925-9d56-b606e09d6ec2",
         "Sprite": {
           "_type": "component",
-          "component_id": "a3678083-c9cb-4007-83a5-06c5009cb65e",
-          "go": "cac742fc-a984-4f28-996c-4a992435b6f5",
+          "component_id": "26eaae8a-778a-4387-b784-f2a5ca5e47b8",
+          "go": "12613e0a-d7bd-42e3-bddd-023ae5f754e6",
           "component_type": "SpriteRenderer"
         }
       }

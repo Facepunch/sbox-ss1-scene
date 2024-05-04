@@ -114,7 +114,7 @@ public class Bullet : Thing
 		float dt = Time.Delta;
 
 		Position2D += Velocity * dt;
-		Transform.Position = Transform.Position.WithZ( -Position2D.y * 10f );
+		Transform.Position = Transform.Position.WithZ( Globals.GetZPos( Position2D.y ) );
 
 		bool changedDamage = false;
 
@@ -147,8 +147,8 @@ public class Bullet : Thing
 
 		if ( TimeSinceSpawn > Stats[BulletStat.Lifetime] )
 		{
-			//Remove();
-			//return;
+			Remove();
+			return;
 		}
 
 		for ( int dx = -1; dx <= 1; dx++ )
@@ -169,8 +169,6 @@ public class Bullet : Thing
 
 		if ( Shooter == null )
 			return;
-
-
 
 		if ( other is Enemy enemy )
 		{
@@ -199,7 +197,7 @@ public class Bullet : Thing
 
 				bool isCrit = Game.Random.Float( 0f, 1f ) < Stats[BulletStat.CriticalChance];
 				float damage = Stats[BulletStat.Damage] * (isCrit ? Stats[BulletStat.CriticalMultiplier] : 1f);
-				enemy.Damage( damage, Shooter, isCrit );
+				enemy.Damage( damage, Shooter.GameObject.Id, isCrit );
 
 				enemy.Velocity += Velocity.Normal * Stats[BulletStat.Force] * (8f / enemy.PushStrength);
 				enemy.TempWeight += Stats[BulletStat.AddTempWeight];

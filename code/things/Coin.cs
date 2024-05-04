@@ -75,7 +75,7 @@ public class Coin : Thing
 
 		Position2D += Velocity * dt;
 		Position2D = new Vector2( MathX.Clamp( Position2D.x, Manager.Instance.BOUNDS_MIN.x + Radius, Manager.Instance.BOUNDS_MAX.x - Radius ), MathX.Clamp( Position2D.y, Manager.Instance.BOUNDS_MIN.y + Radius, Manager.Instance.BOUNDS_MAX.y - Radius ) );
-		Transform.Position = Transform.Position.WithZ( -Position2D.y * 10f );
+		Transform.Position = Transform.Position.WithZ( Globals.GetZPos( Position2D.y ) );
 		Velocity *= (1f - dt * 0.92f);
 
 		//Depth = -Position.y * 10f;

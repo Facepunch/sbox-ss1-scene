@@ -30,9 +30,10 @@ public class Cloud : Component
 
 		Transform.Position += (Vector3)Velocity * Time.Delta;
 		Velocity *= (1f - Time.Delta * 1.5f);
-		Transform.Position = Transform.Position.WithZ( -Transform.Position.y * 10f );
+		Transform.Position = Transform.Position.WithZ( Globals.GetZPos( Transform.Position.y ) );
 
-		Sprite.Color = Color.White.WithAlpha( Utils.Map( _spawnTime, 0f, Lifetime, 1f, 0f ) );
+		var opacity = Utils.Map( _spawnTime, 0f, 0.2f, 0f, 1f ) * Utils.Map( _spawnTime, 0f, Lifetime - 0.03f, 1f, 0f );
+		Sprite.Color = Color.White.WithAlpha( opacity );
 
 		if ( _spawnTime > Lifetime )
 		{

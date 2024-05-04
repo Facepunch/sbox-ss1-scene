@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "98732f20-bd83-4c30-b31a-1807a982432e",
+    "__guid": "a10dd2a6-ec28-4627-9934-c976997b4fb1",
     "Name": "cloud",
     "Enabled": true,
     "NetworkMode": 2,
@@ -8,10 +8,10 @@
     "Components": [
       {
         "__type": "Sandbox.SpriteRenderer",
-        "__guid": "b294cb51-535c-4573-877b-24be086e13e1",
+        "__guid": "81d7ded8-9745-4d55-be71-24303b70454a",
         "Additive": false,
         "CastShadows": false,
-        "Color": "1,1,1,1",
+        "Color": "1,1,1,0",
         "DepthFeather": 0,
         "FlipHorizontal": false,
         "FlipVertical": false,
@@ -22,15 +22,16 @@
       },
       {
         "__type": "Cloud",
-        "__guid": "e5af5ecd-c34b-4f28-bd0f-fcf2fc81ceb9",
+        "__guid": "5a608731-2633-4b68-b162-61d339427cba",
         "Sprite": {
           "_type": "component",
-          "component_id": "b294cb51-535c-4573-877b-24be086e13e1",
-          "go": "98732f20-bd83-4c30-b31a-1807a982432e",
+          "component_id": "81d7ded8-9745-4d55-be71-24303b70454a",
+          "go": "a10dd2a6-ec28-4627-9934-c976997b4fb1",
           "component_type": "SpriteRenderer"
         }
       }
-    ]
+    ],
+    "Children": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

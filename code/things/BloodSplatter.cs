@@ -27,7 +27,8 @@ public class BloodSplatter : Component
 	{
 		base.OnUpdate();
 
-		Sprite.Color = Color.White.WithAlpha( Utils.Map( _spawnTime, 0f, Lifetime, 1f, 0f ) );
+		var opacity = Utils.Map( _spawnTime, 0f, 0.14f, 0f, 1f ) * Utils.Map( _spawnTime, 0f, Lifetime - 0.02f, 1f, 0f );
+		Sprite.Color = Color.White.WithAlpha( opacity );
 
 		if ( _spawnTime > Lifetime )
 		{

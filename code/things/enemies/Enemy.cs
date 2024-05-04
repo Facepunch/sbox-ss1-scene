@@ -82,13 +82,14 @@ public abstract class Enemy : Thing
 
 		SpawnShadow( ShadowScale, ShadowOpacity );
 
+		IsSpawning = true;
+		ElapsedTime = 0f;
+		SpawnTime = 1.75f;
+
 		if ( IsProxy )
 			return;
 
 		MoveTimeOffset = Game.Random.Float( 0f, 4f );
-		IsSpawning = true;
-		ElapsedTime = 0f;
-		SpawnTime = 1.75f;
 		Deceleration = 1.47f;
 		DecelerationAttacking = 1.33f;
 		DeathTime = 0.3f;
@@ -117,7 +118,13 @@ public abstract class Enemy : Thing
 		float dt = Time.Delta;
 		ElapsedTime += dt;
 
-		HandleFlashing( Time.Delta );
+		if ( IsSpawning )
+		{
+			HandleSpawning();
+			return;
+		}
+
+		HandleFlashing( dt );
 
 		ShadowSprite.Color = Color.Black.WithAlpha( ShadowOpacity );
 
@@ -130,14 +137,8 @@ public abstract class Enemy : Thing
 			return;
 		}
 
-		if ( IsSpawning )
-		{
-			HandleSpawning( dt );
-			return;
-		}
-
 		UpdatePosition( dt );
-		Transform.Position = Transform.Position.WithZ( -Position2D.y * 10f );
+		Transform.Position = Transform.Position.WithZ( Globals.GetZPos( Position2D.y ) );
 
 		ClampToBounds();
 		HandleDeceleration( dt );
@@ -280,10 +281,8 @@ public abstract class Enemy : Thing
 		}
 	}
 
-	void HandleSpawning( float dt )
+	void HandleSpawning()
 	{
-		//Depth = -Position.y * 10f;
-
 		if ( ElapsedTime > SpawnTime )
 		{
 			IsSpawning = false;
@@ -295,7 +294,8 @@ public abstract class Enemy : Thing
 		{
 			if ( _spawnCloudTime > (0.3f / TimeScale) )
 			{
-				SpawnCloudClient( Position2D + new Vector2( 0f, 0.05f ), new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) ).Normal * Game.Random.Float( 0.2f, 0.6f ) );
+				var cloud = Manager.Instance.SpawnCloud( Position2D + new Vector2( 0f, 0.05f ) );
+				cloud.Velocity = new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) ).Normal * Game.Random.Float( 0.2f, 0.6f );
 				_spawnCloudTime = Game.Random.Float( 0f, 0.15f );
 			}
 
@@ -318,11 +318,19 @@ public abstract class Enemy : Thing
 
 	}
 
-	public virtual void Damage( float damage, Player player, bool isCrit = false )
+	[Broadcast]
+	public virtual void Damage( float damage, Guid playerId, bool isCrit = false )
 	{
-		if ( IsProxy || IsDying )
+		if ( IsDying )
 			return;
 
+		Flash( damage < Health ? 0.12f : 0.05f );
+
+		if ( IsProxy )
+			return;
+
+		var playerObj = Scene.Directory.FindByGuid( playerId );
+		var player = playerObj?.Components.Get<Player>() ?? null;
 		if ( player != null )
 		{
 			if ( IsFeared )
@@ -338,14 +346,7 @@ public abstract class Enemy : Thing
 		//DamageNumbers.Create( Position + new Vector2( Game.Random.Float( 2.25f, 4.55f ), Game.Random.Float( 4f, 8f ) ) * 0.1f, damage, isCrit ? DamageNumberType.Crit : DamageNumberType.Normal );
 
 		if ( Health <= 0f )
-		{
 			StartDying( player );
-			Flash( 0.05f );
-		}
-		else
-		{
-			Flash( 0.12f );
-		}
 	}
 
 	public virtual void DamageFire( float damage, Player player )
@@ -353,7 +354,7 @@ public abstract class Enemy : Thing
 		if ( IsFrozen )
 			damage *= player.Stats[PlayerStat.FreezeFireDamageMultiplier];
 
-		Damage( damage, player );
+		Damage( damage, player.GameObject.Id );
 	}
 
 	public virtual void StartDying( Player player )
@@ -437,7 +438,6 @@ public abstract class Enemy : Thing
 		base.Remove();
 	}
 
-	[Broadcast]
 	public void Flash( float time )
 	{
 		if ( _isFlashing )
@@ -618,7 +618,7 @@ public abstract class Enemy : Thing
 	protected virtual void OnDamagePlayer( Player player, float damage )
 	{
 		if ( player.Stats[PlayerStat.ThornsPercent] > 0f )
-			Damage( damage * player.Stats[PlayerStat.ThornsPercent] * player.GetDamageMultiplier(), player, false );
+			Damage( damage * player.Stats[PlayerStat.ThornsPercent] * player.GetDamageMultiplier(), player.GameObject.Id, false );
 
 		if ( Game.Random.Float( 0f, 1f ) < player.Stats[PlayerStat.FreezeOnMeleeChance] )
 		{

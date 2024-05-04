@@ -47,8 +47,8 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public TimeSince TimeSinceMagnet { get; set; }
 
-	public List<BloodSplatter> _bloodSplatters;
-	public List<Cloud> _clouds;
+	public List<BloodSplatter> _bloodSplatters = new();
+	public List<Cloud> _clouds = new();
 
 	protected override void OnAwake()
 	{
@@ -72,8 +72,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		if ( IsProxy )
 			return;
 
-		_bloodSplatters = new List<BloodSplatter>();
-		_clouds = new List<Cloud>();
+
 	}
 
 	protected override void OnStart()
@@ -149,10 +148,11 @@ public sealed class Manager : Component, Component.INetworkListener
 	{
 		Log.Info( $"Player '{channel.DisplayName}' is becoming active (local = {channel == Connection.Local}) (host = {channel.IsHost})" );
 
-		var playerObj = PlayerPrefab.Clone( new Vector3( 0f, 0f, 0f) );
+		var playerObj = PlayerPrefab.Clone();
 		var player = playerObj.Components.Get<Player>();
 
 		playerObj.NetworkSpawn( channel );
+		playerObj.Transform.Position = new Vector3( 0f, 0f, Globals.GetZPos( 0f ) );
 	}
 
 	void HandleEnemySpawn()
@@ -249,7 +249,9 @@ public sealed class Manager : Component, Component.INetworkListener
 		if ( EnemyCount >= MAX_ENEMY_COUNT && !forceSpawn )
 			return;
 
-		var enemyObj = EnemyPrefab.Clone( new Vector3( pos.x, pos.y, 0f ) );
+		var enemyObj = EnemyPrefab.Clone();
+		enemyObj.NetworkSpawn();
+		enemyObj.Transform.Position = new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) );
 		enemyObj.Name = type.ToString();
 		var enemy = enemyObj.Components.Create( type ) as Enemy;
 
@@ -264,8 +266,6 @@ public sealed class Manager : Component, Component.INetworkListener
 			CrateCount++;
 
 		//PlaySfxNearby( "zombie.dirt", pos, pitch: Game.Random.Float( 0.6f, 0.8f ), volume: 0.7f, maxDist: 7.5f );
-
-		enemyObj.NetworkSpawn();
 	}
 
 	public Coin SpawnCoin( Vector2 pos, int value = 1 )
@@ -274,28 +274,28 @@ public sealed class Manager : Component, Component.INetworkListener
 		if ( CoinCount >= MAX_COIN_COUNT )
 			return null;
 
-		var coinObj = CoinPrefab.Clone( new Vector3( pos.x, pos.y, 0f ) );
+		var coinObj = CoinPrefab.Clone();
+		coinObj.NetworkSpawn();
+		coinObj.Transform.Position = new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) );
 		var coin = coinObj.Components.Get<Coin>();
 		coin.SetValue( value );
 
 		AddThing( coin );
 		CoinCount++;
 
-		coinObj.NetworkSpawn();
-
 		return coin;
 	}
 
 	public Magnet SpawnMagnet( Vector2 pos, Vector2 vel)
 	{
-		var magnetObj = MagnetPrefab.Clone( new Vector3( pos.x, pos.y, 0f ) );
+		var magnetObj = MagnetPrefab.Clone();
+		magnetObj.NetworkSpawn();
+		magnetObj.Transform.Position = new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) );
 		var magnet = magnetObj.Components.Get<Magnet>();
 		magnet.Velocity = vel;
 		TimeSinceMagnet = 0f;
 
 		AddThing( magnet );
-
-		magnetObj.NetworkSpawn();
 
 		return magnet;
 	}
@@ -477,7 +477,7 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public Cloud SpawnCloud( Vector2 pos )
 	{
-		var cloudObj = CloudPrefab.Clone( new Vector3( pos.x, pos.y, Globals.BLOOD_DEPTH ) );
+		var cloudObj = CloudPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
 		var cloud = cloudObj.Components.Get<Cloud>();
 		cloud.Lifetime = 0.7f * Game.Random.Float( 0.8f, 1.2f );
 

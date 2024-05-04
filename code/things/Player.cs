@@ -158,7 +158,7 @@ public class Player : Thing
 		Health = 100f;
 		Stats[PlayerStat.MaxHp] = 100f;
 		IsDead = false;
-		Radius = 0.1f;
+		Radius = 0.11f;
 		GridPos = Manager.Instance.GetGridSquareForPos( Position2D );
 		AimDir = new Vector2(0f, 1f);
 		NumRerollAvailable = 2;
@@ -251,12 +251,14 @@ public class Player : Thing
 				debug += status.ToString() + "\n";
 			}
 
-			Gizmo.Draw.Color = Color.White;
+			Gizmo.Draw.Color = Color.White.WithAlpha(0.5f);
 			Gizmo.Draw.Text( $"{debug}\nIsGameOver: {Manager.Instance.IsGameOver}\nIsReloading: {IsReloading}\nHealth: {Health}/{Stats[PlayerStat.MaxHp]}\nExperienceTotal: {ExperienceTotal}\nGridPos: {GridPos}\nRadius: {Radius}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
 		}
 
 		//Gizmo.Draw.Color = Color.White.WithAlpha(0.05f);
 		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
+
+		float dt = Time.Delta;
 
 		if ( Velocity.x > 0f )
 			Sprite.FlipHorizontal = true;
@@ -266,10 +268,13 @@ public class Player : Thing
 		ShadowSprite.Color = Color.Black.WithAlpha( ShadowOpacity );
 		ShadowSprite.Size = new Vector2( ShadowScale );
 
+		if ( !IsDead )
+		{
+			HandleFlashing( dt );
+		}
+
 		if ( IsProxy )
 			return;
-
-		float dt = Time.Delta;
 
 		Vector2 inputVector = new Vector2( -Input.AnalogMove.y, Input.AnalogMove.x );
 
@@ -279,7 +284,7 @@ public class Player : Thing
 		var velocity = Velocity + (IsDashing ? DashVelocity : Vector2.Zero);
 		Position2D += velocity * dt;
 
-		Transform.Position = Transform.Position.WithZ( -Position2D.y * 10f );
+		Transform.Position = Transform.Position.WithZ( Globals.GetZPos(Position2D.y) );
 
 		Velocity = Utils.DynamicEaseTo( Velocity, Vector2.Zero, 0.2f, dt );
 		TempWeight *= (1f - dt * 4.7f);
@@ -305,7 +310,7 @@ public class Player : Thing
 
 		if ( !IsDead )
 		{
-			HandleDashing( dt );
+			
 		}
 
 		for ( int dx = -1; dx <= 1; dx++ )
@@ -318,9 +323,9 @@ public class Player : Thing
 
 		if ( !IsDead )
 		{
+			HandleDashing( dt );
 			HandleStatuses( dt );
 			HandleShooting( dt );
-			HandleFlashing( dt );
 			HandleRegen( dt );
 		}
 	}
@@ -669,12 +674,10 @@ public class Player : Thing
 		ForEachStatus( status => status.OnReroll() );
 	}
 
-	// returns actual damage amount taken
-	public float Damage( float damage, DamageType damageType )
+	public float CheckDamageAmount( float damage, DamageType damageType )
 	{
 		if ( IsInvulnerable )
 		{
-			// show DODGED! floater
 			return 0f;
 		}
 
@@ -688,8 +691,6 @@ public class Player : Thing
 		//	}
 		//}
 
-		TimeSinceHurt = 0f;
-
 		if ( Stats[PlayerStat.DamageReductionPercent] > 0f )
 			damage *= (1f - MathX.Clamp( Stats[PlayerStat.DamageReductionPercent], 0f, 1f ));
 
@@ -699,22 +700,39 @@ public class Player : Thing
 		if ( damageType != DamageType.Explosion && Stats[PlayerStat.NonExplosionDamageIncreasePercent] > 0f )
 			damage *= (1f + Stats[PlayerStat.NonExplosionDamageIncreasePercent]);
 
-		ForEachStatus( status => status.OnHurt( damage ) );
-
-		Health -= damage;
-		//DamageNumbers.Create( Position + new Vector2( Game.Random.Float( 2.5f, 5.5f ), Game.Random.Float( 8.5f, 10.5f ) ) * 0.1f, damage, DamageNumberType.Player );
-		Flash( 0.125f );
-
-		SpawnBloodClient( damage );
-
-		if ( Health <= 0f )
-			Die();
-
 		return damage;
 	}
 
 	[Broadcast]
-	public void SpawnBloodClient( float damage )
+	public void Damage( float damage )
+	{
+		TimeSinceHurt = 0f;
+		Flash( 0.125f );
+		SpawnBlood( damage );
+		//DamageNumbers.Create( Position + new Vector2( Game.Random.Float( 2.5f, 5.5f ), Game.Random.Float( 8.5f, 10.5f ) ) * 0.1f, damage, DamageNumberType.Player );
+
+		if ( IsProxy )
+			return;
+
+		//if ( HasStatus( TypeLibrary.GetType( typeof( ShieldStatus ) ) ) )
+		//{
+		//	var shieldStatus = GetStatus( TypeLibrary.GetType( typeof( ShieldStatus ) ) ) as ShieldStatus;
+		//	if ( shieldStatus != null && shieldStatus.IsShielded )
+		//	{
+		//		shieldStatus.LoseShield();
+		//		return;
+		//	}
+		//}
+
+		ForEachStatus( status => status.OnHurt( damage ) );
+
+		Health -= damage;
+
+		if ( Health <= 0f )
+			Die();
+	}
+
+	public void SpawnBlood( float damage )
 	{
 		var blood = Manager.Instance.SpawnBloodSplatter( Position2D );
 		blood.Sprite.Size *= Utils.Map( damage, 1f, 20f, 0.3f, 0.5f, EasingType.QuadIn ) * Game.Random.Float( 0.8f, 1.2f );
@@ -875,7 +893,7 @@ public class Player : Thing
 				damage += Stats[PlayerStat.DamageForSpeed] * DashVelocity.Length;
 		}
 
-		var bulletObj = BulletPrefab.Clone( (Vector3)pos );
+		var bulletObj = BulletPrefab.Clone();
 		var bullet = bulletObj.Components.Get<Bullet>();
 
 		//bullet.Depth = -1f;
@@ -904,6 +922,7 @@ public class Player : Thing
 		bullet.Init();
 
 		bullet.GameObject.NetworkSpawn(Network.OwnerConnection);
+		bullet.Transform.Position = (Vector3)pos;
 
 		//Game.AddThing( bullet );
 	}
