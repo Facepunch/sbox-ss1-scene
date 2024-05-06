@@ -1,0 +1,50 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel
+@attribute [StyleSheet("InfoPanel.razor.scss")]
+
+
+<root>
+	@{
+		var xp_percent = Player.ExperienceCurrent / (float)Player.ExperienceRequired;
+	}
+
+	<div class="info_bar">
+		<div class="info_bar_overlay" style="width:@(xp_percent * 100f)%; background-color: #8888ff33; transition: all 0.2s ease-in-out;"></div>
+		<div class="info_bar_label">XP</div>
+	</div>
+
+	@{
+		var numDashes = (int)MathF.Round(Player.Stats[PlayerStat.NumDashes]);
+	}
+
+	<div class="info_dash_container">
+		@for(int i = 0; i < numDashes; i++)
+		{
+			var progress = i == Player.NumDashesAvailable ? Player.DashRechargeProgress : (i < Player.NumDashesAvailable ? 1f : 0f);
+			var isRecharging = i >= Player.NumDashesAvailable;
+
+			<div class="info_bar">
+				<div class="info_bar_overlay" style="width:@(progress * 100f)%; background-color: @(isRecharging ? "#00ff4411" : "#00ff0055");"></div>
+				<div class="info_bar_label">DASH</div>
+			</div>
+
+			
+		}
+	</div>
+</root>
+
+@code
+{
+	public Player Player { get; set; }
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(
+			Player.ExperienceCurrent,
+			Player.ExperienceRequired,
+			Player.DashRechargeProgress,
+			Player.NumDashesAvailable
+		);
+	}
+}

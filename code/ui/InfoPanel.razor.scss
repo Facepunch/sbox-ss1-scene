@@ -1,0 +1,48 @@
+InfoPanel {
+    position: absolute;
+    width: 180px;
+    right: 5%;
+    bottom: 5%;
+    top: 32px;
+    align-self: flex-end;
+    pointer-events: none;
+    justify-content: flex-start;
+    flex-direction: column-reverse;
+    gap: 16px;
+
+    .info_dash_container {
+        width: 100%;
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .info_bar {
+        width: 100%;
+        border-radius: 4px;
+        overflow: hidden;
+        height: 28px;
+        background-color: #0005;
+
+        .info_bar_label {
+            color: #fff;
+            font-size: 18px;
+            font-weight: bolder;
+            font-family: poppins;
+            width: 100%;
+            right: 0px;
+            justify-content: flex-end;
+            padding: 1px 10px;
+            position: absolute;
+            text-stroke: 5px black;
+            opacity: 0.7;
+        }
+
+        .info_bar_overlay {
+            position: absolute;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

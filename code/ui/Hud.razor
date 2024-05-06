@@ -8,6 +8,11 @@
 		var screenPos = Scene.Camera.PointToScreenPixels(player.Position2D) * Panel.ScaleFromScreen;
 
 		<Nametag style="left: @(screenPos.x)px; top: @(screenPos.y - 140)px;" Player=@player ></Nametag>
+
+		@if(player.Network.IsOwner)
+		{
+			<InfoPanel Player=@player></InfoPanel>
+		}
 	}
 </root>
 

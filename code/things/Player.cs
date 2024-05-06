@@ -151,7 +151,7 @@ public class Player : Thing
 		Stats[PlayerStat.FullHealthDamageMultiplier] = 1f;
 		Stats[PlayerStat.ThornsPercent] = 0f;
 
-		Stats[PlayerStat.NumDashes] = 1f;
+		Stats[PlayerStat.NumDashes] = 3f;
 		NumDashesAvailable = (int)MathF.Round( Stats[PlayerStat.NumDashes] );
 		Stats[PlayerStat.DashCooldown] = 3f;
 		Stats[PlayerStat.DashInvulnTime] = 0.25f;
@@ -501,11 +501,15 @@ public class Player : Thing
 		_flashTimer = time;
 	}
 
+	[Broadcast]
 	public void Heal( float amount, float flashTime )
 	{
 		Sprite.Color = new Color( 0f, 1f, 0f );
 		_isFlashing = true;
 		_flashTimer = flashTime;
+
+		if ( IsProxy )
+			return;
 
 		Health += amount;
 		if ( Health > Stats[PlayerStat.MaxHp] )

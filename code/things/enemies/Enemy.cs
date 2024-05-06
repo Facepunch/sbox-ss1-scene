@@ -319,7 +319,7 @@ public abstract class Enemy : Thing
 	}
 
 	[Broadcast]
-	public virtual void Damage( float damage, Guid playerId, bool isCrit = false )
+	public virtual void Damage( float damage, Guid playerId, Vector2 addVel, float addTempWeight, bool isCrit = false )
 	{
 		if ( IsDying )
 			return;
@@ -342,6 +342,9 @@ public abstract class Enemy : Thing
 			}
 		}
 
+		Velocity += addVel;
+		TempWeight += addTempWeight;
+
 		Health -= damage;
 		//DamageNumbers.Create( Position + new Vector2( Game.Random.Float( 2.25f, 4.55f ), Game.Random.Float( 4f, 8f ) ) * 0.1f, damage, isCrit ? DamageNumberType.Crit : DamageNumberType.Normal );
 
@@ -354,7 +357,7 @@ public abstract class Enemy : Thing
 		if ( IsFrozen )
 			damage *= player.Stats[PlayerStat.FreezeFireDamageMultiplier];
 
-		Damage( damage, player.GameObject.Id );
+		Damage( damage, player.GameObject.Id, addVel: Vector2.Zero, addTempWeight: 0f );
 	}
 
 	public virtual void StartDying( Player player )
@@ -618,7 +621,7 @@ public abstract class Enemy : Thing
 	protected virtual void OnDamagePlayer( Player player, float damage )
 	{
 		if ( player.Stats[PlayerStat.ThornsPercent] > 0f )
-			Damage( damage * player.Stats[PlayerStat.ThornsPercent] * player.GetDamageMultiplier(), player.GameObject.Id, false );
+			Damage( damage * player.Stats[PlayerStat.ThornsPercent] * player.GetDamageMultiplier(), player.GameObject.Id, addVel: Vector2.Zero, addTempWeight: 0f, isCrit: false );
 
 		if ( Game.Random.Float( 0f, 1f ) < player.Stats[PlayerStat.FreezeOnMeleeChance] )
 		{

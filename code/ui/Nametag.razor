@@ -24,7 +24,7 @@
 			<div class="hpbaroverlay" style="width:@(hpPercent * 100f)%; background-color:@(bgColor.Rgba);"></div>
 		</div>
 
-		<div class="reload_bar @(Player.IsReloading ? "showing" : "")" style="width:@(reloadProgress * 100f)%; opacity: @(Utils.MapReturn(reloadProgress, 0f, 1f, 0f, 1f, EasingType.ExpoOut));"></div>
+		<div class="reload_bar @(Player.IsReloading ? "showing" : "")" style="width:@(reloadProgress * 100f)%; opacity: @(Utils.MapReturn(reloadProgress, 0f, 1f, 0f, 1f, EasingType.ExtremeOut));"></div>
 	}
 	else 
 	{
@@ -38,11 +38,16 @@
 @code
 {
 	public Player Player { get; set; }
-	public bool Hidden { get; set; }
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(Time.Now);
+		return HashCode.Combine(
+			Player.Level,
+			Player.Health,
+			Player.Stats[PlayerStat.MaxHp],
+			Player.ReloadProgress,
+			Player.IsReloading
+		);
 	}
 
 	public Color Lerp3(Color a, Color b, Color c, float t)
