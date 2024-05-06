@@ -148,11 +148,10 @@ public sealed class Manager : Component, Component.INetworkListener
 	{
 		Log.Info( $"Player '{channel.DisplayName}' is becoming active (local = {channel == Connection.Local}) (host = {channel.IsHost})" );
 
-		var playerObj = PlayerPrefab.Clone();
+		var playerObj = PlayerPrefab.Clone( new Vector3( 0f, 0f, Globals.GetZPos( 0f ) ) );
 		var player = playerObj.Components.Get<Player>();
 
 		playerObj.NetworkSpawn( channel );
-		playerObj.Transform.Position = new Vector3( 0f, 0f, Globals.GetZPos( 0f ) );
 	}
 
 	void HandleEnemySpawn()

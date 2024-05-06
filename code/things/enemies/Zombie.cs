@@ -10,7 +10,7 @@ public class Zombie : Enemy
 
 	protected override void OnStart()
 	{
-		OffsetY = -0.4f;
+		OffsetY = -0.38f;
 		ShadowScale = 0.95f;
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
@@ -23,6 +23,9 @@ public class Zombie : Enemy
 
 		Sprite.Texture = Texture.Load("textures/sprites/zombie.vtex");
 
+		ScaleFactor = 0.85f;
+		Sprite.Size = new Vector2( 1f, 1f ) * ScaleFactor;
+
 		if ( IsProxy )
 			return;
 		
@@ -32,9 +35,6 @@ public class Zombie : Enemy
 		Health = 30f;
 		MaxHealth = Health;
 		DamageToPlayer = 7f;
-
-		ScaleFactor = 0.85f;
-		//Scale = new Vector2( 1f, 1f ) * ScaleFactor;
 
 		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );

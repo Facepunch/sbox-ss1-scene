@@ -17,6 +17,9 @@ public class Crate : Enemy
 
 		Sprite.Texture = Texture.Load("textures/sprites/crate.vtex");
 
+		ScaleFactor = 0.95f;
+		Sprite.Size = new Vector2( 1f, 1f ) * ScaleFactor;
+
 		if ( IsProxy )
 			return;
 		
@@ -25,9 +28,6 @@ public class Crate : Enemy
 		Radius = 0.25f;
 		Health = 45f;
 		MaxHealth = Health;
-
-		ScaleFactor = 0.95f;
-		//Scale = new Vector2( 1f, 1f ) * ScaleFactor;
 
 		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );

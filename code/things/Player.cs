@@ -1,5 +1,6 @@
 using Sandbox;
 using System.Drawing;
+using System.Runtime.Serialization.Formatters;
 using static Manager;
 
 public enum ModifierType { Set, Add, Mult }
@@ -88,6 +89,8 @@ public class Player : Thing
 	private Dictionary<Status, Dictionary<PlayerStat, ModifierData>> _modifiers_stat = new Dictionary<Status, Dictionary<PlayerStat, ModifierData>>();
 	private Dictionary<PlayerStat, float> _original_properties_stat = new Dictionary<PlayerStat, float>();
 
+	private bool _doneFirstUpdate;
+
 	protected override void OnStart()
 	{
 		base.OnStart();
@@ -96,7 +99,7 @@ public class Player : Thing
 
 		ShadowOpacity = 0.8f;
 		ShadowScale = 1.12f;
-		SpawnShadow( ShadowScale, ShadowOpacity );
+		//SpawnShadow( ShadowScale, ShadowOpacity );
 
 		if ( IsProxy )
 			return;
@@ -243,7 +246,13 @@ public class Player : Thing
 
 		string debug = "";
 
-		if(!IsProxy )
+		if(!_doneFirstUpdate)
+		{
+			SpawnShadow( ShadowScale, ShadowOpacity );
+			_doneFirstUpdate = true;
+		}
+
+		if (!IsProxy )
 		{
 			foreach ( KeyValuePair<int, Status> pair in Statuses )
 			{
@@ -251,12 +260,15 @@ public class Player : Thing
 				debug += status.ToString() + "\n";
 			}
 
-			Gizmo.Draw.Color = Color.White.WithAlpha(0.5f);
-			Gizmo.Draw.Text( $"{debug}\nIsGameOver: {Manager.Instance.IsGameOver}\nIsReloading: {IsReloading}\nHealth: {Health}/{Stats[PlayerStat.MaxHp]}\nExperienceTotal: {ExperienceTotal}\nGridPos: {GridPos}\nRadius: {Radius}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
+			//Gizmo.Draw.Color = Color.White.WithAlpha(0.5f);
+			//Gizmo.Draw.Text( $"{debug}\nIsGameOver: {Manager.Instance.IsGameOver}\nIsReloading: {IsReloading}\nHealth: {Health}/{Stats[PlayerStat.MaxHp]}\nExperienceTotal: {ExperienceTotal}\nGridPos: {GridPos}\nRadius: {Radius}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
 		}
 
 		//Gizmo.Draw.Color = Color.White.WithAlpha(0.05f);
 		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
+
+		if ( Manager.Instance.IsGameOver )
+			return;
 
 		float dt = Time.Delta;
 
@@ -265,8 +277,11 @@ public class Player : Thing
 		else if ( Velocity.x < 0f )
 			Sprite.FlipHorizontal = false;
 
-		ShadowSprite.Color = Color.Black.WithAlpha( ShadowOpacity );
-		ShadowSprite.Size = new Vector2( ShadowScale );
+		if(ShadowSprite != null)
+		{
+			ShadowSprite.Color = Color.Black.WithAlpha( ShadowOpacity );
+			ShadowSprite.Size = new Vector2( ShadowScale );
+		}
 
 		if ( !IsDead )
 		{
@@ -739,57 +754,53 @@ public class Player : Thing
 		blood.Lifetime *= 0.3f;
 	}
 
+	[Broadcast]
 	public void Die()
 	{
 		if ( IsDead )
 			return;
 
 		IsDead = true;
-		//AnimationPath = $"textures/sprites/player_ghost_idle.frames";
-		Manager.Instance.PlayerDied( this );
-		//EnableDrawing = false;
 		Sprite.Color = new Color( 1f, 1f, 1f, 0.05f );
 		ShadowOpacity = 0.1f;
 		_isFlashing = false;
 		IsReloading = false;
 
 		//Game.PlaySfxNearby( "die", Position, pitch: Game.Random.Float( 1f, 1.2f ), volume: 1.5f, maxDist: 12f );
-		//DieClient();
-		//DieClientSingle( To.Single( Client ) );
+
+		if ( IsProxy )
+			return;
+
+		
+		//AnimationPath = $"textures/sprites/player_ghost_idle.frames";
+		Manager.Instance.PlayerDied( this );
+
+		//Game.Hud.RemoveChoicePanel();
 	}
 
-	//[Broadcast]
-	//public void DieClient()
-	//{
-	//	Nametag.SetVisible( false );
-
-	//	if ( ArrowAimer != null )
-	//		ArrowAimer.Opacity = 0f;
-	//}
-
-	//[Broadcast]
-	//public void DieClientSingle()
-	//{
-	//	Game.Hud.RemoveChoicePanel();
-	//}
-
+	[Broadcast]
 	public void Revive()
 	{
 		if ( !IsDead )
 			return;
 
+		IsDead = false;
 		IsChoosingLevelUpReward = false;
 		IsDashing = false;
 		IsReloading = true;
+		Sprite.Color = Color.White;
+
+		if ( IsProxy )
+			return;
+
 		Timer = Stats[PlayerStat.ReloadTime];
 		ReloadProgress = 0f;
 		DashProgress = 0f;
 		ExperienceCurrent = 0;
 
 		Health = Stats[PlayerStat.MaxHp] * 0.33f;
-		Sprite.Color = Color.White;
 
-		IsDead = false;
+		
 
 		//Nametag.SetVisible( true );
 
@@ -893,7 +904,7 @@ public class Player : Thing
 				damage += Stats[PlayerStat.DamageForSpeed] * DashVelocity.Length;
 		}
 
-		var bulletObj = BulletPrefab.Clone();
+		var bulletObj = BulletPrefab.Clone( (Vector3)pos );
 		var bullet = bulletObj.Components.Get<Bullet>();
 
 		//bullet.Depth = -1f;
@@ -922,7 +933,7 @@ public class Player : Thing
 		bullet.Init();
 
 		bullet.GameObject.NetworkSpawn(Network.OwnerConnection);
-		bullet.Transform.Position = (Vector3)pos;
+		//bullet.Transform.Position = (Vector3)pos;
 
 		//Game.AddThing( bullet );
 	}
