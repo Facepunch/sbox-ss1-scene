@@ -3,6 +3,8 @@
 @inherits PanelComponent
 
 <root>
+	<TimerPanel></TimerPanel>
+
 	@foreach ( Player player in Scene.GetAllComponents<Player>() )
 	{
 		var screenPos = Scene.Camera.PointToScreenPixels(player.Position2D) * Panel.ScaleFromScreen;

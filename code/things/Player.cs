@@ -151,7 +151,7 @@ public class Player : Thing
 		Stats[PlayerStat.FullHealthDamageMultiplier] = 1f;
 		Stats[PlayerStat.ThornsPercent] = 0f;
 
-		Stats[PlayerStat.NumDashes] = 3f;
+		Stats[PlayerStat.NumDashes] = 1f;
 		NumDashesAvailable = (int)MathF.Round( Stats[PlayerStat.NumDashes] );
 		Stats[PlayerStat.DashCooldown] = 3f;
 		Stats[PlayerStat.DashInvulnTime] = 0.25f;

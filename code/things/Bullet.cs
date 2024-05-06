@@ -197,10 +197,8 @@ public class Bullet : Thing
 
 				bool isCrit = Game.Random.Float( 0f, 1f ) < Stats[BulletStat.CriticalChance];
 				float damage = Stats[BulletStat.Damage] * (isCrit ? Stats[BulletStat.CriticalMultiplier] : 1f);
-				enemy.Damage( damage, Shooter.GameObject.Id, isCrit );
-
-				enemy.Velocity += Velocity.Normal * Stats[BulletStat.Force] * (8f / enemy.PushStrength);
-				enemy.TempWeight += Stats[BulletStat.AddTempWeight];
+				var addVel = Velocity.Normal * Stats[BulletStat.Force] * (8f / enemy.PushStrength);
+				enemy.Damage( damage, Shooter.GameObject.Id, addVel, Stats[BulletStat.AddTempWeight], isCrit );
 
 				NumHits++;
 
