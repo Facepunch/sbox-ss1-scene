@@ -362,6 +362,10 @@ public class Player : Thing
 		{
 			AddExperience( 1 );
 		}
+		else if(Input.Pressed("Menu"))
+		{
+			Manager.Instance.Restart();
+		}
 	}
 
 	void HandleRegen( float dt )
@@ -1059,5 +1063,17 @@ public class Player : Thing
 			status.Level = currLevel + 1;
 			LevelUpChoices.Add( status );
 		}
+	}
+
+	[Broadcast]
+	public void Restart()
+	{
+		if ( IsProxy )
+			return;
+
+		Position2D = new Vector3( Game.Random.Float( -3f, 3f ), Game.Random.Float( -3f, 3f ));
+		Manager.Instance.Camera2D.SetPos( Position2D );
+
+		InitializeStats();
 	}
 }

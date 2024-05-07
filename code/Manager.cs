@@ -150,7 +150,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	{
 		Log.Info( $"Player '{channel.DisplayName}' is becoming active (local = {channel == Connection.Local}) (host = {channel.IsHost})" );
 
-		var playerObj = PlayerPrefab.Clone( new Vector3( 0f, 0f, Globals.GetZPos( 0f ) ) );
+		var playerObj = PlayerPrefab.Clone( new Vector3( Game.Random.Float(-3f, 3f), Game.Random.Float( -3f, 3f ), Globals.GetZPos( 0f ) ) );
 		var player = playerObj.Components.Get<Player>();
 
 		playerObj.NetworkSpawn( channel );
@@ -495,6 +495,8 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Broadcast]
 	public void Restart()
 	{
+		//MyGame.Current.PlaySfxTarget( To.Everyone, "restart", Vector2.Zero, Sandbox.Game.Random.Float( 0.95f, 1.05f ), 0.66f );
+
 		foreach ( var blood in _bloodSplatters )
 			blood.GameObject.Destroy();
 		_bloodSplatters.Clear();
@@ -502,5 +504,34 @@ public sealed class Manager : Component, Component.INetworkListener
 		foreach ( var cloud in _clouds )
 			cloud.GameObject.Destroy();
 		_clouds.Clear();
+
+		//foreach ( var explosion in _explosions )
+		//	explosion.GameObject.Destroy();
+		//_explosions.Clear();
+
+		foreach ( KeyValuePair<GridSquare, List<Thing>> pair in ThingGridPositions )
+			pair.Value.Clear();
+
+		EnemyCount = 0;
+		CrateCount = 0;
+		CoinCount = 0;
+		_enemySpawnTime = 0f;
+		ElapsedTime = 0f;
+		IsGameOver = false;
+		HasSpawnedBoss = false;
+		TimeSinceMagnet = 0f;
+
+		if ( IsProxy )
+			return;
+
+		foreach ( Thing thing in Scene.GetAllComponents<Thing>())
+		{
+			if ( thing is Player player )
+				player.Restart();
+			else
+				thing.DestroyCmd();
+		}
+
+		SpawnStartingThings();
 	}
 }

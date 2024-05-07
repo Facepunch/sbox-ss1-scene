@@ -13,7 +13,12 @@ public class Camera2D : Component
 		var YDIST = 8.3f;
 		newPos = new Vector2( MathX.Clamp( newPos.x, -XDIST, XDIST ), MathX.Clamp( newPos.y, -YDIST, YDIST ) );
 
-
 		Transform.Position = ((Vector3)newPos).WithZ( Transform.Position.z );
+	}
+
+	public void SetPos( Vector2 pos )
+	{
+		Transform.Position = ((Vector3)pos).WithZ( Transform.Position.z );
+		TargetPos = pos;
 	}
 }

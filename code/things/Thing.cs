@@ -58,6 +58,15 @@ public class Thing : Component
 		GameObject.Destroy();
 	}
 
+	[Broadcast]
+	public void DestroyCmd()
+	{
+		if ( IsProxy )
+			return;
+
+		GameObject.Destroy();
+	}
+
 	protected void SpawnShadow( float size, float opacity )
 	{
 		var shadowObj = Manager.Instance.ShadowPrefab.Clone( Transform.Position );
