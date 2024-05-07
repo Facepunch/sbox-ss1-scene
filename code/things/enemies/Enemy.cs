@@ -335,16 +335,20 @@ public abstract class Enemy : Thing
 		if ( IsProxy )
 			return;
 
-		var playerObj = Scene.Directory.FindByGuid( playerId );
-		var player = playerObj?.Components.Get<Player>() ?? null;
-		if ( player != null )
+		Player player = null;
+		if ( playerId != Guid.Empty)
 		{
-			if ( IsFeared )
+			var playerObj = Scene.Directory.FindByGuid( playerId );
+			player = playerObj?.Components.Get<Player>() ?? null;
+			if ( player != null )
 			{
-				damage *= player.Stats[PlayerStat.FearDamageMultiplier];
+				if ( IsFeared )
+				{
+					damage *= player.Stats[PlayerStat.FearDamageMultiplier];
 
-				if ( player.Stats[PlayerStat.FearDrainPercent] > 0f )
-					player.RegenHealth( damage * player.Stats[PlayerStat.FearDrainPercent] );
+					if ( player.Stats[PlayerStat.FearDrainPercent] > 0f )
+						player.RegenHealth( damage * player.Stats[PlayerStat.FearDrainPercent] );
+				}
 			}
 		}
 
@@ -580,49 +584,49 @@ public abstract class Enemy : Thing
 	//	}
 	//}
 
-	//public void Burn( Player player, float damage, float lifetime, float spreadChance )
-	//{
-	//	var burning = AddEnemyStatus<BurningEnemyStatus>();
-	//	burning.Player = player;
-	//	burning.Damage = damage;
-	//	burning.Lifetime = lifetime;
-	//	burning.SpreadChance = spreadChance;
+	public void Burn( Player player, float damage, float lifetime, float spreadChance )
+	{
+		var burning = AddEnemyStatus<BurningEnemyStatus>();
+		burning.Player = player;
+		burning.Damage = damage;
+		burning.Lifetime = lifetime;
+		burning.SpreadChance = spreadChance;
 
-	//	if ( player != null )
-	//		player.ForEachStatus( status => status.OnBurn( this ) );
-	//}
+		if ( player != null )
+			player.ForEachStatus( status => status.OnBurn( this ) );
+	}
 
-	//public void Freeze( Player player )
-	//{
-	//	if ( IsDying )
-	//		return;
+	public void Freeze( Player player )
+	{
+		if ( IsDying )
+			return;
 
-	//	var frozen = AddEnemyStatus<FrozenEnemyStatus>();
-	//	frozen.Player = player;
-	//	frozen.SetLifetime( player.Stats[PlayerStat.FreezeLifetime] );
-	//	frozen.SetTimeScale( player.Stats[PlayerStat.FreezeTimeScale] );
+		var frozen = AddEnemyStatus<FrozenEnemyStatus>();
+		frozen.Player = player;
+		frozen.SetLifetime( player.Stats[PlayerStat.FreezeLifetime] );
+		frozen.SetTimeScale( player.Stats[PlayerStat.FreezeTimeScale] );
 
-	//	if ( player != null )
-	//		player.ForEachStatus( status => status.OnFreeze( this ) );
-	//}
+		if ( player != null )
+			player.ForEachStatus( status => status.OnFreeze( this ) );
+	}
 
-	//public void Fear( Player player )
-	//{
-	//	if ( IsDying )
-	//		return;
+	public void Fear( Player player )
+	{
+		if ( IsDying )
+			return;
 
-	//	var fear = AddEnemyStatus<FearEnemyStatus>();
-	//	fear.Player = player;
-	//	fear.SetLifetime( player?.Stats[PlayerStat.FearLifetime] ?? 4f );
+		var fear = AddEnemyStatus<FearEnemyStatus>();
+		fear.Player = player;
+		fear.SetLifetime( player?.Stats[PlayerStat.FearLifetime] ?? 4f );
 
-	//	if ( player != null )
-	//	{
-	//		if ( player.Stats[PlayerStat.FearPainPercent] > 0f )
-	//			fear.PainPercent = player.Stats[PlayerStat.FearPainPercent];
+		if ( player != null )
+		{
+			if ( player.Stats[PlayerStat.FearPainPercent] > 0f )
+				fear.PainPercent = player.Stats[PlayerStat.FearPainPercent];
 
-	//		player.ForEachStatus( status => status.OnFear( this ) );
-	//	}
-	//}
+			player.ForEachStatus( status => status.OnFear( this ) );
+		}
+	}
 
 	protected virtual void OnDamagePlayer( Player player, float damage )
 	{

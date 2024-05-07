@@ -347,6 +347,17 @@ public class Player : Thing
 			HandleRegen( dt );
 		}
 
+		if(IsChoosingLevelUpReward)
+		{
+			if ( Input.Pressed( "reload" ) )		UseReroll();
+			else if ( Input.Pressed( "Slot1" ) )	UseChoiceHotkey( 1 );
+			else if ( Input.Pressed( "Slot2" ) )	UseChoiceHotkey( 2 );
+			else if ( Input.Pressed( "Slot3" ) )	UseChoiceHotkey( 3 );
+			else if ( Input.Pressed( "Slot4" ) )	UseChoiceHotkey( 4 );
+			else if ( Input.Pressed( "Slot5" ) )	UseChoiceHotkey( 5 );
+			else if ( Input.Pressed( "Slot6" ) )	UseChoiceHotkey( 6 );
+		}
+
 		if(Input.Pressed("use"))
 		{
 			AddExperience( 1 );
@@ -703,12 +714,28 @@ public class Player : Thing
 
 	public void UseReroll()
 	{
+		if(NumRerollAvailable <= 0)
+		{
+			// todo: sfx
+			return;
+		}
+
 		NumRerollAvailable--;
 
 		GenerateLevelUpChoices();
 		//Game.PlaySfxTarget( To.Single( Sandbox.Game.LocalClient ), "levelup", Position, Game.Random.Float( 0.95f, 1.05f ), 0.66f );
 
 		ForEachStatus( status => status.OnReroll() );
+	}
+
+	public void UseChoiceHotkey(int num)
+	{
+		var index = num - 1;
+
+		if ( !IsChoosingLevelUpReward || index >= LevelUpChoices.Count )
+			return;
+
+		AddStatus( TypeLibrary.GetType( LevelUpChoices[index].GetType() ) );
 	}
 
 	public float CheckDamageAmount( float damage, DamageType damageType )
