@@ -1,0 +1,42 @@
+StatusTooltip {
+    position: absolute;
+    pointer-events: none;
+    z-index: 9999;
+    border: 1px solid #00000022;
+    //width: 200px;
+    background-color: #00000099;
+    color: #ffffffaa;
+    margin-left: 6px;
+    margin-top: 6px;
+    flex-direction: column;
+    padding: 8px;
+    border-radius: 4px;
+    //overflow: visible;
+    //box-shadow: -2px 2px 2px #00000022;
+    backdrop-filter: blur( 10px );
+
+    .title_bar {
+        flex-direction: row;
+        padding-bottom: 4px;
+    }
+
+    &.unset {
+        opacity: 0;
+    }
+
+    .tooltip_title {
+        color: #66ff66;
+        font-size: 22px;
+    }
+
+    .tooltip_level {
+        color: #ffffff55;
+        font-size: 22px;
+        padding-left: 8px;
+    }
+
+    .tooltip_description {
+        font-style: italic;
+        font-size: 18px;
+    }
+}

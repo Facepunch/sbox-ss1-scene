@@ -22,6 +22,15 @@
 			}
 		}
 	}
+
+	@{
+		var hoveredStatus = Manager.Instance.HoveredStatus;
+	}
+
+	@if(hoveredStatus != null)
+	{
+		<StatusTooltip Status=@hoveredStatus style="left:@(Mouse.Position.x * Panel.ScaleFromScreen + 50)px; top:@(Mouse.Position.y * Panel.ScaleFromScreen - 50)px;"></StatusTooltip>
+	}
 </root>
 
 @code

@@ -50,6 +50,8 @@ public sealed class Manager : Component, Component.INetworkListener
 	public List<BloodSplatter> _bloodSplatters = new();
 	public List<Cloud> _clouds = new();
 
+	public Status HoveredStatus { get; set; }
+
 	protected override void OnAwake()
 	{
 		base.OnAwake();

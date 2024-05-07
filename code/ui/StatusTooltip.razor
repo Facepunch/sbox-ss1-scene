@@ -1,0 +1,32 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel
+@attribute [StyleSheet("StatusTooltip.razor.scss")]
+
+<root>
+	<div class="title_bar">
+		<div class="tooltip_title">
+			@Status.Title
+		</div>
+
+		<div class="tooltip_level">
+			@($"{Status.Level}/{Status.MaxLevel}")
+		</div>
+	</div>
+
+	<div class="tooltip_description">
+		@Status.Description
+	</div>
+</root>
+
+@code
+{
+	public Status Status { get; set; }
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(
+			Time.Now
+		);
+	}
+}

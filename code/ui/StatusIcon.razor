@@ -20,4 +20,18 @@
 			Time.Now
 		);
 	}
+
+	protected override void OnMouseOver(MousePanelEvent e)
+	{
+		base.OnMouseOver(e);
+
+		Manager.Instance.HoveredStatus = Status;
+	}
+
+	protected override void OnMouseOut(MousePanelEvent e)
+	{
+		base.OnMouseOut(e);
+
+		Manager.Instance.HoveredStatus = null;
+	}
 }
