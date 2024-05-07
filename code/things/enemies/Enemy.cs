@@ -24,7 +24,7 @@ public abstract class Enemy : Thing
 	public float DeathTimeElapsed { get; private set; }
 	public float DeathTime { get; protected set; }
 	[Sync] public float DeathProgress { get; private set; }
-	private Vector2 _deathScale;
+	//private Vector2 _deathScale;
 
 	public bool IsAttacking { get; private set; }
 	private float _aggroTimer;
@@ -62,7 +62,7 @@ public abstract class Enemy : Thing
 	public bool IsFrozen { get; set; }
 	public bool IsFeared { get; set; }
 
-	private float _animSpeed;
+	//private float _animSpeed;
 	//public float AnimSpeed { get { return _animSpeed; } set { _animSpeed = value; AnimationSpeed = _animSpeed * _animSpeedModifier; } }
 	//private float _animSpeedModifier;
 	//public float AnimSpeedModifier { get { return _animSpeedModifier; } set { _animSpeedModifier = value; AnimationSpeed = _animSpeed * _animSpeedModifier; } }

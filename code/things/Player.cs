@@ -1,5 +1,6 @@
 using Sandbox;
 using System.Drawing;
+using System.Numerics;
 using System.Runtime.Serialization.Formatters;
 using static Manager;
 
@@ -56,6 +57,7 @@ public class Player : Thing
 	[Sync] public int ExperienceCurrent { get; protected set; }
 	[Sync] public int ExperienceRequired { get; protected set; }
 	public bool IsChoosingLevelUpReward { get; protected set; }
+	public List<Status> LevelUpChoices { get; private set; }
 
 	[Sync] public float DashTimer { get; private set; }
 	[Sync] public bool IsDashing { get; private set; }
@@ -108,6 +110,7 @@ public class Player : Thing
 		CollideWith.Add( typeof( Player ) );
 
 		Statuses = new Dictionary<int, Status>();
+		LevelUpChoices = new List<Status>();
 
 		InitializeStats();
 
@@ -343,6 +346,11 @@ public class Player : Thing
 			HandleShooting( dt );
 			HandleRegen( dt );
 		}
+
+		if(Input.Pressed("use"))
+		{
+			AddExperience( 1 );
+		}
 	}
 
 	void HandleRegen( float dt )
@@ -553,7 +561,9 @@ public class Player : Thing
 
 		//RefreshStatusHud();
 
+		LevelUpChoices.Clear();
 		IsChoosingLevelUpReward = false;
+
 		CheckForLevelUp();
 	}
 
@@ -649,8 +659,12 @@ public class Player : Thing
 		Stats[statType] = curr_value;
 	}
 
+	[Broadcast]
 	public void AddExperience( int xp )
 	{
+		if ( IsProxy )
+			return;
+
 		ExperienceTotal += xp;
 		ExperienceCurrent += xp;
 
@@ -667,8 +681,14 @@ public class Player : Thing
 			LevelUp();
 	}
 
+	[Broadcast]
 	public void LevelUp()
 	{
+		//Game.PlaySfxTarget( To.Single( Sandbox.Game.LocalClient ), "levelup", Position, Game.Random.Float( 0.95f, 1.05f ), 0.66f );
+
+		if ( IsProxy )
+			return;
+
 		ExperienceCurrent -= ExperienceRequired;
 
 		Level++;
@@ -677,17 +697,15 @@ public class Player : Thing
 
 		ForEachStatus( status => status.OnLevelUp() );
 
+		GenerateLevelUpChoices();
 		IsChoosingLevelUpReward = true;
-		//Game.Hud.SpawnChoicePanel();
-		//Game.PlaySfxTarget( To.Single( Sandbox.Game.LocalClient ), "levelup", Position, Game.Random.Float( 0.95f, 1.05f ), 0.66f );
-
 	}
 
 	public void UseReroll()
 	{
 		NumRerollAvailable--;
 
-		//Game.Hud.SpawnChoicePanel();
+		GenerateLevelUpChoices();
 		//Game.PlaySfxTarget( To.Single( Sandbox.Game.LocalClient ), "levelup", Position, Game.Random.Float( 0.95f, 1.05f ), 0.66f );
 
 		ForEachStatus( status => status.OnReroll() );
@@ -997,5 +1015,22 @@ public class Player : Thing
 	public void SpawnDashCloudClient()
 	{
 		Manager.Instance.SpawnCloud( Position2D + new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) ) * 0.05f );
+	}
+
+	public void GenerateLevelUpChoices()
+	{
+		LevelUpChoices.Clear();
+
+		int numChoices = Math.Clamp( (int)MathF.Round( Stats[PlayerStat.NumUpgradeChoices] ), 1, 6 );
+		List<TypeDescription> statusTypes = StatusManager.GetRandomStatuses( this, numChoices );
+
+		for ( int i = 0; i < statusTypes.Count; i++ )
+		{
+			var type = statusTypes[i];
+			var status = StatusManager.CreateStatus( type );
+			var currLevel = GetStatusLevel( type );
+			status.Level = currLevel + 1;
+			LevelUpChoices.Add( status );
+		}
 	}
 }

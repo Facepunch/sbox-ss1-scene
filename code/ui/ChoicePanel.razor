@@ -1,0 +1,71 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel
+@attribute [StyleSheet("ChoicePanel.razor.scss")]
+
+
+<root>
+	<div class="choice_modal">
+		<div class="choice_lvl_label">
+			Level 1
+		</div>
+
+		<div class="choice_button_container">
+			@for(int i = 0; i < Player.LevelUpChoices.Count; i++)
+			{
+				var status = Player.LevelUpChoices[i];
+				var lvlStr = status.Level > 1 ? $" [{status.Level}]" : "";
+
+				<div class="choice_button" onclick=@(() => ChoiceButtonClicked(TypeLibrary.GetType( typeof( MovespeedStatus ) )))>
+					<div class="choice_icon" style="background-image: url(@(status.IconPath));"></div>
+
+					<div class="choice_title">
+						@($"{i + 1}. {status.Title}{lvlStr}")
+					</div>
+
+					<div class="choice_description">
+						@status.GetUpgradeDescription(status.Level)
+					</div>
+				</div>
+			}
+		</div>
+
+		<div class="reroll_button @(Player.NumRerollAvailable <= 0 ? "disabled" : "")" onclick=@(() => RerollButtonClicked())>
+			<div class="reroll_button_label @(Player.NumRerollAvailable <= 0 ? "disabled_text" : "")">
+				@($"Reroll [{Player.NumRerollAvailable}]")
+			</div>
+		</div>
+	</div>
+</root>
+
+@code
+{
+	public Player Player { get; set; }
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(
+			Time.Now
+		);
+	}
+
+	void ChoiceButtonClicked(TypeDescription type)
+	{
+		if (Manager.Instance.IsGameOver)
+			return;
+
+		Player.AddStatus(type);
+
+		// MyGame.Current.PlaySfxTarget(To.Single(Sandbox.Game.LocalClient), "click", Vector2.Zero, 0.9f, 0.75f);
+	}
+
+	void RerollButtonClicked()
+	{
+		if(Manager.Instance.IsGameOver)
+			return;
+
+		Player.UseReroll();
+
+		// MyGame.Current.PlaySfxTarget(To.Single(Sandbox.Game.LocalClient), "reroll", player.Position, Utils.Map(player.NumRerollAvailable, 0, 20, 0.9f, 1.4f, EasingType.QuadIn), 0.6f);
+	}
+}

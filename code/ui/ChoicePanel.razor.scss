@@ -1,0 +1,120 @@
+ChoicePanel {
+    position: absolute;
+    left: 0;
+    right: 32px;
+    bottom: 0;
+    top: 0;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: row;
+    //background-color: red;
+
+    .choice_modal {
+        width: 300px;
+        border-radius: 5px;
+        backdrop-filter: blur( 10px );
+        padding: 10px;
+        gap: 10px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #000a;
+
+        .choice_lvl_label {
+            color: #fffe;
+            font-size: 30px;
+            font-weight: bold;
+            font-family: Poppins;
+        }
+
+        .choice_button_container {
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .choice_button {
+            max-width: 300px;
+            min-height: 90px;
+            pointer-events: all;
+            flex-direction: column;
+            align-items: flex-start;
+            cursor: pointer;
+            padding: 5px;
+            padding-left: 100px;
+            opacity: 1;
+            gap: 5px;
+            border-radius: 4px;
+
+            &:hover {
+                opacity: 1;
+                filter: brightness( 2 );
+                background-color: #fff3;
+            }
+
+            &:active {
+                background-color: #000033ff;
+            }
+
+            .choice_title {
+                color: #66ff66;
+                font-size: 22px;
+                font-weight: 400;
+            }
+
+            .choice_icon {
+                position: absolute;
+                left: 8px;
+                top: 8px;
+                width: 80px;
+                height: 80px;
+                image-rendering: pixelated;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+
+            .choice_description {
+                font-size: 14px;
+                color: #fffe;
+                padding: 4px;
+                //border: 1px solid blue;
+                font-weight: 300;
+            }
+        }
+
+        .reroll_button {
+            width: 100%;
+            border-radius: 4px;
+            height: 40px;
+            background-color: #000000cc;
+            pointer-events: all;
+            margin-top: 4px;
+            margin-bottom: 4px;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #000000ff;
+            }
+
+            &:active {
+                border: 3px solid #88880099;
+            }
+
+            .reroll_button_label {
+                color: #aaaaaa;
+                font-size: 18px;
+                pointer-events: none;
+            }
+
+            .disabled_text {
+                color: #aaaaaa22;
+            }
+        }
+
+        .disabled {
+            pointer-events: none;
+            border: 3px solid #ffffff11;
+        }
+    }
+}

@@ -73,9 +73,11 @@ public class StatusManager
 			valid.Add( (type, attrib.Weight) );
 		}
 
-		// todo: handle if valid has < elements than numStatuses
-
 		List<TypeDescription> output = new List<TypeDescription>();
+
+		// todo: handle if valid has < elements than numStatuses
+		if ( valid.Count < numStatuses )
+			return output;
 
 		while ( output.Count < numStatuses )
 		{
