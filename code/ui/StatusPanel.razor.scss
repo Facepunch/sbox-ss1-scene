@@ -1,0 +1,19 @@
+StatusPanel {
+    position: absolute;
+    display: flex;
+    cursor: default;
+    pointer-events: all;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 100px;
+    height: 100%;
+    left: 10px;
+    bottom: 10px;
+    justify-content: flex-end;
+    align-items: center;
+    overflow: scroll;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    //background-color: red;
+}

@@ -16,7 +16,7 @@
 				var status = Player.LevelUpChoices[i];
 				var lvlStr = status.Level > 1 ? $" [{status.Level}]" : "";
 
-				<div class="choice_button" onclick=@(() => ChoiceButtonClicked(TypeLibrary.GetType( typeof( MovespeedStatus ) )))>
+				<div class="choice_button" onclick=@(() => ChoiceButtonClicked(TypeLibrary.GetType( status.GetType() )))>
 					<div class="choice_icon" style="background-image: url(@(status.IconPath));"></div>
 
 					<div class="choice_title">

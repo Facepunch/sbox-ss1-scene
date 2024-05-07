@@ -1,0 +1,26 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel
+@attribute [StyleSheet("StatusPanel.razor.scss")]
+
+
+<root>
+	@foreach(var pair in Player.Statuses)
+	{
+		var status = pair.Value;
+
+		<StatusIcon Status=@status></StatusIcon>
+	}
+</root>
+
+@code
+{
+	public Player Player { get; set; }
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(
+			Time.Now
+		);
+	}
+}
