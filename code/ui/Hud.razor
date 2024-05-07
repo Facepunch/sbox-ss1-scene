@@ -16,7 +16,7 @@
 			<InfoPanel Player=@player></InfoPanel>
 			<StatusPanel Player=@player></StatusPanel>
 
-			@if(player.IsChoosingLevelUpReward)
+			@if(player.IsChoosingLevelUpReward && !Manager.Instance.IsGameOver)
 			{
 				<ChoicePanel Player=@player></ChoicePanel>	
 			}

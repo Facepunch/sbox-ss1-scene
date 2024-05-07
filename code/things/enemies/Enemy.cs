@@ -69,14 +69,20 @@ public abstract class Enemy : Thing
 	public int CoinValueMin { get; protected set; }
 	public int CoinValueMax { get; protected set; }
 
+	protected override void OnAwake()
+	{
+		base.OnAwake();
+
+		Sprite = Components.Get<SpriteRenderer>();
+		Sprite.Color = Color.White.WithAlpha( 0f );
+	}
+
 	protected override void OnStart()
 	{
 		base.OnStart();
 
 		//_animSpeed = 1f;
 		//_animSpeedModifier = 1f;
-		Sprite = Components.Get<SpriteRenderer>();
-		Sprite.Color = Color.White.WithAlpha( 0f );
 
 		ShadowFullOpacity = 0.8f;
 
