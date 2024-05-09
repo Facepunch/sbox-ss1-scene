@@ -13,8 +13,6 @@ public enum BulletStat
 
 public class Bullet : Thing
 {
-	[Property] public SpriteRenderer Sprite { get; set; }
-
 	public Vector2 Velocity { get; set; }
 
 	public TimeSince TimeSinceSpawn { get; private set; }
@@ -24,7 +22,7 @@ public class Bullet : Thing
 	public Dictionary<BulletStat, float> Stats { get; private set; }
 
 	public List<Thing> _hitThings = new List<Thing>();
-	private float _scaleFactor;
+	//private float _scaleFactor;
 
 	protected override void OnAwake()
 	{
@@ -61,7 +59,7 @@ public class Bullet : Thing
 
 	public void Init()
 	{
-		_scaleFactor = Utils.Map( Stats[BulletStat.Damage], 10f, 120f, 0.015f, 0.003f, EasingType.Linear );
+		//_scaleFactor = Utils.Map( Stats[BulletStat.Damage], 10f, 120f, 0.015f, 0.003f, EasingType.Linear );
 		DetermineSize();
 
 		if ( Stats[BulletStat.HealTeammateAmount] > 0f )
@@ -79,9 +77,13 @@ public class Bullet : Thing
 			? Utils.Map( damage, 0f, 30f, 0.1f, 0.5f, EasingType.QuadOut )
 			: Utils.Map( damage, 30f, 150f, 0.5f, 1.75f, EasingType.QuadIn );
 
-		//Scale = new Vector2( scale, scale );
+		Scale = scale;
+		//Sprite.Size = new Vector2( scale );
+		
 		Radius = 0.07f + scale * 0.2f;
-		//ShadowScale = scale * 1.2f;
+		ShadowScale = scale * 1.2f;
+
+		SpriteDirty = true;
 	}
 
 	protected override void OnUpdate()
@@ -184,7 +186,7 @@ public class Bullet : Thing
 					//if ( !enemy.HasEnemyStatus<BurningEnemyStatus>() )
 					//	Game.PlaySfxNearby( "burn", Position, pitch: Game.Random.Float( 0.95f, 1.05f ), volume: 1f, maxDist: 5f );
 
-					//enemy.Burn( Shooter, Shooter.Stats[PlayerStat.FireDamage] * Shooter.GetDamageMultiplier(), Shooter.Stats[PlayerStat.FireLifetime], Shooter.Stats[PlayerStat.FireSpreadChance] );
+					enemy.Burn( Shooter, Shooter.Stats[PlayerStat.FireDamage] * Shooter.GetDamageMultiplier(), Shooter.Stats[PlayerStat.FireLifetime], Shooter.Stats[PlayerStat.FireSpreadChance] );
 				}
 
 				if ( Game.Random.Float( 0f, 1f ) < Stats[BulletStat.FreezeChance] )

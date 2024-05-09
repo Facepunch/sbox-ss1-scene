@@ -29,7 +29,7 @@ public class BurningEnemyStatus : EnemyStatus
 	{
 		base.Init( enemy );
 
-		//Enemy.CreateBurningVfx();
+		Enemy.CreateBurningVfx();
 	}
 
 	public override void Update( float dt )
@@ -49,7 +49,7 @@ public class BurningEnemyStatus : EnemyStatus
 
 	public override void Remove()
 	{
-		//Enemy.RemoveBurningVfx();
+		Enemy.RemoveBurningVfx();
 	}
 
 	public override void Refresh()
@@ -89,39 +89,3 @@ public class BurningEnemyStatus : EnemyStatus
 			_damageOtherTime = 0f;
 	}
 }
-
-//public partial class BurningVfx : Sprite
-//{
-//	private Enemy _enemy;
-
-//	public BurningVfx( Enemy enemy )
-//	{
-//		_enemy = enemy;
-//	}
-
-//	public override void Spawn()
-//	{
-//		base.Spawn();
-
-//		SpriteTexture = SpriteTexture.Atlas( "textures/sprites/fire_spritesheet.png", 1, 4 );
-//		AnimationPath = "textures/sprites/fire.frames";
-//		AnimationSpeed = Sandbox.Game.Random.Float( 3f, 6f );
-
-//		ColorTint = new Color( 1f, 1f, 1f, 1f );
-//		Filter = SpriteFilter.Pixelated;
-//	}
-
-//	[Event.Tick.Client]
-//	public void ClientTick()
-//	{
-//		if ( !_enemy.IsValid )
-//			return;
-
-//		Position = _enemy.Position + new Vector2( 0f, 0.4f );
-
-//		bool flip = Utils.FastSin( Time.Now * 4f ) < 0f;
-//		Scale = new Vector2( (1f + Utils.FastSin( Time.Now * 24f ) * 0.1f) * (flip ? -1f : 1f), 1f + Utils.FastSin( Time.Now * 14f ) * 0.075f );
-//		Depth = _enemy.Depth + 2f;
-//		Opacity = (0.4f + Utils.FastSin( Time.Now * 20f ) * 0.3f) * Utils.Map( _enemy.DeathProgress, 0f, 1f, 1f, 0f );
-//	}
-//}

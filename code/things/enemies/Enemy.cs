@@ -8,7 +8,6 @@ using static Manager;
 
 public abstract class Enemy : Thing
 {
-	public SpriteRenderer Sprite { get; private set; }
 	[Sync] public float Health { get; set; }
 	[Sync] public Vector2 Velocity { get; set; }
 	public float MoveTimeOffset { get; set; }
@@ -56,7 +55,7 @@ public abstract class Enemy : Thing
 
 	public Dictionary<TypeDescription, EnemyStatus> EnemyStatuses = new Dictionary<TypeDescription, EnemyStatus>();
 
-	//private BurningVfx _burningVfx;
+	private BurningVfx _burningVfx;
 	//private FrozenVfx _frozenVfx;
 	//private FearVfx _fearVfx;
 	public bool IsFrozen { get; set; }
@@ -136,6 +135,8 @@ public abstract class Enemy : Thing
 
 		if ( IsProxy )
 			return;
+
+		HandleStatuses( dt );
 
 		if ( IsDying )
 		{
@@ -538,21 +539,26 @@ public abstract class Enemy : Thing
 		return EnemyStatuses.ContainsKey( TypeLibrary.GetType<TStatus>() );
 	}
 
-	//[ClientRpc]
-	//public void CreateBurningVfx()
-	//{
-	//	_burningVfx = new BurningVfx( this );
-	//}
+	[Broadcast]
+	public void CreateBurningVfx()
+	{
+		var obj = Manager.Instance.BurningVfxPrefab.Clone( Transform.Position );
+		obj.Parent = GameObject;
+		obj.Transform.LocalPosition = new Vector3( 0f, 0f, 1f );
 
-	//[ClientRpc]
-	//public void RemoveBurningVfx()
-	//{
-	//	if ( _burningVfx != null )
-	//	{
-	//		_burningVfx.Delete();
-	//		_burningVfx = null;
-	//	}
-	//}
+		_burningVfx = obj.Components.Get<BurningVfx>();
+		_burningVfx.Enemy = this;
+	}
+
+	[Broadcast]
+	public void RemoveBurningVfx()
+	{
+		if ( _burningVfx != null )
+		{
+			_burningVfx.GameObject.Destroy();
+			_burningVfx = null;
+		}
+	}
 
 	//[ClientRpc]
 	//public void CreateFrozenVfx()

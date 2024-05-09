@@ -3,8 +3,6 @@ using static Manager;
 
 public class Magnet : Thing
 {
-	[Property] public SpriteRenderer Sprite { get; set; }
-
 	public Vector2 Velocity { get; set; }
 
 	public TimeSince SpawnTime { get; private set; }
@@ -17,6 +15,8 @@ public class Magnet : Thing
 
 		OffsetY = -0.14f;
 
+		Scale = 0.4f;
+
 		ShadowOpacity = 0.8f;
 		ShadowScale = 0.8f;
 		SpawnShadow( ShadowScale, ShadowOpacity );
@@ -26,7 +26,6 @@ public class Magnet : Thing
 
 		//BasePivotY = 0.225f;
 
-		//Scale = new Vector2( 1f, 1f ) * 0.4f;
 		SpawnTime = 0f;
 		Lifetime = 60f;
 		Radius = 0.175f;

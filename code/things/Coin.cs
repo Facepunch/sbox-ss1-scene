@@ -3,8 +3,6 @@ using static Manager;
 
 public class Coin : Thing
 {
-	[Property] public SpriteRenderer Sprite { get; set; }
-
 	public Vector2 Velocity { get; set; }
 
 	public TimeSince SpawnTime { get; private set; }
@@ -20,7 +18,9 @@ public class Coin : Thing
 	{
 		base.OnAwake();
 
-		OffsetY = -0.13f;
+		OffsetY = -0.1f;
+
+		Scale = 0.4f;
 
 		ShadowOpacity = 0.8f;
 		ShadowScale = 0.4f;

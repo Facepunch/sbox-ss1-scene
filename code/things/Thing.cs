@@ -1,6 +1,7 @@
 ﻿using Sandbox.UI;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -9,6 +10,9 @@ using static Manager;
 
 public class Thing : Component
 {
+	[Property] public SpriteRenderer Sprite { get; set; }
+	[Sync] public float Scale { get; set; }
+
 	[Sync] public float Radius { get; set; }
 	public float TempWeight { get; set; }
 	public GridSquare GridPos { get; set; }
@@ -21,21 +25,18 @@ public class Thing : Component
 	[Sync] public float ShadowScale { get; set; }
 	public SpriteRenderer ShadowSprite { get; set; }
 
+	[Sync] public bool SpriteDirty { get; set; }
+
 	public Vector2 Position2D
 	{
-		get
-		{
-			return (Vector2)Transform.Position + new Vector2(0f, OffsetY);
-		}
-		set
-		{
-			Transform.Position = new Vector3( value.x, value.y - OffsetY, Transform.Position.z );
-		}
+		get { return (Vector2)Transform.Position + new Vector2(0f, OffsetY); }
+		set { Transform.Position = new Vector3( value.x, value.y - OffsetY, Transform.Position.z ); }
 	}
 
 	public Thing()
 	{
 		TimeScale = 1f;
+		SpriteDirty = true;
 	}
 
 	protected override void OnUpdate()
@@ -44,6 +45,14 @@ public class Thing : Component
 
 		// todo: optimize?
 		UpdateGridPos();
+
+		if( SpriteDirty && ShadowSprite != null )
+		{
+			Sprite.Size = new Vector2( Scale );
+			ShadowSprite.Size = new Vector2( ShadowScale );
+
+			SpriteDirty = false;
+		}
 	}
 
 	public virtual void Colliding( Thing other, float percent, float dt )

@@ -16,6 +16,10 @@
             "_type": "gameobject",
             "prefab": "prefabs/blood.prefab"
           },
+          "BurningVfxPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/burning_vfx.prefab"
+          },
           "Camera": {
             "_type": "component",
             "component_id": "72c6dbcd-cb02-4717-852c-dea61fa2659d",
@@ -195,7 +199,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-05-08T19:34:45.5979551-07:00",
+  "LastSaved": "2024-05-09T02:45:42.9992976-07:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

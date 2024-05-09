@@ -23,8 +23,9 @@ public class Zombie : Enemy
 
 		Sprite.Texture = Texture.Load("textures/sprites/zombie.vtex");
 
-		ScaleFactor = 0.85f;
-		Sprite.Size = new Vector2( 1f, 1f ) * ScaleFactor;
+		//ScaleFactor = 0.85f;
+		//Sprite.Size = new Vector2( 1f, 1f ) * ScaleFactor;
+		Scale = 0.85f;
 
 		if ( IsProxy )
 			return;

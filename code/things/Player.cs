@@ -34,7 +34,6 @@ public enum DamageType { Melee, Ranged, Explosion, Fire, }
 
 public class Player : Thing
 {
-	[Property] public SpriteRenderer Sprite { get; set; }
 	[Property] public GameObject ArrowAimerPrefab { get; set;  }
 	[Property] public GameObject BulletPrefab { get; set; }
 
@@ -98,6 +97,8 @@ public class Player : Thing
 		base.OnStart();
 
 		OffsetY = -0.42f;
+
+		Scale = 1f;
 
 		ShadowOpacity = 0.8f;
 		ShadowScale = 1.12f;
@@ -239,7 +240,11 @@ public class Player : Thing
 
 		//RefreshStatusHud( To.Single( Client ) );
 
-		//AddStatus( TypeLibrary.GetType( typeof( MovespeedStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( FireIgniteStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( FireIgniteStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( FireIgniteStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( FireIgniteStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( FireIgniteStatus ) ) );
 	}
 
 	protected override void OnUpdate()
@@ -1077,5 +1082,18 @@ public class Player : Thing
 		Manager.Instance.Camera2D.SetPos( Position2D );
 
 		InitializeStats();
+	}
+
+	public void SpawnBulletRing( Vector2 pos, int numBullets, Vector2 aimDir )
+	{
+		float increment = 360f / numBullets;
+
+		for ( int i = 0; i < numBullets; i++ )
+		{
+			var dir = Utils.RotateVector( aimDir, i * increment );
+			SpawnBullet( pos, dir );
+		}
+
+		//Game.PlaySfxNearby( "shoot", pos, pitch: 1f, volume: 1f, maxDist: 3f );
 	}
 }

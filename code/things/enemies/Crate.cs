@@ -17,8 +17,9 @@ public class Crate : Enemy
 
 		Sprite.Texture = Texture.Load("textures/sprites/crate.vtex");
 
-		ScaleFactor = 0.95f;
-		Sprite.Size = new Vector2( 1f, 1f ) * ScaleFactor;
+		//ScaleFactor = 0.95f;
+		//Sprite.Size = new Vector2( 1f, 1f ) * ScaleFactor;
+		Scale = 0.95f;
 
 		if ( IsProxy )
 			return;
