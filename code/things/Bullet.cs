@@ -194,7 +194,7 @@ public class Bullet : Thing
 					//if ( !enemy.HasEnemyStatus<FrozenEnemyStatus>() )
 					//	Game.PlaySfxNearby( "frozen", Position, pitch: Game.Random.Float( 1.2f, 1.3f ), volume: 1.6f, maxDist: 6f );
 
-					//enemy.Freeze( Shooter );
+					enemy.Freeze( Shooter );
 				}
 
 				bool isCrit = Game.Random.Float( 0f, 1f ) < Stats[BulletStat.CriticalChance];

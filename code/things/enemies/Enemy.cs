@@ -56,7 +56,7 @@ public abstract class Enemy : Thing
 	public Dictionary<TypeDescription, EnemyStatus> EnemyStatuses = new Dictionary<TypeDescription, EnemyStatus>();
 
 	private BurningVfx _burningVfx;
-	//private FrozenVfx _frozenVfx;
+	private FrozenVfx _frozenVfx;
 	//private FearVfx _fearVfx;
 	public bool IsFrozen { get; set; }
 	public bool IsFeared { get; set; }
@@ -560,21 +560,26 @@ public abstract class Enemy : Thing
 		}
 	}
 
-	//[ClientRpc]
-	//public void CreateFrozenVfx()
-	//{
-	//	_frozenVfx = new FrozenVfx( this );
-	//}
+	[Broadcast]
+	public void CreateFrozenVfx()
+	{
+		var obj = Manager.Instance.FrozenVfxPrefab.Clone( Transform.Position );
+		obj.Parent = GameObject;
+		obj.Transform.LocalPosition = new Vector3( 0f, 0f, 2f );
 
-	//[ClientRpc]
-	//public void RemoveFrozenVfx()
-	//{
-	//	if ( _frozenVfx != null )
-	//	{
-	//		_frozenVfx.Delete();
-	//		_frozenVfx = null;
-	//	}
-	//}
+		_frozenVfx = obj.Components.Get<FrozenVfx>();
+		_frozenVfx.Enemy = this;
+	}
+
+	[Broadcast]
+	public void RemoveFrozenVfx()
+	{
+		if ( _frozenVfx != null )
+		{
+			_frozenVfx.GameObject.Destroy();
+			_frozenVfx = null;
+		}
+	}
 
 	//[ClientRpc]
 	//public void CreateFearVfx()
@@ -646,7 +651,7 @@ public abstract class Enemy : Thing
 			//if ( !HasEnemyStatus<FrozenEnemyStatus>() )
 			//	Game.PlaySfxNearby( "frozen", Position, pitch: Game.Random.Float( 1.1f, 1.2f ), volume: 1.5f, maxDist: 5f );
 
-			//Freeze( player );
+			Freeze( player );
 		}
 
 		if ( Game.Random.Float( 0f, 1f ) < player.Stats[PlayerStat.FearOnMeleeChance] )

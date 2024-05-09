@@ -1,5 +1,5 @@
 {
-  "__guid": "cb2e18e0-a241-42d4-af6a-e643d23edadb",
+  "__guid": "6f63fc82-4866-4ba4-8625-5186db06b0bc",
   "GameObjects": [
     {
       "__guid": "0ee658db-c168-4901-afd1-af4fa0ad5c51",
@@ -43,6 +43,10 @@
           "EnemyPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/enemy.prefab"
+          },
+          "FrozenVfxPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/frozen_vfx.prefab"
           },
           "MagnetPrefab": {
             "_type": "gameobject",
@@ -199,7 +203,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-05-09T02:45:42.9992976-07:00",
+  "LastSaved": "2024-05-09T04:04:31.2872522-07:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

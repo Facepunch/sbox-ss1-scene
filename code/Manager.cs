@@ -14,6 +14,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public GameObject BloodSplatterPrefab { get; set; }
 	[Property] public GameObject CloudPrefab { get; set; }
 	[Property] public GameObject BurningVfxPrefab { get; set; }
+	[Property] public GameObject FrozenVfxPrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }

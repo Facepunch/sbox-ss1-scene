@@ -26,7 +26,10 @@ public class FreezeShardsStatus : Status
 
     public override string GetDescription(int newLevel)
     {
-        return string.Format("Enemies you freeze release {0} bullet when they die", GetPercentForLevel(Level));
+		if(newLevel > 1)
+			return string.Format( "Enemies you freeze release up to {0} bullets when they die", GetPercentForLevel( Level ) );
+		else
+			return string.Format("Enemies you freeze release 1 bullet when they die", GetPercentForLevel( Level ));
     }
 
     public override string GetUpgradeDescription(int newLevel)

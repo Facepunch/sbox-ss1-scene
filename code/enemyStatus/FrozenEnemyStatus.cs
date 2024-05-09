@@ -17,7 +17,7 @@ public class FrozenEnemyStatus : EnemyStatus
 	{
 		base.Init( enemy );
 
-		//enemy.CreateFrozenVfx();
+		enemy.CreateFrozenVfx();
 		enemy.IsFrozen = true;
 		TimeScale = float.MaxValue;
 	}
@@ -61,9 +61,9 @@ public class FrozenEnemyStatus : EnemyStatus
 		if ( Player != null && Player.Stats[PlayerStat.FrozenShardsNum] > 0f )
 		{
 			int maxShardsNum = (int)Player.Stats[PlayerStat.FrozenShardsNum];
-			int numShards = Sandbox.Game.Random.Int( 1, maxShardsNum );
-			Vector2 aimDir = (new Vector2( Sandbox.Game.Random.Float( -1f, 1f ), Sandbox.Game.Random.Float( -1f, 1f ) )).Normal;
-			//Player.SpawnBulletRing( Enemy.Position, numShards, aimDir );
+			int numShards = Game.Random.Int( 1, maxShardsNum );
+			Vector2 aimDir = (new Vector2( Game.Random.Float( -1f, 1f ), Sandbox.Game.Random.Float( -1f, 1f ) )).Normal;
+			Player.SpawnBulletRing( Enemy.Position2D, numShards, aimDir );
 		}
 	}
 
@@ -73,7 +73,7 @@ public class FrozenEnemyStatus : EnemyStatus
 		Enemy.TimeScale = 1f;
 		Enemy.IsFrozen = false;
 
-		//Enemy.RemoveFrozenVfx();
+		Enemy.RemoveFrozenVfx();
 	}
 
 	public override void Refresh()
@@ -81,38 +81,3 @@ public class FrozenEnemyStatus : EnemyStatus
 		ElapsedTime = 0f;
 	}
 }
-
-//public partial class FrozenVfx : Sprite
-//{
-//	private Enemy _enemy;
-
-//	public FrozenVfx( Enemy enemy )
-//	{
-//		_enemy = enemy;
-//	}
-
-//	public override void Spawn()
-//	{
-//		base.Spawn();
-
-//		SpriteTexture = SpriteTexture.Atlas( "textures/sprites/frozen.png", 1, 5 );
-//		AnimationPath = "textures/sprites/frozen.frames";
-//		AnimationSpeed = Sandbox.Game.Random.Float( 3f, 4f );
-
-//		Scale = new Vector2( Sandbox.Game.Random.Float( 0f, 1f ) < 0.5f ? -1f : 1f, 1f ) * Sandbox.Game.Random.Float( 0.9f, 1f );
-
-//		ColorTint = new Color( 1f, 1f, 1f, 1f );
-//		Filter = SpriteFilter.Pixelated;
-//	}
-
-//	[Event.Tick.Client]
-//	public void ClientTick()
-//	{
-//		if ( !_enemy.IsValid )
-//			return;
-
-//		Position = _enemy.Position + new Vector2( 0f, 0.4f );
-//		Depth = _enemy.Depth + 2f;
-//		Opacity = (0.8f + Utils.FastSin( Time.Now * 20f ) * 0.2f) * Utils.Map( _enemy.DeathProgress, 0f, 1f, 1f, 0f );
-//	}
-//}

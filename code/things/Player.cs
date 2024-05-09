@@ -240,11 +240,12 @@ public class Player : Thing
 
 		//RefreshStatusHud( To.Single( Client ) );
 
-		AddStatus( TypeLibrary.GetType( typeof( FireIgniteStatus ) ) );
-		AddStatus( TypeLibrary.GetType( typeof( FireIgniteStatus ) ) );
-		AddStatus( TypeLibrary.GetType( typeof( FireIgniteStatus ) ) );
-		AddStatus( TypeLibrary.GetType( typeof( FireIgniteStatus ) ) );
-		AddStatus( TypeLibrary.GetType( typeof( FireIgniteStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( FreezeShootStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( FreezeShootStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( FreezeShootStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( FreezeShootStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( FreezeShootStatus ) ) );
+		//AddStatus( TypeLibrary.GetType( typeof( FreezeShardsStatus ) ) );
 	}
 
 	protected override void OnUpdate()
