@@ -44,6 +44,10 @@
             "_type": "gameobject",
             "prefab": "prefabs/enemy.prefab"
           },
+          "FearVfxPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/fear_vfx.prefab"
+          },
           "FrozenVfxPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/frozen_vfx.prefab"
@@ -203,7 +207,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-05-09T04:04:31.2872522-07:00",
+  "LastSaved": "2024-05-09T04:28:55.5684379-07:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

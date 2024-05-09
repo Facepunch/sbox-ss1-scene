@@ -57,7 +57,7 @@ public abstract class Enemy : Thing
 
 	private BurningVfx _burningVfx;
 	private FrozenVfx _frozenVfx;
-	//private FearVfx _fearVfx;
+	private FearVfx _fearVfx;
 	public bool IsFrozen { get; set; }
 	public bool IsFeared { get; set; }
 
@@ -581,21 +581,26 @@ public abstract class Enemy : Thing
 		}
 	}
 
-	//[ClientRpc]
-	//public void CreateFearVfx()
-	//{
-	//	_fearVfx = new FearVfx( this );
-	//}
+	[Broadcast]
+	public void CreateFearVfx()
+	{
+		var obj = Manager.Instance.FearVfxPrefab.Clone( Transform.Position );
+		obj.Parent = GameObject;
+		obj.Transform.LocalPosition = new Vector3( 0f, 0f, 3f );
 
-	//[ClientRpc]
-	//public void RemoveFearVfx()
-	//{
-	//	if ( _fearVfx != null )
-	//	{
-	//		_fearVfx.Delete();
-	//		_fearVfx = null;
-	//	}
-	//}
+		_fearVfx = obj.Components.Get<FearVfx>();
+		_fearVfx.Enemy = this;
+	}
+
+	[Broadcast]
+	public void RemoveFearVfx()
+	{
+		if ( _fearVfx != null )
+		{
+			_fearVfx.GameObject.Destroy();
+			_fearVfx = null;
+		}
+	}
 
 	public void Burn( Player player, float damage, float lifetime, float spreadChance )
 	{
@@ -659,7 +664,7 @@ public abstract class Enemy : Thing
 			//if ( !HasEnemyStatus<FearEnemyStatus>() )
 			//	Game.PlaySfxNearby( "fear", Position, pitch: Game.Random.Float( 0.95f, 1.05f ), volume: 0.6f, maxDist: 5f );
 
-			//Fear( player );
+			Fear( player );
 		}
 	}
 

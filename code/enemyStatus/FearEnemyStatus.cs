@@ -20,7 +20,7 @@ public class FearEnemyStatus : EnemyStatus
 	{
 		base.Init( enemy );
 
-		//enemy.CreateFearVfx();
+		enemy.CreateFearVfx();
 		enemy.IsFeared = true;
 		TimeScale = float.MaxValue;
 		TimeSincePain = 0f;
@@ -71,7 +71,7 @@ public class FearEnemyStatus : EnemyStatus
 	{
 		Enemy.IsFeared = false;
 
-		//Enemy.RemoveFearVfx();
+		Enemy.RemoveFearVfx();
 	}
 
 	public override void Refresh()
@@ -79,38 +79,3 @@ public class FearEnemyStatus : EnemyStatus
 		ElapsedTime = 0f;
 	}
 }
-
-//public partial class FearVfx : Sprite
-//{
-//	private Enemy _enemy;
-
-//	public FearVfx( Enemy enemy )
-//	{
-//		_enemy = enemy;
-//	}
-
-//	public override void Spawn()
-//	{
-//		base.Spawn();
-
-//		SpriteTexture = SpriteTexture.Atlas( "textures/sprites/fear.png", 1, 5 );
-//		AnimationPath = "textures/sprites/fear.frames";
-//		AnimationSpeed = Sandbox.Game.Random.Float( 2f, 2.5f );
-
-//		Scale = new Vector2( Sandbox.Game.Random.Float( 0f, 1f ) < 0.5f ? -1f : 1f, 1f ) * Sandbox.Game.Random.Float( 0.9f, 1f );
-
-//		ColorTint = new Color( 1f, 1f, 1f, 1f );
-//		Filter = SpriteFilter.Pixelated;
-//	}
-
-//	[Event.Tick.Client]
-//	public void ClientTick()
-//	{
-//		if ( !_enemy.IsValid )
-//			return;
-
-//		Position = _enemy.Position + new Vector2( 0f, 0.4f );
-//		Depth = _enemy.Depth + 2f;
-//		Opacity = 1f * Utils.Map( _enemy.DeathProgress, 0f, 1f, 1f, 0f );
-//	}
-//}

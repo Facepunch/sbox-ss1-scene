@@ -36,15 +36,15 @@ public class DashFearStatus : Status
 	{
 		base.Colliding( other, percent, dt );
 
-		//if ( Player.IsDashing && other is Enemy enemy )
-		//{
-		//	if ( !enemy.HasEnemyStatus<FearEnemyStatus>() )
-		//	{
-		//		var pos = enemy.Position + (!enemy.Position.Equals( Player.Position ) ? (enemy.Position - Player.Position).Normal * 2f : Vector2.Zero);
-		//		Player.Game.PlaySfxNearby( "fear", pos, pitch: Sandbox.Game.Random.Float( 0.95f, 1.05f ), volume: 0.6f, maxDist: 5f );
-		//	}
+		if ( Player.IsDashing && other is Enemy enemy )
+		{
+			if ( !enemy.HasEnemyStatus<FearEnemyStatus>() )
+			{
+				var pos = enemy.Position2D + (!enemy.Position2D.Equals( Player.Position2D ) ? (enemy.Position2D - Player.Position2D).Normal * 2f : Vector2.Zero);
+				//Player.Game.PlaySfxNearby( "fear", pos, pitch: Sandbox.Game.Random.Float( 0.95f, 1.05f ), volume: 0.6f, maxDist: 5f );
+			}
 
-		//	enemy.Fear( Player );
-		//}
+			enemy.Fear( Player );
+		}
 	}
 }

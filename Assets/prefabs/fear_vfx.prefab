@@ -1,0 +1,43 @@
+{
+  "RootObject": {
+    "__guid": "f4ac49e2-a25b-4f87-9417-4e2bd86fcf6b",
+    "Flags": 0,
+    "Name": "fear_vfx",
+    "Position": "24.31859,-251.8182,-604.6948",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SpriteRenderer",
+        "__guid": "9d850a07-2152-4104-8eeb-5281df53cc8a",
+        "Additive": false,
+        "CastShadows": false,
+        "Color": "1,1,1,1",
+        "DepthFeather": 0,
+        "FlipHorizontal": false,
+        "FlipVertical": false,
+        "FogStrength": 1,
+        "Opaque": false,
+        "Size": "1,1",
+        "Texture": "textures/sprites/fear.vtex"
+      },
+      {
+        "__type": "FearVfx",
+        "__guid": "80e9f0cc-3924-4f6f-867e-9d74c6c3f3be",
+        "Sprite": {
+          "_type": "component",
+          "component_id": "9d850a07-2152-4104-8eeb-5281df53cc8a",
+          "go": "f4ac49e2-a25b-4f87-9417-4e2bd86fcf6b",
+          "component_type": "SpriteRenderer"
+        }
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
