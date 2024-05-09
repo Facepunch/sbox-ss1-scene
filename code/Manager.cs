@@ -532,6 +532,9 @@ public sealed class Manager : Component, Component.INetworkListener
 				thing.DestroyCmd();
 		}
 
+		foreach ( var number in Scene.GetAllComponents<LegacyParticleSystem>() )
+			number.GameObject.Destroy();
+
 		SpawnStartingThings();
 	}
 }

@@ -7,6 +7,7 @@ public class Globals
 {
 	public const float SHADOW_DEPTH_OFFSET = -200f;
 	public const float BLOOD_DEPTH = -400f;
+	public const float DAMAGE_NUMBER_DEPTH = 200f;
 
 	public static float GetZPos( float yPos )
 	{

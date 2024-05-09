@@ -189,7 +189,7 @@ public class Player : Thing
 		Stats[PlayerStat.HealthRegen] = 0f;
 		Stats[PlayerStat.HealthRegenStill] = 0f;
 		Stats[PlayerStat.DamageReductionPercent] = 0f;
-		Stats[PlayerStat.PushStrength] = 50f;
+		Stats[PlayerStat.PushStrength] = 30f;
 		Stats[PlayerStat.LastAmmoDamageMultiplier] = 1f;
 		Stats[PlayerStat.BulletDamageGrow] = 0f;
 		Stats[PlayerStat.BulletDamageShrink] = 0f;
@@ -237,7 +237,6 @@ public class Player : Thing
 		//ShadowOpacity = 0.8f;
 		//ShadowScale = 1.12f;
 
-		//InitializeStatsClient();
 		//RefreshStatusHud( To.Single( Client ) );
 
 		//AddStatus( TypeLibrary.GetType( typeof( MovespeedStatus ) ) );
@@ -249,9 +248,11 @@ public class Player : Thing
 
 		string debug = "";
 
-		if(!_doneFirstUpdate)
+		if (!_doneFirstUpdate)
 		{
 			SpawnShadow( ShadowScale, ShadowOpacity );
+			Manager.Instance.Camera2D.SetPos( Position2D );
+
 			_doneFirstUpdate = true;
 		}
 
@@ -777,7 +778,8 @@ public class Player : Thing
 		TimeSinceHurt = 0f;
 		Flash( 0.125f );
 		SpawnBlood( damage );
-		//DamageNumbers.Create( Position + new Vector2( Game.Random.Float( 2.5f, 5.5f ), Game.Random.Float( 8.5f, 10.5f ) ) * 0.1f, damage, DamageNumberType.Player );
+		//DamageNumbers.Add( (int)damage, Position2D + Vector2.Up * Radius * 3f + new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) ) * 0.2f, color: Color.Red );
+		DamageNumbersLegacy.Create( damage, Position2D + new Vector2( 0.4f + Game.Random.Float( -0.1f, 0.1f ), Radius * 3f + Game.Random.Float( -0.2f, 0.3f ) ), color: Color.Red );
 
 		if ( IsProxy )
 			return;

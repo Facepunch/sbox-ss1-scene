@@ -24,6 +24,7 @@ public class Crate : Enemy
 			return;
 		
 		PushStrength = 5f;
+		Deceleration = 10f;
 
 		Radius = 0.25f;
 		Health = 45f;

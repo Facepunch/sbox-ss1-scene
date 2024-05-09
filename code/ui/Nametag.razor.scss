@@ -2,11 +2,11 @@ Nametag {
     position: absolute;
     width: 112px;
     height: 42px;
-    background-color: #0006;
+    background-color: #0005;
     border-radius: 5px;
     justify-content: center;
     flex-direction: column;
-    backdrop-filter: blur( 10px );
+    backdrop-filter: blur( 3px );
     transform: translateX( -50% ) translateY( -50% );
     overflow: hidden;
 

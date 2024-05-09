@@ -3,6 +3,7 @@
   "GameObjects": [
     {
       "__guid": "0ee658db-c168-4901-afd1-af4fa0ad5c51",
+      "Flags": 0,
       "Name": "Manager",
       "Enabled": true,
       "NetworkMode": 1,
@@ -68,6 +69,7 @@
     },
     {
       "__guid": "2dae15f1-83ec-4e7f-ac1e-5487524a3567",
+      "Flags": 0,
       "Name": "Camera",
       "Position": "0,0,250",
       "Rotation": "-0.5,0.5,0.5,0.5",
@@ -100,6 +102,7 @@
     },
     {
       "__guid": "42e851a4-43f5-4ae6-8e3a-002ae1ffc459",
+      "Flags": 0,
       "Name": "Directional Light",
       "Position": "0,0,200",
       "Rotation": "-0.2764369,0.6673765,0.2646312,0.6388752",
@@ -121,6 +124,7 @@
     },
     {
       "__guid": "c13b0129-7c1f-4c62-868f-f751f9b228eb",
+      "Flags": 0,
       "Name": "bg_front",
       "Position": "0,0,-500",
       "Scale": "0.65,0.5,0.01",
@@ -140,6 +144,7 @@
     },
     {
       "__guid": "cf4c92f3-aec7-41ef-bfcf-ab2500938bcc",
+      "Flags": 0,
       "Name": "bg",
       "Position": "0,0,-501",
       "Scale": "0.8,0.8,0.01",
@@ -190,7 +195,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-05-03T04:01:50.4850598-07:00",
+  "LastSaved": "2024-05-08T19:34:45.5979551-07:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
