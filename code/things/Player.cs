@@ -238,12 +238,9 @@ public class Player : Thing
 		//ShadowOpacity = 0.8f;
 		//ShadowScale = 1.12f;
 
-		//RefreshStatusHud( To.Single( Client ) );
-
-		AddStatus( TypeLibrary.GetType( typeof( GrenadeShootReloadStatus ) ) );
-		AddStatus( TypeLibrary.GetType( typeof( GrenadeShootReloadStatus ) ) );
-		AddStatus( TypeLibrary.GetType( typeof( GrenadeShootReloadStatus ) ) );
-		AddStatus( TypeLibrary.GetType( typeof( GrenadeShootReloadStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( HealthRegenStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( HealthRegenStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( HealthRegenStatus ) ) );
 	}
 
 	protected override void OnUpdate()
@@ -275,6 +272,12 @@ public class Player : Thing
 		//Gizmo.Draw.Color = Color.White.WithAlpha(0.05f);
 		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
+		if ( ShadowSprite != null )
+		{
+			ShadowSprite.Color = Color.Black.WithAlpha( ShadowOpacity );
+			ShadowSprite.Size = new Vector2( ShadowScale );
+		}
+
 		if ( Manager.Instance.IsGameOver )
 			return;
 
@@ -284,12 +287,6 @@ public class Player : Thing
 			Sprite.FlipHorizontal = true;
 		else if ( Velocity.x < 0f )
 			Sprite.FlipHorizontal = false;
-
-		if(ShadowSprite != null)
-		{
-			ShadowSprite.Color = Color.Black.WithAlpha( ShadowOpacity );
-			ShadowSprite.Size = new Vector2( ShadowScale );
-		}
 
 		if ( !IsDead )
 		{
@@ -329,11 +326,6 @@ public class Player : Thing
 		{
 			//ArrowAimer.LocalRotation = (MathF.Atan2( AimDir.y, AimDir.x ) * (180f / MathF.PI));
 			ArrowAimer.Transform.LocalPosition = new Vector2( 0f, 0.4f + OffsetY ) + AimDir * 0.65f;
-		}
-
-		if ( !IsDead )
-		{
-			
 		}
 
 		for ( int dx = -1; dx <= 1; dx++ )
@@ -821,7 +813,7 @@ public class Player : Thing
 
 		IsDead = true;
 		Sprite.Color = new Color( 1f, 1f, 1f, 0.05f );
-		ShadowOpacity = 0.1f;
+		ShadowOpacity = 0.2f;
 		_isFlashing = false;
 		IsReloading = false;
 
@@ -829,7 +821,6 @@ public class Player : Thing
 
 		if ( IsProxy )
 			return;
-
 		
 		//AnimationPath = $"textures/sprites/player_ghost_idle.frames";
 		Manager.Instance.PlayerDied( this );
@@ -848,6 +839,7 @@ public class Player : Thing
 		IsDashing = false;
 		IsReloading = true;
 		Sprite.Color = Color.White;
+		ShadowOpacity = 0.8f;
 
 		if ( IsProxy )
 			return;
@@ -858,8 +850,6 @@ public class Player : Thing
 		ExperienceCurrent = 0;
 
 		Health = Stats[PlayerStat.MaxHp] * 0.33f;
-
-		
 
 		//Nametag.SetVisible( true );
 

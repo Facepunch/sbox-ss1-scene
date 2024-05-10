@@ -112,8 +112,8 @@ public abstract class Enemy : Thing
 		//Gizmo.Draw.Color = Color.White;
 		//Gizmo.Draw.Text( $"IsAttacking: {IsAttacking}\nHealth: {Health}/{MaxHealth}\nGridPos: {GridPos}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
 
-		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
-		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
+		Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
+		Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
 		if ( Manager.Instance.IsGameOver )
 			return;

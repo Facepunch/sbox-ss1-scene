@@ -18,13 +18,14 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public GameObject FearVfxPrefab { get; set; }
 	[Property] public GameObject GrenadePrefab { get; set; }
 	[Property] public GameObject ExplosionEffectPrefab { get; set; }
+	[Property] public GameObject ReviveSoulPrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
 
 	public int EnemyCount { get; private set; }
-	public const float MAX_ENEMY_COUNT = 350;
-	//public const float MAX_ENEMY_COUNT = 3;
+	//public const float MAX_ENEMY_COUNT = 350;
+	public const float MAX_ENEMY_COUNT = 6;
 
 	public int CrateCount { get; private set; }
 	public const float MAX_CRATE_COUNT = 7;
@@ -275,22 +276,28 @@ public sealed class Manager : Component, Component.INetworkListener
 		//PlaySfxNearby( "zombie.dirt", pos, pitch: Game.Random.Float( 0.6f, 0.8f ), volume: 0.7f, maxDist: 7.5f );
 	}
 
-	public Coin SpawnCoin( Vector2 pos, int value = 1 )
+	[Broadcast]
+	public void SpawnCoin( Vector2 pos, Vector2 vel, int value = 1 )
 	{
+		if ( IsProxy )
+			return;
+
 		// todo: spawn larger amounts less often if reaching max coin cap
 		if ( CoinCount >= MAX_COIN_COUNT )
-			return null;
+			return;
 
 		var coinObj = CoinPrefab.Clone();
-		coinObj.NetworkSpawn();
-		coinObj.Transform.Position = new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) );
 		var coin = coinObj.Components.Get<Coin>();
+		coin.Velocity = vel;
 		coin.SetValue( value );
 
+		coinObj.NetworkSpawn();
+		coinObj.Transform.Position = new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) );
+		
 		AddThing( coin );
 		CoinCount++;
 
-		return coin;
+		return;
 	}
 
 	public Magnet SpawnMagnet( Vector2 pos, Vector2 vel)
@@ -305,6 +312,21 @@ public sealed class Manager : Component, Component.INetworkListener
 		AddThing( magnet );
 
 		return magnet;
+	}
+
+	[Broadcast]
+	public void SpawnReviveSoul( Vector2 pos, Vector2 vel )
+	{
+		if ( IsProxy )
+			return;
+
+		var reviveObj = ReviveSoulPrefab.Clone();
+		var revive = reviveObj.Components.Get<ReviveSoul>();
+		revive.Velocity = vel;
+
+		reviveObj.NetworkSpawn();
+		reviveObj.Transform.Position = new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) );
+		AddThing( revive );
 	}
 
 	public void SpawnBoss( Vector2 pos )

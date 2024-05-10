@@ -68,6 +68,10 @@
             "_type": "gameobject",
             "prefab": "prefabs/player.prefab"
           },
+          "ReviveSoulPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/revive_soul.prefab"
+          },
           "ShadowPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/shadow.prefab"
@@ -215,7 +219,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-05-09T22:33:53.3095508-07:00",
+  "LastSaved": "2024-05-10T00:11:06.1311858-07:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

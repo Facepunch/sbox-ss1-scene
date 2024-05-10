@@ -1,0 +1,42 @@
+{
+  "RootObject": {
+    "__guid": "3a566ab2-1125-4b81-984c-36ff59751f24",
+    "Flags": 0,
+    "Name": "revive_soul",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SpriteRenderer",
+        "__guid": "1c1c6de9-5e1d-4afa-b27e-64a6ac0550e6",
+        "Additive": false,
+        "CastShadows": false,
+        "Color": "1,1,1,1",
+        "DepthFeather": 0,
+        "FlipHorizontal": false,
+        "FlipVertical": false,
+        "FogStrength": 1,
+        "Opaque": false,
+        "Size": "0.6,0.6",
+        "Texture": "textures/sprites/soul.vtex"
+      },
+      {
+        "__type": "ReviveSoul",
+        "__guid": "db71fdd6-a411-4c3e-9a7a-81da59b7ffd2",
+        "Sprite": {
+          "_type": "component",
+          "component_id": "1c1c6de9-5e1d-4afa-b27e-64a6ac0550e6",
+          "go": "3a566ab2-1125-4b81-984c-36ff59751f24",
+          "component_type": "SpriteRenderer"
+        }
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

@@ -67,10 +67,8 @@ public class Crate : Enemy
 		int num_coins = Game.Random.Int( 2, 3 );
 		for ( int i = 0; i < num_coins; i++ )
 		{
-			var coin = Manager.Instance.SpawnCoin( Position2D + new Vector2( Game.Random.Float( -RAND_POS, RAND_POS ), Game.Random.Float( -RAND_POS, RAND_POS ) ), Game.Random.Int( CoinValueMin, CoinValueMax ) );
-
-			if ( coin != null )
-				coin.Velocity = (coin.Position2D - Position2D) * Game.Random.Float( 2f, 6f );
+			var pos = Position2D + new Vector2( Game.Random.Float( -RAND_POS, RAND_POS ), Game.Random.Float( -RAND_POS, RAND_POS ) );
+			Manager.Instance.SpawnCoin( pos, vel: (pos - Position2D) * Game.Random.Float( 2f, 6f ), value: Game.Random.Int( CoinValueMin, CoinValueMax ) );
 		}
 
 		//var health_pack_chance = player != null ? Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.2f, 0.75f ) : 0.1f;
@@ -92,13 +90,12 @@ public class Crate : Enemy
 			}
 		}
 
-		//var revive_chance = Game.DeadPlayers.ToList().Count * 0.4f;
+		//var revive_chance = Scene.GetAllComponents<Player>().Where(x => x.IsDead).Count() * 0.4f;
 		//if ( Game.Random.Float( 0f, 1f ) < revive_chance )
-		//{
-		//	var reviveSoul = new ReviveSoul() { Position = Position + new Vector2( Game.Random.Float( -RAND_POS, RAND_POS ), Game.Random.Float( -RAND_POS, RAND_POS ) ) };
-		//	reviveSoul.Velocity = (reviveSoul.Position - Position) * Game.Random.Float( 2f, 6f );
-		//	Game.AddThing( reviveSoul );
-		//}
+		{
+			var pos = Position2D + new Vector2( Game.Random.Float( -RAND_POS, RAND_POS ), Game.Random.Float( -RAND_POS, RAND_POS ) );
+			Manager.Instance.SpawnReviveSoul( pos, vel: (pos - Position2D) * Game.Random.Float( 2f, 6f ) );
+		}
 
 		var grenade_chance = 0.15f;
 		if ( player != null && Game.Random.Float( 0f, 1f ) < grenade_chance )
