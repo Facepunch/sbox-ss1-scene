@@ -35,8 +35,8 @@ public class DashShootStatus : Status
 	public override void OnDashStarted()
 	{
 		int maxShardsNum = (int)Player.Stats[PlayerStat.FrozenShardsNum];
-		int numShards = Sandbox.Game.Random.Int( 1, maxShardsNum );
-		Vector2 aimDir = (new Vector2( Sandbox.Game.Random.Float( -1f, 1f ), Sandbox.Game.Random.Float( -1f, 1f ) )).Normal;
+		int numShards = Game.Random.Int( 1, maxShardsNum );
+		Vector2 aimDir = (new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) )).Normal;
 		Player.SpawnBulletRing( Player.Position2D, (int)GetAmountForLevel( Level ), Player.DashVelocity.Normal );
 	}
 

@@ -16,6 +16,8 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public GameObject BurningVfxPrefab { get; set; }
 	[Property] public GameObject FrozenVfxPrefab { get; set; }
 	[Property] public GameObject FearVfxPrefab { get; set; }
+	[Property] public GameObject GrenadePrefab { get; set; }
+	[Property] public GameObject ExplosionEffectPrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
@@ -52,6 +54,7 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public List<BloodSplatter> _bloodSplatters = new();
 	public List<Cloud> _clouds = new();
+	public List<ExplosionEffect> _explosions = new();
 
 	public Status HoveredStatus { get; set; }
 
@@ -495,10 +498,27 @@ public sealed class Manager : Component, Component.INetworkListener
 			_clouds.Remove( cloud );
 	}
 
+	public ExplosionEffect SpawnExplosionEffect( Vector2 pos, float scaleModifier = 1f )
+	{
+		var explosionObj = ExplosionEffectPrefab.Clone( new Vector3( pos.x, pos.y, 100f ) );
+		var explosion = explosionObj.Components.Get<ExplosionEffect>();
+		explosion.Lifetime = 0.5f;
+		explosion.Sprite.Size *= scaleModifier;
+
+		_explosions.Add( explosion );
+		return explosion;
+	}
+
+	public void RemoveExplosionEffect( ExplosionEffect explosion )
+	{
+		if ( _explosions.Contains( explosion ) )
+			_explosions.Remove( explosion );
+	}
+
 	[Broadcast]
 	public void Restart()
 	{
-		//MyGame.Current.PlaySfxTarget( To.Everyone, "restart", Vector2.Zero, Sandbox.Game.Random.Float( 0.95f, 1.05f ), 0.66f );
+		//MyGame.Current.PlaySfxTarget( To.Everyone, "restart", Vector2.Zero, Game.Random.Float( 0.95f, 1.05f ), 0.66f );
 
 		foreach ( var blood in _bloodSplatters )
 			blood.GameObject.Destroy();
@@ -508,9 +528,9 @@ public sealed class Manager : Component, Component.INetworkListener
 			cloud.GameObject.Destroy();
 		_clouds.Clear();
 
-		//foreach ( var explosion in _explosions )
-		//	explosion.GameObject.Destroy();
-		//_explosions.Clear();
+		foreach ( var explosion in _explosions )
+			explosion.GameObject.Destroy();
+		_explosions.Clear();
 
 		foreach ( KeyValuePair<GridSquare, List<Thing>> pair in ThingGridPositions )
 			pair.Value.Clear();

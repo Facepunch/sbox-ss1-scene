@@ -1,0 +1,42 @@
+{
+  "RootObject": {
+    "__guid": "947ed399-e5c8-4506-a05d-0394cc583e3c",
+    "Flags": 0,
+    "Name": "explosion_effect",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SpriteRenderer",
+        "__guid": "75aa1af7-40fc-44b3-a0c9-292eaaef0ac9",
+        "Additive": false,
+        "CastShadows": false,
+        "Color": "1,0,0,1",
+        "DepthFeather": 0,
+        "FlipHorizontal": false,
+        "FlipVertical": false,
+        "FogStrength": 1,
+        "Opaque": false,
+        "Size": "1,1",
+        "Texture": "textures/sprites/explosion.vtex"
+      },
+      {
+        "__type": "ExplosionEffect",
+        "__guid": "647f182a-9a31-4846-98e6-7b0a850c4f93",
+        "Sprite": {
+          "_type": "component",
+          "component_id": "75aa1af7-40fc-44b3-a0c9-292eaaef0ac9",
+          "go": "947ed399-e5c8-4506-a05d-0394cc583e3c",
+          "component_type": "SpriteRenderer"
+        }
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

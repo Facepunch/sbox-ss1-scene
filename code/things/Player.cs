@@ -240,7 +240,10 @@ public class Player : Thing
 
 		//RefreshStatusHud( To.Single( Client ) );
 
-		//AddStatus( TypeLibrary.GetType( typeof( FreezeShardsStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( GrenadeShootReloadStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( GrenadeShootReloadStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( GrenadeShootReloadStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( GrenadeShootReloadStatus ) ) );
 	}
 
 	protected override void OnUpdate()
@@ -1091,5 +1094,30 @@ public class Player : Thing
 		}
 
 		//Game.PlaySfxNearby( "shoot", pos, pitch: 1f, volume: 1f, maxDist: 3f );
+	}
+
+	public Grenade SpawnGrenade( Vector2 pos, Vector2 vel )
+	{
+		var grenadeObj = Manager.Instance.GrenadePrefab.Clone();
+
+		var grenade = grenadeObj.Components.Get<Grenade>();
+		grenade.Velocity = vel;
+		grenade.ExplosionSizeMultiplier = Stats[PlayerStat.ExplosionSizeMultiplier];
+		grenade.Player = this;
+		grenade.StickyPercent = Stats[PlayerStat.GrenadeStickyPercent];
+		grenade.FearChance = Stats[PlayerStat.GrenadeFearChance];
+
+		if ( Stats[PlayerStat.GrenadesCanCrit] > 0f )
+		{
+			grenade.CriticalChance = Stats[PlayerStat.CritChance];
+			grenade.CriticalMultiplier = Stats[PlayerStat.CritMultiplier];
+		}
+
+		grenadeObj.NetworkSpawn();
+		grenadeObj.Transform.Position = new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) );
+
+		Manager.Instance.AddThing( grenade );
+
+		return grenade;
 	}
 }

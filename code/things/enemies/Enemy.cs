@@ -446,10 +446,13 @@ public abstract class Enemy : Thing
 
 	public override void Remove()
 	{
-		for ( int i = EnemyStatuses.Count - 1; i >= 0; i-- )
-			EnemyStatuses.Values.ElementAt( i ).Remove();
+		if(!IsProxy)
+		{
+			for ( int i = EnemyStatuses.Count - 1; i >= 0; i-- )
+				EnemyStatuses.Values.ElementAt( i ).Remove();
 
-		EnemyStatuses.Clear();
+			EnemyStatuses.Clear();
+		}
 
 		base.Remove();
 	}

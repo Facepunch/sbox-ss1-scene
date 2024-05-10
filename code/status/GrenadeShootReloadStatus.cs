@@ -34,13 +34,12 @@ public class GrenadeShootReloadStatus : Status
 
 	public override void OnReload()
 	{
-		if(Sandbox.Game.Random.Float(0f, 1f) < GetChanceForLevel(Level))
+		if(Game.Random.Float(0f, 1f) < GetChanceForLevel(Level))
         {
-			//var pos = Player.Position + Player.AimDir * 0.5f;
-   //         Player.SpawnGrenade(pos: pos, velocity: (pos - Player.Position) * Player.Stats[PlayerStat.GrenadeVelocity]);
+			var pos = Player.Position2D + Player.AimDir * 0.5f;
+			Player.SpawnGrenade( pos: pos, vel: (pos - Player.Position2D) * Player.Stats[PlayerStat.GrenadeVelocity] );
 
-			// todo:
-            //MyGame.Current.PlaySfxNearby("ignite", Player.Position, pitch: Sandbox.Game.Random.Float(1.05f, 1.25f), volume: 0.5f, maxDist: 4f);
+			// todo: sfx
 		}
 	}
 

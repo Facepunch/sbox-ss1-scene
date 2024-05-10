@@ -60,10 +60,15 @@ public class Thing : Component
 
 	}
 
+	[Broadcast]
 	public virtual void Remove()
 	{
 		IsRemoved = true;
-		//Game.RemoveThing( this );
+		Manager.Instance.DeregisterThingGridSquare( this, GridPos );
+
+		if ( IsProxy )
+			return;
+
 		GameObject.Destroy();
 	}
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Sandbox;
-using static Sandbox.Connection;
+﻿using Sandbox;
 
 public class FearEnemyStatus : EnemyStatus
 {
@@ -58,12 +52,12 @@ public class FearEnemyStatus : EnemyStatus
 	{
 		Enemy.IsFeared = false;
 
-		if ( Player != null && Sandbox.Game.Random.Float( 0f, 1f ) < Player.Stats[PlayerStat.FearDropGrenadeChance] )
+		if ( Player != null && Game.Random.Float( 0f, 1f ) < Player.Stats[PlayerStat.FearDropGrenadeChance] )
 		{
-			//Player.SpawnGrenade(
-			//	pos: Enemy.Position + new Vector2( Enemy.Radius * Sandbox.Game.Random.Float( -1f, 1f ), Enemy.Radius * Sandbox.Game.Random.Float( -1f, 1f ) ),
-			//	velocity: new Vector2( 0.5f * Sandbox.Game.Random.Float( -1f, 1f ), 0.5f * Sandbox.Game.Random.Float( -1f, 1f ) )
-			//);
+			Player.SpawnGrenade(
+				pos: Enemy.Position2D + new Vector2( Enemy.Radius * Game.Random.Float( -1f, 1f ), Enemy.Radius * Game.Random.Float( -1f, 1f ) ),
+				vel: new Vector2( 0.5f * Game.Random.Float( -1f, 1f ), 0.5f * Game.Random.Float( -1f, 1f ) )
+			);
 		}
 	}
 

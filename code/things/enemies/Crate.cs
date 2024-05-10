@@ -100,10 +100,10 @@ public class Crate : Enemy
 		//	Game.AddThing( reviveSoul );
 		//}
 
-		//var grenade_chance = 0.15f;
-		//if ( player != null && Game.Random.Float( 0f, 1f ) < grenade_chance )
-		//{
-		//	player.SpawnGrenade( Position, Vector2.Zero );
-		//}
+		var grenade_chance = 0.15f;
+		if ( player != null && Game.Random.Float( 0f, 1f ) < grenade_chance )
+		{
+			player.SpawnGrenade( Position2D, Vector2.Zero );
+		}
 	}
 }

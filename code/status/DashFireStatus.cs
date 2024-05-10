@@ -34,7 +34,7 @@ public class DashFireStatus : Status
 
 	public override void OnDashStarted()
 	{
-		//if ( Sandbox.Game.Random.Float( 0f, 1f ) < GetChanceForLevel( Level ) )
+		//if ( Game.Random.Float( 0f, 1f ) < GetChanceForLevel( Level ) )
 		//{
 		//	var fire = new Fire()
 		//	{
@@ -46,7 +46,7 @@ public class DashFireStatus : Status
 		//	};
 
 		//	MyGame.Current.AddThing( fire );
-		//	MyGame.Current.PlaySfxNearby( "ignite", Player.Position, pitch: Sandbox.Game.Random.Float( 1.05f, 1.25f ), volume: 0.5f, maxDist: 4f );
+		//	MyGame.Current.PlaySfxNearby( "ignite", Player.Position, pitch: Game.Random.Float( 1.05f, 1.25f ), volume: 0.5f, maxDist: 4f );
 		//}
 	}
 

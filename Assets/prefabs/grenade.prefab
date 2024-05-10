@@ -1,0 +1,42 @@
+{
+  "RootObject": {
+    "__guid": "161f3bd9-e65a-4b64-883d-8c078a7d757f",
+    "Flags": 0,
+    "Name": "grenade",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SpriteRenderer",
+        "__guid": "3c80f347-3bc3-49b6-bdd6-5385c3f718ae",
+        "Additive": false,
+        "CastShadows": false,
+        "Color": "0.31188,0.06176,0.06176,1",
+        "DepthFeather": 0,
+        "FlipHorizontal": false,
+        "FlipVertical": false,
+        "FogStrength": 1,
+        "Opaque": false,
+        "Size": "0.3,0.3",
+        "Texture": "textures/sprites/grenade.vtex"
+      },
+      {
+        "__type": "Grenade",
+        "__guid": "3977affe-3350-4e3e-8bae-ef5fc2a86915",
+        "Sprite": {
+          "_type": "component",
+          "component_id": "3c80f347-3bc3-49b6-bdd6-5385c3f718ae",
+          "go": "161f3bd9-e65a-4b64-883d-8c078a7d757f",
+          "component_type": "SpriteRenderer"
+        }
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

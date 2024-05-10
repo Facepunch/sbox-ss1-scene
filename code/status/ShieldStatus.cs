@@ -49,7 +49,7 @@ public class ShieldStatus : Status
             IsShielded = true;
             //Player.CreateShieldVfx();
             _timer = 0f;
-            //MyGame.Current.PlaySfxNearby("shield_gain", Player.Position, pitch: Sandbox.Game.Random.Float(1.2f, 1.25f), volume: 0.7f, maxDist: 7.5f);
+            //MyGame.Current.PlaySfxNearby("shield_gain", Player.Position, pitch: Game.Random.Float(1.2f, 1.25f), volume: 0.7f, maxDist: 7.5f);
         }
     }
 
@@ -59,7 +59,7 @@ public class ShieldStatus : Status
         {
             IsShielded = false;
             //Player.RemoveShieldVfx();
-            //MyGame.Current.PlaySfxNearby("shield_break", Player.Position, pitch: Sandbox.Game.Random.Float(0.95f, 1.05f), volume: 1f, maxDist: 7.5f);
+            //MyGame.Current.PlaySfxNearby("shield_break", Player.Position, pitch: Game.Random.Float(0.95f, 1.05f), volume: 1f, maxDist: 7.5f);
         }
     }
 

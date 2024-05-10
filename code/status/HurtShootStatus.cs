@@ -34,7 +34,7 @@ public class HurtShootStatus : Status
 
     public override void OnHurt(float amount)
     {
-        if (Sandbox.Game.Random.Float(0f, 1f) < GetChanceForLevel(Level))
+        if (Game.Random.Float(0f, 1f) < GetChanceForLevel(Level))
         {
             Player.Shoot();
         }

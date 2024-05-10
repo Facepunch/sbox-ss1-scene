@@ -13,7 +13,7 @@ public static class DamageNumbersLegacy
 		else
 		{
 			float fractional = amount - MathF.Floor( amount );
-			if ( fractional > 0f && Sandbox.Game.Random.Float( 0f, 1f ) > fractional )
+			if ( fractional > 0f && Game.Random.Float( 0f, 1f ) > fractional )
 				amount = MathF.Floor( amount );
 			else
 				amount = MathF.Ceiling( amount );
