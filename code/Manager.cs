@@ -208,13 +208,15 @@ public sealed class Manager : Component, Component.INetworkListener
 		//	type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( ExploderElite ) ) : TypeLibrary.GetType( typeof( Exploder ) );
 		//}
 
-		//// SPITTER
-		//float spitterChance = ElapsedTime < 100f ? 0f : Utils.Map( ElapsedTime, 100f, 800f, 0.015f, 0.1f );
-		//if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < spitterChance )
-		//{
-		//	float eliteChance = ElapsedTime < 540f ? 0f : Utils.Map( ElapsedTime, 540f, 1200f, 0.025f, 1f, EasingType.QuadIn );
-		//	type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( SpitterElite ) ) : TypeLibrary.GetType( typeof( Spitter ) );
-		//}
+		// SPITTER
+		float spitterChance = ElapsedTime < 100f ? 0f : Utils.Map( ElapsedTime, 100f, 800f, 0.015f, 0.1f );
+		spitterChance = 0.4f;
+		if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < spitterChance )
+		{
+			float eliteChance = ElapsedTime < 540f ? 0f : Utils.Map( ElapsedTime, 540f, 1200f, 0.025f, 1f, EasingType.QuadIn );
+			//type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( SpitterElite ) ) : TypeLibrary.GetType( typeof( Spitter ) );
+			type = TypeLibrary.GetType( typeof( Spitter ) );
+		}
 
 		//// SPIKER
 		//float spikerChance = ElapsedTime < 320f ? 0f : Utils.Map( ElapsedTime, 320f, 800f, 0.018f, 0.1f, EasingType.SineIn );
@@ -353,6 +355,7 @@ public sealed class Manager : Component, Component.INetworkListener
 			.Thing;
 	}
 
+	// todo: cache this
 	public Player GetClosestPlayer( Vector3 pos, float maxRange = float.PositiveInfinity, bool alive = true, bool ignoreZ = true, Player except = null )
 	{
 		var players = alive
