@@ -1,0 +1,42 @@
+{
+  "RootObject": {
+    "__guid": "bf67cd3c-9c0f-4f0a-8a8f-45d5ee6ac4e8",
+    "Flags": 0,
+    "Name": "health_pack",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SpriteRenderer",
+        "__guid": "c03e1134-0399-44f2-ae1e-93cd518efb72",
+        "Additive": false,
+        "CastShadows": false,
+        "Color": "1,1,1,1",
+        "DepthFeather": 0,
+        "FlipHorizontal": false,
+        "FlipVertical": false,
+        "FogStrength": 1,
+        "Opaque": false,
+        "Size": "0.6,0.6",
+        "Texture": "textures/sprites/health_pack.vtex"
+      },
+      {
+        "__type": "HealthPack",
+        "__guid": "b86c31b7-0a9b-442f-94a3-e0b22998bfd4",
+        "Sprite": {
+          "_type": "component",
+          "component_id": "c03e1134-0399-44f2-ae1e-93cd518efb72",
+          "go": "bf67cd3c-9c0f-4f0a-8a8f-45d5ee6ac4e8",
+          "component_type": "SpriteRenderer"
+        }
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

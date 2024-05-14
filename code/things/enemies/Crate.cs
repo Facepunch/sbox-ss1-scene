@@ -76,13 +76,12 @@ public class Crate : Enemy
 			Manager.Instance.SpawnCoin( pos, vel: (pos - Position2D) * Game.Random.Float( 2f, 6f ), value: Game.Random.Int( CoinValueMin, CoinValueMax ) );
 		}
 
-		//var health_pack_chance = player != null ? Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.2f, 0.75f ) : 0.1f;
-		//if ( Game.Random.Float( 0f, 1f ) < health_pack_chance )
-		//{
-		//	var healthPack = new HealthPack() { Position = Position + new Vector2( Game.Random.Float( -RAND_POS, RAND_POS ), Game.Random.Float( -RAND_POS, RAND_POS ) ) };
-		//	healthPack.Velocity = (healthPack.Position - Position) * Game.Random.Float( 2f, 6f );
-		//	Game.AddThing( healthPack );
-		//}
+		var health_pack_chance = player != null ? Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.2f, 0.75f ) : 0.1f;
+		if ( Game.Random.Float( 0f, 1f ) < health_pack_chance )
+		{
+			var pos = Position2D + new Vector2( Game.Random.Float( -RAND_POS, RAND_POS ), Game.Random.Float( -RAND_POS, RAND_POS ) );
+			Manager.Instance.SpawnHealthPack( pos, vel: (pos - Position2D) * Game.Random.Float( 2f, 6f ) );
+		}
 
 		if ( Manager.Instance.TimeSinceMagnet > 50f )
 		{

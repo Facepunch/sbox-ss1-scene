@@ -60,6 +60,10 @@
             "_type": "gameobject",
             "prefab": "prefabs/grenade.prefab"
           },
+          "HealthPackPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/health_pack.prefab"
+          },
           "MagnetPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/magnet.prefab"
@@ -219,7 +223,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-05-10T02:50:37.3883464-07:00",
+  "LastSaved": "2024-05-14T00:15:19.4518404-07:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

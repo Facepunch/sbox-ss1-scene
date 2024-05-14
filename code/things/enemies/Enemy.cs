@@ -421,16 +421,15 @@ public abstract class Enemy : Thing
 		}
 		else
 		{
-			//var lowest_hp_percent = 1f;
-			//foreach ( Player p in Game.AlivePlayers )
-			//	lowest_hp_percent = MathF.Min( lowest_hp_percent, p.Health / p.Stats[PlayerStat.MaxHp] );
+			var lowest_hp_percent = 1f;
+			foreach ( Player p in Scene.GetAllComponents<Player>().Where(x => !x.IsDead) )
+				lowest_hp_percent = MathF.Min( lowest_hp_percent, p.Health / p.Stats[PlayerStat.MaxHp] );
 
-			//var health_pack_chance = Utils.Map( lowest_hp_percent, 1f, 0f, 0f, 0.1f );
-			//if ( Game.Random.Float( 0f, 1f ) < health_pack_chance )
-			//{
-			//	var healthPack = new HealthPack() { Position = Position };
-			//	Game.AddThing( healthPack );
-			//}
+			var health_pack_chance = Utils.Map( lowest_hp_percent, 1f, 0f, 0f, 0.1f );
+			if ( Game.Random.Float( 0f, 1f ) < health_pack_chance )
+			{
+				Manager.Instance.SpawnHealthPack(Position2D, vel: Vector2.Zero);
+			}
 		}
 	}
 

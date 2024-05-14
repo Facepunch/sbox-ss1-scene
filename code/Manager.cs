@@ -19,6 +19,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public GameObject GrenadePrefab { get; set; }
 	[Property] public GameObject ExplosionEffectPrefab { get; set; }
 	[Property] public GameObject ReviveSoulPrefab { get; set; }
+	[Property] public GameObject HealthPackPrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
@@ -286,13 +287,12 @@ public sealed class Manager : Component, Component.INetworkListener
 		if ( CoinCount >= MAX_COIN_COUNT )
 			return;
 
-		var coinObj = CoinPrefab.Clone();
+		var coinObj = CoinPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
 		var coin = coinObj.Components.Get<Coin>();
 		coin.Velocity = vel;
 		coin.SetValue( value );
 
 		coinObj.NetworkSpawn();
-		coinObj.Transform.Position = new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) );
 		
 		AddThing( coin );
 		CoinCount++;
@@ -302,11 +302,11 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public Magnet SpawnMagnet( Vector2 pos, Vector2 vel)
 	{
-		var magnetObj = MagnetPrefab.Clone();
-		magnetObj.NetworkSpawn();
-		magnetObj.Transform.Position = new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) );
+		var magnetObj = MagnetPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
 		var magnet = magnetObj.Components.Get<Magnet>();
 		magnet.Velocity = vel;
+		magnetObj.NetworkSpawn();
+		
 		TimeSinceMagnet = 0f;
 
 		AddThing( magnet );
@@ -314,19 +314,24 @@ public sealed class Manager : Component, Component.INetworkListener
 		return magnet;
 	}
 
-	[Broadcast]
 	public void SpawnReviveSoul( Vector2 pos, Vector2 vel )
 	{
-		if ( IsProxy )
-			return;
-
-		var reviveObj = ReviveSoulPrefab.Clone();
+		var reviveObj = ReviveSoulPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
 		var revive = reviveObj.Components.Get<ReviveSoul>();
 		revive.Velocity = vel;
 
 		reviveObj.NetworkSpawn();
-		reviveObj.Transform.Position = new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) );
 		AddThing( revive );
+	}
+
+	public void SpawnHealthPack( Vector2 pos, Vector2 vel )
+	{
+		var healthPackObj = HealthPackPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+		var healthPack = healthPackObj.Components.Get<HealthPack>();
+		healthPack.Velocity = vel;
+
+		healthPackObj.NetworkSpawn();
+		AddThing( healthPack );
 	}
 
 	public void SpawnBoss( Vector2 pos )
