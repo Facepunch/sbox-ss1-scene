@@ -256,6 +256,12 @@ public class Player : Thing
 
 		if (!IsProxy )
 		{
+			if ( Input.Pressed( "Menu" ) )
+			{
+				Manager.Instance.Restart();
+				return;
+			}
+
 			foreach ( KeyValuePair<int, Status> pair in Statuses )
 			{
 				Status status = pair.Value;
@@ -355,10 +361,6 @@ public class Player : Thing
 		if(Input.Pressed("use"))
 		{
 			AddExperience( 1 );
-		}
-		else if(Input.Pressed("Menu"))
-		{
-			Manager.Instance.Restart();
 		}
 	}
 
@@ -793,6 +795,15 @@ public class Player : Thing
 
 		if ( Health <= 0f )
 			Die();
+	}
+
+	[Broadcast]
+	public void AddVelocity(Vector2 vel)
+	{
+		if ( IsProxy )
+			return;
+
+		Velocity += vel;
 	}
 
 	public void SpawnBlood( float damage )

@@ -1,0 +1,43 @@
+{
+  "RootObject": {
+    "__guid": "cd8376ce-c146-4364-9673-e0c43528b018",
+    "Flags": 0,
+    "Name": "enemy_bullet",
+    "Position": "1,1,1",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SpriteRenderer",
+        "__guid": "d0fba1d3-e13a-4593-9b14-4db906eb3108",
+        "Additive": false,
+        "CastShadows": false,
+        "Color": "1,0,0,1",
+        "DepthFeather": 0,
+        "FlipHorizontal": false,
+        "FlipVertical": false,
+        "FogStrength": 1,
+        "Opaque": false,
+        "Size": "0.35,0.35",
+        "Texture": "textures/sprites/enemy_bullet.vtex"
+      },
+      {
+        "__type": "EnemyBullet",
+        "__guid": "9d2d178e-2e76-4b02-8c23-4a8d20a61959",
+        "Sprite": {
+          "_type": "component",
+          "component_id": "d0fba1d3-e13a-4593-9b14-4db906eb3108",
+          "go": "cd8376ce-c146-4364-9673-e0c43528b018",
+          "component_type": "SpriteRenderer"
+        }
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

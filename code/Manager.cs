@@ -20,6 +20,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public GameObject ExplosionEffectPrefab { get; set; }
 	[Property] public GameObject ReviveSoulPrefab { get; set; }
 	[Property] public GameObject HealthPackPrefab { get; set; }
+	[Property] public GameObject EnemyBulletPrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
@@ -334,6 +335,16 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		healthPackObj.NetworkSpawn();
 		AddThing( healthPack );
+	}
+
+	public void SpawnEnemyBullet( Vector2 pos, Vector2 dir )
+	{
+		var enemyBulletObj = EnemyBulletPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+		var enemyBullet = enemyBulletObj.Components.Get<EnemyBullet>();
+		enemyBullet.Direction = dir;
+
+		enemyBulletObj.NetworkSpawn();
+		AddThing( enemyBullet );
 	}
 
 	public void SpawnBoss( Vector2 pos )

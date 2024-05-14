@@ -40,6 +40,10 @@
             "_type": "gameobject",
             "prefab": "prefabs/coin.prefab"
           },
+          "EnemyBulletPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/enemy_bullet.prefab"
+          },
           "EnemyPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/enemy.prefab"
@@ -223,7 +227,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-05-14T00:15:19.4518404-07:00",
+  "LastSaved": "2024-05-14T03:18:46.4172455-07:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
