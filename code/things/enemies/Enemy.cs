@@ -74,11 +74,6 @@ public abstract class Enemy : Thing
 
 		Sprite = Components.Get<SpriteRenderer>();
 		Sprite.Color = Color.White.WithAlpha( 0f );
-	}
-
-	protected override void OnStart()
-	{
-		base.OnStart();
 
 		//_animSpeed = 1f;
 		//_animSpeedModifier = 1f;
@@ -91,9 +86,6 @@ public abstract class Enemy : Thing
 		ElapsedTime = 0f;
 		SpawnTime = 1.75f;
 
-		if ( IsProxy )
-			return;
-
 		MoveTimeOffset = Game.Random.Float( 0f, 4f );
 		Deceleration = 1.47f;
 		DecelerationAttacking = 1.33f;
@@ -105,15 +97,18 @@ public abstract class Enemy : Thing
 
 		CoinValueMin = 1;
 		CoinValueMax = 1;
+
+		if ( IsProxy )
+			return;
 	}
 
 	protected override void OnUpdate()
 	{
 		//Gizmo.Draw.Color = Color.White;
-		//Gizmo.Draw.Text( $"IsAttacking: {IsAttacking}\nHealth: {Health}/{MaxHealth}\nGridPos: {GridPos}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
+		//Gizmo.Draw.Text( $"Scale: {Scale}\nSprite.Size: {Sprite.Size}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
 
-		Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
-		Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
+		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
+		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
 		if ( Manager.Instance.IsGameOver )
 			return;

@@ -4,13 +4,14 @@ public class Crate : Enemy
 {
 	public override bool CanBleed => false;
 
-	protected override void OnStart()
+	protected override void OnAwake()
 	{
 		OffsetY = -0.4f;
 		ShadowScale = 1.3f;
+		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
 
-		base.OnStart();
+		base.OnAwake();
 
 		//AnimSpeed = 2f;
 		//BasePivotY = 0.05f;
@@ -21,15 +22,17 @@ public class Crate : Enemy
 		//Sprite.Size = new Vector2( 1f, 1f ) * ScaleFactor;
 		Scale = 0.95f;
 
-		if ( IsProxy )
-			return;
-		
 		PushStrength = 5f;
 		Deceleration = 10f;
 
 		Radius = 0.25f;
 		Health = 45f;
 		MaxHealth = Health;
+
+		CanTurn = false; 
+
+		if ( IsProxy )
+			return;
 
 		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );
@@ -62,6 +65,8 @@ public class Crate : Enemy
 
 	public override void DropLoot( Player player )
 	{
+		Log.Info( $"{GameObject.Name} - DropLoot - player: {player.GameObject.Name}" );
+
 		float RAND_POS = 0.2f;
 
 		int num_coins = Game.Random.Int( 2, 3 );

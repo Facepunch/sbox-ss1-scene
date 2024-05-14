@@ -92,9 +92,9 @@ public class Player : Thing
 
 	private bool _doneFirstUpdate;
 
-	protected override void OnStart()
+	protected override void OnAwake()
 	{
-		base.OnStart();
+		base.OnAwake();
 
 		OffsetY = -0.42f;
 
@@ -104,16 +104,15 @@ public class Player : Thing
 		ShadowScale = 1.12f;
 		//SpawnShadow( ShadowScale, ShadowOpacity );
 
+		Statuses = new Dictionary<int, Status>();
+		LevelUpChoices = new List<Status>();
+		InitializeStats();
+
 		if ( IsProxy )
 			return;
 
 		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );
-
-		Statuses = new Dictionary<int, Status>();
-		LevelUpChoices = new List<Status>();
-
-		InitializeStats();
 
 		ArrowAimer = ArrowAimerPrefab.Clone(Transform.Position);
 		ArrowAimer.SetParent( GameObject );
@@ -238,9 +237,7 @@ public class Player : Thing
 		//ShadowOpacity = 0.8f;
 		//ShadowScale = 1.12f;
 
-		AddStatus( TypeLibrary.GetType( typeof( HealthRegenStatus ) ) );
-		AddStatus( TypeLibrary.GetType( typeof( HealthRegenStatus ) ) );
-		AddStatus( TypeLibrary.GetType( typeof( HealthRegenStatus ) ) );
+		//AddStatus( TypeLibrary.GetType( typeof( FireIgniteStatus ) ) );
 	}
 
 	protected override void OnUpdate()
@@ -981,7 +978,7 @@ public class Player : Thing
 
 		bullet.Init();
 
-		bullet.GameObject.NetworkSpawn(Network.OwnerConnection);
+		bullet.GameObject.NetworkSpawn(Network.OwnerConnection); // todo: not necessary to specify connection?
 		//bullet.Transform.Position = (Vector3)pos;
 
 		//Game.AddThing( bullet );
@@ -1103,7 +1100,7 @@ public class Player : Thing
 			grenade.CriticalMultiplier = Stats[PlayerStat.CritMultiplier];
 		}
 
-		grenadeObj.NetworkSpawn();
+		grenadeObj.NetworkSpawn(Network.OwnerConnection);
 		grenadeObj.Transform.Position = new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) );
 
 		Manager.Instance.AddThing( grenade );

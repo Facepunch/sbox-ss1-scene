@@ -24,8 +24,8 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public Camera2D Camera2D { get; set; }
 
 	public int EnemyCount { get; private set; }
-	//public const float MAX_ENEMY_COUNT = 350;
-	public const float MAX_ENEMY_COUNT = 6;
+	public const float MAX_ENEMY_COUNT = 350;
+	//public const float MAX_ENEMY_COUNT = 6;
 
 	public int CrateCount { get; private set; }
 	public const float MAX_CRATE_COUNT = 7;
@@ -257,11 +257,11 @@ public sealed class Manager : Component, Component.INetworkListener
 		if ( EnemyCount >= MAX_ENEMY_COUNT && !forceSpawn )
 			return;
 
-		var enemyObj = EnemyPrefab.Clone();
-		enemyObj.NetworkSpawn();
-		enemyObj.Transform.Position = new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) );
-		enemyObj.Name = type.ToString();
+		var enemyObj = EnemyPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
 		var enemy = enemyObj.Components.Create( type ) as Enemy;
+		enemyObj.Name = type.ToString();
+		enemyObj.NetworkSpawn();
+		//enemyObj.Transform.Position = new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) );
 
 		//var closestPlayer = GetClosestPlayer( pos );
 		//if ( closestPlayer?.Position2D.x > pos.x )

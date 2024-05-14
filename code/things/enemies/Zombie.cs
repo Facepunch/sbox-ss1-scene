@@ -8,14 +8,14 @@ public class Zombie : Enemy
 	public bool HasTarget { get; private set; }
 	private Vector2 _wanderPos;
 
-	protected override void OnStart()
+	protected override void OnAwake()
 	{
 		OffsetY = -0.38f;
 		ShadowScale = 0.95f;
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
 
-		base.OnStart();
+		base.OnAwake();
 
 		//SpriteTexture = SpriteTexture.Atlas( "textures/sprites/zombie.png", 5, 6 );
 		//AnimSpeed = 2f;
@@ -24,19 +24,20 @@ public class Zombie : Enemy
 		Sprite.Texture = Texture.Load("textures/sprites/zombie.vtex");
 
 		//ScaleFactor = 0.85f;
-		//Sprite.Size = new Vector2( 1f, 1f ) * ScaleFactor;
 		Scale = 0.85f;
+		Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
-		if ( IsProxy )
-			return;
-		
 		PushStrength = 10f;
 
 		Radius = 0.25f;
+
 		Health = 30f;
 		MaxHealth = Health;
 		DamageToPlayer = 7f;
 
+		if ( IsProxy )
+			return;
+		
 		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );
 
@@ -96,6 +97,7 @@ public class Zombie : Enemy
 			var spawnFactor = Utils.Map( enemy.ElapsedTime, 0f, enemy.SpawnTime, 0f, 1f, EasingType.QuadIn );
 			Velocity += (Position2D - enemy.Position2D).Normal * Utils.Map( percent, 0f, 1f, 0f, 1f ) * enemy.PushStrength * (1f + enemy.TempWeight) * spawnFactor * dt;
 		}
+		// todo: move collision check to player instead to prevent laggy hits?
 		else if ( other is Player player )
 		{
 			if ( !player.IsDead )

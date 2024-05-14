@@ -68,7 +68,7 @@ public class Magnet : Thing
 
 		if ( SpawnTime > 0.1f )
 		{
-			foreach ( Player player in Scene.GetAllComponents<Player>() )
+			foreach ( Player player in Scene.GetAllComponents<Player>().Where(x => !x.IsDead) )
 			{
 				var dist_sqr = (Position2D - player.Position2D).LengthSquared;
 				var req_dist_sqr = MathF.Pow( player.Stats[PlayerStat.CoinAttractRange], 2f );

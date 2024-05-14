@@ -12,7 +12,7 @@ public class Coin : Thing
 	public TimeSince MagnetizeTime { get; private set; }
 	private const float MAGNETIZE_DURATION = 12f;
 
-	public int Value { get; set; }
+	[Property] public int Value { get; set; }
 
 	protected override void OnAwake()
 	{
@@ -78,9 +78,7 @@ public class Coin : Thing
 		Transform.Position = Transform.Position.WithZ( Globals.GetZPos( Position2D.y ) );
 		Velocity *= (1f - dt * 0.92f);
 
-		//Depth = -Position.y * 10f;
-
-		foreach ( Player player in Scene.GetAllComponents<Player>() )
+		foreach ( Player player in Scene.GetAllComponents<Player>().Where(x => !x.IsDead))
 		{
 			var dist_sqr = (Position2D - player.Position2D).LengthSquared;
 			var req_dist_sqr = MathF.Pow( player.Stats[PlayerStat.CoinAttractRange], 2f );

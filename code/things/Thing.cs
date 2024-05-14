@@ -43,6 +43,9 @@ public class Thing : Component
 	{
 		base.OnUpdate();
 
+		//Gizmo.Draw.Color = Color.White;
+		//Gizmo.Draw.Text( $"{GameObject.Name}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
+
 		// todo: optimize?
 		UpdateGridPos();
 
