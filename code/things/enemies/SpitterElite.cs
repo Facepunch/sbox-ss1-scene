@@ -1,6 +1,6 @@
 ﻿using Sandbox;
 
-public class Spitter : Enemy
+public class SpitterElite : Enemy
 {
 	private TimeSince _damageTime;
 	private const float DAMAGE_TIME = 0.75f;
@@ -10,31 +10,32 @@ public class Spitter : Enemy
 	private const float SHOOT_DELAY_MAX = 3f;
 
 	public bool IsShooting { get; private set; }
-	private bool _hasShot;
 
 	private TimeSince _prepareShootTime;
+	private int _numVolleysShot;
+	private float _currShootDelay;
 
 	protected override void OnAwake()
 	{
-		OffsetY = -0.45f;
-		ShadowScale = 1.1f;
+		OffsetY = -0.47f;
+		ShadowScale = 1.125f;
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
 
 		base.OnAwake();
 
-		Sprite.Texture = Texture.Load("textures/sprites/spitter.vtex");
+		Sprite.Texture = Texture.Load("textures/sprites/spitter_elite.vtex");
 
-		Scale = 1f;
+		Scale = 1.05f;
 		Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 8f;
 
-		Radius = 0.25f;
+		Radius = 0.26f;
 
-		Health = 50f;
+		Health = 100f;
 		MaxHealth = Health;
-		DamageToPlayer = 10f;
+		DamageToPlayer = 11f;
 
 		CoinValueMin = 1;
 		CoinValueMax = 2;
@@ -61,10 +62,9 @@ public class Spitter : Enemy
 
 		if ( IsShooting )
 		{
-			if ( !_hasShot && _prepareShootTime > 1.0f )
+			if ( _numVolleysShot < 3 && _prepareShootTime > (_numVolleysShot == 0 ? 1.0f : _currShootDelay) )
 				Shoot();
-
-			if ( _prepareShootTime > 1.6f )
+			else if ( _numVolleysShot >= 3 && _prepareShootTime > 0.6f )
 				FinishShooting();
 
 			return;
@@ -74,11 +74,11 @@ public class Spitter : Enemy
 			Velocity += (closestPlayer.Position2D - Position2D).Normal * 1.0f * dt * (IsFeared ? -1f : 1f);
 		}
 
-		float speed = 0.9f * (IsAttacking ? 1.3f : 0.7f) + Utils.FastSin( MoveTimeOffset + Time.Now * (IsAttacking ? 15f : 7.5f) ) * (IsAttacking ? 0.66f : 0.35f);
+		float speed = 0.6f * (IsAttacking ? 1.3f : 0.7f) + Utils.FastSin( MoveTimeOffset + Time.Now * (IsAttacking ? 15f : 7.5f) ) * (IsAttacking ? 0.5f : 0.2f);
 		Transform.Position += (Vector3)Velocity * speed * dt;
 
 		var player_dist_sqr = (closestPlayer.Position2D - Position2D).LengthSquared;
-		if ( !IsShooting && !IsAttacking && player_dist_sqr < 5f * 5f )
+		if ( !IsShooting && player_dist_sqr < 10f * 10f )
 		{
 			_shootDelayTimer -= dt;
 			if ( _shootDelayTimer < 0f )
@@ -92,10 +92,11 @@ public class Spitter : Enemy
 	{
 		_prepareShootTime = 0f;
 		IsShooting = true;
-		_hasShot = false;
 		//AnimationPath = "textures/sprites/spitter_shoot.frames";
 		//Game.PlaySfxNearby( "spitter.prepare", Position, pitch: Sandbox.Game.Random.Float( 1f, 1.1f ), volume: 0.6f, maxDist: 2.75f );
 		CanAttack = false;
+		_numVolleysShot = 0;
+		_currShootDelay = Sandbox.Game.Random.Float( 0.1f, 0.5f );
 	}
 
 	public void Shoot()
@@ -104,15 +105,21 @@ public class Spitter : Enemy
 		if ( closestPlayer == null )
 			return;
 
-		var target_pos = closestPlayer.Position2D + closestPlayer.Velocity * Game.Random.Float( 0.5f, 1.5f );
-		var dir = Utils.RotateVector( (target_pos - Position2D).Normal, Game.Random.Float( -10f, 10f ) );
-		Manager.Instance.SpawnEnemyBullet( Position2D + dir * 0.05f, dir, speed: 2f );
+		var target_pos = closestPlayer.Position2D + closestPlayer.Velocity * Game.Random.Float( 0.5f, 1.85f );
+		var dir = Utils.RotateVector( (target_pos - Position2D).Normal, Game.Random.Float( -14f, 14f ) );
+		var enemyBullet = Manager.Instance.SpawnEnemyBullet( Position2D + dir * 0.03f, dir, speed: 2.15f );
+		enemyBullet.SetColor( new Color( 1f, 0.2f, 0f ) );
+		enemyBullet.Lifetime = 8f;
 
 		Velocity *= 0.25f;
-		_hasShot = true;
+		_numVolleysShot++;
+		_prepareShootTime = 0f;
+		_currShootDelay = Sandbox.Game.Random.Float( 0.1f, 0.5f );
 
-		//Game.PlaySfxNearby( "spitter.shoot", Position, pitch: Sandbox.Game.Random.Float( 0.8f, 0.9f ), volume: 0.9f, maxDist: 5f );
-		//AnimationPath = "textures/sprites/spitter_shoot_reverse.frames";
+		//Game.PlaySfxNearby( "spitter.shoot", Position, pitch: Sandbox.Game.Random.Float( 1.0f, 1.1f ), volume: 0.9f, maxDist: 5f );
+
+		//if ( _numVolleysShot >= 3 )
+		//	AnimationPath = "textures/sprites/spitter_shoot_reverse.frames";
 	}
 
 	public void FinishShooting()

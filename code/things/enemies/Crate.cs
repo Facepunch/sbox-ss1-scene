@@ -65,8 +65,6 @@ public class Crate : Enemy
 
 	public override void DropLoot( Player player )
 	{
-		Log.Info( $"{GameObject.Name} - DropLoot - player: {player.GameObject.Name}" );
-
 		float RAND_POS = 0.2f;
 
 		int num_coins = Game.Random.Int( 2, 3 );

@@ -15,6 +15,7 @@ public class EnemyBullet : Thing
 	public float Lifetime { get; set; }
 	public Vector2 Direction { get; set; }
 	public float Speed { get; set; }
+
 	protected override void OnAwake()
 	{
 		base.OnAwake();
@@ -28,8 +29,8 @@ public class EnemyBullet : Thing
 		ShadowScale = 0.6f;
 		SpawnShadow( ShadowScale, ShadowOpacity );
 
-		Speed = 2f;
-		Lifetime = 8f;
+		//Speed = 2f;
+		Lifetime = 6f;
 		Damage = 12f;
 		SpawnTime = 0f;
 
@@ -37,6 +38,12 @@ public class EnemyBullet : Thing
 			return;
 
 		CollideWith.Add( typeof( Player ) );
+	}
+
+	[Broadcast]
+	public void SetColor(Color color)
+	{
+		Sprite.Color = color;
 	}
 
 	protected override void OnUpdate()

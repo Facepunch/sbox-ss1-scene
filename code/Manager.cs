@@ -211,12 +211,12 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		// SPITTER
 		float spitterChance = ElapsedTime < 100f ? 0f : Utils.Map( ElapsedTime, 100f, 800f, 0.015f, 0.1f );
-		spitterChance = 0.4f;
+		spitterChance = 0.6f;
 		if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < spitterChance )
 		{
 			float eliteChance = ElapsedTime < 540f ? 0f : Utils.Map( ElapsedTime, 540f, 1200f, 0.025f, 1f, EasingType.QuadIn );
-			//type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( SpitterElite ) ) : TypeLibrary.GetType( typeof( Spitter ) );
-			type = TypeLibrary.GetType( typeof( Spitter ) );
+			eliteChance = 0.8f;
+			type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( SpitterElite ) ) : TypeLibrary.GetType( typeof( Spitter ) );
 		}
 
 		//// SPIKER
@@ -337,14 +337,17 @@ public sealed class Manager : Component, Component.INetworkListener
 		AddThing( healthPack );
 	}
 
-	public void SpawnEnemyBullet( Vector2 pos, Vector2 dir )
+	public EnemyBullet SpawnEnemyBullet( Vector2 pos, Vector2 dir, float speed )
 	{
 		var enemyBulletObj = EnemyBulletPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
 		var enemyBullet = enemyBulletObj.Components.Get<EnemyBullet>();
 		enemyBullet.Direction = dir;
+		enemyBullet.Speed = speed;
 
 		enemyBulletObj.NetworkSpawn();
 		AddThing( enemyBullet );
+
+		return enemyBullet;
 	}
 
 	public void SpawnBoss( Vector2 pos )
