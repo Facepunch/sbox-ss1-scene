@@ -93,7 +93,7 @@ public class EnemyBullet : Thing
 
 			if ( !player.IsInvulnerable )
 			{
-				//Game.PlaySfxNearby( "splash", Position, pitch: Sandbox.Game.Random.Float( 0.95f, 1.05f ), volume: 1f, maxDist: 4f );
+				//Game.PlaySfxNearby( "splash", Position, pitch: Game.Random.Float( 0.95f, 1.05f ), volume: 1f, maxDist: 4f );
 				player.Damage( dmg );
 				player.AddVelocity( Direction * 2f );
 			}

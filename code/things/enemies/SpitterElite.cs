@@ -47,7 +47,7 @@ public class SpitterElite : Enemy
 		CollideWith.Add( typeof( Player ) );
 
 		_damageTime = DAMAGE_TIME;
-		_shootDelayTimer = Sandbox.Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
+		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
 
 		//AnimationPath = AnimSpawnPath;
 	}
@@ -93,10 +93,10 @@ public class SpitterElite : Enemy
 		_prepareShootTime = 0f;
 		IsShooting = true;
 		//AnimationPath = "textures/sprites/spitter_shoot.frames";
-		//Game.PlaySfxNearby( "spitter.prepare", Position, pitch: Sandbox.Game.Random.Float( 1f, 1.1f ), volume: 0.6f, maxDist: 2.75f );
+		//Game.PlaySfxNearby( "spitter.prepare", Position, pitch: Game.Random.Float( 1f, 1.1f ), volume: 0.6f, maxDist: 2.75f );
 		CanAttack = false;
 		_numVolleysShot = 0;
-		_currShootDelay = Sandbox.Game.Random.Float( 0.1f, 0.5f );
+		_currShootDelay = Game.Random.Float( 0.1f, 0.5f );
 	}
 
 	public void Shoot()
@@ -114,9 +114,9 @@ public class SpitterElite : Enemy
 		Velocity *= 0.25f;
 		_numVolleysShot++;
 		_prepareShootTime = 0f;
-		_currShootDelay = Sandbox.Game.Random.Float( 0.1f, 0.5f );
+		_currShootDelay = Game.Random.Float( 0.1f, 0.5f );
 
-		//Game.PlaySfxNearby( "spitter.shoot", Position, pitch: Sandbox.Game.Random.Float( 1.0f, 1.1f ), volume: 0.9f, maxDist: 5f );
+		//Game.PlaySfxNearby( "spitter.shoot", Position, pitch: Game.Random.Float( 1.0f, 1.1f ), volume: 0.9f, maxDist: 5f );
 
 		//if ( _numVolleysShot >= 3 )
 		//	AnimationPath = "textures/sprites/spitter_shoot_reverse.frames";

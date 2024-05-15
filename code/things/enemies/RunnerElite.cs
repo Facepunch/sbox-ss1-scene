@@ -82,7 +82,7 @@ public class RunnerElite : Enemy
 			if ( player_dist_sqr < 3.5f * 3.5f )
 			{
 				HasTarget = true;
-				//Game.PlaySfxNearby( "runner.howl", Position, pitch: Sandbox.Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 6f );
+				//Game.PlaySfxNearby( "runner.howl", Position, pitch: Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 6f );
 			}
 		}
 
@@ -94,7 +94,7 @@ public class RunnerElite : Enemy
 	{
 		base.StartAttacking();
 
-		//Game.PlaySfxNearby( "runner.bark", Position, pitch: Sandbox.Game.Random.Float( 0.7f, 0.75f ), volume: 1f, maxDist: 4f );
+		//Game.PlaySfxNearby( "runner.bark", Position, pitch: Game.Random.Float( 0.7f, 0.75f ), volume: 1f, maxDist: 4f );
 	}
 
 	public override void Colliding( Thing other, float percent, float dt )

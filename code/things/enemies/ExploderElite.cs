@@ -168,7 +168,7 @@ public class ExploderElite : Enemy
 		base.StartDying( _playerWhoKilledUs );
 
 		Manager.Instance.SpawnExplosionEffect( Position2D );
-		//Game.PlaySfxNearby( "explode", Position, pitch: Sandbox.Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 6f );
+		//Game.PlaySfxNearby( "explode", Position, pitch: Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 6f );
 
 		_hasExploded = true;
 		IsExploding = false;

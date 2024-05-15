@@ -46,7 +46,7 @@ public class Spitter : Enemy
 		CollideWith.Add( typeof( Player ) );
 
 		_damageTime = DAMAGE_TIME;
-		_shootDelayTimer = Sandbox.Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
+		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
 
 		//AnimationPath = AnimSpawnPath;
 	}
@@ -94,7 +94,7 @@ public class Spitter : Enemy
 		IsShooting = true;
 		_hasShot = false;
 		//AnimationPath = "textures/sprites/spitter_shoot.frames";
-		//Game.PlaySfxNearby( "spitter.prepare", Position, pitch: Sandbox.Game.Random.Float( 1f, 1.1f ), volume: 0.6f, maxDist: 2.75f );
+		//Game.PlaySfxNearby( "spitter.prepare", Position, pitch: Game.Random.Float( 1f, 1.1f ), volume: 0.6f, maxDist: 2.75f );
 		CanAttack = false;
 	}
 
@@ -111,7 +111,7 @@ public class Spitter : Enemy
 		Velocity *= 0.25f;
 		_hasShot = true;
 
-		//Game.PlaySfxNearby( "spitter.shoot", Position, pitch: Sandbox.Game.Random.Float( 0.8f, 0.9f ), volume: 0.9f, maxDist: 5f );
+		//Game.PlaySfxNearby( "spitter.shoot", Position, pitch: Game.Random.Float( 0.8f, 0.9f ), volume: 0.9f, maxDist: 5f );
 		//AnimationPath = "textures/sprites/spitter_shoot_reverse.frames";
 	}
 
