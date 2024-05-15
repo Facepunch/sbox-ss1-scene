@@ -18,7 +18,7 @@ public class Coin : Thing
 	{
 		base.OnAwake();
 
-		OffsetY = -0.1f;
+		OffsetY = -0.12f;
 
 		Scale = 0.4f;
 
@@ -27,14 +27,14 @@ public class Coin : Thing
 
 		SpawnShadow( ShadowScale, ShadowOpacity );
 
-		if ( IsProxy )
-			return;
-
 		//BasePivotY = 0.225f;
 
 		//Scale = new Vector2( 1f, 1f ) * 0.4f;
 		SpawnTime = 0f;
 		Radius = 0.125f;
+
+		if ( IsProxy )
+			return;
 
 		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );

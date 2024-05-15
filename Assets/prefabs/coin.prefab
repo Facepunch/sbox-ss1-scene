@@ -1,6 +1,7 @@
 {
   "RootObject": {
     "__guid": "fb6101d9-a5d0-4c65-9af7-800fb66e4a7c",
+    "Flags": 0,
     "Name": "coin",
     "Enabled": true,
     "NetworkMode": 2,
@@ -18,7 +19,7 @@
         "FogStrength": 1,
         "Opaque": false,
         "Size": "0.5,0.5",
-        "Texture": "textures/sprites/coin.vtex"
+        "Texture": "textures/sprites/xp.vtex"
       },
       {
         "__type": "Coin",
@@ -28,7 +29,8 @@
           "component_id": "1289a588-4f39-4737-80fc-c630bd1cd24e",
           "go": "fb6101d9-a5d0-4c65-9af7-800fb66e4a7c",
           "component_type": "SpriteRenderer"
-        }
+        },
+        "Value": 0
       }
     ],
     "Children": []

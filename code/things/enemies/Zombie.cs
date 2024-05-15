@@ -55,6 +55,7 @@ public class Zombie : Enemy
 	{
 		base.UpdatePosition( dt );
 
+		// todo: optimize
 		var closestPlayer = Manager.Instance.GetClosestPlayer( Position2D );
 		if ( closestPlayer == null )
 			return;

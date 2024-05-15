@@ -107,7 +107,7 @@ public class SpitterElite : Enemy
 
 		var target_pos = closestPlayer.Position2D + closestPlayer.Velocity * Game.Random.Float( 0.5f, 1.85f );
 		var dir = Utils.RotateVector( (target_pos - Position2D).Normal, Game.Random.Float( -14f, 14f ) );
-		var enemyBullet = Manager.Instance.SpawnEnemyBullet( Position2D + dir * 0.03f, dir, speed: 2.15f );
+		var enemyBullet = Manager.Instance.SpawnEnemyBullet( Position2D + new Vector2(0f, 0.55f) + dir * 0.03f, dir, speed: 2.15f );
 		enemyBullet.SetColor( new Color( 1f, 0.2f, 0f ) );
 		enemyBullet.Lifetime = 8f;
 

@@ -106,7 +106,7 @@ public class Spitter : Enemy
 
 		var target_pos = closestPlayer.Position2D + closestPlayer.Velocity * Game.Random.Float( 0.5f, 1.5f );
 		var dir = Utils.RotateVector( (target_pos - Position2D).Normal, Game.Random.Float( -10f, 10f ) );
-		Manager.Instance.SpawnEnemyBullet( Position2D + dir * 0.05f, dir, speed: 2f );
+		Manager.Instance.SpawnEnemyBullet( Position2D + new Vector2( 0f, 0.45f ) + dir * 0.05f, dir, speed: 2f );
 
 		Velocity *= 0.25f;
 		_hasShot = true;
