@@ -1,6 +1,6 @@
 ﻿using Sandbox;
 
-public class Charger : Enemy
+public class ChargerElite : Enemy
 {
 	private TimeSince _damageTime;
 	private const float DAMAGE_TIME = 1f;
@@ -14,7 +14,7 @@ public class Charger : Enemy
 	private float _prepareTimer;
 	private const float PREPARE_TIME = 1f;
 	private float _chargeTimer;
-	private const float CHARGE_TIME = 3f;
+	private const float CHARGE_TIME = 5f;
 
 	private Vector2 _chargeDir;
 	private Vector2 _chargeVel;
@@ -22,29 +22,29 @@ public class Charger : Enemy
 
 	protected override void OnAwake()
 	{
-		OffsetY = -0.57f;
-		ShadowScale = 1.25f;
+		OffsetY = -0.66f;
+		ShadowScale = 1.45f;
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
 
 		base.OnAwake();
 
-		Sprite.Texture = Texture.Load("textures/sprites/charger.vtex");
+		Sprite.Texture = Texture.Load("textures/sprites/charger_elite.vtex");
 
 		//ScaleFactor = 0.85f;
-		Scale = 1.25f;
+		Scale = 1.45f;
 		Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
-		PushStrength = 25f;
+		PushStrength = 30f;
 
-		Radius = 0.275f;
+		Radius = 0.39f;
 
-		Health = 75f;
+		Health = 335f;
 		MaxHealth = Health;
-		DamageToPlayer = 15f;
+		DamageToPlayer = 18f;
 
-		CoinValueMin = 2;
-		CoinValueMax = 5;
+		CoinValueMin = 3;
+		CoinValueMax = 6;
 
 		if ( IsProxy )
 			return;
@@ -58,15 +58,15 @@ public class Charger : Enemy
 
 	protected override void UpdatePosition( float dt )
 	{
-		//Gizmo.Draw.Color = Color.White.WithAlpha(0.5f);
-		//Gizmo.Draw.Text( $"IsCharging: {IsCharging}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
-
 		base.UpdatePosition( dt );
 
 		// todo: optimize
 		var closestPlayer = Manager.Instance.GetClosestPlayer( Position2D );
 		if ( closestPlayer == null )
 			return;
+
+		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.5f );
+		//Gizmo.Draw.Text( $"{(closestPlayer.Position2D - Position2D).Length}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
 
 		if ( IsPreparingToCharge )
 		{
@@ -105,11 +105,19 @@ public class Charger : Enemy
 			Velocity += (closestPlayer.Position2D - Position2D).Normal * dt * (IsFeared ? -1f : 1f);
 
 			float speed = 0.75f * (IsAttacking ? 1.3f : 0.7f) + Utils.FastSin( MoveTimeOffset + Time.Now * (IsAttacking ? 15f : 7.5f) ) * (IsAttacking ? 0.66f : 0.35f);
+			var newPos = Position2D + Velocity * dt * speed;
+			if ( float.IsNaN( newPos.x ) || float.IsNaN( newPos.y ) )
+			{
+				StartDying( null );
+				Flash( 0.05f );
+				return;
+			}
+
 			Transform.Position += (Vector3)Velocity * speed * dt;
 		}
 
 		var player_dist_sqr = (closestPlayer.Position2D - Position2D).LengthSquared;
-		if ( !IsPreparingToCharge && !IsCharging && !IsAttacking && player_dist_sqr < 4.2f * 4.2f )
+		if ( !IsPreparingToCharge && !IsCharging && !IsAttacking && player_dist_sqr < 5.5f * 5.5f )
 		{
 			_chargeDelayTimer -= dt;
 			if ( _chargeDelayTimer < 0f )
@@ -160,7 +168,7 @@ public class Charger : Enemy
 		if ( closestPlayer == null )
 			return;
 
-		var target_pos = closestPlayer.Position2D + closestPlayer.Velocity * Game.Random.Float( 0.5f, 1.75f );
+		var target_pos = closestPlayer.Position2D + closestPlayer.Velocity * Game.Random.Float( 0.5f, 2.45f );
 		_chargeDir = Utils.RotateVector( (target_pos - Position2D).Normal, Game.Random.Float( -10f, 10f ) );
 
 		IsPreparingToCharge = false;
@@ -175,7 +183,7 @@ public class Charger : Enemy
 		//AnimSpeed = 3f;
 		Sprite.FlipHorizontal = target_pos.x > Position2D.x;
 
-		//Game.PlaySfxNearby( "enemy.roar", Position, pitch: Game.Random.Float( 0.925f, 1.075f ), volume: 1f, maxDist: 8f );
+		//Game.PlaySfxNearby( "enemy.roar", Position, pitch: Game.Random.Float( 0.825f, 0.875f ), volume: 1f, maxDist: 8f );
 	}
 
 	public override void Colliding( Thing other, float percent, float dt )
