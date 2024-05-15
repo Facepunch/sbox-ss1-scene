@@ -126,8 +126,6 @@ public abstract class Enemy : Thing
 
 		HandleFlashing( dt );
 
-		ShadowSprite.Color = Color.Black.WithAlpha( ShadowOpacity );
-
 		if ( IsProxy )
 			return;
 
@@ -304,6 +302,8 @@ public abstract class Enemy : Thing
 			ShadowOpacity = Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, ShadowFullOpacity );
 			Sprite.Color = Color.White.WithAlpha( Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, 1f, EasingType.SineIn ) );
 		}
+
+		ShadowSprite.Color = Color.Black.WithAlpha( ShadowOpacity );
 	}
 
 	void ClampToBounds()

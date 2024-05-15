@@ -233,13 +233,15 @@ public sealed class Manager : Component, Component.INetworkListener
 		//	type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( ChargerElite ) ) : TypeLibrary.GetType( typeof( Charger ) );
 		//}
 
-		//// RUNNER
-		//float runnerChance = ElapsedTime < 500f ? 0f : Utils.Map( ElapsedTime, 500f, 900f, 0.035f, 0.15f, EasingType.QuadIn );
-		//if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < runnerChance )
-		//{
-		//	float eliteChance = ElapsedTime < 720f ? 0f : Utils.Map( ElapsedTime, 720f, 1500f, 0.01f, 1f, EasingType.QuadIn );
-		//	type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( RunnerElite ) ) : TypeLibrary.GetType( typeof( Runner ) );
-		//}
+		// RUNNER
+		float runnerChance = ElapsedTime < 500f ? 0f : Utils.Map( ElapsedTime, 500f, 900f, 0.035f, 0.15f, EasingType.QuadIn );
+		runnerChance = 0.4f;
+		if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < runnerChance )
+		{
+			float eliteChance = ElapsedTime < 720f ? 0f : Utils.Map( ElapsedTime, 720f, 1500f, 0.01f, 1f, EasingType.QuadIn );
+			//type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( RunnerElite ) ) : TypeLibrary.GetType( typeof( Runner ) );
+			type = TypeLibrary.GetType( typeof( Runner ) );
+		}
 
 		// ZOMBIE ELITE
 		var zombieEliteChance = ElapsedTime < 400f ? 0f : Utils.Map( ElapsedTime, 400f, 1200f, 0.0175f, 1f, EasingType.SineIn );

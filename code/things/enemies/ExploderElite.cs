@@ -43,8 +43,8 @@ public class ExploderElite : Enemy
 
 		DeathTime = 0.2f;
 
-		CoinValueMin = 1;
-		CoinValueMax = 2;
+		CoinValueMin = 2;
+		CoinValueMax = 6;
 
 		if ( IsProxy )
 			return;
