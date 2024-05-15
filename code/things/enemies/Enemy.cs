@@ -42,6 +42,7 @@ public abstract class Enemy : Thing
 
 	public float SpawnTime { get; protected set; }
 	public float ShadowFullOpacity { get; protected set; }
+	public virtual float FullOpacity => 1f;
 
 	public string AnimSpawnPath { get; protected set; }
 	public string AnimIdlePath { get; protected set; }
@@ -77,8 +78,6 @@ public abstract class Enemy : Thing
 
 		//_animSpeed = 1f;
 		//_animSpeedModifier = 1f;
-
-		ShadowFullOpacity = 0.8f;
 
 		SpawnShadow( ShadowScale, ShadowOpacity );
 
@@ -259,7 +258,7 @@ public abstract class Enemy : Thing
 			if ( _flashTimer < 0f )
 			{
 				_isFlashing = false;
-				Sprite.Color = Color.Lerp( Color.White, Color.Black, Utils.Map(Health, MaxHealth, 0f, 0f, 0.7f) );
+				Sprite.Color = Color.Lerp( Color.White, Color.Black, Utils.Map(Health, MaxHealth, 0f, 0f, 0.7f) ).WithAlpha(FullOpacity);
 			}
 		}
 	}
@@ -288,7 +287,7 @@ public abstract class Enemy : Thing
 			IsSpawning = false;
 			//AnimationPath = AnimIdlePath;
 			ShadowOpacity = ShadowFullOpacity;
-			Sprite.Color = Color.White.WithAlpha( 1f );
+			Sprite.Color = Color.White.WithAlpha( FullOpacity );
 		}
 		else
 		{
@@ -300,7 +299,7 @@ public abstract class Enemy : Thing
 			}
 
 			ShadowOpacity = Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, ShadowFullOpacity );
-			Sprite.Color = Color.White.WithAlpha( Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, 1f, EasingType.SineIn ) );
+			Sprite.Color = Color.White.WithAlpha( Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, FullOpacity, EasingType.SineIn ) );
 		}
 
 		ShadowSprite.Color = Color.Black.WithAlpha( ShadowOpacity );

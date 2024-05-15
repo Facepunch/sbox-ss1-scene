@@ -1,6 +1,6 @@
 ﻿using Sandbox;
 
-public class Runner : Enemy
+public class RunnerElite : Enemy
 {
 	private TimeSince _damageTime;
 	private const float DAMAGE_TIME = 0.5f;
@@ -8,11 +8,13 @@ public class Runner : Enemy
 	public bool HasTarget { get; private set; }
 	private Vector2 _wanderPos;
 
+	public override float FullOpacity => 0.1f;
+
 	protected override void OnAwake()
 	{
-		OffsetY = -0.45f;
-		ShadowScale = 1.1f;
-		ShadowFullOpacity = 0.8f;
+		OffsetY = -0.54f;
+		ShadowScale = 1.3f;
+		ShadowFullOpacity = 0.2f;
 		ShadowOpacity = 0f;
 
 		base.OnAwake();
@@ -20,19 +22,19 @@ public class Runner : Enemy
 		//AnimSpeed = 2f;
 		Sprite.Texture = Texture.Load("textures/sprites/runner.vtex");
 
-		Scale = 1.0f;
+		Scale = 1.3f;
 		Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 10f;
-		Deceleration = 0.47f;
-		DecelerationAttacking = 0.33f;
+		Deceleration = 0.27f;
+		DecelerationAttacking = 0.1f;
 		AggroRange = 2.5f;
 
-		Radius = 0.25f;
+		Radius = 0.29f;
 
-		Health = 70f;
+		Health = 120f;
 		MaxHealth = Health;
-		DamageToPlayer = 12f;
+		DamageToPlayer = 15f;
 
 		CoinValueMin = 1;
 		CoinValueMax = 4;
@@ -84,7 +86,7 @@ public class Runner : Enemy
 			}
 		}
 
-		float speed = (IsAttacking ? 1.3f : 0.7f) + Utils.FastSin( MoveTimeOffset + Time.Now * (IsAttacking ? 15f : 7.5f) ) * (IsAttacking ? 0.66f : 0.35f);
+		float speed = (IsAttacking ? 0.9f : 0.2f) + Utils.FastSin( MoveTimeOffset + Time.Now * (IsAttacking ? 14f : 5.5f) ) * (IsAttacking ? 0.8f : 0.2f);
 		Transform.Position += (Vector3)Velocity * speed * dt;
 	}
 
@@ -92,7 +94,7 @@ public class Runner : Enemy
 	{
 		base.StartAttacking();
 
-		//Game.PlaySfxNearby( "runner.bark", Position, pitch: Sandbox.Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 4f );
+		//Game.PlaySfxNearby( "runner.bark", Position, pitch: Sandbox.Game.Random.Float( 0.7f, 0.75f ), volume: 1f, maxDist: 4f );
 	}
 
 	public override void Colliding( Thing other, float percent, float dt )
