@@ -1,7 +1,7 @@
 ﻿using Sandbox;
 using static Manager;
 
-public class Exploder : Enemy
+public class ExploderElite : Enemy
 {
 	private TimeSince _damageTime;
 	private const float DAMAGE_TIME = 0.75f;
@@ -18,28 +18,28 @@ public class Exploder : Enemy
 
 	protected override void OnAwake()
 	{
-		OffsetY = -0.52f;
-		ShadowScale = 1.05f;
+		OffsetY = -0.56f;
+		ShadowScale = 1.08f;
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
 
 		base.OnAwake();
 
 		//AnimSpeed = 2f;
-		Sprite.Texture = Texture.Load("textures/sprites/exploder.vtex");
+		Sprite.Texture = Texture.Load("textures/sprites/exploder_elite.vtex");
 
-		Scale = 1.1f;
+		Scale = 1.2f;
 		Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 12f;
 		Deceleration = 1.87f;
 		DecelerationAttacking = 1.53f;
 
-		Radius = 0.24f;
+		Radius = 0.275f;
 
-		Health = 40f;
+		Health = 75f;
 		MaxHealth = Health;
-		DamageToPlayer = 12f;
+		DamageToPlayer = 16f;
 
 		DeathTime = 0.2f;
 
@@ -81,7 +81,7 @@ public class Exploder : Enemy
 				_hasStartedLooping = true;
 			}
 
-			if ( !_hasExploded && _explodeStartTime > 1.5f )
+			if ( !_hasExploded && _explodeStartTime > 3.5f )
 				Explode();
 		}
 
@@ -98,9 +98,13 @@ public class Exploder : Enemy
 
 		Velocity += (closestPlayer.Position2D - Position2D).Normal * 1.0f * dt * (IsFeared ? -1f : 1f);
 
-		if ( !IsExploding )
+		if ( IsExploding )
 		{
-			float speed = (IsAttacking ? 1.3f : 0.7f) + Utils.FastSin( MoveTimeOffset + Time.Now * (IsAttacking ? 15f : 7.5f) ) * (IsAttacking ? 0.3f : 0.2f);
+			Transform.Position += (Vector3)Velocity * 4f * dt;
+		}
+		else
+		{
+			float speed = IsAttacking ? 2f : 1.3f;
 			Transform.Position += (Vector3)Velocity * speed * dt;
 		}
 	}
