@@ -1,6 +1,6 @@
 ﻿using Sandbox;
 
-public class Spiker : Enemy
+public class SpikerElite : Enemy
 {
 	private TimeSince _damageTime;
 	private const float DAMAGE_TIME = 0.75f;
@@ -18,32 +18,32 @@ public class Spiker : Enemy
 
 	protected override void OnAwake()
 	{
-		OffsetY = -0.58f;
-		ShadowScale = 1.15f;
+		OffsetY = -0.90f;
+		ShadowScale = 1.6f;
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
 
 		base.OnAwake();
 
-		//AnimSpeed = 4f;
-		Sprite.Texture = Texture.Load("textures/sprites/spiker.vtex");
+		//AnimSpeed = 3f;
+		Sprite.Texture = Texture.Load("textures/sprites/spiker_elite.vtex");
 
-		Scale = 1.4f;
+		Scale = 2.1f;
 		Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
-		PushStrength = 8f;
+		PushStrength = 12f;
 		Deceleration = 2.57f;
 		DecelerationAttacking = 2.35f;
-		AggroRange = 0.75f;
+		AggroRange = 0.45f;
 
-		Radius = 0.27f;
+		Radius = 0.28f;
 
-		Health = 80f;
+		Health = 220f;
 		MaxHealth = Health;
-		DamageToPlayer = 14f;
+		DamageToPlayer = 20f;
 
-		CoinValueMin = 2;
-		CoinValueMax = 4;
+		CoinValueMin = 7;
+		CoinValueMax = 15;
 
 		if ( IsProxy )
 			return;
@@ -93,11 +93,11 @@ public class Spiker : Enemy
 			Velocity += (closestPlayer.Position2D - Position2D).Normal * 1.0f * dt * (IsFeared ? -1f : 1f);
 		}
 
-		float speed = 0.9f * (IsAttacking ? 1.3f : 0.7f) + Utils.FastSin( MoveTimeOffset + Time.Now * (IsAttacking ? 15f : 7.5f) ) * (IsAttacking ? 0.66f : 0.35f);
+		float speed = 0.5f * (IsAttacking ? 1.3f : 0.7f) + Utils.FastSin( MoveTimeOffset + Time.Now * (IsAttacking ? 12f : 4.5f) ) * (IsAttacking ? 0.66f : 0.35f);
 		Transform.Position += (Vector3)Velocity * speed * dt;
 
 		var player_dist_sqr = (closestPlayer.Position2D - Position2D).LengthSquared;
-		if ( !IsShooting && !IsAttacking && player_dist_sqr < MathF.Pow( 6f, 2f ) )
+		if ( !IsShooting && !IsAttacking && player_dist_sqr < MathF.Pow( 8f, 2f ) )
 		{
 			_shootDelayTimer -= dt;
 			if ( _shootDelayTimer < 0f )
@@ -126,10 +126,13 @@ public class Spiker : Enemy
 		if ( closestPlayer == null )
 			return;
 
-		var target_pos = closestPlayer.Position2D + closestPlayer.Velocity * Game.Random.Float( 0.2f, 2f ) + new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) ) * 0.4f;
+		var target_pos = closestPlayer.Position2D + closestPlayer.Velocity * Game.Random.Float( 0.1f, 3f ) + new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) ) * 0.5f;
 		var BUFFER = 0.3f;
 
-		Manager.Instance.SpawnEnemySpike( new Vector2( Math.Clamp( target_pos.x, Manager.Instance.BOUNDS_MIN.x + BUFFER, Manager.Instance.BOUNDS_MAX.x - BUFFER ), Math.Clamp( target_pos.y, Manager.Instance.BOUNDS_MIN.y + BUFFER, Manager.Instance.BOUNDS_MAX.y - BUFFER ) ) );
+		Manager.Instance.SpawnEnemySpike( 
+			new Vector2( Math.Clamp( target_pos.x, Manager.Instance.BOUNDS_MIN.x + BUFFER, Manager.Instance.BOUNDS_MAX.x - BUFFER ), Math.Clamp( target_pos.y, Manager.Instance.BOUNDS_MIN.y + BUFFER, Manager.Instance.BOUNDS_MAX.y - BUFFER ) ),
+			elite: true
+		);
 
 		//Game.PlaySfxNearby( "spike.prepare", target_pos, pitch: Sandbox.Game.Random.Float( 0.95f, 1.05f ), volume: 1.5f, maxDist: 5f );
 	}

@@ -52,6 +52,10 @@
             "_type": "gameobject",
             "prefab": "prefabs/enemy_spike_bg.prefab"
           },
+          "EnemySpikeElitePrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/enemy_spike_elite.prefab"
+          },
           "EnemySpikePrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/enemy_spike.prefab"
@@ -235,7 +239,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-05-15T17:44:25.8795466-07:00",
+  "LastSaved": "2024-05-16T02:38:49.0485387-07:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

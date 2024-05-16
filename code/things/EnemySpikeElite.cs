@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Manager;
 
-public class EnemySpike : Thing
+public class EnemySpikeElite : Thing
 {
 	public TimeSince SpawnTime { get; private set; }
 
@@ -23,16 +23,16 @@ public class EnemySpike : Thing
 	{
 		base.OnAwake();
 
-		OffsetY = -0.2f;
+		OffsetY = -0.24f;
 
-		Radius = 0.225f;
+		Radius = 0.29f;
 
-		Scale = 0.65f;
+		Scale = 1f;
 		Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 		Sprite.FlipHorizontal = Game.Random.Float( 0f, 1f ) < 0.5f;
 
 		Lifetime = 2.1f;
-		Damage = 10f;
+		Damage = 30f;
 		SpawnTime = 0f;
 
 		// spawn background
@@ -43,7 +43,7 @@ public class EnemySpike : Thing
 
 		BgSprite = bgObj.Components.Get<SpriteRenderer>();
 		BgSprite.FlipHorizontal = Game.Random.Float( 0f, 1f ) < 0.5f;
-		BgSprite.Size = new Vector2( 1f, 1f ) * 1f;
+		BgSprite.Size = new Vector2( 1f, 1f ) * 1.3f;
 
 		Sprite.Color = Color.White.WithAlpha( 0f );
 		BgSprite.Color = Color.White.WithAlpha( 0f );
@@ -116,7 +116,7 @@ public class EnemySpike : Thing
 			{
 				//Game.PlaySfxNearby( "spike.stab", player.Position, pitch: Sandbox.Game.Random.Float( 0.85f, 0.9f ), volume: 1.6f, maxDist: 6f );
 				player.Damage( dmg );
-				player.AddVelocity( (player.Position2D - Position2D).Normal * Game.Random.Float(1f, 2f));
+				player.AddVelocity( (player.Position2D - Position2D).Normal * Game.Random.Float(2f, 4f));
 			}
 
 			_hitThings.Add( player );

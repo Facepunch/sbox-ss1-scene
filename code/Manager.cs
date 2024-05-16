@@ -24,6 +24,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public GameObject EnemyBulletPrefab { get; set; }
 	[Property] public GameObject EnemySpikePrefab { get; set; }
 	[Property] public GameObject EnemySpikeBgPrefab { get; set; }
+	[Property] public GameObject EnemySpikeElitePrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
@@ -226,8 +227,8 @@ public sealed class Manager : Component, Component.INetworkListener
 		if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < spikerChance )
 		{
 			float eliteChance = ElapsedTime < 580f ? 0f : Utils.Map( ElapsedTime, 580f, 1300f, 0.008f, 1f, EasingType.SineIn );
-			//type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( SpikerElite ) ) : TypeLibrary.GetType( typeof( Spiker ) );
-			type = TypeLibrary.GetType( typeof( Spiker ) );
+			eliteChance = 0.6f;
+			type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( SpikerElite ) ) : TypeLibrary.GetType( typeof( Spiker ) );
 		}
 
 		// CHARGER
@@ -353,13 +354,22 @@ public sealed class Manager : Component, Component.INetworkListener
 		return enemyBullet;
 	}
 
-	public void SpawnEnemySpike( Vector2 pos )
+	public void SpawnEnemySpike( Vector2 pos, bool elite = false )
 	{
-		var spikeObj = EnemySpikePrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
-		var spike = spikeObj.Components.Get<EnemySpike>();
-
-		spikeObj.NetworkSpawn();
-		AddThing( spike );
+		if ( elite )
+		{
+			var spikeObj = EnemySpikeElitePrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+			var spike = spikeObj.Components.Get<EnemySpikeElite>();
+			spikeObj.NetworkSpawn();
+			AddThing( spike );
+		}
+		else
+		{
+			var spikeObj = EnemySpikePrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+			var spike = spikeObj.Components.Get<EnemySpike>();
+			spikeObj.NetworkSpawn();
+			AddThing( spike );
+		}
 	}
 
 	public void SpawnBoss( Vector2 pos )
