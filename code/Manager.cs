@@ -121,7 +121,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		//	SpawnEnemy(TypeLibrary.GetType(typeof(Zombie)), pos);
 		//}
 
-		//SpawnBoss(new Vector2(3, 3f));
+		SpawnBoss( new Vector2(3f, 3f));
 	}
 
 	protected override void OnUpdate()
@@ -223,11 +223,9 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		// SPIKER
 		float spikerChance = ElapsedTime < 320f ? 0f : Utils.Map( ElapsedTime, 320f, 800f, 0.018f, 0.1f, EasingType.SineIn );
-		spikerChance = 0.6f;
 		if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < spikerChance )
 		{
 			float eliteChance = ElapsedTime < 580f ? 0f : Utils.Map( ElapsedTime, 580f, 1300f, 0.008f, 1f, EasingType.SineIn );
-			eliteChance = 0.6f;
 			type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( SpikerElite ) ) : TypeLibrary.GetType( typeof( Spiker ) );
 		}
 
@@ -374,7 +372,7 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public void SpawnBoss( Vector2 pos )
 	{
-		//SpawnEnemy( TypeLibrary.GetType( typeof( Boss ) ), pos, forceSpawn: true );
+		SpawnEnemy( TypeLibrary.GetType( typeof( Boss ) ), pos, forceSpawn: true );
 		//PlaySfxNearby( "boss.fanfare", pos, pitch: 1.0f, volume: 1.3f, maxDist: 30f );
 	}
 

@@ -81,7 +81,7 @@ public class Bullet : Thing
 		//Sprite.Size = new Vector2( scale );
 		
 		Radius = 0.07f + scale * 0.2f;
-		ShadowScale = scale * 1.2f;
+		ShadowScale = scale * 1.3f;
 
 		SpriteDirty = true;
 	}

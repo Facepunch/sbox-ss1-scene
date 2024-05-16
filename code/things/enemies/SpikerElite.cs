@@ -18,7 +18,7 @@ public class SpikerElite : Enemy
 
 	protected override void OnAwake()
 	{
-		OffsetY = -0.90f;
+		OffsetY = -0.82f;
 		ShadowScale = 1.6f;
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
@@ -28,7 +28,7 @@ public class SpikerElite : Enemy
 		//AnimSpeed = 3f;
 		Sprite.Texture = Texture.Load("textures/sprites/spiker_elite.vtex");
 
-		Scale = 2.1f;
+		Scale = 1.9f;
 		Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 12f;
@@ -52,6 +52,7 @@ public class SpikerElite : Enemy
 		CollideWith.Add( typeof( Player ) );
 
 		_damageTime = DAMAGE_TIME;
+		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
 		//AnimationPath = AnimSpawnPath;
 	}
 
@@ -134,12 +135,12 @@ public class SpikerElite : Enemy
 			elite: true
 		);
 
-		//Game.PlaySfxNearby( "spike.prepare", target_pos, pitch: Sandbox.Game.Random.Float( 0.95f, 1.05f ), volume: 1.5f, maxDist: 5f );
+		//Game.PlaySfxNearby( "spike.prepare", target_pos, pitch: Game.Random.Float( 0.95f, 1.05f ), volume: 1.5f, maxDist: 5f );
 	}
 
 	public void FinishShooting()
 	{
-		_shootDelayTimer = Sandbox.Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
+		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
 		IsShooting = false;
 		CanAttack = true;
 		CanTurn = true;

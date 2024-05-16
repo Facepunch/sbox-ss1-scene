@@ -63,6 +63,8 @@ public class EnemyBullet : Thing
 
 		float dt = Time.Delta;
 
+		// todo: flip horizontal if moving left
+
 		var speed = Speed * Utils.Map( SpawnTime, 0f, 0.5f, 0f, 1f, EasingType.QuadInOut );
 		Position2D += Direction * speed * dt;
 		Transform.Position = Transform.Position.WithZ( Globals.GetZPos( Position2D.y ) );

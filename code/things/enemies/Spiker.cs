@@ -52,6 +52,7 @@ public class Spiker : Enemy
 		CollideWith.Add( typeof( Player ) );
 
 		_damageTime = DAMAGE_TIME;
+		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
 		//AnimationPath = AnimSpawnPath;
 	}
 
@@ -131,12 +132,12 @@ public class Spiker : Enemy
 
 		Manager.Instance.SpawnEnemySpike( new Vector2( Math.Clamp( target_pos.x, Manager.Instance.BOUNDS_MIN.x + BUFFER, Manager.Instance.BOUNDS_MAX.x - BUFFER ), Math.Clamp( target_pos.y, Manager.Instance.BOUNDS_MIN.y + BUFFER, Manager.Instance.BOUNDS_MAX.y - BUFFER ) ) );
 
-		//Game.PlaySfxNearby( "spike.prepare", target_pos, pitch: Sandbox.Game.Random.Float( 0.95f, 1.05f ), volume: 1.5f, maxDist: 5f );
+		//Game.PlaySfxNearby( "spike.prepare", target_pos, pitch: Game.Random.Float( 0.95f, 1.05f ), volume: 1.5f, maxDist: 5f );
 	}
 
 	public void FinishShooting()
 	{
-		_shootDelayTimer = Sandbox.Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
+		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
 		IsShooting = false;
 		CanAttack = true;
 		CanTurn = true;
