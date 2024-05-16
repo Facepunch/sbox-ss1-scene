@@ -25,6 +25,8 @@ public class EnemyBullet : Thing
 		Radius = 0.066f;
 
 		Scale = 0.35f;
+		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
+
 		ShadowOpacity = 0.8f;
 		ShadowScale = 0.6f;
 		SpawnShadow( ShadowScale, ShadowOpacity );

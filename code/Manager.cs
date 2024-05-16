@@ -22,6 +22,8 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public GameObject ReviveSoulPrefab { get; set; }
 	[Property] public GameObject HealthPackPrefab { get; set; }
 	[Property] public GameObject EnemyBulletPrefab { get; set; }
+	[Property] public GameObject EnemySpikePrefab { get; set; }
+	[Property] public GameObject EnemySpikeBgPrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
@@ -218,21 +220,21 @@ public sealed class Manager : Component, Component.INetworkListener
 			type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( SpitterElite ) ) : TypeLibrary.GetType( typeof( Spitter ) );
 		}
 
-		//// SPIKER
-		//float spikerChance = ElapsedTime < 320f ? 0f : Utils.Map( ElapsedTime, 320f, 800f, 0.018f, 0.1f, EasingType.SineIn );
-		//if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < spikerChance )
-		//{
-		//	float eliteChance = ElapsedTime < 580f ? 0f : Utils.Map( ElapsedTime, 580f, 1300f, 0.008f, 1f, EasingType.SineIn );
-		//	type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( SpikerElite ) ) : TypeLibrary.GetType( typeof( Spiker ) );
-		//}
+		// SPIKER
+		float spikerChance = ElapsedTime < 320f ? 0f : Utils.Map( ElapsedTime, 320f, 800f, 0.018f, 0.1f, EasingType.SineIn );
+		spikerChance = 0.6f;
+		if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < spikerChance )
+		{
+			float eliteChance = ElapsedTime < 580f ? 0f : Utils.Map( ElapsedTime, 580f, 1300f, 0.008f, 1f, EasingType.SineIn );
+			//type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( SpikerElite ) ) : TypeLibrary.GetType( typeof( Spiker ) );
+			type = TypeLibrary.GetType( typeof( Spiker ) );
+		}
 
 		// CHARGER
 		float chargerChance = ElapsedTime < 420f ? 0f : Utils.Map( ElapsedTime, 420f, 800f, 0.022f, 0.075f );
-		chargerChance = 0.7f;
 		if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < chargerChance )
 		{
 			float eliteChance = ElapsedTime < 660f ? 0f : Utils.Map( ElapsedTime, 660f, 1400f, 0.008f, 1f, EasingType.SineIn );
-			eliteChance = 0.5f;
 			type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( ChargerElite ) ) : TypeLibrary.GetType( typeof( Charger ) );
 		}
 
@@ -349,6 +351,15 @@ public sealed class Manager : Component, Component.INetworkListener
 		AddThing( enemyBullet );
 
 		return enemyBullet;
+	}
+
+	public void SpawnEnemySpike( Vector2 pos )
+	{
+		var spikeObj = EnemySpikePrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+		var spike = spikeObj.Components.Get<EnemySpike>();
+
+		spikeObj.NetworkSpawn();
+		AddThing( spike );
 	}
 
 	public void SpawnBoss( Vector2 pos )

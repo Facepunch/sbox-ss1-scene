@@ -1,0 +1,42 @@
+{
+  "RootObject": {
+    "__guid": "df60c6cd-b313-48cf-b25a-04540712009b",
+    "Flags": 0,
+    "Name": "enemy_spike",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SpriteRenderer",
+        "__guid": "56baa2a8-51fb-4c14-8142-20ec37a6ef45",
+        "Additive": false,
+        "CastShadows": false,
+        "Color": "1,1,1,1",
+        "DepthFeather": 0,
+        "FlipHorizontal": false,
+        "FlipVertical": false,
+        "FogStrength": 1,
+        "Opaque": false,
+        "Size": "1,1",
+        "Texture": "textures/sprites/spike_top.vtex"
+      },
+      {
+        "__type": "EnemySpike",
+        "__guid": "05fa06ea-fbf7-4c1f-928a-c43f9152a7d6",
+        "Sprite": {
+          "_type": "component",
+          "component_id": "56baa2a8-51fb-4c14-8142-20ec37a6ef45",
+          "go": "df60c6cd-b313-48cf-b25a-04540712009b",
+          "component_type": "SpriteRenderer"
+        }
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

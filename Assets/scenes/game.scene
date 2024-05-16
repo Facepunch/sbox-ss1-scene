@@ -48,6 +48,14 @@
             "_type": "gameobject",
             "prefab": "prefabs/enemy.prefab"
           },
+          "EnemySpikeBgPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/enemy_spike_bg.prefab"
+          },
+          "EnemySpikePrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/enemy_spike.prefab"
+          },
           "ExplosionEffectPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/explosion_effect.prefab"
@@ -227,7 +235,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-05-14T03:18:46.4172455-07:00",
+  "LastSaved": "2024-05-15T17:44:25.8795466-07:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
