@@ -237,7 +237,10 @@ public class Player : Thing
 		//ShadowOpacity = 0.8f;
 		//ShadowScale = 1.12f;
 
-		//AddStatus( TypeLibrary.GetType( typeof( FireIgniteStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( DashFireStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( DashFireStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( DashFireStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( DashFireStatus ) ) );
 	}
 
 	protected override void OnUpdate()

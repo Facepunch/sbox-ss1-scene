@@ -1,7 +1,5 @@
 using Sandbox;
 using Sandbox.Network;
-using System.Reflection;
-using System.Runtime.InteropServices;
 
 public sealed class Manager : Component, Component.INetworkListener
 {
@@ -25,6 +23,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public GameObject EnemySpikePrefab { get; set; }
 	[Property] public GameObject EnemySpikeBgPrefab { get; set; }
 	[Property] public GameObject EnemySpikeElitePrefab { get; set; }
+	[Property] public GameObject FirePrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
@@ -368,6 +367,26 @@ public sealed class Manager : Component, Component.INetworkListener
 			spikeObj.NetworkSpawn();
 			AddThing( spike );
 		}
+	}
+
+	[Broadcast]
+	public void SpawnFire( Vector2 pos, Guid playerId )
+	{
+		if ( IsProxy )
+			return;
+
+		var playerObj = Scene.Directory.FindByGuid( playerId );
+		Player player = playerObj?.Components.Get<Player>() ?? null;
+		if ( player == null )
+			return;
+
+		var fireObj = FirePrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+		var fire = fireObj.Components.Get<Fire>();
+		fire.Shooter = player;
+		fire.Lifetime = player.Stats[PlayerStat.FireLifetime];
+
+		fireObj.NetworkSpawn();
+		AddThing( fire );
 	}
 
 	public void SpawnBoss( Vector2 pos )

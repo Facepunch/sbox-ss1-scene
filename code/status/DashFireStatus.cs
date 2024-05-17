@@ -34,20 +34,12 @@ public class DashFireStatus : Status
 
 	public override void OnDashStarted()
 	{
-		//if ( Game.Random.Float( 0f, 1f ) < GetChanceForLevel( Level ) )
-		//{
-		//	var fire = new Fire()
-		//	{
-		//		Position = Player.Position,
-		//		Shooter = Player,
-		//		Lifetime = Player.Stats[PlayerStat.FireLifetime],
-		//		Scale = new Vector2( 1f, 1f ),
-		//		Radius = 0.3f,
-		//	};
+		if ( Game.Random.Float( 0f, 1f ) < GetChanceForLevel( Level ) )
+		{
+			Manager.Instance.SpawnFire( Player.Position2D + new Vector2(0f, 0.3f), Player.GameObject.Id );
 
-		//	MyGame.Current.AddThing( fire );
-		//	MyGame.Current.PlaySfxNearby( "ignite", Player.Position, pitch: Game.Random.Float( 1.05f, 1.25f ), volume: 0.5f, maxDist: 4f );
-		//}
+			//MyGame.Current.PlaySfxNearby( "ignite", Player.Position, pitch: Game.Random.Float( 1.05f, 1.25f ), volume: 0.5f, maxDist: 4f );
+		}
 	}
 
 	public float GetChanceForLevel( int level )

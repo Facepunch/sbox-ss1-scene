@@ -1,0 +1,43 @@
+{
+  "RootObject": {
+    "__guid": "eb5ea8d0-88d0-4199-8810-3fc01abb75f4",
+    "Flags": 0,
+    "Name": "fire",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SpriteRenderer",
+        "__guid": "5ae8e98a-cdf0-4bb8-9cb4-8951ce593e4c",
+        "Additive": false,
+        "CastShadows": false,
+        "Color": "1,1,1,1",
+        "DepthFeather": 0,
+        "FlipHorizontal": false,
+        "FlipVertical": false,
+        "FogStrength": 1,
+        "Opaque": false,
+        "Size": "1,1",
+        "Texture": "textures/sprites/fire.vtex"
+      },
+      {
+        "__type": "Fire",
+        "__guid": "f718750a-31b3-46bf-aaae-6066f04296df",
+        "Sprite": {
+          "_type": "component",
+          "component_id": "5ae8e98a-cdf0-4bb8-9cb4-8951ce593e4c",
+          "go": "eb5ea8d0-88d0-4199-8810-3fc01abb75f4",
+          "component_type": "SpriteRenderer"
+        }
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

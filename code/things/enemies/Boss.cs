@@ -55,7 +55,7 @@ public class Boss : Enemy
 		PushStrength = 50f;
 		DeathTime = 3f;
 
-		Radius = 0.46f;
+		Radius = 0.42f;
 
 		Deceleration = 1.1f;
 		DecelerationAttacking = 1.1f;
