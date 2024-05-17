@@ -1,0 +1,17 @@
+{
+  "UI": false,
+  "Volume": "0.85,0.85,0",
+  "Pitch": "0.80,0.80,0",
+  "Decibels": 25,
+  "SelectionMode": "Random",
+  "Sounds": [
+    "sounds/enemy.hit.vsnd"
+  ],
+  "Occlusion": false,
+  "AirAbsorption": true,
+  "Transmission": true,
+  "OcclusionRadius": 64,
+  "DistanceAttenuation": true,
+  "__version": 0,
+  "__references": []
+}

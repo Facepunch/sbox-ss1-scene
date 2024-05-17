@@ -122,8 +122,8 @@ public sealed class Manager : Component, Component.INetworkListener
 		//	SpawnEnemy(TypeLibrary.GetType(typeof(Zombie)), pos);
 		//}
 
-		SpawnBoss( new Vector2(3f, 3f ) );
-		HasSpawnedBoss = true;
+		//SpawnBoss( new Vector2(3f, 3f ) );
+		//HasSpawnedBoss = true;
 	}
 
 	protected override void OnUpdate()
@@ -659,5 +659,25 @@ public sealed class Manager : Component, Component.INetworkListener
 			number.GameObject.Destroy();
 
 		SpawnStartingThings();
+	}
+
+	public void PlaySfxNearby( string name, Vector2 worldPos, float pitch, float volume, float maxDist )
+	{
+		maxDist *= 1.3f;
+
+		foreach ( Player player in Scene.GetAllComponents<Player>() )
+		{
+			var playerPos = player.Position2D;
+
+			var distSqr = (player.Position2D - worldPos).LengthSquared;
+			if ( distSqr < maxDist * maxDist )
+			{
+				var dist = (player.Position2D - worldPos).Length;
+				var falloff = Utils.Map( dist, 0f, maxDist, 1f, 0f, EasingType.SineIn );
+				var pos = playerPos + (worldPos - playerPos) * 0.1f;
+
+				player.PlaySfx( name, pos, pitch * 0.75f, volume * falloff );
+			}
+		}
 	}
 }

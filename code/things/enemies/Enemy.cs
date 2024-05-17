@@ -398,7 +398,7 @@ public abstract class Enemy : Thing
 		for ( int i = EnemyStatuses.Count - 1; i >= 0; i-- )
 			EnemyStatuses.Values.ElementAt( i ).StartDying();
 
-		//Game.PlaySfxNearby( "enemy.die", Position, pitch: 1f, volume: 1f, maxDist: 5.5f );
+		Manager.Instance.PlaySfxNearby( "enemy.die", Position2D, pitch: 1f, volume: 1f, maxDist: 5.5f );
 		//StartDyingClient();
 
 		if ( CanBleed )

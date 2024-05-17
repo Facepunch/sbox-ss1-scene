@@ -1,0 +1,17 @@
+{
+  "UI": false,
+  "Volume": "1.00,1.00,0",
+  "Pitch": "0.80,0.80,0",
+  "Decibels": 45,
+  "SelectionMode": "Random",
+  "Sounds": [
+    "sounds/shoot.vsnd"
+  ],
+  "Occlusion": true,
+  "AirAbsorption": false,
+  "Transmission": false,
+  "OcclusionRadius": 64,
+  "DistanceAttenuation": true,
+  "__version": 0,
+  "__references": []
+}

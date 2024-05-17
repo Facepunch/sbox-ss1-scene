@@ -2,6 +2,7 @@ using Sandbox;
 using System.Drawing;
 using System.Numerics;
 using System.Runtime.Serialization.Formatters;
+using System.Xml.Linq;
 using static Manager;
 
 public enum ModifierType { Set, Add, Mult }
@@ -942,7 +943,7 @@ public class Player : Thing
 				SpawnBullet( pos, dir, isLastAmmo );
 		}
 
-		//Game.PlaySfxNearby( "shoot", pos, pitch: Utils.Map( _shotNum, 0f, (float)Stats[PlayerStat.MaxAmmoCount], 1f, 1.25f ), volume: 1f, maxDist: 4f );
+		Manager.Instance.PlaySfxNearby( "shoot", pos, pitch: Utils.Map( _shotNum, 0f, (float)Stats[PlayerStat.MaxAmmoCount], 1f, 1.25f ), volume: 1f, maxDist: 4f );
 
 		Velocity -= AimDir * Stats[PlayerStat.Recoil];
 
@@ -1122,5 +1123,19 @@ public class Player : Thing
 		Manager.Instance.AddThing( grenade );
 
 		return grenade;
+	}
+
+	[Broadcast]
+	public void PlaySfx(string name, Vector2 pos, float pitch, float volume)
+	{
+		if ( IsProxy )
+			return;
+
+		var sfx = Sound.Play( name, new Vector3( pos.x, pos.y, Globals.SFX_DEPTH ) );
+		if ( sfx != null )
+		{
+			sfx.Volume = volume;
+			sfx.Pitch = pitch;
+		}
 	}
 }

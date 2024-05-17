@@ -179,7 +179,7 @@ public class Bullet : Thing
 				if ( _hitThings.Contains( enemy ) )
 					return;
 
-				//Game.PlaySfxNearby( "enemy.hit", Position, pitch: Utils.Map( enemy.Health, enemy.MaxHealth, 0f, 0.9f, 1.3f, EasingType.SineIn ), volume: 1f, maxDist: 4f );
+				Manager.Instance.PlaySfxNearby( "enemy.hit", Position2D, pitch: Utils.Map( enemy.Health, enemy.MaxHealth, 0f, 0.9f, 1.3f, EasingType.SineIn ), volume: 1f, maxDist: 4f );
 
 				if ( Game.Random.Float( 0f, 1f ) < Stats[BulletStat.FireIgniteChance] )
 				{

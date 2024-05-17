@@ -1,0 +1,16 @@
+{
+	"UI": false,
+	"Volume": 1,
+	"VolumeRandom": 0,
+	"Pitch": 1,
+	"PitchRandom": 0,
+	"Decibels": 20,
+	"Sounds":
+	[
+		"sounds/zombie.spawn0.vsnd",
+		"sounds/zombie.spawn1.vsnd"
+	],
+	"SelectionMode": "Random",
+	"MaximumDistance": 122.770090,
+	"MinimumDistance": 6.138505
+}
