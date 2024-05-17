@@ -1,0 +1,36 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel
+@attribute [StyleSheet("DeathPanel.razor.scss")]
+
+<root>
+	<div class="death_panel">
+		<div class="death_label">
+			@(Manager.Instance.IsVictory ? "Victory!" : "You're dead...")
+		</div>
+
+		<div class="death_button @(Manager.Instance.IsProxy ? "disabled" : "")" onclick=@(() => DeathButtonClicked())>
+			@($"{(Manager.Instance.IsVictory ? "Restart" : "Retry")}{(Manager.Instance.IsProxy ? " (Host Only)" : "")}")
+		</div>
+	</div>
+</root>
+
+@code
+{
+	protected override int BuildHash()
+	{
+		var seconds = MathX.FloorToInt(Manager.Instance.ElapsedTime.Relative);
+
+		return HashCode.Combine(
+			seconds
+		);
+	}
+
+	void DeathButtonClicked()
+	{
+		if (Manager.Instance.IsProxy)
+			return;
+
+		Manager.Instance.Restart();
+	}
+}

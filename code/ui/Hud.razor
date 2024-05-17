@@ -31,6 +31,11 @@
 	{
 		<StatusTooltip Status=@hoveredStatus style="left:@(Mouse.Position.x * Panel.ScaleFromScreen + 50)px; top:@(Mouse.Position.y * Panel.ScaleFromScreen - 50)px;"></StatusTooltip>
 	}
+
+	@if(Manager.Instance.IsGameOver)
+	{
+		<DeathPanel />
+	}
 </root>
 
 @code

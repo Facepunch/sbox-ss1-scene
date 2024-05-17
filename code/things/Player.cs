@@ -164,7 +164,7 @@ public class Player : Thing
 		Health = 100f;
 		Stats[PlayerStat.MaxHp] = 100f;
 		IsDead = false;
-		Radius = 0.11f;
+		Radius = 0.10f;
 		GridPos = Manager.Instance.GetGridSquareForPos( Position2D );
 		AimDir = new Vector2(0f, 1f);
 		NumRerollAvailable = 2;
@@ -236,11 +236,10 @@ public class Player : Thing
 		TimeSinceHurt = 999f;
 		//ShadowOpacity = 0.8f;
 		//ShadowScale = 1.12f;
+		Sprite.Color = Color.White;
+		ShadowOpacity = 0.8f;
 
-		AddStatus( TypeLibrary.GetType( typeof( DashFireStatus ) ) );
-		AddStatus( TypeLibrary.GetType( typeof( DashFireStatus ) ) );
-		AddStatus( TypeLibrary.GetType( typeof( DashFireStatus ) ) );
-		AddStatus( TypeLibrary.GetType( typeof( DashFireStatus ) ) );
+		//AddStatus( TypeLibrary.GetType( typeof( DashFireStatus ) ) );
 	}
 
 	protected override void OnUpdate()

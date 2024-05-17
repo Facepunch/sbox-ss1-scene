@@ -43,11 +43,13 @@ ChoicePanel {
             opacity: 1;
             gap: 5px;
             border-radius: 4px;
+            color: #aaa;
 
             &:hover {
                 opacity: 1;
                 filter: brightness( 2 );
                 background-color: #fff3;
+                color: #fff;
             }
 
             &:active {
@@ -73,7 +75,7 @@ ChoicePanel {
 
             .choice_description {
                 font-size: 14px;
-                color: #fffe;
+                //color: #fffe;
                 padding: 4px;
                 //border: 1px solid blue;
                 font-weight: 300;

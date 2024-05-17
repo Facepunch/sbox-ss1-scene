@@ -51,6 +51,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Sync] public TimeSince ElapsedTime { get; set; }
 
 	[Sync] public bool IsGameOver { get; private set; }
+	[Sync] public bool IsVictory { get; private set; }
 
 	public Vector2 MouseWorldPos { get; private set; }
 
@@ -120,7 +121,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		//	SpawnEnemy(TypeLibrary.GetType(typeof(Zombie)), pos);
 		//}
 
-		SpawnBoss( new Vector2(3f, 3f));
+		//SpawnBoss( new Vector2(3f, 3f));
 	}
 
 	protected override void OnUpdate()
@@ -546,7 +547,20 @@ public sealed class Manager : Component, Component.INetworkListener
 			return;
 
 		IsGameOver = true;
+		IsVictory = false;
 		//GameOverClient();
+	}
+
+	public void Victory()
+	{
+		if ( IsGameOver )
+			return;
+
+		IsGameOver = true;
+		IsVictory = true;
+
+		//Sandbox.Services.Stats.Increment( "victories", 1 );
+		//Sandbox.Services.Stats.SetValue( "victory-time", ElapsedTime.Relative );
 	}
 
 	public BloodSplatter SpawnBloodSplatter( Vector2 pos )
