@@ -1,0 +1,40 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel
+@attribute [StyleSheet("BossNametag.razor.scss")]
+
+<root>
+	@{
+		var hpPercent = Boss.Health / Boss.MaxHealth;
+		var bgColor = Lerp3(new Color(0f, 0.75f, 0f), new Color(0.75f, 0.75f, 0f), new Color(1f, 0f, 0f), 1f - hpPercent);
+	}
+
+	<div class="hpbar">
+		<div class="hpbardelta" style="width:@(hpPercent * 100f)%;"></div>
+		<div class="hpbaroverlay" style="width:@(hpPercent * 100f)%; background-color:@(bgColor.Rgba);"></div>
+
+		<div class="label">
+			BOSS
+		</div>
+	</div>
+</root>
+
+@code
+{
+	public Boss Boss { get; set; }
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(
+			Boss.Health
+		);
+	}
+
+	Color Lerp3(Color a, Color b, Color c, float t)
+	{
+		if(t < 0.5f) // 0.0 to 0.5 goes to a -> b
+			return Color.Lerp(a, b, t / 0.5f);
+		else // 0.5 to 1.0 goes to b -> c
+			return Color.Lerp(b, c, (t - 0.5f) / 0.5f);
+	}
+}

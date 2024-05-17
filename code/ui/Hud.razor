@@ -36,6 +36,13 @@
 	{
 		<DeathPanel />
 	}
+	else
+	{
+		@if(Manager.Instance.HasSpawnedBoss && Manager.Instance.Boss != null)
+		{
+			<BossNametag Boss=@Manager.Instance.Boss />
+		}
+	}
 </root>
 
 @code

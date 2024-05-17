@@ -56,6 +56,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	public Vector2 MouseWorldPos { get; private set; }
 
 	public bool HasSpawnedBoss { get; private set; }
+	public Boss Boss { get; set; }
 
 	public TimeSince TimeSinceMagnet { get; set; }
 
@@ -121,7 +122,8 @@ public sealed class Manager : Component, Component.INetworkListener
 		//	SpawnEnemy(TypeLibrary.GetType(typeof(Zombie)), pos);
 		//}
 
-		//SpawnBoss( new Vector2(3f, 3f));
+		SpawnBoss( new Vector2(3f, 3f ) );
+		HasSpawnedBoss = true;
 	}
 
 	protected override void OnUpdate()
@@ -639,6 +641,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		ElapsedTime = 0f;
 		IsGameOver = false;
 		HasSpawnedBoss = false;
+		Boss = null;
 		TimeSinceMagnet = 0f;
 
 		if ( IsProxy )

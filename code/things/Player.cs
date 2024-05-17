@@ -239,7 +239,7 @@ public class Player : Thing
 		Sprite.Color = Color.White;
 		ShadowOpacity = 0.8f;
 
-		//AddStatus( TypeLibrary.GetType( typeof( DashFireStatus ) ) );
+		//AddStatus( TypeLibrary.GetType( typeof( DamageStatus) ) );
 	}
 
 	protected override void OnUpdate()

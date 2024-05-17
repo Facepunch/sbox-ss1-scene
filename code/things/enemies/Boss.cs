@@ -64,6 +64,8 @@ public class Boss : Enemy
 		MaxHealth = Health;
 		DamageToPlayer = 32f;
 
+		Manager.Instance.Boss = this;
+
 		if ( IsProxy )
 			return;
 		
