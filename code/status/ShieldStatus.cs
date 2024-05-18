@@ -47,9 +47,9 @@ public class ShieldStatus : Status
         if(!IsShielded)
         {
             IsShielded = true;
-            //Player.CreateShieldVfx();
+            Player.CreateShieldVfx();
             _timer = 0f;
-            //MyGame.Current.PlaySfxNearby("shield_gain", Player.Position, pitch: Game.Random.Float(1.2f, 1.25f), volume: 0.7f, maxDist: 7.5f);
+            Manager.Instance.PlaySfxNearby( "shield_gain", Player.Position2D, pitch: Game.Random.Float(1.2f, 1.25f), volume: 0.7f, maxDist: 7.5f);
         }
     }
 
@@ -58,9 +58,9 @@ public class ShieldStatus : Status
         if(IsShielded)
         {
             IsShielded = false;
-            //Player.RemoveShieldVfx();
-            //MyGame.Current.PlaySfxNearby("shield_break", Player.Position, pitch: Game.Random.Float(0.95f, 1.05f), volume: 1f, maxDist: 7.5f);
-        }
+            Player.RemoveShieldVfx();
+			Manager.Instance.PlaySfxNearby("shield_break", Player.Position2D, pitch: Game.Random.Float(0.95f, 1.05f), volume: 1f, maxDist: 7.5f);
+		}
     }
 
     public override string GetDescription(int newLevel)
@@ -82,7 +82,7 @@ public class ShieldStatus : Status
     {
         base.Remove();
 
-        //Player.RemoveShieldVfx();
+        Player.RemoveShieldVfx();
     }
 }
 

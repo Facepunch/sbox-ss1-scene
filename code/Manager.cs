@@ -24,6 +24,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public GameObject EnemySpikeBgPrefab { get; set; }
 	[Property] public GameObject EnemySpikeElitePrefab { get; set; }
 	[Property] public GameObject FirePrefab { get; set; }
+	[Property] public GameObject ShieldVfxPrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }

@@ -78,7 +78,7 @@ public class Player : Thing
 
 	//public Nametag Nametag { get; private set; }
 
-	//private ShieldVfx _shieldVfx;
+	private GameObject _shieldVfx;
 
 	[Sync] public int NumRerollAvailable { get; set; }
 
@@ -127,7 +127,7 @@ public class Player : Thing
 
 		_original_properties_stat.Clear();
 
-		//RemoveShieldVfx();
+		RemoveShieldVfx();
 
 		Level = 0;
 		ExperienceRequired = GetExperienceReqForLevel( Level + 1 );
@@ -751,15 +751,15 @@ public class Player : Thing
 			return 0f;
 		}
 
-		//if ( HasStatus( TypeLibrary.GetType( typeof( ShieldStatus ) ) ) )
-		//{
-		//	var shieldStatus = GetStatus( TypeLibrary.GetType( typeof( ShieldStatus ) ) ) as ShieldStatus;
-		//	if ( shieldStatus != null && shieldStatus.IsShielded )
-		//	{
-		//		shieldStatus.LoseShield();
-		//		return 0f;
-		//	}
-		//}
+		if ( HasStatus( TypeLibrary.GetType( typeof( ShieldStatus ) ) ) )
+		{
+			var shieldStatus = GetStatus( TypeLibrary.GetType( typeof( ShieldStatus ) ) ) as ShieldStatus;
+			if ( shieldStatus != null && shieldStatus.IsShielded )
+			{
+				shieldStatus.LoseShield();
+				return 0f;
+			}
+		}
 
 		if ( Stats[PlayerStat.DamageReductionPercent] > 0f )
 			damage *= (1f - MathX.Clamp( Stats[PlayerStat.DamageReductionPercent], 0f, 1f ));
@@ -1123,6 +1123,25 @@ public class Player : Thing
 		Manager.Instance.AddThing( grenade );
 
 		return grenade;
+	}
+
+	[Broadcast]
+	public void CreateShieldVfx()
+	{
+		_shieldVfx = Manager.Instance.ShieldVfxPrefab.Clone( Transform.Position );
+		_shieldVfx.Parent = GameObject;
+		_shieldVfx.Transform.LocalPosition = new Vector3( 0f, 0f, 1f );
+		_shieldVfx.Components.Get<SpriteRenderer>().Size = new Vector2(1.8f);
+	}
+
+	[Broadcast]
+	public void RemoveShieldVfx()
+	{
+		if ( _shieldVfx != null )
+		{
+			_shieldVfx.Destroy();
+			_shieldVfx = null;
+		}
 	}
 
 	[Broadcast]

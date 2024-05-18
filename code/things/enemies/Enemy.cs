@@ -663,30 +663,4 @@ public abstract class Enemy : Thing
 			Fear( player );
 		}
 	}
-
-	//protected override void OnDestroy()
-	//{
-	//	base.OnDestroy();
-
-	//	if ( Sandbox.Game.IsClient )
-	//	{
-	//		if ( _burningVfx != null )
-	//		{
-	//			_burningVfx.Delete();
-	//			_burningVfx = null;
-	//		}
-
-	//		if ( _frozenVfx != null )
-	//		{
-	//			_frozenVfx.Delete();
-	//			_frozenVfx = null;
-	//		}
-
-	//		if ( _fearVfx != null )
-	//		{
-	//			_fearVfx.Delete();
-	//			_fearVfx = null;
-	//		}
-	//	}
-	//}
 }

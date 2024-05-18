@@ -1,0 +1,33 @@
+{
+  "RootObject": {
+    "__guid": "1168f658-504e-4196-9abc-df1faf90b26e",
+    "Flags": 0,
+    "Name": "shield_vfx",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Sandbox.SpriteRenderer",
+        "__guid": "f6c51b59-ef2e-4fba-937b-92d8cea88d94",
+        "Additive": false,
+        "CastShadows": false,
+        "Color": "1,1,0,0.64",
+        "DepthFeather": 0,
+        "FlipHorizontal": false,
+        "FlipVertical": false,
+        "FogStrength": 1,
+        "Opaque": false,
+        "Size": "1,1",
+        "Texture": "textures/sprites/shield.vtex"
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
