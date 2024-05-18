@@ -38,7 +38,7 @@ public class DashFireStatus : Status
 		{
 			Manager.Instance.SpawnFire( Player.Position2D + new Vector2(0f, 0.3f), Player.GameObject.Id );
 
-			//MyGame.Current.PlaySfxNearby( "ignite", Player.Position, pitch: Game.Random.Float( 1.05f, 1.25f ), volume: 0.5f, maxDist: 4f );
+			Manager.Instance.PlaySfxNearby( "ignite", Player.Position2D, pitch: Game.Random.Float( 1.05f, 1.25f ), volume: 0.5f, maxDist: 4f );
 		}
 	}
 

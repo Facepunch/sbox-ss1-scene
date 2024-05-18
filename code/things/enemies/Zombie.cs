@@ -78,7 +78,7 @@ public class Zombie : Enemy
 			if ( player_dist_sqr < 3.5f * 3.5f )
 			{
 				HasTarget = true;
-				//Game.PlaySfxNearby( "zombie.spawn0", Position, pitch: Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 4f );
+				Manager.Instance.PlaySfxNearby( "zombie.spawn0", Position2D, pitch: Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 4f );
 			}
 		}
 
@@ -111,7 +111,7 @@ public class Zombie : Enemy
 
 					if ( !player.IsInvulnerable )
 					{
-						//Game.PlaySfxNearby( "zombie.attack.player", Position, pitch: Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.95f, 1.15f, EasingType.QuadIn ), volume: 1f, maxDist: 5.5f );
+						Manager.Instance.PlaySfxNearby( "zombie.attack.player", Position2D, pitch: Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.95f, 1.15f, EasingType.QuadIn ), volume: 1f, maxDist: 5.5f );
 
 						player.Damage( dmg );
 

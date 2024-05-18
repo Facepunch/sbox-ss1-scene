@@ -76,7 +76,7 @@ public class EnemySpikeElite : Thing
 
 		if ( !_playedSfx && SpawnTime > 1.15f )
 		{
-			//Game.PlaySfxNearby( "spike.thrust", Position, pitch: Game.Random.Float( 1.15f, 1.3f ), volume: 1.5f, maxDist: 6f );
+			Manager.Instance.PlaySfxNearby( "spike.thrust", Position2D, pitch: Game.Random.Float( 1.15f, 1.3f ), volume: 1.5f, maxDist: 6f );
 			_playedSfx = true;
 		}
 
@@ -114,7 +114,7 @@ public class EnemySpikeElite : Thing
 
 			if ( !player.IsInvulnerable )
 			{
-				//Game.PlaySfxNearby( "spike.stab", player.Position, pitch: Game.Random.Float( 0.85f, 0.9f ), volume: 1.6f, maxDist: 6f );
+				Manager.Instance.PlaySfxNearby( "spike.stab", player.Position2D, pitch: Game.Random.Float( 0.85f, 0.9f ), volume: 1.6f, maxDist: 6f );
 				player.Damage( dmg );
 				player.AddVelocity( (player.Position2D - Position2D).Normal * Game.Random.Float(2f, 4f));
 			}

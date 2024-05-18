@@ -19,11 +19,9 @@ public sealed class ExplosionEffect : Component
 	{
 		Sprite.Color = Color.Red.WithAlpha( Utils.Map( _spawnTime, 0f, Lifetime, 0.8f, 0f ) );
 
-		if ( IsProxy )
-			return;
-
 		if ( _spawnTime > Lifetime )
 		{
+			Manager.Instance.RemoveExplosionEffect( this );
 			GameObject.Destroy();
 		}
 	}

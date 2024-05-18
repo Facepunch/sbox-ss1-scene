@@ -80,7 +80,7 @@ public class Runner : Enemy
 			if ( player_dist_sqr < 3.5f * 3.5f )
 			{
 				HasTarget = true;
-				//Game.PlaySfxNearby( "runner.howl", Position, pitch: Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 6f );
+				Manager.Instance.PlaySfxNearby( "runner.howl", Position2D, pitch: Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 6f );
 			}
 		}
 
@@ -92,7 +92,7 @@ public class Runner : Enemy
 	{
 		base.StartAttacking();
 
-		//Game.PlaySfxNearby( "runner.bark", Position, pitch: Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 4f );
+		Manager.Instance.PlaySfxNearby( "runner.bark", Position2D, pitch: Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 4f );
 	}
 
 	public override void Colliding( Thing other, float percent, float dt )
@@ -117,7 +117,7 @@ public class Runner : Enemy
 
 					if ( !player.IsInvulnerable )
 					{
-						//Game.PlaySfxNearby( "runner.bite", Position, pitch: Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.9f, 0.95f, EasingType.QuadIn ), volume: 1f, maxDist: 5.5f );
+						Manager.Instance.PlaySfxNearby( "runner.bite", Position2D, pitch: Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.9f, 0.95f, EasingType.QuadIn ), volume: 1f, maxDist: 5.5f );
 
 						player.Damage( dmg );
 

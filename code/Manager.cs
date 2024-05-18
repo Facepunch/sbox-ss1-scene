@@ -282,7 +282,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		if ( type == TypeLibrary.GetType( typeof( Crate ) ) )
 			CrateCount++;
 
-		//PlaySfxNearby( "zombie.dirt", pos, pitch: Game.Random.Float( 0.6f, 0.8f ), volume: 0.7f, maxDist: 7.5f );
+		PlaySfxNearby( "zombie.dirt", pos, pitch: Game.Random.Float( 0.6f, 0.8f ), volume: 0.7f, maxDist: 7.5f );
 	}
 
 	[Broadcast]
@@ -396,7 +396,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	public void SpawnBoss( Vector2 pos )
 	{
 		SpawnEnemy( TypeLibrary.GetType( typeof( Boss ) ), pos, forceSpawn: true );
-		//PlaySfxNearby( "boss.fanfare", pos, pitch: 1.0f, volume: 1.3f, maxDist: 30f );
+		PlaySfxNearby( "boss.fanfare", pos, pitch: 1.0f, volume: 1.3f, maxDist: 30f );
 	}
 
 	private T GetClosest<T>( IEnumerable<T> enumerable, Vector3 pos, float maxRange, bool ignoreZ, T except )
@@ -465,22 +465,22 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public void RemoveThing( Thing thing )
 	{
-		if ( ThingGridPositions.ContainsKey( thing.GridPos ) )
+		//if ( ThingGridPositions.ContainsKey( thing.GridPos ) )
+		//{
+		//	ThingGridPositions[thing.GridPos].Remove( thing );
+		//}
+
+		if ( thing is Enemy ) // counts Crate too
 		{
-			ThingGridPositions[thing.GridPos].Remove( thing );
+			EnemyCount--;
+
+			if ( thing is Crate )
+				CrateCount--;
 		}
-
-		//if ( thing is Enemy ) // counts Crate too
-		//{
-		//	EnemyCount--;
-
-		//	if ( thing is Crate )
-		//		CrateCount--;
-		//}
-		//else if ( thing is Coin )
-		//{
-		//	CoinCount--;
-		//}
+		else if ( thing is Coin )
+		{
+			CoinCount--;
+		}
 	}
 
 	public void HandleThingCollisionForGridSquare( Thing thing, GridSquare gridSquare, float dt )
@@ -598,7 +598,7 @@ public sealed class Manager : Component, Component.INetworkListener
 			_clouds.Remove( cloud );
 	}
 
-	public ExplosionEffect SpawnExplosionEffect( Vector2 pos, float scaleModifier = 1f )
+	public ExplosionEffect SpawnExplosionEffectLocal( Vector2 pos, float scaleModifier = 1f )
 	{
 		var explosionObj = ExplosionEffectPrefab.Clone( new Vector3( pos.x, pos.y, 100f ) );
 		var explosion = explosionObj.Components.Get<ExplosionEffect>();
@@ -618,8 +618,6 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Broadcast]
 	public void Restart()
 	{
-		//MyGame.Current.PlaySfxTarget( To.Everyone, "restart", Vector2.Zero, Game.Random.Float( 0.95f, 1.05f ), 0.66f );
-
 		foreach ( var blood in _bloodSplatters )
 			blood.GameObject.Destroy();
 		_bloodSplatters.Clear();
@@ -664,7 +662,7 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public void PlaySfxNearby( string name, Vector2 worldPos, float pitch, float volume, float maxDist )
 	{
-		maxDist *= 1.3f;
+		maxDist *= Globals.SFX_DIST_MODIFIER;
 
 		foreach ( Player player in Scene.GetAllComponents<Player>() )
 		{
@@ -677,8 +675,45 @@ public sealed class Manager : Component, Component.INetworkListener
 				var falloff = Utils.Map( dist, 0f, maxDist, 1f, 0f, EasingType.SineIn );
 				var pos = playerPos + (worldPos - playerPos) * 0.1f;
 
-				player.PlaySfx( name, pos, pitch * 0.75f, volume * falloff );
+				player.PlaySfx( name, pos, pitch * Globals.SFX_PITCH_MODIFIER, volume * falloff );
 			}
 		}
+	}
+
+	public void PlaySfxNearbyLocal( string name, Vector2 worldPos, float pitch, float volume, float maxDist )
+	{
+		maxDist *= Globals.SFX_DIST_MODIFIER;
+
+		var player = GetLocalPlayer();
+		if ( player == null )
+			return;
+
+		var playerPos = player.Position2D;
+
+		var distSqr = (player.Position2D - worldPos).LengthSquared;
+		if ( distSqr < maxDist * maxDist )
+		{
+			var dist = (player.Position2D - worldPos).Length;
+			var falloff = Utils.Map( dist, 0f, maxDist, 1f, 0f, EasingType.SineIn );
+			var pos = playerPos + (worldPos - playerPos) * 0.1f;
+
+			var sfx = Sound.Play( name, new Vector3( pos.x, pos.y, Globals.SFX_DEPTH ) );
+			if ( sfx != null )
+			{
+				sfx.Volume = volume * falloff;
+				sfx.Pitch = pitch * Globals.SFX_PITCH_MODIFIER;
+			}
+		}
+	}
+
+	public Player GetLocalPlayer()
+	{
+		foreach ( var player in Scene.GetAllComponents<Player>() )
+		{
+			if ( player.Network.IsOwner )
+				return player;
+		}
+
+		return null;
 	}
 }

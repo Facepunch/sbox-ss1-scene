@@ -106,7 +106,7 @@ public class HealthPack : Thing
 			if ( !player.IsDead && SpawnTime > 0.1f )
 			{
 				player.Heal( HP_AMOUNT, 0.2f );
-				//Game.PlaySfxNearby( "heal", Position, pitch: Utils.Map( player.Health / player.Stats[PlayerStat.MaxHp], 0f, 1f, 1.5f, 1f ), volume: 1.5f, maxDist: 5f );
+				Manager.Instance.PlaySfxNearby( "heal", Position2D, pitch: Utils.Map( player.Health / player.Stats[PlayerStat.MaxHp], 0f, 1f, 1.5f, 1f ), volume: 1.5f, maxDist: 5f );
 
 				Remove();
 			}

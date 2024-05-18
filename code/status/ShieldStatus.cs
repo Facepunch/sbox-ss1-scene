@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sandbox;
 
-[Status(7, 0, 1111f)]
+[Status(7, 0, 1f)]
 public class ShieldStatus : Status
 {
     public bool IsShielded;

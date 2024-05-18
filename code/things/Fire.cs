@@ -99,7 +99,7 @@ public class Fire : Thing
 			if ( !enemy.HasEnemyStatus<BurningEnemyStatus>() )
 			{
 				enemy.Burn( Shooter, Shooter.Stats[PlayerStat.FireDamage] * Shooter.GetDamageMultiplier(), Shooter.Stats[PlayerStat.FireLifetime], Shooter.Stats[PlayerStat.FireSpreadChance] );
-				//Game.PlaySfxNearby( "burn", Position, pitch: Sandbox.Game.Random.Float( 0.95f, 1.15f ), volume: 1f, maxDist: 5f );
+				Manager.Instance.PlaySfxNearby( "burn", Position2D, pitch: Sandbox.Game.Random.Float( 0.95f, 1.15f ), volume: 1f, maxDist: 5f );
 			}
 		}
 		else if ( other is Player player && !player.IsDead )
@@ -110,7 +110,7 @@ public class Fire : Thing
 
 				if ( !player.IsInvulnerable )
 				{
-					//Game.PlaySfxNearby( "splash", Position, pitch: Game.Random.Float( 0.95f, 1.05f ), volume: 1f, maxDist: 4f );
+					Manager.Instance.PlaySfxNearby( "splash", Position2D, pitch: Game.Random.Float( 0.95f, 1.05f ), volume: 1f, maxDist: 4f );
 					player.Damage( dmg );
 					player.AddVelocity( Game.Random.Float(0f, 0.3f) );
 				}

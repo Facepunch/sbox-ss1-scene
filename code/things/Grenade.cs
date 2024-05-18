@@ -120,8 +120,8 @@ public class Grenade : Thing
 	public void Explode()
 	{
 		float scaleModifier = BASE_EXPLOSION_MODIFIER * ExplosionSizeMultiplier;
-		Manager.Instance.SpawnExplosionEffect( Position2D, scaleModifier );
-		//Game.PlaySfxNearby( "explode", Position, pitch: Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 6f );
+		Manager.Instance.SpawnExplosionEffectLocal( Position2D, scaleModifier );
+		Manager.Instance.PlaySfxNearbyLocal( "explode", Position2D, pitch: Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 6f );
 
 		if ( IsProxy )
 			return;
@@ -157,8 +157,8 @@ public class Grenade : Thing
 
 					if ( Game.Random.Float( 0f, 1f ) < FearChance && !enemy.IsDying )
 					{
-						//if ( !enemy.HasEnemyStatus<FearEnemyStatus>() )
-							//MyGame.Current.PlaySfxNearby( "fear", enemy.Position, pitch: Game.Random.Float( 0.95f, 1.05f ), volume: 0.6f, maxDist: 6f );
+						if ( !enemy.HasEnemyStatus<FearEnemyStatus>() )
+							Manager.Instance.PlaySfxNearby( "fear", enemy.Position2D, pitch: Game.Random.Float( 0.95f, 1.05f ), volume: 0.6f, maxDist: 6f );
 
 						enemy.Fear( Player );
 					}

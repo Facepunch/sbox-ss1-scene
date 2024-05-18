@@ -131,7 +131,7 @@ public class ExploderElite : Enemy
 
 					if ( !player.IsInvulnerable )
 					{
-						//Game.PlaySfxNearby( "zombie.attack.player", Position, pitch: Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.95f, 1.15f, EasingType.QuadIn ), volume: 1f, maxDist: 5.5f );
+						Manager.Instance.PlaySfxNearby( "zombie.attack.player", Position2D, pitch: Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.95f, 1.15f, EasingType.QuadIn ), volume: 1f, maxDist: 5.5f );
 
 						player.Damage( dmg );
 
@@ -163,15 +163,19 @@ public class ExploderElite : Enemy
 		CanTurn = false;
 	}
 
+	[Broadcast]
 	public void Explode()
 	{
-		base.StartDying( _playerWhoKilledUs );
-
-		Manager.Instance.SpawnExplosionEffect( Position2D );
-		//Game.PlaySfxNearby( "explode", Position, pitch: Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 6f );
+		Manager.Instance.SpawnExplosionEffectLocal( Position2D );
+		Manager.Instance.PlaySfxNearbyLocal( "explode", Position2D, pitch: Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 6f );
 
 		_hasExploded = true;
 		IsExploding = false;
+
+		if ( IsProxy )
+			return;
+
+		base.StartDying( _playerWhoKilledUs );
 	}
 
 	public override void FinishDying()

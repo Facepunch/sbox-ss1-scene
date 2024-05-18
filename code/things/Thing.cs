@@ -72,6 +72,8 @@ public class Thing : Component
 		if ( IsProxy )
 			return;
 
+		Manager.Instance.RemoveThing( this );
+
 		GameObject.Destroy();
 	}
 

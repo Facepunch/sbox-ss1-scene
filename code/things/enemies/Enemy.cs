@@ -649,16 +649,16 @@ public abstract class Enemy : Thing
 
 		if ( Game.Random.Float( 0f, 1f ) < player.Stats[PlayerStat.FreezeOnMeleeChance] )
 		{
-			//if ( !HasEnemyStatus<FrozenEnemyStatus>() )
-			//	Game.PlaySfxNearby( "frozen", Position, pitch: Game.Random.Float( 1.1f, 1.2f ), volume: 1.5f, maxDist: 5f );
+			if ( !HasEnemyStatus<FrozenEnemyStatus>() )
+				Manager.Instance.PlaySfxNearby( "frozen", Position2D, pitch: Game.Random.Float( 1.1f, 1.2f ), volume: 1.5f, maxDist: 5f );
 
 			Freeze( player );
 		}
 
 		if ( Game.Random.Float( 0f, 1f ) < player.Stats[PlayerStat.FearOnMeleeChance] )
 		{
-			//if ( !HasEnemyStatus<FearEnemyStatus>() )
-			//	Game.PlaySfxNearby( "fear", Position, pitch: Game.Random.Float( 0.95f, 1.05f ), volume: 0.6f, maxDist: 5f );
+			if ( !HasEnemyStatus<FearEnemyStatus>() )
+				Manager.Instance.PlaySfxNearby( "fear", Position2D, pitch: Game.Random.Float( 0.95f, 1.05f ), volume: 0.6f, maxDist: 5f );
 
 			Fear( player );
 		}

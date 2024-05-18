@@ -447,7 +447,7 @@ public class Player : Thing
 		DashProgress = 0f;
 		DashRechargeProgress = 0f;
 
-		//Game.PlaySfxNearby( "player.dash", Position + dashDir * 0.5f, pitch: Utils.Map( NumDashesAvailable, 0, 5, 1f, 0.9f ), volume: 1f, maxDist: 4f );
+		Manager.Instance.PlaySfxNearby( "player.dash", Position2D + dashDir * 0.5f, pitch: Utils.Map( NumDashesAvailable, 0, 5, 1f, 0.9f ), volume: 1f, maxDist: 4f );
 		SpawnDashCloudClient();
 		_dashCloudTime = 0f;
 
@@ -478,7 +478,7 @@ public class Player : Thing
 
 		ForEachStatus( status => status.OnDashRecharged() );
 
-		//Game.PlaySfxTarget( To.Single( Client ), "player.dash.recharge", Position, pitch: Utils.Map( NumDashesAvailable, 1, numDashes, 1f, 1.2f ), volume: 0.2f );
+		Manager.Instance.PlaySfxNearbyLocal( "player.dash.recharge", Position2D, pitch: Utils.Map( NumDashesAvailable, 1, numDashes, 1f, 1.2f ), volume: 0.2f, maxDist: 5f );
 	}
 
 	void HandleBounds()
@@ -577,6 +577,8 @@ public class Player : Thing
 		status.Refresh();
 
 		//RefreshStatusHud();
+
+		Manager.Instance.PlaySfxNearbyLocal( "click", Position2D, 0.9f, 0.75f, 5f );
 
 		LevelUpChoices.Clear();
 		IsChoosingLevelUpReward = false;
@@ -701,8 +703,6 @@ public class Player : Thing
 	[Broadcast]
 	public void LevelUp()
 	{
-		//Game.PlaySfxTarget( To.Single( Sandbox.Game.LocalClient ), "levelup", Position, Game.Random.Float( 0.95f, 1.05f ), 0.66f );
-
 		if ( IsProxy )
 			return;
 
@@ -711,6 +711,8 @@ public class Player : Thing
 		Level++;
 		ExperienceRequired = GetExperienceReqForLevel( Level + 1 );
 		NumRerollAvailable += (int)Stats[PlayerStat.NumRerollsPerLevel];
+
+		Manager.Instance.PlaySfxNearbyLocal( "levelup", Position2D, Game.Random.Float( 0.95f, 1.05f ), 0.5f, 5f );
 
 		ForEachStatus( status => status.OnLevelUp() );
 
@@ -726,10 +728,11 @@ public class Player : Thing
 			return;
 		}
 
+		Manager.Instance.PlaySfxNearbyLocal( "reroll", Position2D, Utils.Map( NumRerollAvailable, 0, 20, 0.9f, 1.4f, EasingType.QuadIn ), 0.6f, 5f );
+
 		NumRerollAvailable--;
 
 		GenerateLevelUpChoices();
-		//Game.PlaySfxTarget( To.Single( Sandbox.Game.LocalClient ), "levelup", Position, Game.Random.Float( 0.95f, 1.05f ), 0.66f );
 
 		ForEachStatus( status => status.OnReroll() );
 	}
@@ -831,7 +834,7 @@ public class Player : Thing
 		_isFlashing = false;
 		IsReloading = false;
 
-		//Game.PlaySfxNearby( "die", Position, pitch: Game.Random.Float( 1f, 1.2f ), volume: 1.5f, maxDist: 12f );
+		Manager.Instance.PlaySfxNearbyLocal( "die", Position2D, pitch: Game.Random.Float( 1f, 1.2f ), volume: 1.5f, maxDist: 12f );
 
 		if ( IsProxy )
 			return;
@@ -1010,7 +1013,7 @@ public class Player : Thing
 
 		ForEachStatus( status => status.OnReload() );
 
-		//Game.PlaySfxTarget(To.Single(Client), "reload.end", Position, pitch: 1f, volume: 0.5f);
+		//Manager.Instance.PlaySfxNearbyLocal("reload.end", Position2D, pitch: 1f, volume: 0.5f, 5f);
 	}
 
 	public float GetDamageMultiplier()
@@ -1085,6 +1088,8 @@ public class Player : Thing
 		Manager.Instance.Camera2D.SetPos( Position2D );
 
 		InitializeStats();
+
+		Manager.Instance.PlaySfxNearbyLocal("restart", Position2D, Game.Random.Float( 0.95f, 1.05f ), 0.66f, 4f );
 	}
 
 	public void SpawnBulletRing( Vector2 pos, int numBullets, Vector2 aimDir )
@@ -1097,7 +1102,7 @@ public class Player : Thing
 			SpawnBullet( pos, dir );
 		}
 
-		//Game.PlaySfxNearby( "shoot", pos, pitch: 1f, volume: 1f, maxDist: 3f );
+		Manager.Instance.PlaySfxNearby( "shoot", pos, pitch: 1f, volume: 1f, maxDist: 3f );
 	}
 
 	public Grenade SpawnGrenade( Vector2 pos, Vector2 vel )

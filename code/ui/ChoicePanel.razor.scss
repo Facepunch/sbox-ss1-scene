@@ -9,7 +9,7 @@ ChoicePanel {
     //background-color: red;
 
     .choice_modal {
-        width: 300px;
+        width: 320px;
         border-radius: 5px;
         backdrop-filter: blur( 10px );
         padding: 10px;
@@ -32,7 +32,7 @@ ChoicePanel {
         }
 
         .choice_button {
-            max-width: 300px;
+            max-width: 320px;
             min-height: 90px;
             pointer-events: all;
             flex-direction: column;

@@ -99,7 +99,7 @@ public class ReviveSoul : Thing
 			if ( player.IsDead )
 			{
 				player.Revive();
-				//Game.PlaySfxNearby( "heal", Position, pitch: Utils.Map( player.Health / player.Stats[PlayerStat.MaxHp], 0f, 1f, 1.5f, 1f ), volume: 1.5f, maxDist: 5f );
+				Manager.Instance.PlaySfxNearby( "heal", Position2D, pitch: Utils.Map( player.Health / player.Stats[PlayerStat.MaxHp], 0f, 1f, 1.5f, 1f ), volume: 1.5f, maxDist: 5f );
 				Remove();
 			}
 			else

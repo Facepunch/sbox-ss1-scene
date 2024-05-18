@@ -55,8 +55,6 @@
 			return;
 
 		Player.AddStatus(type);
-
-		// MyGame.Current.PlaySfxTarget(To.Single(Sandbox.Game.LocalClient), "click", Vector2.Zero, 0.9f, 0.75f);
 	}
 
 	void RerollButtonClicked()
@@ -65,7 +63,5 @@
 			return;
 
 		Player.UseReroll();
-
-		// MyGame.Current.PlaySfxTarget(To.Single(Sandbox.Game.LocalClient), "reroll", player.Position, Utils.Map(player.NumRerollAvailable, 0, 20, 0.9f, 1.4f, EasingType.QuadIn), 0.6f);
 	}
 }

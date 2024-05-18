@@ -183,16 +183,16 @@ public class Bullet : Thing
 
 				if ( Game.Random.Float( 0f, 1f ) < Stats[BulletStat.FireIgniteChance] )
 				{
-					//if ( !enemy.HasEnemyStatus<BurningEnemyStatus>() )
-					//	Game.PlaySfxNearby( "burn", Position, pitch: Game.Random.Float( 0.95f, 1.05f ), volume: 1f, maxDist: 5f );
+					if ( !enemy.HasEnemyStatus<BurningEnemyStatus>() )
+						Manager.Instance.PlaySfxNearby( "burn", Position2D, pitch: Game.Random.Float( 0.95f, 1.05f ), volume: 1f, maxDist: 5f );
 
 					enemy.Burn( Shooter, Shooter.Stats[PlayerStat.FireDamage] * Shooter.GetDamageMultiplier(), Shooter.Stats[PlayerStat.FireLifetime], Shooter.Stats[PlayerStat.FireSpreadChance] );
 				}
 
 				if ( Game.Random.Float( 0f, 1f ) < Stats[BulletStat.FreezeChance] )
 				{
-					//if ( !enemy.HasEnemyStatus<FrozenEnemyStatus>() )
-					//	Game.PlaySfxNearby( "frozen", Position, pitch: Game.Random.Float( 1.2f, 1.3f ), volume: 1.6f, maxDist: 6f );
+					if ( !enemy.HasEnemyStatus<FrozenEnemyStatus>() )
+						Manager.Instance.PlaySfxNearby( "frozen", Position2D, pitch: Game.Random.Float( 1.2f, 1.3f ), volume: 1.6f, maxDist: 6f );
 
 					enemy.Freeze( Shooter );
 				}

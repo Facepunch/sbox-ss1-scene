@@ -148,7 +148,7 @@ public class Charger : Enemy
 	{
 		_prepareTimer = PREPARE_TIME;
 		IsPreparingToCharge = true;
-		//Game.PlaySfxNearby( "enemy.roar.prepare", Position, pitch: Game.Random.Float( 0.95f, 1.05f ), volume: 1f, maxDist: 5f );
+		Manager.Instance.PlaySfxNearby( "enemy.roar.prepare", Position2D, pitch: Game.Random.Float( 0.95f, 1.05f ), volume: 1f, maxDist: 5f );
 		//AnimationPath = "textures/sprites/charger_charge_start.frames";
 		CanTurn = false;
 		CanAttack = false;
@@ -175,7 +175,7 @@ public class Charger : Enemy
 		//AnimSpeed = 3f;
 		Sprite.FlipHorizontal = target_pos.x > Position2D.x;
 
-		//Game.PlaySfxNearby( "enemy.roar", Position, pitch: Game.Random.Float( 0.925f, 1.075f ), volume: 1f, maxDist: 8f );
+		Manager.Instance.PlaySfxNearby( "enemy.roar", Position2D, pitch: Game.Random.Float( 0.925f, 1.075f ), volume: 1f, maxDist: 8f );
 	}
 
 	public override void Colliding( Thing other, float percent, float dt )
@@ -200,7 +200,7 @@ public class Charger : Enemy
 
 					if ( !player.IsInvulnerable )
 					{
-						//Game.PlaySfxNearby( "zombie.attack.player", Position, pitch: Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.95f, 1.15f, EasingType.QuadIn ), volume: 1f, maxDist: 5.5f );
+						Manager.Instance.PlaySfxNearby( "zombie.attack.player", Position2D, pitch: Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.95f, 1.15f, EasingType.QuadIn ), volume: 1f, maxDist: 5.5f );
 
 						player.Damage( dmg );
 

@@ -189,7 +189,7 @@ public class Boss : Enemy
 		IsShooting = true;
 		_hasShot = false;
 		//AnimationPath = "textures/sprites/boss_shoot.frames";
-		//Game.PlaySfxNearby( "boss.prepare", Position, pitch: Game.Random.Float( 0.75f, 0.85f ), volume: 1.7f, maxDist: 16f );
+		Manager.Instance.PlaySfxNearby( "boss.prepare", Position2D, pitch: Game.Random.Float( 0.75f, 0.85f ), volume: 1.7f, maxDist: 16f );
 		CanAttack = false;
 	}
 
@@ -219,7 +219,7 @@ public class Boss : Enemy
 		_hasShot = true;
 
 		//AnimationPath = "textures/sprites/boss_shoot_reverse.frames";
-		//Game.PlaySfxNearby( "boss.shoot", Position, pitch: Game.Random.Float( 0.65f, 0.75f ), volume: 1.5f, maxDist: 9f );
+		Manager.Instance.PlaySfxNearby( "boss.shoot", Position2D, pitch: Game.Random.Float( 0.65f, 0.75f ), volume: 1.5f, maxDist: 9f );
 	}
 
 	public void FinishShooting()
@@ -234,7 +234,7 @@ public class Boss : Enemy
 	{
 		_prepareTimer = PREPARE_TIME;
 		IsPreparingToCharge = true;
-		//Game.PlaySfxNearby( "boss.prepare", Position, pitch: Game.Random.Float( 1.05f, 1.1f ), volume: 1.75f, maxDist: 10f );
+		Manager.Instance.PlaySfxNearby( "boss.prepare", Position2D, pitch: Game.Random.Float( 1.05f, 1.1f ), volume: 1.75f, maxDist: 10f );
 		//AnimationPath = "textures/sprites/boss_charge.frames";
 		CanTurn = false;
 		CanAttack = false;
@@ -262,7 +262,7 @@ public class Boss : Enemy
 
 		Sprite.FlipHorizontal = target_pos.x > Position2D.x;
 
-		//Game.PlaySfxNearby( "boss.charge", Position, pitch: Game.Random.Float( 0.9f, 1.05f ), volume: 1.6f, maxDist: 9f );
+		Manager.Instance.PlaySfxNearby( "boss.charge", Position2D, pitch: Game.Random.Float( 0.9f, 1.05f ), volume: 1.6f, maxDist: 9f );
 	}
 
 	public override void Colliding( Thing other, float percent, float dt )
@@ -287,7 +287,7 @@ public class Boss : Enemy
 
 					if ( !player.IsInvulnerable )
 					{
-						//Game.PlaySfxNearby( "zombie.attack.player", Position, pitch: Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.95f, 1.15f, EasingType.QuadIn ), volume: 1f, maxDist: 5.5f );
+						Manager.Instance.PlaySfxNearby( "zombie.attack.player", Position2D, pitch: Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.95f, 1.15f, EasingType.QuadIn ), volume: 1f, maxDist: 5.5f );
 
 						player.Damage( dmg );
 
@@ -307,7 +307,7 @@ public class Boss : Enemy
 
 		//ColorFill = new ColorHsv( 0f, 0f, 0f, 0f );
 
-		//Game.PlaySfxNearby( "boss.die", Position, pitch: Game.Random.Float( 0.75f, 0.8f ), volume: 1.5f, maxDist: 15f );
-		//Game.Victory();
+		Manager.Instance.PlaySfxNearby( "boss.die", Position2D, pitch: Game.Random.Float( 0.75f, 0.8f ), volume: 1.5f, maxDist: 15f );
+		Manager.Instance.Victory();
 	}
 }

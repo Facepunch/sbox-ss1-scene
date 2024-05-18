@@ -93,7 +93,7 @@ public class SpitterElite : Enemy
 		_prepareShootTime = 0f;
 		IsShooting = true;
 		//AnimationPath = "textures/sprites/spitter_shoot.frames";
-		//Game.PlaySfxNearby( "spitter.prepare", Position, pitch: Game.Random.Float( 1f, 1.1f ), volume: 0.6f, maxDist: 2.75f );
+		Manager.Instance.PlaySfxNearby( "spitter.prepare", Position2D, pitch: Game.Random.Float( 1f, 1.1f ), volume: 0.6f, maxDist: 2.75f );
 		CanAttack = false;
 		_numVolleysShot = 0;
 		_currShootDelay = Game.Random.Float( 0.1f, 0.5f );
@@ -116,7 +116,7 @@ public class SpitterElite : Enemy
 		_prepareShootTime = 0f;
 		_currShootDelay = Game.Random.Float( 0.1f, 0.5f );
 
-		//Game.PlaySfxNearby( "spitter.shoot", Position, pitch: Game.Random.Float( 1.0f, 1.1f ), volume: 0.9f, maxDist: 5f );
+		Manager.Instance.PlaySfxNearby( "spitter.shoot", Position2D, pitch: Game.Random.Float( 1.0f, 1.1f ), volume: 0.9f, maxDist: 5f );
 
 		//if ( _numVolleysShot >= 3 )
 		//	AnimationPath = "textures/sprites/spitter_shoot_reverse.frames";
@@ -151,7 +151,7 @@ public class SpitterElite : Enemy
 
 					if ( !player.IsInvulnerable )
 					{
-						//Game.PlaySfxNearby( "zombie.attack.player", Position, pitch: Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.95f, 1.15f, EasingType.QuadIn ), volume: 1f, maxDist: 5.5f );
+						Manager.Instance.PlaySfxNearby( "zombie.attack.player", Position2D, pitch: Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.95f, 1.15f, EasingType.QuadIn ), volume: 1f, maxDist: 5.5f );
 
 						player.Damage( dmg );
 

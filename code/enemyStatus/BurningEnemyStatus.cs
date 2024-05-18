@@ -70,7 +70,7 @@ public class BurningEnemyStatus : EnemyStatus
 				if ( !enemy.HasEnemyStatus<BurningEnemyStatus>() && Game.Random.Float( 0f, 1f ) < SpreadChance )
 				{
 					enemy.Burn( Player, Damage, Lifetime, SpreadChance );
-					//Manager.Instance.PlaySfxNearby.PlaySfxNearby( "burn", enemy.Position, pitch: Game.Random.Float( 1.15f, 1.35f ), volume: 0.7f, maxDist: 4f );
+					Manager.Instance.PlaySfxNearby( "burn", enemy.Position2D, pitch: Game.Random.Float( 1.15f, 1.35f ), volume: 0.7f, maxDist: 4f );
 				}
 
 				didDamage = true;

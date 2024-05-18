@@ -135,7 +135,7 @@ public class SpikerElite : Enemy
 			elite: true
 		);
 
-		//Game.PlaySfxNearby( "spike.prepare", target_pos, pitch: Game.Random.Float( 0.95f, 1.05f ), volume: 1.5f, maxDist: 5f );
+		Manager.Instance.PlaySfxNearby( "spike.prepare", target_pos, pitch: Game.Random.Float( 0.95f, 1.05f ), volume: 1.5f, maxDist: 5f );
 	}
 
 	public void FinishShooting()
@@ -169,7 +169,7 @@ public class SpikerElite : Enemy
 
 					if ( !player.IsInvulnerable )
 					{
-						//Game.PlaySfxNearby( "zombie.attack.player", Position, pitch: Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.95f, 1.15f, EasingType.QuadIn ), volume: 1f, maxDist: 5.5f );
+						Manager.Instance.PlaySfxNearby( "zombie.attack.player", Position2D, pitch: Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.95f, 1.15f, EasingType.QuadIn ), volume: 1f, maxDist: 5.5f );
 
 						player.Damage( dmg );
 
