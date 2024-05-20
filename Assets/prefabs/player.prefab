@@ -1,6 +1,7 @@
 {
   "RootObject": {
-    "__guid": "6cbb1db3-3c5c-4fc3-b143-0c95c8984656",
+    "__guid": "7270cb20-18e9-40c9-bfb7-3cedbba8c653",
+    "Flags": 0,
     "Name": "player",
     "Enabled": true,
     "NetworkMode": 2,
@@ -8,7 +9,7 @@
     "Components": [
       {
         "__type": "Player",
-        "__guid": "939bff54-09fa-4cb0-843b-f9324217ec16",
+        "__guid": "577ac0b5-842e-4859-a313-c9e5d21e48c4",
         "ArrowAimerPrefab": {
           "_type": "gameobject",
           "prefab": "prefabs/arrow.prefab"
@@ -19,23 +20,33 @@
         },
         "Sprite": {
           "_type": "component",
-          "component_id": "f91ee2ca-4a01-4b2c-8aea-56b045069334",
-          "go": "f45f7cab-0fd1-4590-86c0-ea7a817143d0",
+          "component_id": "daccd7bd-9c64-46c2-b821-88721a20d687",
+          "go": "1ce60815-7225-4835-b172-99663caf0702",
           "component_type": "SpriteRenderer"
+        },
+        "SpriteC": {
+          "_type": "component",
+          "component_id": "c00f82a6-ede0-4371-9707-95bcc1e8f1ab",
+          "go": "1ce60815-7225-4835-b172-99663caf0702",
+          "component_type": "SpriteComponent"
         }
       }
     ],
     "Children": [
       {
-        "__guid": "f45f7cab-0fd1-4590-86c0-ea7a817143d0",
+        "__guid": "1ce60815-7225-4835-b172-99663caf0702",
+        "Flags": 0,
         "Name": "sprite",
+        "Rotation": "0,0,-0.7071067,0.7071068",
+        "Scale": "0.1,0.1,0.1",
         "Enabled": true,
         "NetworkMode": 2,
         "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "Sandbox.SpriteRenderer",
-            "__guid": "f91ee2ca-4a01-4b2c-8aea-56b045069334",
+            "__guid": "daccd7bd-9c64-46c2-b821-88721a20d687",
+            "__enabled": false,
             "Additive": false,
             "CastShadows": false,
             "Color": "1,1,1,1",
@@ -46,6 +57,17 @@
             "Opaque": false,
             "Size": "1,1",
             "Texture": "textures/sprites/player.vtex"
+          },
+          {
+            "__type": "SpriteTools.SpriteComponent",
+            "__guid": "c00f82a6-ede0-4371-9707-95bcc1e8f1ab",
+            "_broadcastEvents": {},
+            "CastShadows": "Off",
+            "CreateAttachPoints": false,
+            "PlaybackSpeed": 1,
+            "Sprite": "resources/sprites/citizen_01.sprite",
+            "StartingAnimationName": "idle",
+            "Tint": "1,1,1,1"
           }
         ]
       }

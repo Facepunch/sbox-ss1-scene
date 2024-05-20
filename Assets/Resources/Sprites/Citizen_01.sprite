@@ -1,0 +1,167 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 4,
+      "Origin": "0.5,0.96875",
+      "Looping": true,
+      "Name": "stand",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_0.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_1.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 4,
+      "Origin": "0.5,0.969",
+      "Looping": true,
+      "Name": "stand-hit",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_8.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_9.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 4,
+      "Origin": "0.5,0.969",
+      "Looping": true,
+      "Name": "stand-attack",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_4.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_5.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 4,
+      "Origin": "0.5,0.969",
+      "Looping": true,
+      "Name": "stand-attack-hit",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_12.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_13.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 4,
+      "Origin": "0.5,0.969",
+      "Looping": true,
+      "Name": "walk",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_2.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_3.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 4,
+      "Origin": "0.5,0.969",
+      "Looping": true,
+      "Name": "walk-hit",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_10.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_11.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 4,
+      "Origin": "0.5,0.969",
+      "Looping": true,
+      "Name": "walk-attack",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_6.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_7.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 4,
+      "Origin": "0.5,0.969",
+      "Looping": true,
+      "Name": "walk-attack-hit",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_14.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_15.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 4,
+      "Origin": "0.5,0.969",
+      "Looping": true,
+      "Name": "dead",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_19.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_18.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_17.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/citizen/player_spritesheet_1_16.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__version": 0,
+  "__references": []
+}

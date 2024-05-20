@@ -93,13 +93,15 @@ public class Player : Thing
 
 	private bool _doneFirstUpdate;
 
+	string AnimationString = "idle";
+
 	protected override void OnAwake()
 	{
 		base.OnAwake();
 
-		OffsetY = -0.42f;
+		OffsetY = 0.0f;
 
-		Scale = 1f;
+		Scale = .01f;
 
 		ShadowOpacity = 0.8f;
 		ShadowScale = 1.12f;
@@ -293,9 +295,9 @@ public class Player : Thing
 		float dt = Time.Delta;
 
 		if ( Velocity.x > 0f )
-			Sprite.FlipHorizontal = true;
+			SpriteC.Transform.Scale = new Vector3( Scale, -Scale, 1f );
 		else if ( Velocity.x < 0f )
-			Sprite.FlipHorizontal = false;
+			SpriteC.Transform.Scale = new Vector3( Scale, Scale, 1f );
 
 		if ( !IsDead )
 		{
@@ -368,6 +370,27 @@ public class Player : Thing
 		{
 			AddExperience( 1 );
 		}
+
+		bool hurting = TimeSinceHurt < 0.15f;
+		bool attacking = !IsReloading;
+		bool moving = Velocity.LengthSquared > 0.01f && inputVector.LengthSquared > 0.1f;
+
+		string stateStr = "";
+		if ( hurting && attacking )
+			stateStr = "-attack-hit";
+		else if ( hurting )
+			stateStr = "-hit";
+		else if ( attacking )
+			stateStr = "-attack";
+
+		if ( SpriteC != null )
+		{
+			AnimationString = IsDead ? "death" : IsDashing ? "dash" : IsMoving ? $"walk{stateStr}" : $"stand{stateStr}";
+
+			SpriteC.PlayAnimation( AnimationString );
+		}
+
+		TimeSinceHurt += dt;
 	}
 
 	void HandleRegen( float dt )

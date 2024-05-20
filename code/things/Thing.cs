@@ -1,4 +1,5 @@
 ﻿using Sandbox.UI;
+using SpriteTools;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,6 +12,7 @@ using static Manager;
 public class Thing : Component
 {
 	[Property] public SpriteRenderer Sprite { get; set; }
+	[Property] public SpriteComponent SpriteC { get; set; }
 	[Sync] public float Scale { get; set; }
 
 	[Sync] public float Radius { get; set; }
@@ -55,6 +57,11 @@ public class Thing : Component
 			ShadowSprite.Size = new Vector2( ShadowScale );
 
 			SpriteDirty = false;
+		}
+
+		if(SpriteC != null)
+		{
+			SpriteC.Transform.Scale = new Vector3( Scale, Scale, 1f );
 		}
 	}
 
