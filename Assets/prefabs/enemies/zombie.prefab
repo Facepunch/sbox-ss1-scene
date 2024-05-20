@@ -1,0 +1,73 @@
+{
+  "RootObject": {
+    "__guid": "bc34a1e9-244b-46b5-88c0-a7b9eb1794ee",
+    "Flags": 0,
+    "Name": "zombie",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Zombie",
+        "__guid": "f75bdbdc-b977-45eb-9c89-0f991e3b15a3",
+        "Sprite": {
+          "_type": "component",
+          "component_id": "48c7c9d3-3b14-4ec6-94cb-b4a3b884c4d9",
+          "go": "bc34a1e9-244b-46b5-88c0-a7b9eb1794ee",
+          "component_type": "SpriteRenderer"
+        },
+        "SpriteC": {
+          "_type": "component",
+          "component_id": "ab165b27-fbef-4686-a2a9-ea1fae77a081",
+          "go": "822eff49-5797-484a-a514-038efe6ac353",
+          "component_type": "SpriteComponent"
+        }
+      },
+      {
+        "__type": "Sandbox.SpriteRenderer",
+        "__guid": "48c7c9d3-3b14-4ec6-94cb-b4a3b884c4d9",
+        "Additive": false,
+        "CastShadows": false,
+        "Color": "1,1,1,1",
+        "DepthFeather": 0,
+        "FlipHorizontal": false,
+        "FlipVertical": false,
+        "FogStrength": 1,
+        "Opaque": false,
+        "Size": "0.01,0.01",
+        "Texture": "materials/particle/base_sprite.vtex"
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "822eff49-5797-484a-a514-038efe6ac353",
+        "Flags": 0,
+        "Name": "Object",
+        "Rotation": "0,0,-0.7071067,0.7071068",
+        "Scale": "0.01,0.01,1",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "SpriteTools.SpriteComponent",
+            "__guid": "ab165b27-fbef-4686-a2a9-ea1fae77a081",
+            "_broadcastEvents": {},
+            "CastShadows": "Off",
+            "CreateAttachPoints": false,
+            "PlaybackSpeed": 1,
+            "Sprite": "resources/sprites/zombie_01.sprite",
+            "StartingAnimationName": "walk",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
