@@ -265,8 +265,10 @@ public sealed class Manager : Component, Component.INetworkListener
 		if ( EnemyCount >= MAX_ENEMY_COUNT && !forceSpawn )
 			return;
 
-		var enemyObj = EnemyPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
-		var enemy = enemyObj.Components.Create( type ) as Enemy;
+		var zomb = ResourceLibrary.Get<PrefabFile>( "prefabs/enemies/zombie.prefab" );
+
+		var enemyObj = SceneUtility.GetPrefabScene(zomb).Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+		//var enemy = enemyObj.Components.Create( type ) as Enemy;
 		enemyObj.Name = type.ToString();
 		enemyObj.NetworkSpawn();
 		//enemyObj.Transform.Position = new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) );
@@ -275,7 +277,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		//if ( closestPlayer?.Position2D.x > pos.x )
 		//	enemy.Scale = new Vector2( -1f, 1f ) * enemy.ScaleFactor;
 
-		AddThing( enemy );
+		AddThing( enemyObj.Components.Get<Enemy>() );
 		EnemyCount++;
 
 		if ( type == TypeLibrary.GetType( typeof( Crate ) ) )
