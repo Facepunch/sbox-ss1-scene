@@ -31,7 +31,8 @@
           "component_type": "SpriteRenderer"
         }
       }
-    ]
+    ],
+    "Children": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

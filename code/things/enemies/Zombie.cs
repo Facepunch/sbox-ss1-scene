@@ -10,7 +10,7 @@ public class Zombie : Enemy
 
 	protected override void OnAwake()
 	{
-		OffsetY = -0.38f;
+		OffsetY = -0f;
 		ShadowScale = 0.95f;
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
@@ -24,7 +24,7 @@ public class Zombie : Enemy
 		Sprite.Texture = Texture.Load("textures/sprites/zombie.vtex");
 
 		//ScaleFactor = 0.85f;
-		Scale = 0.85f;
+		Scale = .01f;
 		Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 10f;

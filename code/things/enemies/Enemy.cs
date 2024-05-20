@@ -193,6 +193,9 @@ public abstract class Enemy : Thing
 					_aggroTimer = 0f;
 				}
 			}
+
+			if ( SpriteC != null )
+				SpriteC.PlayAnimation( "walk" );
 		}
 		else
 		{
@@ -212,6 +215,9 @@ public abstract class Enemy : Thing
 				//AnimSpeed = Utils.Map( dist_sqr, attack_dist_sqr, 0f, 1f, 4f, EasingType.Linear );
 				_aggroTimer = 0f;
 			}
+
+			if ( SpriteC != null )
+				SpriteC.PlayAnimation( "attack" );
 		}
 	}
 
@@ -231,7 +237,8 @@ public abstract class Enemy : Thing
 
 			if ( MathF.Abs( Velocity.x ) > 0.175f && !IsFrozen && CanTurn )
 				Sprite.FlipHorizontal = Velocity.x > 0f;
-				//Scale = new Vector2( 1f * Velocity.x < 0f ? 1f : -1f, 1f ) * ScaleFactor;
+				SpriteC.Transform.Scale = Velocity.x > 0f? new Vector3( Scale, -Scale, 1f ) : new Vector3( Scale, Scale, 1f );
+			//Scale = new Vector2( 1f * Velocity.x < 0f ? 1f : -1f, 1f ) * ScaleFactor;
 		}
 		else
 		{
@@ -242,8 +249,10 @@ public abstract class Enemy : Thing
 			if ( !IsFrozen && CanTurn )
 			{
 				Sprite.FlipHorizontal = (targetPlayer.Position2D.x < Position2D.x ? false : true);
+				SpriteC.Transform.Scale = targetPlayer.Position2D.x < Position2D.x ? new Vector3( Scale, Scale, 1f ) : new Vector3( Scale, -Scale, 1f );
 				if ( IsFeared )
 					Sprite.FlipHorizontal = !Sprite.FlipHorizontal;
+					SpriteC.Transform.Scale = !Sprite.FlipHorizontal ? new Vector3( Scale, Scale, 1f ) : new Vector3( Scale, -Scale, 1f );
 			}
 				
 			//Scale = new Vector2( (IsFeared ? -1f : 1f) * (targetPlayer.Position.x < Position.x ? 1f : -1f), 1f ) * ScaleFactor;
@@ -268,6 +277,9 @@ public abstract class Enemy : Thing
 		DeathTimeElapsed += dt;
 		//Scale = _deathScale * Utils.Map( DeathTimeElapsed, 0f, DeathTime, 1f, 1.2f );
 
+		if ( SpriteC != null )
+			SpriteC.PlayAnimation( "death" );
+
 		if ( DeathTimeElapsed > DeathTime )
 		{
 			DeathProgress = 1f;
@@ -288,6 +300,9 @@ public abstract class Enemy : Thing
 			//AnimationPath = AnimIdlePath;
 			ShadowOpacity = ShadowFullOpacity;
 			Sprite.Color = Color.White.WithAlpha( FullOpacity );
+
+			if ( SpriteC != null )
+				SpriteC.PlayAnimation( "walk" );
 		}
 		else
 		{
@@ -296,6 +311,9 @@ public abstract class Enemy : Thing
 				var cloud = Manager.Instance.SpawnCloud( Position2D + new Vector2( 0f, 0.05f ) );
 				cloud.Velocity = new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) ).Normal * Game.Random.Float( 0.2f, 0.6f );
 				_spawnCloudTime = Game.Random.Float( 0f, 0.15f );
+
+				if ( SpriteC != null )
+					SpriteC.PlayAnimation( "spawn" );
 			}
 
 			ShadowOpacity = Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, ShadowFullOpacity );

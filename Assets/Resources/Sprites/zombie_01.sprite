@@ -1,0 +1,157 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 6,
+      "Origin": "0.5,0.9375",
+      "Looping": true,
+      "Name": "walk",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/zombie/zombie_1.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_2.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 9,
+      "Origin": "0.5,0.938",
+      "Name": "spawn",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/zombie/zombie_3.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_4.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_5.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_6.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_7.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_8.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_9.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_10.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_11.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_12.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_13.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_14.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_15.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_16.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_17.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_18.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 12,
+      "Origin": "0.5,0.938",
+      "Looping": true,
+      "Name": "death",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/zombie/zombie_20.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_21.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_22.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_23.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_24.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_25.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_26.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 6,
+      "Origin": "0.5,0.938",
+      "Looping": true,
+      "Name": "attack",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/zombie/zombie_27.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_28.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_29.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie/zombie_30.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__version": 0,
+  "__references": []
+}
