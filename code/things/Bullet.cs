@@ -28,8 +28,6 @@ public class Bullet : Thing
 	{
 		base.OnAwake();
 
-		OffsetY = -0.45f;
-
 		Radius = 0.1f;
 
 		ShadowOpacity = 0.8f;
@@ -38,7 +36,7 @@ public class Bullet : Thing
 
 		if ( IsProxy )
 			return;
-
+		Scale = 0.01f;
 		//Scale = new Vector2( 0.1f, 0.1f );
 		TimeSinceSpawn = 0f;
 		NumHits = 0;
@@ -65,7 +63,7 @@ public class Bullet : Thing
 		if ( Stats[BulletStat.HealTeammateAmount] > 0f )
 		{
 			CollideWith.Add( typeof( Player ) );
-			Sprite.Color = Color.Green;
+			//Sprite.Color = Color.Green;
 		}
 	}
 
@@ -78,6 +76,7 @@ public class Bullet : Thing
 			: Utils.Map( damage, 30f, 150f, 0.5f, 1.75f, EasingType.QuadIn );
 
 		Scale = scale;
+		Scale = Scale * 0.05f;
 		//Sprite.Size = new Vector2( scale );
 		
 		Radius = 0.07f + scale * 0.2f;

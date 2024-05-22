@@ -46,11 +46,9 @@ public class Boss : Enemy
 		//AnimSpeed = 3f;
 		//BasePivotY = 0.05f;
 
-		Sprite.Texture = Texture.Load("textures/sprites/boss.vtex");
-
 		//ScaleFactor = 0.85f;
 		Scale = 2.5f;
-		Sprite.Size = new Vector2( 1f, 1f ) * Scale;
+		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 50f;
 		DeathTime = 3f;
@@ -260,7 +258,7 @@ public class Boss : Enemy
 		_chargeDelayTimer = Game.Random.Float( CHARGE_DELAY_MIN, CHARGE_DELAY_MAX ) * Utils.Map( Health, MaxHealth, 0f, 1f, 0.5f, EasingType.SineIn );
 		_chargeVel = Vector2.Zero;
 
-		Sprite.FlipHorizontal = target_pos.x > Position2D.x;
+		//Sprite.FlipHorizontal = target_pos.x > Position2D.x;
 
 		//Game.PlaySfxNearby( "boss.charge", Position, pitch: Game.Random.Float( 0.9f, 1.05f ), volume: 1.6f, maxDist: 9f );
 	}

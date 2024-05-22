@@ -48,7 +48,7 @@ public class HealthPack : Thing
 		if ( Manager.Instance.IsGameOver )
 			return;
 
-		Sprite.Size = new Vector2( 0.6f + Utils.FastSin( SpawnTime * 8f ) * 0.025f, 0.6f + MathF.Cos( SpawnTime * 8f ) * 0.025f );
+		//Sprite.Size = new Vector2( 0.6f + Utils.FastSin( SpawnTime * 8f ) * 0.025f, 0.6f + MathF.Cos( SpawnTime * 8f ) * 0.025f );
 		//ShadowScale = 0.8f + Utils.FastSin( SpawnTime * 8f ) * 0.025f;
 
 		if ( IsProxy )

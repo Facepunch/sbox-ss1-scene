@@ -11,8 +11,7 @@ using static Manager;
 
 public class Thing : Component
 {
-	[Property] public SpriteRenderer Sprite { get; set; }
-	[Property] public SpriteComponent SpriteC { get; set; }
+	[Property] public SpriteComponent Sprite { get; set; }
 	[Sync] public float Scale { get; set; }
 
 	[Sync] public float Radius { get; set; }
@@ -53,15 +52,14 @@ public class Thing : Component
 
 		if( SpriteDirty && ShadowSprite != null )
 		{
-			Sprite.Size = new Vector2( Scale );
 			ShadowSprite.Size = new Vector2( ShadowScale );
 
 			SpriteDirty = false;
 		}
 
-		if(SpriteC != null)
+		if(Sprite != null)
 		{
-			SpriteC.Transform.Scale = new Vector3( Scale, Scale, 1f );
+			Sprite.Transform.Scale = new Vector3( Scale, Scale, 1f );
 		}
 	}
 

@@ -26,10 +26,9 @@ public class ExploderElite : Enemy
 		base.OnAwake();
 
 		//AnimSpeed = 2f;
-		Sprite.Texture = Texture.Load("textures/sprites/exploder_elite.vtex");
 
 		Scale = 1.2f;
-		Sprite.Size = new Vector2( 1f, 1f ) * Scale;
+		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 12f;
 		Deceleration = 1.87f;
@@ -67,7 +66,7 @@ public class ExploderElite : Enemy
 
 		if ( IsExploding )
 		{
-			Sprite.Color = Color.Lerp( Color.White, Color.Blue, 0.5f + Utils.FastSin( Time.Now * 24f ) * 0.5f );
+			Sprite.Tint = Color.Lerp( Color.White, Color.Blue, 0.5f + Utils.FastSin( Time.Now * 24f ) * 0.5f );
 		}
 
 		if ( IsProxy )

@@ -16,11 +16,9 @@ public class Crate : Enemy
 		//AnimSpeed = 2f;
 		//BasePivotY = 0.05f;
 
-		Sprite.Texture = Texture.Load("textures/sprites/crate.vtex");
-
 		//ScaleFactor = 0.95f;
 		//Sprite.Size = new Vector2( 1f, 1f ) * ScaleFactor;
-		Scale = 0.95f;
+		Scale = 0.095f;
 
 		PushStrength = 5f;
 		Deceleration = 10f;

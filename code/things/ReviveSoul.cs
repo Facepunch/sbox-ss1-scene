@@ -41,11 +41,11 @@ public class ReviveSoul : Thing
 		if ( Manager.Instance.IsGameOver )
 			return;
 
-		Sprite.Size = new Vector2( 0.6f + Utils.FastSin( SpawnTime * 8f ) * 0.025f, 0.6f + MathF.Cos( SpawnTime * 8f ) * 0.025f );
+		//Sprite.Size = new Vector2( 0.6f + Utils.FastSin( SpawnTime * 8f ) * 0.025f, 0.6f + MathF.Cos( SpawnTime * 8f ) * 0.025f );
 		//ShadowScale = 0.8f + Utils.FastSin( SpawnTime * 8f ) * 0.025f;
 
 		float opacity = 0.3f + Utils.FastSin( SpawnTime * 5f ) * 0.2f;
-		Sprite.Color = Color.White.WithAlpha( opacity );
+		Sprite.Tint = Color.White.WithAlpha( opacity );
 		ShadowSprite.Color = Color.Black.WithAlpha( opacity );
 
 		if ( IsProxy )

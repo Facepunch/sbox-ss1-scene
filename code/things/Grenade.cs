@@ -60,7 +60,7 @@ public class Grenade : Thing
 		if ( Manager.Instance.IsGameOver )
 			return;
 
-		Sprite.Color = Color.Lerp( StickyPercent <= 0f ? Color.Red : Color.Magenta, new Color( 0f, 0.01f, 0f ), 0.5f + MathF.Sin( SpawnTime.Relative * Utils.Map( SpawnTime, 0f, Lifetime, 1f, 16f, EasingType.QuadIn ) ) * 0.5f );
+		//Sprite.Color = Color.Lerp( StickyPercent <= 0f ? Color.Red : Color.Magenta, new Color( 0f, 0.01f, 0f ), 0.5f + MathF.Sin( SpawnTime.Relative * Utils.Map( SpawnTime, 0f, Lifetime, 1f, 16f, EasingType.QuadIn ) ) * 0.5f );
 
 		if ( IsProxy )
 			return;

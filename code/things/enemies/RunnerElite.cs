@@ -20,10 +20,9 @@ public class RunnerElite : Enemy
 		base.OnAwake();
 
 		//AnimSpeed = 2f;
-		Sprite.Texture = Texture.Load("textures/sprites/runner.vtex");
 
 		Scale = 1.3f;
-		Sprite.Size = new Vector2( 1f, 1f ) * Scale;
+		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 10f;
 		Deceleration = 0.27f;

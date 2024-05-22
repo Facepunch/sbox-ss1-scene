@@ -239,7 +239,7 @@ public class Player : Thing
 		TimeSinceHurt = 999f;
 		//ShadowOpacity = 0.8f;
 		//ShadowScale = 1.12f;
-		Sprite.Color = Color.White;
+		Sprite.Tint = Color.White;
 		ShadowOpacity = 0.8f;
 
 		//AddStatus( TypeLibrary.GetType( typeof( DamageStatus) ) );
@@ -295,9 +295,9 @@ public class Player : Thing
 		float dt = Time.Delta;
 
 		if ( Velocity.x > 0f )
-			SpriteC.Transform.Scale = new Vector3( Scale, -Scale, 1f );
+			Sprite.Transform.Scale = new Vector3( Scale, -Scale, 1f );
 		else if ( Velocity.x < 0f )
-			SpriteC.Transform.Scale = new Vector3( Scale, Scale, 1f );
+			Sprite.Transform.Scale = new Vector3( Scale, Scale, 1f );
 
 		if ( !IsDead )
 		{
@@ -383,11 +383,11 @@ public class Player : Thing
 		else if ( attacking )
 			stateStr = "-attack";
 
-		if ( SpriteC != null )
+		if ( Sprite != null )
 		{
 			AnimationString = IsDead ? "death" : IsDashing ? "dash" : IsMoving ? $"walk{stateStr}" : $"stand{stateStr}";
 
-			SpriteC.PlayAnimation( AnimationString );
+			Sprite.PlayAnimation( AnimationString );
 		}
 
 		TimeSinceHurt += dt;
@@ -432,13 +432,13 @@ public class Player : Thing
 			if ( DashInvulnTimer <= 0f )
 			{
 				IsDashing = false;
-				Sprite.Color = Color.White;
+				Sprite.Tint = Color.White;
 				DashFinished();
 			}
 			else
 			{
 				if ( IsInvulnerable )
-					Sprite.Color = new Color( Game.Random.Float( 0.1f, 0.25f ), Game.Random.Float( 0.1f, 0.25f ), 1f );
+					Sprite.Tint = new Color( Game.Random.Float( 0.1f, 0.25f ), Game.Random.Float( 0.1f, 0.25f ), 1f );
 
 				if ( _dashCloudTime > Game.Random.Float( 0.1f, 0.2f ) )
 				{
@@ -544,7 +544,7 @@ public class Player : Thing
 		if ( _isFlashing )
 			return;
 
-		Sprite.Color = new Color( 1f, 0f, 0f );
+		Sprite.Tint = new Color( 1f, 0f, 0f );
 		_isFlashing = true;
 		_flashTimer = time;
 	}
@@ -552,7 +552,7 @@ public class Player : Thing
 	[Broadcast]
 	public void Heal( float amount, float flashTime )
 	{
-		Sprite.Color = new Color( 0f, 1f, 0f );
+		Sprite.Tint = new Color( 0f, 1f, 0f );
 		_isFlashing = true;
 		_flashTimer = flashTime;
 
@@ -572,7 +572,7 @@ public class Player : Thing
 			if ( _flashTimer < 0f )
 			{
 				_isFlashing = false;
-				Sprite.Color = Color.White;
+				Sprite.Tint = Color.White;
 			}
 		}
 	}
@@ -849,7 +849,7 @@ public class Player : Thing
 			return;
 
 		IsDead = true;
-		Sprite.Color = new Color( 1f, 1f, 1f, 0.05f );
+		Sprite.Tint = new Color( 1f, 1f, 1f, 0.05f );
 		ShadowOpacity = 0.2f;
 		_isFlashing = false;
 		IsReloading = false;
@@ -875,7 +875,7 @@ public class Player : Thing
 		IsChoosingLevelUpReward = false;
 		IsDashing = false;
 		IsReloading = true;
-		Sprite.Color = Color.White;
+		Sprite.Tint = Color.White;
 		ShadowOpacity = 0.8f;
 
 		if ( IsProxy )
