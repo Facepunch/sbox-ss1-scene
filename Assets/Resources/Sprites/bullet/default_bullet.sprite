@@ -1,0 +1,19 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 15,
+      "Origin": "0.5000001,0.5000001",
+      "Looping": true,
+      "Name": "idle",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/images/bullet.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__references": [],
+  "__version": 0
+}

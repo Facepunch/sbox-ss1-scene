@@ -1,0 +1,175 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 6,
+      "Origin": "0.5,0.9117647",
+      "Looping": true,
+      "Name": "walk",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/exploder/exploder_0.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_1.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 9,
+      "Origin": "0.5,0.912",
+      "Looping": true,
+      "Name": "spawn",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/exploder/exploder_3.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_4.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_5.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_6.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_7.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_8.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_9.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_10.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_11.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_12.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_13.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_14.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_15.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_16.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 9,
+      "Origin": "0.5,0.912",
+      "Looping": true,
+      "Name": "death",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/exploder/exploder_17.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_18.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_19.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_20.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_21.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_22.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_23.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_24.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 6,
+      "Origin": "0.5,0.912",
+      "Looping": true,
+      "Name": "attack",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/exploder/exploder_25.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_26.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_27.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 6,
+      "Origin": "0.5,0.5",
+      "Looping": true,
+      "Name": "explode",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/exploder/exploder_30.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_29.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_28.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/exploder/exploder_31.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__references": [],
+  "__version": 0
+}

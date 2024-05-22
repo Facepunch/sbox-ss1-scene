@@ -1,51 +1,43 @@
 {
   "RootObject": {
-    "__guid": "85798f91-f55e-494f-9c3a-3aa2c1fde704",
+    "__guid": "bc34a1e9-244b-46b5-88c0-a7b9eb1794ee",
     "Flags": 0,
-    "Name": "player",
+    "Name": "exploder",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Player",
-        "__guid": "f693c8b0-8322-496d-b228-5eb2e66ce85a",
-        "ArrowAimerPrefab": {
-          "_type": "gameobject",
-          "prefab": "prefabs/arrow.prefab"
-        },
-        "BulletPrefab": {
-          "_type": "gameobject",
-          "prefab": "prefabs/bullet.prefab"
-        },
+        "__type": "Exploder",
+        "__guid": "c91de11b-061e-434e-832e-e74aa47f810b",
         "Sprite": {
           "_type": "component",
-          "component_id": "fd77e359-68d4-40b5-a94f-fe30140a7a3d",
-          "go": "b055bf32-7b44-4f79-9456-b8327d122493",
+          "component_id": "ab165b27-fbef-4686-a2a9-ea1fae77a081",
+          "go": "822eff49-5797-484a-a514-038efe6ac353",
           "component_type": "SpriteComponent"
         }
       }
     ],
     "Children": [
       {
-        "__guid": "b055bf32-7b44-4f79-9456-b8327d122493",
+        "__guid": "822eff49-5797-484a-a514-038efe6ac353",
         "Flags": 0,
-        "Name": "sprite",
+        "Name": "Object",
         "Rotation": "0,0,-0.7071067,0.7071068",
-        "Scale": "0.1,0.1,0.1",
+        "Scale": "0.01,0.01,1",
         "Enabled": true,
         "NetworkMode": 2,
         "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "SpriteTools.SpriteComponent",
-            "__guid": "fd77e359-68d4-40b5-a94f-fe30140a7a3d",
+            "__guid": "ab165b27-fbef-4686-a2a9-ea1fae77a081",
             "_broadcastEvents": {},
             "CastShadows": "Off",
             "CreateAttachPoints": false,
             "PlaybackSpeed": 1,
-            "Sprite": "resources/sprites/citizen_01.sprite",
-            "StartingAnimationName": "stand",
+            "Sprite": "resources/sprites/enemy/exploder_01.sprite",
+            "StartingAnimationName": "walk",
             "Tint": "1,1,1,1"
           }
         ]

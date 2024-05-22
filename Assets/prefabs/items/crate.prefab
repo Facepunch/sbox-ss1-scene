@@ -1,26 +1,40 @@
 {
   "RootObject": {
-    "__guid": "5dc66509-4332-4e91-9a53-c04f5aaf5ea1",
+    "__guid": "499b9f69-e2f7-4c9a-9269-3fec5010bce6",
     "Flags": 0,
-    "Name": "zombie",
+    "Name": "crate",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Zombie",
-        "__guid": "0526aeaa-8446-46f3-88df-daa5c343ab42",
+        "__type": "Sandbox.SpriteRenderer",
+        "__guid": "1b877094-37f1-41e1-926c-795afa89254f",
+        "Additive": false,
+        "CastShadows": false,
+        "Color": "1,1,1,1",
+        "DepthFeather": 0,
+        "FlipHorizontal": false,
+        "FlipVertical": false,
+        "FogStrength": 1,
+        "Opaque": false,
+        "Size": "0.01,0.01",
+        "Texture": "materials/particle/base_sprite.vtex"
+      },
+      {
+        "__type": "Crate",
+        "__guid": "03ed8b2e-c46a-4bbe-a10a-01f5108478e9",
         "Sprite": {
           "_type": "component",
-          "component_id": "d88ffe3b-c3a6-4323-b8e2-a434db96724c",
-          "go": "07de4150-9368-4a42-9842-20fd182e577c",
+          "component_id": "c2f3dce6-38fb-429d-b6cf-c2351434267c",
+          "go": "a9e62cde-e9d3-4998-ac5d-23f995c7e97c",
           "component_type": "SpriteComponent"
         }
       }
     ],
     "Children": [
       {
-        "__guid": "07de4150-9368-4a42-9842-20fd182e577c",
+        "__guid": "a9e62cde-e9d3-4998-ac5d-23f995c7e97c",
         "Flags": 0,
         "Name": "Object",
         "Rotation": "0,0,-0.7071067,0.7071068",
@@ -31,12 +45,12 @@
         "Components": [
           {
             "__type": "SpriteTools.SpriteComponent",
-            "__guid": "d88ffe3b-c3a6-4323-b8e2-a434db96724c",
+            "__guid": "c2f3dce6-38fb-429d-b6cf-c2351434267c",
             "_broadcastEvents": {},
             "CastShadows": "Off",
             "CreateAttachPoints": false,
             "PlaybackSpeed": 1,
-            "Sprite": "resources/sprites/enemy/zombie_01.sprite",
+            "Sprite": "resources/sprites/items/crate.sprite",
             "StartingAnimationName": "walk",
             "Tint": "1,1,1,1"
           }
