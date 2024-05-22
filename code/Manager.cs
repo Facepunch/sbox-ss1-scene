@@ -1,5 +1,26 @@
 using Sandbox;
 using Sandbox.Network;
+using System.Reflection;
+public class PrefabAttribute : Attribute
+{
+	public string Path { get; private set; }
+	public PrefabAttribute( string path )
+	{
+		Path = path;
+	}
+}
+public enum UnitType
+{
+	[Prefab( "prefabs/enemies/zombie.prefab" )]
+	Zombie,
+	[Prefab( "prefabs/items/crate.prefab" )]
+	Crate,
+	[Prefab( "prefabs/enemies/exploder.prefab" )]
+	Exploder,
+	[Prefab( "prefabs/items/crate.prefab" )]
+	ExploderElite,
+}
+
 
 public sealed class Manager : Component, Component.INetworkListener
 {
@@ -110,7 +131,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		for ( int i = 0; i < 3; i++ )
 		{
 			var pos = new Vector2( Game.Random.Float( BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x ), Game.Random.Float( BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y ) );
-			SpawnEnemy( TypeLibrary.GetType( typeof( Crate ) ), pos );
+			SpawnEnemy( ResourceLibrary.Get<PrefabFile>( "prefabs/enemies/zombie.prefab" ), pos );
 		}
 
 		//SpawnMagnet( new Vector2( 3f, 3f ) );
@@ -189,7 +210,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		var pos = new Vector2( Game.Random.Float( BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x ), Game.Random.Float( BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y ) );
 
 		//// ZOMBIE (DEFAULT)
-		TypeDescription type = TypeLibrary.GetType( typeof( Zombie ) );
+		UnitType type = UnitType.Zombie;
 
 		// CRATE
 		if ( CrateCount < MAX_CRATE_COUNT )
@@ -202,19 +223,18 @@ public sealed class Manager : Component, Component.INetworkListener
 					additionalCrateChance += player.Stats[PlayerStat.CrateChanceAdditional];
 			}
 			crateChance *= (1f + additionalCrateChance);
-
-			if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < crateChance )
-				type = TypeLibrary.GetType( typeof( Crate ) );
+			if ( type == UnitType.Zombie && Game.Random.Float( 0f, 1f ) < crateChance )
+				type = UnitType.Crate;
 		}
 
 		// EXPLODER
 		float exploderChance = ElapsedTime < 35f ? 0f : Utils.Map( ElapsedTime, 35f, 700f, 0.022f, 0.08f );
-		if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < exploderChance )
+		if ( type == UnitType.Zombie && Game.Random.Float( 0f, 1f ) < exploderChance )
 		{
 			float eliteChance = ElapsedTime < 480f ? 0f : Utils.Map( ElapsedTime, 480f, 1200f, 0.025f, 1f, EasingType.SineIn );
-			type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( ExploderElite ) ) : TypeLibrary.GetType( typeof( Exploder ) );
+			type = Game.Random.Float( 0f, 1f ) < eliteChance ? UnitType.ExploderElite : UnitType.Exploder;
 		}
-
+		/*
 		// SPITTER
 		float spitterChance = ElapsedTime < 100f ? 0f : Utils.Map( ElapsedTime, 100f, 800f, 0.015f, 0.1f );
 		if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < spitterChance )
@@ -253,19 +273,22 @@ public sealed class Manager : Component, Component.INetworkListener
 		{
 			type = TypeLibrary.GetType( typeof( ZombieElite ) );
 		}
+		*/
 
 		//type = Game.Random.Int(0, 2) == 0 ? TypeLibrary.GetType(typeof(RunnerElite)) : TypeLibrary.GetType(typeof(Runner));
 
-		SpawnEnemy( type, pos );
+		var prefab = ResourceLibrary.Get<PrefabFile>(type.GetAttributeOfType<PrefabAttribute>().Path);
+
+		SpawnEnemy( prefab, pos );
 	}
 
 	//void SpawnEnemy( TypeDescription type, Vector2 pos, bool forceSpawn = false )
-	void SpawnEnemy( TypeDescription type, Vector2 pos, bool forceSpawn = false )
+	void SpawnEnemy( PrefabFile type, Vector2 pos, bool forceSpawn = false )
 	{
 		if ( EnemyCount >= MAX_ENEMY_COUNT && !forceSpawn )
 			return;
 
-		var zomb = ResourceLibrary.Get<PrefabFile>( "prefabs/enemies/zombie.prefab" );
+		var zomb = type;
 
 		var enemyObj = SceneUtility.GetPrefabScene(zomb).Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
 		//var enemy = enemyObj.Components.Create( type ) as Enemy;
@@ -280,7 +303,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		AddThing( enemyObj.Components.Get<Enemy>() );
 		EnemyCount++;
 
-		if ( type == TypeLibrary.GetType( typeof( Crate ) ) )
+		if ( enemyObj.Components.Get<Crate>() != null )
 			CrateCount++;
 
 		//PlaySfxNearby( "zombie.dirt", pos, pitch: Game.Random.Float( 0.6f, 0.8f ), volume: 0.7f, maxDist: 7.5f );
@@ -396,7 +419,7 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public void SpawnBoss( Vector2 pos )
 	{
-		SpawnEnemy( TypeLibrary.GetType( typeof( Boss ) ), pos, forceSpawn: true );
+		//SpawnEnemy( TypeLibrary.GetType( typeof( Boss ) ), pos, forceSpawn: true );
 		//PlaySfxNearby( "boss.fanfare", pos, pitch: 1.0f, volume: 1.3f, maxDist: 30f );
 	}
 
