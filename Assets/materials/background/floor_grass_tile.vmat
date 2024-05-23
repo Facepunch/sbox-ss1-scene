@@ -1,0 +1,22 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/blendable.shader"
+
+	//---- Texture Filtering ----
+	F_TEXTURE_FILTERING 4 // Nearest Neighbour
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material A ----
+	g_flTintColorA "[1.000000 1.000000 1.000000 0.000000]"
+	TextureAmbientOcclusionA "[1.000000 1.000000 1.000000 0.000000]"
+	TextureBlendMaskA "[1.000000 1.000000 1.000000 0.000000]"
+	TextureColorA "textures/sprites/floor_grass_tile.png"
+	TextureMetalnessA "[0.000000 0.000000 0.000000 0.000000]"
+	TextureNormalA "materials/default/default_normal.tga"
+	TextureRoughnessA "[1.000000 1.000000 1.000000 0.000000]"
+	TextureTintMaskA "[1.000000 1.000000 1.000000 0.000000]"
+}

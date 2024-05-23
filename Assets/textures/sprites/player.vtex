@@ -1,9 +1,12 @@
 {
   "Sequences": [
     {
-      "Source": "textures/sprites/player.png",
+      "Source": "textures/sprites/player_02_walk.png",
       "IsLooping": true,
-      "Frames": 64
+      "FlipBook": true,
+      "Columns": 12,
+      "Rows": 1,
+      "Frames": 12
     }
   ],
   "OutputTypeString": "2D"
