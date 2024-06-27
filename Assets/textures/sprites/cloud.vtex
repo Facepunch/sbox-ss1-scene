@@ -3,9 +3,6 @@
     {
       "Source": "textures/sprites/cloud.png",
       "IsLooping": true,
-      "FlipBook": true,
-      "Columns": 11,
-      "Rows": 1,
       "Frames": 64
     }
   ],

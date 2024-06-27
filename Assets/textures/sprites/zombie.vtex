@@ -3,9 +3,6 @@
     {
       "Source": "textures/sprites/zombie.png",
       "IsLooping": true,
-      "FlipBook": true,
-      "Columns": 12,
-      "Rows": 1,
       "Frames": 64
     }
   ],

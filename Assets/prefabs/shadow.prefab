@@ -1,7 +1,6 @@
 {
   "RootObject": {
-    "__guid": "a8c69e0e-0210-4236-9b4e-1394186fa27c",
-    "Flags": 0,
+    "__guid": "5591cbbd-d869-459d-a83c-db30b9aad4a6",
     "Name": "shadow",
     "Enabled": true,
     "NetworkMode": 2,
@@ -9,7 +8,7 @@
     "Components": [
       {
         "__type": "Sandbox.SpriteRenderer",
-        "__guid": "6ec0f8fb-09a4-4e57-ae41-636edb4b6234",
+        "__guid": "ba3e8272-b483-4f90-b89e-ca8ebb119c60",
         "Additive": false,
         "CastShadows": false,
         "Color": "0,0,0,1",
@@ -18,16 +17,15 @@
         "FlipVertical": false,
         "FogStrength": 1,
         "Opaque": false,
-        "Size": "0.2,0.2",
+        "Size": "1,1",
         "Texture": "textures/sprites/shadow3.vtex"
       }
-    ],
-    "Children": []
+    ]
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__references": [],
-  "__version": 1
+  "__version": 1,
+  "__references": []
 }
