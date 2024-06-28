@@ -7,11 +7,11 @@
       "Name": "idle",
       "Frames": [
         {
-          "FilePath": "textures/sprites/player/player_idle_0.png",
+          "FilePath": "textures/sprites/player/player_00.png",
           "Events": []
         },
         {
-          "FilePath": "textures/sprites/player/player_idle_1.png",
+          "FilePath": "textures/sprites/player/player_01.png",
           "Events": []
         }
       ],
@@ -24,14 +24,12 @@
       "Name": "walk",
       "Frames": [
         {
-          "FilePath": "textures/sprites/player/player_walk_0.png",
+          "FilePath": "textures/sprites/player/player_02.png",
           "Events": []
         },
         {
-          "FilePath": "textures/sprites/player/player_walk_1.png",
-          "Events": [
-            "walk_2"
-          ]
+          "FilePath": "textures/sprites/player/player_03.png",
+          "Events": []
         }
       ],
       "Attachments": []

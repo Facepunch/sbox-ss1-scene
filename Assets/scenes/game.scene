@@ -1,5 +1,5 @@
 {
-  "__guid": "6f63fc82-4866-4ba4-8625-5186db06b0bc",
+  "__guid": "a343e18e-c11d-4e22-8097-90af8da470c9",
   "GameObjects": [
     {
       "__guid": "0ee658db-c168-4901-afd1-af4fa0ad5c51",
@@ -241,7 +241,7 @@
           },
           "SpriteComponent": {
             "_type": "component",
-            "component_id": "843e3f99-b86e-40ca-9818-f4889f94078f",
+            "component_id": "3e065552-7424-4557-8177-48cec17e1039",
             "go": "e2cafd9d-9539-4ef7-bfe9-5b2d41eed7e1",
             "component_type": "SpriteComponent"
           }
@@ -270,7 +270,7 @@
               "Components": [
                 {
                   "__type": "SpriteTools.SpriteComponent",
-                  "__guid": "843e3f99-b86e-40ca-9818-f4889f94078f",
+                  "__guid": "3e065552-7424-4557-8177-48cec17e1039",
                   "_broadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -278,7 +278,7 @@
                   "FlashColor": "1,1,1,1",
                   "PlaybackSpeed": 1,
                   "Sprite": "textures/sprites/player/player.sprite",
-                  "StartingAnimationName": "idle",
+                  "StartingAnimationName": "",
                   "Tint": "1,1,1,1"
                 }
               ]
@@ -311,7 +311,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-06-27T17:31:06.018533-07:00",
+  "LastSaved": "2024-06-28T09:37:12.2235418-07:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
