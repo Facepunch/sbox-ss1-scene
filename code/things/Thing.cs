@@ -1,4 +1,5 @@
 ﻿using Sandbox.UI;
+using SpriteTools;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,6 +12,7 @@ using static Manager;
 public class Thing : Component
 {
 	[Property] public SpriteRenderer Sprite { get; set; }
+	[Property] public SpriteComponent SpriteComponent { get; set; }
 	[Sync] public float Scale { get; set; }
 
 	[Sync] public float Radius { get; set; }
@@ -49,7 +51,7 @@ public class Thing : Component
 		// todo: optimize?
 		UpdateGridPos();
 
-		if( SpriteDirty && ShadowSprite != null )
+		if( Sprite != null && SpriteDirty && ShadowSprite != null )
 		{
 			Sprite.Size = new Vector2( Scale );
 			ShadowSprite.Size = new Vector2( ShadowScale );

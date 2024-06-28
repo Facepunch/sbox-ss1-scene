@@ -1,0 +1,319 @@
+{
+  "Model": null,
+  "Description": "",
+  "BlendMode": "Masked",
+  "nodes": [
+    {
+      "_class": "TextureSampler",
+      "Image": null,
+      "Sampler": {
+        "Filter": "Point",
+        "AddressU": "Clamp",
+        "AddressV": "Clamp"
+      },
+      "UI": {
+        "Name": "Texture",
+        "Default": "1,1,1,1",
+        "CustomExtension": "",
+        "ImageFormat": "BC7",
+        "SrgbRead": true,
+        "PrimaryGroup": {
+          "Name": "Texture",
+          "Priority": 1
+        }
+      },
+      "Identifier": "0",
+      "Position": "-96,160",
+      "Coords": {
+        "Identifier": "9",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float2",
+      "Min": "0,0",
+      "Max": "1,1",
+      "Value": "1,1",
+      "Name": "Tiling",
+      "IsAttribute": false,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": "Texture Coordinates",
+          "Priority": 5
+        }
+      },
+      "Identifier": "1",
+      "Position": "-944,320"
+    },
+    {
+      "_class": "TextureCoord",
+      "UseSecondaryCoord": false,
+      "Tiling": "1,1",
+      "Identifier": "2",
+      "Position": "-944,240"
+    },
+    {
+      "_class": "Saturate",
+      "Identifier": "3",
+      "Position": "896,288",
+      "Input": {
+        "Identifier": "5",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Result",
+      "DefaultOpacity": 1,
+      "DefaultRoughness": 1,
+      "DefaultMetalness": 0,
+      "DefaultAmbientOcclusion": 1,
+      "Identifier": "4",
+      "Position": "1600,192",
+      "Albedo": {
+        "Identifier": "15",
+        "Output": "Out"
+      },
+      "Opacity": {
+        "Identifier": "3",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "SmoothStep",
+      "Identifier": "5",
+      "Position": "672,368",
+      "Input": {
+        "Identifier": "0",
+        "Output": "A"
+      },
+      "Edge1": {
+        "Identifier": "6",
+        "Output": "Result"
+      },
+      "Edge2": {
+        "Identifier": "7",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 0,
+      "Name": "Smooth Step Min",
+      "IsAttribute": false,
+      "UI": {
+        "Priority": 1,
+        "PrimaryGroup": {
+          "Name": "Translucent",
+          "Priority": 1
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "6",
+      "Position": "416,480"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 1,
+      "Name": "Smooth Step Max",
+      "IsAttribute": false,
+      "UI": {
+        "Priority": 2,
+        "PrimaryGroup": {
+          "Name": "Translucent",
+          "Priority": 1
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "7",
+      "Position": "416,544"
+    },
+    {
+      "_class": "Add",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "8",
+      "Position": "1024,-16",
+      "A": {
+        "Identifier": "12",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "13",
+        "Output": "X"
+      }
+    },
+    {
+      "_class": "TileAndOffset",
+      "DefaultTile": "1,1",
+      "DefaultOffset": "0,0",
+      "WrapTo01": false,
+      "Identifier": "9",
+      "Position": "-544,304",
+      "Coords": {
+        "Identifier": "2",
+        "Output": "Result"
+      },
+      "Tile": {
+        "Identifier": "1",
+        "Output": "Result"
+      },
+      "Offset": {
+        "Identifier": "10",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float2",
+      "Min": "0,0",
+      "Max": "1,1",
+      "Value": "0,0",
+      "Name": "Offset",
+      "IsAttribute": false,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": "Texture Coordinates",
+          "Priority": 5
+        }
+      },
+      "Identifier": "10",
+      "Position": "-944,432"
+    },
+    {
+      "_class": "RGBtoHSV",
+      "Identifier": "11",
+      "Position": "576,48",
+      "In": {
+        "Identifier": "16",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 0,
+      "Name": "Hue shift",
+      "IsAttribute": false,
+      "UI": {
+        "PrimaryGroup": {
+          "Name": "Hue",
+          "Priority": 2
+        },
+        "SecondaryGroup": {
+          "Name": ""
+        }
+      },
+      "Identifier": "12",
+      "Position": "816,-48"
+    },
+    {
+      "_class": "SplitVector",
+      "Identifier": "13",
+      "Position": "816,48",
+      "Input": {
+        "Identifier": "11",
+        "Output": "Out"
+      }
+    },
+    {
+      "_class": "CombineVector",
+      "DefaultX": 0,
+      "DefaultY": 0,
+      "DefaultZ": 0,
+      "DefaultW": 0,
+      "Identifier": "14",
+      "Position": "1152,48",
+      "X": {
+        "Identifier": "8",
+        "Output": "Result"
+      },
+      "Y": {
+        "Identifier": "13",
+        "Output": "Y"
+      },
+      "Z": {
+        "Identifier": "13",
+        "Output": "Z"
+      }
+    },
+    {
+      "_class": "HSVtoRGB",
+      "Identifier": "15",
+      "Position": "1392,80",
+      "In": {
+        "Identifier": "14",
+        "Output": "Vector"
+      }
+    },
+    {
+      "_class": "Multiply",
+      "DefaultA": 0,
+      "DefaultB": 1,
+      "Identifier": "16",
+      "Position": "416,96",
+      "A": {
+        "Identifier": "17",
+        "Output": "RGBA"
+      },
+      "B": {
+        "Identifier": "18",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Tint",
+      "Identifier": "17",
+      "Position": "-96,32"
+    },
+    {
+      "_class": "Blend",
+      "Fraction": 0.5,
+      "BlendMode": "Mix",
+      "Clamp": true,
+      "Identifier": "18",
+      "Position": "144,288",
+      "A": {
+        "Identifier": "0",
+        "Output": "Result"
+      },
+      "B": {
+        "Identifier": "19",
+        "Output": "Result"
+      },
+      "C": {
+        "Identifier": "20",
+        "Output": "Result"
+      }
+    },
+    {
+      "_class": "Float4",
+      "Value": "1,1,1,1",
+      "Name": "FlashColor",
+      "IsAttribute": false,
+      "UI": {
+        "Type": "Color"
+      },
+      "Identifier": "19",
+      "Position": "-96,368"
+    },
+    {
+      "_class": "Float",
+      "Min": 0,
+      "Max": 1,
+      "Value": 1,
+      "Name": "FlashAmount",
+      "IsAttribute": false,
+      "UI": {},
+      "Identifier": "20",
+      "Position": "-96,544"
+    }
+  ]
+}

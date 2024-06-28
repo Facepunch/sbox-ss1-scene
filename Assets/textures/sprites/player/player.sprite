@@ -1,0 +1,42 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 3,
+      "Origin": "0.5,0.875",
+      "Looping": true,
+      "Name": "idle",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/player/player_idle_0.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/player/player_idle_1.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.875",
+      "Looping": true,
+      "Name": "walk",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/player/player_walk_0.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/player/player_walk_1.png",
+          "Events": [
+            "walk_2"
+          ]
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__references": [],
+  "__version": 0
+}
