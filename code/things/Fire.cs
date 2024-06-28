@@ -25,7 +25,7 @@ public class Fire : Thing
 		Radius = 0.27f;
 
 		Scale = 0.9f;
-		Sprite.Size = new Vector2( 1f, 1f ) * Scale;
+		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		//ShadowOpacity = 0.8f;
 		//ShadowScale = 0.3f;
@@ -45,7 +45,7 @@ public class Fire : Thing
 	[Broadcast]
 	public void SetColor(Color color)
 	{
-		Sprite.Color = color;
+		Sprite.Tint = color;
 	}
 
 	protected override void OnUpdate()
@@ -58,11 +58,11 @@ public class Fire : Thing
 		if ( Manager.Instance.IsGameOver )
 			return;
 
-		Sprite.FlipHorizontal = Utils.FastSin( SpawnTime * 6f ) < 0f;
-		Sprite.Size = new Vector2( (0.9f + Utils.FastSin( SpawnTime * 28f ) * 0.09f), 0.9f + Utils.FastSin( SpawnTime * 15f ) * 0.065f );
+		//Sprite.FlipHorizontal = Utils.FastSin( SpawnTime * 6f ) < 0f;
+		//Sprite.Size = new Vector2( (0.9f + Utils.FastSin( SpawnTime * 28f ) * 0.09f), 0.9f + Utils.FastSin( SpawnTime * 15f ) * 0.065f );
 
 		float opacity = 0.6f + Utils.FastSin( SpawnTime * 5f ) * 0.4f * Utils.Map( SpawnTime, Lifetime - 0.25f, Lifetime, 1f, 0f );
-		Sprite.Color = Color.White.WithAlpha( opacity );
+		Sprite.Tint = Color.White.WithAlpha( opacity );
 
 		if ( IsProxy )
 			return;

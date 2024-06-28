@@ -2,7 +2,7 @@
   "Animations": [
     {
       "FrameRate": 3,
-      "Origin": "0.5,0.875",
+      "Origin": "0.5,1",
       "Looping": true,
       "Name": "idle",
       "Frames": [
@@ -18,8 +18,8 @@
       "Attachments": []
     },
     {
-      "FrameRate": 15,
-      "Origin": "0.5,0.875",
+      "FrameRate": 6,
+      "Origin": "0.5,1",
       "Looping": true,
       "Name": "walk",
       "Frames": [
@@ -29,6 +29,57 @@
         },
         {
           "FilePath": "textures/sprites/player/player_03.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 3,
+      "Origin": "0.5,1",
+      "Looping": true,
+      "Name": "attack_idle",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/player/player_04.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/player/player_05.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 6,
+      "Origin": "0.5,1",
+      "Looping": true,
+      "Name": "attack_walk",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/player/player_06.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/player/player_07.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 3,
+      "Origin": "0.5,1",
+      "Looping": true,
+      "Name": "hurt_idle",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/player/player_08.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/player/player_09.png",
           "Events": []
         }
       ],

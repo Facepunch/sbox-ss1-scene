@@ -1,4 +1,5 @@
 ﻿using Sandbox.Diagnostics;
+using SpriteTools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,8 +74,8 @@ public abstract class Enemy : Thing
 	{
 		base.OnAwake();
 
-		Sprite = Components.Get<SpriteRenderer>();
-		Sprite.Color = Color.White.WithAlpha( 0f );
+		Sprite = Components.Get<SpriteComponent>();
+		Sprite.Tint = Color.White.WithAlpha( 0f );
 
 		//_animSpeed = 1f;
 		//_animSpeedModifier = 1f;
@@ -229,9 +230,8 @@ public abstract class Enemy : Thing
 		{
 			//AnimSpeed = Utils.Map( Utils.FastSin( MoveTimeOffset + Time.Now * 7.5f ), -1f, 1f, 0.75f, 3f, EasingType.ExpoIn );
 
-			if ( MathF.Abs( Velocity.x ) > 0.175f && !IsFrozen && CanTurn )
-				Sprite.FlipHorizontal = Velocity.x > 0f;
-				//Scale = new Vector2( 1f * Velocity.x < 0f ? 1f : -1f, 1f ) * ScaleFactor;
+			//if ( MathF.Abs( Velocity.x ) > 0.175f && !IsFrozen && CanTurn )
+			//	Sprite.FlipHorizontal = Velocity.x > 0f;
 		}
 		else
 		{
@@ -241,9 +241,9 @@ public abstract class Enemy : Thing
 
 			if ( !IsFrozen && CanTurn )
 			{
-				Sprite.FlipHorizontal = (targetPlayer.Position2D.x < Position2D.x ? false : true);
-				if ( IsFeared )
-					Sprite.FlipHorizontal = !Sprite.FlipHorizontal;
+				//Sprite.FlipHorizontal = (targetPlayer.Position2D.x < Position2D.x ? false : true);
+				//if ( IsFeared )
+				//	Sprite.FlipHorizontal = !Sprite.FlipHorizontal;
 			}
 				
 			//Scale = new Vector2( (IsFeared ? -1f : 1f) * (targetPlayer.Position.x < Position.x ? 1f : -1f), 1f ) * ScaleFactor;
@@ -258,7 +258,7 @@ public abstract class Enemy : Thing
 			if ( _flashTimer < 0f )
 			{
 				_isFlashing = false;
-				Sprite.Color = Color.Lerp( Color.White, Color.Black, Utils.Map(Health, MaxHealth, 0f, 0f, 0.7f) ).WithAlpha(FullOpacity);
+				Sprite.Tint = Color.Lerp( Color.White, Color.Black, Utils.Map(Health, MaxHealth, 0f, 0f, 0.7f) ).WithAlpha(FullOpacity);
 			}
 		}
 	}
@@ -287,7 +287,7 @@ public abstract class Enemy : Thing
 			IsSpawning = false;
 			//AnimationPath = AnimIdlePath;
 			ShadowOpacity = ShadowFullOpacity;
-			Sprite.Color = Color.White.WithAlpha( FullOpacity );
+			Sprite.Tint = Color.White.WithAlpha( FullOpacity );
 		}
 		else
 		{
@@ -299,7 +299,7 @@ public abstract class Enemy : Thing
 			}
 
 			ShadowOpacity = Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, ShadowFullOpacity );
-			Sprite.Color = Color.White.WithAlpha( Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, FullOpacity, EasingType.SineIn ) );
+			Sprite.Tint = Color.White.WithAlpha( Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, FullOpacity, EasingType.SineIn ) );
 		}
 
 		ShadowSprite.Color = Color.Black.WithAlpha( ShadowOpacity );
@@ -455,7 +455,7 @@ public abstract class Enemy : Thing
 		if ( _isFlashing )
 			return;
 
-		Sprite.Color = Color.Red;
+		Sprite.Tint = Color.Red;
 		_isFlashing = true;
 		_flashTimer = time;
 	}

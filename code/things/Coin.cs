@@ -170,20 +170,20 @@ public class Coin : Thing
 		switch ( tier_color )
 		{
 			case 1:
-				Sprite.Color = new Color( 0.2f, 0.2f, 1f );
+				Sprite.Tint = new Color( 0.2f, 0.2f, 1f );
 				break;
 			case 2:
-				Sprite.Color = new Color( 1f, 0.2f, 0.2f );
+				Sprite.Tint = new Color( 1f, 0.2f, 0.2f );
 				break;
 			case 3:
-				Sprite.Color = new Color( 1f, 1f, 0.2f );
+				Sprite.Tint = new Color( 1f, 1f, 0.2f );
 				break;
 			case 4:
-				Sprite.Color = new Color( 0.2f, 1f, 0.3f );
+				Sprite.Tint = new Color( 0.2f, 1f, 0.3f );
 				break;
 			case 5:
 			default:
-				Sprite.Color = new Color( 1f, 1f, 1f ) * 2f;
+				Sprite.Tint = new Color( 1f, 1f, 1f ) * 2f;
 				break;
 		}
 	}

@@ -28,8 +28,8 @@ public class EnemySpike : Thing
 		Radius = 0.225f;
 
 		Scale = 0.65f;
-		Sprite.Size = new Vector2( 1f, 1f ) * Scale;
-		Sprite.FlipHorizontal = Game.Random.Float( 0f, 1f ) < 0.5f;
+		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
+		//Sprite.FlipHorizontal = Game.Random.Float( 0f, 1f ) < 0.5f;
 
 		Lifetime = 2.1f;
 		Damage = 10f;
@@ -45,7 +45,7 @@ public class EnemySpike : Thing
 		BgSprite.FlipHorizontal = Game.Random.Float( 0f, 1f ) < 0.5f;
 		BgSprite.Size = new Vector2( 1f, 1f ) * 1f;
 
-		Sprite.Color = Color.White.WithAlpha( 0f );
+		Sprite.Tint = Color.White.WithAlpha( 0f );
 		BgSprite.Color = Color.White.WithAlpha( 0f );
 
 		if ( IsProxy )
@@ -64,7 +64,7 @@ public class EnemySpike : Thing
 		if ( Manager.Instance.IsGameOver )
 			return;
 
-		Sprite.Color = Color.White.WithAlpha( Utils.Map( SpawnTime, 0.8f, 1.25f, 0f, 1f, EasingType.SineOut ) * Utils.Map( SpawnTime, 1.25f, 1.4f, 1f, 0f, EasingType.SineOut ) );
+		Sprite.Tint = Color.White.WithAlpha( Utils.Map( SpawnTime, 0.8f, 1.25f, 0f, 1f, EasingType.SineOut ) * Utils.Map( SpawnTime, 1.25f, 1.4f, 1f, 0f, EasingType.SineOut ) );
 		BgSprite.Color = Color.White.WithAlpha( Utils.Map( SpawnTime, 0f, 1f, 0f, 1f, EasingType.SineOut ) * Utils.Map( SpawnTime, Lifetime - 0.3f, Lifetime, 1f, 0f ) );
 
 		if ( IsProxy )

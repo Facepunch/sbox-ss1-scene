@@ -21,11 +21,11 @@ public class Zombie : Enemy
 		//AnimSpeed = 2f;
 		//BasePivotY = 0.05f;
 
-		Sprite.Texture = Texture.Load("textures/sprites/zombie.vtex");
+		//Sprite.Texture = Texture.Load("textures/sprites/zombie.vtex");
 
 		//ScaleFactor = 0.85f;
 		Scale = 0.85f;
-		Sprite.Size = new Vector2( 1f, 1f ) * Scale;
+		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 10f;
 

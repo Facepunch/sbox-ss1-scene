@@ -108,6 +108,8 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public void SpawnStartingThings()
 	{
+		return;
+
 		for ( int i = 0; i < 3; i++ )
 		{
 			var pos = new Vector2( Game.Random.Float( BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x ), Game.Random.Float( BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y ) );
@@ -174,6 +176,8 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	void HandleEnemySpawn()
 	{
+		return;
+
 		var spawnTime = Utils.Map( EnemyCount, 0, MAX_ENEMY_COUNT, 0.05f, 0.33f, EasingType.QuadOut ) * Utils.Map( ElapsedTime, 0f, 80f, 1.5f, 1f ) * Utils.Map( ElapsedTime, 0f, 250f, 3f, 1f ) * Utils.Map( ElapsedTime, 0f, 900f, 1.2f, 1f );
 		if ( _enemySpawnTime > spawnTime )
 		{

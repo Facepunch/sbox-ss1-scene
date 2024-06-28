@@ -26,10 +26,10 @@ public class SpikerElite : Enemy
 		base.OnAwake();
 
 		//AnimSpeed = 3f;
-		Sprite.Texture = Texture.Load("textures/sprites/spiker_elite.vtex");
+		//Sprite.Texture = Texture.Load("textures/sprites/spiker_elite.vtex");
 
 		Scale = 1.9f;
-		Sprite.Size = new Vector2( 1f, 1f ) * Scale;
+		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 12f;
 		Deceleration = 2.57f;

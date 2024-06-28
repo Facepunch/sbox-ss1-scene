@@ -24,10 +24,10 @@ public class SpitterElite : Enemy
 
 		base.OnAwake();
 
-		Sprite.Texture = Texture.Load("textures/sprites/spitter_elite.vtex");
+		//Sprite.Texture = Texture.Load("textures/sprites/spitter_elite.vtex");
 
 		Scale = 1.05f;
-		Sprite.Size = new Vector2( 1f, 1f ) * Scale;
+		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 8f;
 

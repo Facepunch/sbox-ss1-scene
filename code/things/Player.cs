@@ -1,4 +1,5 @@
 using Sandbox;
+using SpriteTools;
 using System.Drawing;
 using System.Numerics;
 using System.Runtime.Serialization.Formatters;
@@ -35,11 +36,13 @@ public enum DamageType { Melee, Ranged, Explosion, Fire, }
 
 public class Player : Thing
 {
+	[Property] public GameObject Body { get; set; }
 	[Property] public GameObject ArrowAimerPrefab { get; set;  }
 	[Property] public GameObject BulletPrefab { get; set; }
 
 	[Sync] public float Health { get; set; }
 	[Sync] public Vector2 Velocity { get; set; }
+	[Sync] public Vector2 InputVector { get; set; }
 
 	public GameObject ArrowAimer { get; private set; }
 	public Vector2 AimDir { get; private set; }
@@ -97,7 +100,8 @@ public class Player : Thing
 	{
 		base.OnAwake();
 
-		OffsetY = -0.42f;
+		//OffsetY = -0.42f;
+		OffsetY = 0f;
 
 		Scale = 1f;
 
@@ -237,7 +241,7 @@ public class Player : Thing
 		TimeSinceHurt = 999f;
 		//ShadowOpacity = 0.8f;
 		//ShadowScale = 1.12f;
-		Sprite.Color = Color.White;
+		Sprite.Tint = Color.White;
 		ShadowOpacity = 0.8f;
 
 		//AddStatus( TypeLibrary.GetType( typeof( DamageStatus) ) );
@@ -262,6 +266,8 @@ public class Player : Thing
 
 		if (!IsProxy )
 		{
+			InputVector = new Vector2( -Input.AnalogMove.y, Input.AnalogMove.x );
+
 			if ( Input.Pressed( "Menu" ) )
 			{
 				Manager.Instance.Restart();
@@ -292,10 +298,24 @@ public class Player : Thing
 
 		float dt = Time.Delta;
 
-		if ( Velocity.x > 0f )
-			Sprite.FlipHorizontal = true;
-		else if ( Velocity.x < 0f )
-			Sprite.FlipHorizontal = false;
+		SetFlipHorizontal( Velocity.x > 0f );
+
+		bool hurting = TimeSinceHurt < 0.15f;
+		bool attacking = !IsReloading;
+		bool moving = Velocity.LengthSquared > 0.01f && InputVector.LengthSquared > 0.1f;
+
+		string stateStr = "";
+		if ( hurting && attacking )
+			stateStr = "hurt_attack_";
+		else if ( hurting )
+			stateStr = "hurt_";
+		else if ( attacking )
+			stateStr = "attack_";
+
+		Sprite.PlayAnimation( $"{stateStr}{(moving ? "walk" : "idle")}" );
+		Sprite.PlaybackSpeed = moving ? Utils.Map( Velocity.Length, 0f, 2f, 1.5f, 2f ) : 0.66f;
+
+		Sprite.Transform.LocalRotation = new Angles( 0f, -90f + (Velocity.Length * Utils.FastSin( Time.Now * MathF.PI * 6f ) * 1.6f) * (IsFlippedHorizontal ? -1f : 1f), 0f );
 
 		if ( !IsDead )
 		{
@@ -305,10 +325,8 @@ public class Player : Thing
 		if ( IsProxy )
 			return;
 
-		Vector2 inputVector = new Vector2( -Input.AnalogMove.y, Input.AnalogMove.x );
-
-		if ( inputVector.LengthSquared > 0f )
-			Velocity += inputVector.Normal * Stats[PlayerStat.MoveSpeed] * BASE_MOVE_SPEED * dt;
+		if ( InputVector.LengthSquared > 0f )
+			Velocity += InputVector.Normal * Stats[PlayerStat.MoveSpeed] * BASE_MOVE_SPEED * dt;
 
 		var velocity = Velocity + (IsDashing ? DashVelocity : Vector2.Zero);
 		Position2D += velocity * dt;
@@ -409,13 +427,13 @@ public class Player : Thing
 			if ( DashInvulnTimer <= 0f )
 			{
 				IsDashing = false;
-				Sprite.Color = Color.White;
+				Sprite.Tint = Color.White;
 				DashFinished();
 			}
 			else
 			{
 				if ( IsInvulnerable )
-					Sprite.Color = new Color( Game.Random.Float( 0.1f, 0.25f ), Game.Random.Float( 0.1f, 0.25f ), 1f );
+					Sprite.Tint = new Color( Game.Random.Float( 0.1f, 0.25f ), Game.Random.Float( 0.1f, 0.25f ), 1f );
 
 				if ( _dashCloudTime > Game.Random.Float( 0.1f, 0.2f ) )
 				{
@@ -521,7 +539,7 @@ public class Player : Thing
 		if ( _isFlashing )
 			return;
 
-		Sprite.Color = new Color( 1f, 0f, 0f );
+		Sprite.Tint = new Color( 1f, 0f, 0f );
 		_isFlashing = true;
 		_flashTimer = time;
 	}
@@ -529,7 +547,7 @@ public class Player : Thing
 	[Broadcast]
 	public void Heal( float amount, float flashTime )
 	{
-		Sprite.Color = new Color( 0f, 1f, 0f );
+		Sprite.Tint = new Color( 0f, 1f, 0f );
 		_isFlashing = true;
 		_flashTimer = flashTime;
 
@@ -549,7 +567,7 @@ public class Player : Thing
 			if ( _flashTimer < 0f )
 			{
 				_isFlashing = false;
-				Sprite.Color = Color.White;
+				Sprite.Tint = Color.White;
 			}
 		}
 	}
@@ -829,7 +847,7 @@ public class Player : Thing
 			return;
 
 		IsDead = true;
-		Sprite.Color = new Color( 1f, 1f, 1f, 0.05f );
+		Sprite.Tint = new Color( 1f, 1f, 1f, 0.05f );
 		ShadowOpacity = 0.2f;
 		_isFlashing = false;
 		IsReloading = false;
@@ -855,7 +873,7 @@ public class Player : Thing
 		IsChoosingLevelUpReward = false;
 		IsDashing = false;
 		IsReloading = true;
-		Sprite.Color = Color.White;
+		Sprite.Tint = Color.White;
 		ShadowOpacity = 0.8f;
 
 		if ( IsProxy )
@@ -911,7 +929,7 @@ public class Player : Thing
 			Timer -= dt * Stats[PlayerStat.AttackSpeed] * (IsMoving ? 1f : Stats[PlayerStat.AttackSpeedStill]);
 			if ( Timer <= 0f )
 			{
-				Shoot( isLastAmmo: AmmoCount == 1 );
+				//Shoot( isLastAmmo: AmmoCount == 1 );
 				AmmoCount--;
 
 				if ( AmmoCount <= 0 )
@@ -1161,5 +1179,10 @@ public class Player : Thing
 			sfx.Volume = volume;
 			sfx.Pitch = pitch;
 		}
+	}
+
+	public override void SetFlipHorizontal( bool flip )
+	{
+		Body.Transform.LocalRotation = new Angles( flip ? 180f : 0f, 0f, 0f );
 	}
 }

@@ -29,11 +29,11 @@ public class Charger : Enemy
 
 		base.OnAwake();
 
-		Sprite.Texture = Texture.Load("textures/sprites/charger.vtex");
+		//Sprite.Texture = Texture.Load("textures/sprites/charger.vtex");
 
 		//ScaleFactor = 0.85f;
 		Scale = 1.25f;
-		Sprite.Size = new Vector2( 1f, 1f ) * Scale;
+		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 25f;
 
@@ -173,7 +173,7 @@ public class Charger : Enemy
 		//AnimationPath = "textures/sprites/charger_charge_loop.frames";
 
 		//AnimSpeed = 3f;
-		Sprite.FlipHorizontal = target_pos.x > Position2D.x;
+		//Sprite.FlipHorizontal = target_pos.x > Position2D.x;
 
 		Manager.Instance.PlaySfxNearby( "enemy.roar", Position2D, pitch: Game.Random.Float( 0.925f, 1.075f ), volume: 1f, maxDist: 8f );
 	}

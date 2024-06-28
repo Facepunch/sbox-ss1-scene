@@ -11,9 +11,9 @@ using static Manager;
 
 public class Thing : Component
 {
-	[Property] public SpriteRenderer Sprite { get; set; }
-	[Property] public SpriteComponent SpriteComponent { get; set; }
+	[Property] public SpriteComponent Sprite { get; set; }
 	[Sync] public float Scale { get; set; }
+	[Sync] public bool IsFlippedHorizontal { get; set; }
 
 	[Sync] public float Radius { get; set; }
 	public float TempWeight { get; set; }
@@ -29,10 +29,16 @@ public class Thing : Component
 
 	[Sync] public bool SpriteDirty { get; set; }
 
+	//public Vector2 Position2D
+	//{
+	//	get { return (Vector2)Transform.Position + new Vector2(0f, OffsetY); }
+	//	set { Transform.Position = new Vector3( value.x, value.y - OffsetY, Transform.Position.z ); }
+	//}
+
 	public Vector2 Position2D
 	{
-		get { return (Vector2)Transform.Position + new Vector2(0f, OffsetY); }
-		set { Transform.Position = new Vector3( value.x, value.y - OffsetY, Transform.Position.z ); }
+		get { return (Vector2)Transform.Position; }
+		set { Transform.Position = new Vector3( value.x, value.y, Transform.Position.z ); }
 	}
 
 	public Thing()
@@ -45,15 +51,18 @@ public class Thing : Component
 	{
 		base.OnUpdate();
 
-		//Gizmo.Draw.Color = Color.White;
-		//Gizmo.Draw.Text( $"{GameObject.Name}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
+		Gizmo.Draw.Color = Color.Black.WithAlpha(0.2f);
+		Gizmo.Draw.Text( $"{GameObject.Name}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.2f, 0f ) ) );
+
+		Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
+		Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
 		// todo: optimize?
 		UpdateGridPos();
 
 		if( Sprite != null && SpriteDirty && ShadowSprite != null )
 		{
-			Sprite.Size = new Vector2( Scale );
+			//Sprite.Size = new Vector2( Scale );
 			ShadowSprite.Size = new Vector2( ShadowScale );
 
 			SpriteDirty = false;
@@ -116,5 +125,11 @@ public class Thing : Component
 	{
 		var cloud = Manager.Instance.SpawnCloud( pos );
 		cloud.Velocity = vel;
+	}
+
+	public virtual void SetFlipHorizontal(bool flip)
+	{
+		Transform.LocalRotation = new Angles( flip ? 180f : 0f, 0f, 0f );
+		IsFlippedHorizontal = flip;
 	}
 }

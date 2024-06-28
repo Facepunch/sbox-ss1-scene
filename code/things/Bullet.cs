@@ -65,7 +65,7 @@ public class Bullet : Thing
 		if ( Stats[BulletStat.HealTeammateAmount] > 0f )
 		{
 			CollideWith.Add( typeof( Player ) );
-			Sprite.Color = Color.Green;
+			Sprite.Tint = Color.Green;
 		}
 	}
 
