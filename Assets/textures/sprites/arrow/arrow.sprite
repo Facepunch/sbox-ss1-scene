@@ -1,0 +1,18 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.5",
+      "Name": "idle",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/arrow/arrow.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__references": [],
+  "__version": 0
+}

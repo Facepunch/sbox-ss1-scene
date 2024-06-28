@@ -1,32 +1,33 @@
 {
   "RootObject": {
     "__guid": "a8ce8cc2-34ec-4f3e-9f41-2a958d144601",
+    "Flags": 0,
     "Name": "arrow",
+    "Scale": "0.005,0.005,1",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Sandbox.SpriteRenderer",
-        "__guid": "b89e02e3-0e08-4486-963b-ca2a778f53b0",
-        "Additive": false,
-        "CastShadows": false,
-        "Color": "1,1,1,1",
-        "DepthFeather": 0,
-        "FlipHorizontal": false,
-        "FlipVertical": false,
-        "FogStrength": 1,
-        "Opaque": false,
-        "Size": "0.5,0.5",
-        "Texture": "textures/sprites/arrow.vtex"
+        "__type": "SpriteTools.SpriteComponent",
+        "__guid": "994c2676-244b-47f0-a5ce-afe24259dc94",
+        "_broadcastEvents": {},
+        "CastShadows": "Off",
+        "CreateAttachPoints": false,
+        "FlashTint": "1,1,1,0",
+        "PlaybackSpeed": 1,
+        "Sprite": "textures/sprites/arrow/arrow.sprite",
+        "StartingAnimationName": "",
+        "Tint": "1,1,1,1"
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

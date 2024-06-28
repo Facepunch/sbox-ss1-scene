@@ -346,13 +346,13 @@ public class Player : Thing
 		}
 		else
 		{
-			AimDir = (Manager.Instance.MouseWorldPos - Position2D).Normal;
+			AimDir = (Manager.Instance.MouseWorldPos - (Position2D + new Vector2(0f, 0.5f))).Normal;
 		}
 
 		if ( ArrowAimer != null )
 		{
-			//ArrowAimer.LocalRotation = (MathF.Atan2( AimDir.y, AimDir.x ) * (180f / MathF.PI));
-			ArrowAimer.Transform.LocalPosition = new Vector2( 0f, 0.4f + OffsetY ) + AimDir * 0.65f;
+			ArrowAimer.Transform.LocalRotation = new Angles(0f, MathF.Atan2( AimDir.y, AimDir.x ) * (180f / MathF.PI) - 180f, 0f);
+			ArrowAimer.Transform.LocalPosition = new Vector2( 0f, 0.4f + OffsetY ) + AimDir * 0.7f;
 		}
 
 		for ( int dx = -1; dx <= 1; dx++ )

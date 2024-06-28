@@ -29,7 +29,7 @@ public class PlayerTest : Component
 			//SpriteComponent.Tint = Color.White.WithAlpha( 1f );
 			Body.Transform.LocalRotation = new Angles( 0f, 0f, 0f );
 			//Transform.LocalScale = new Vector3( 1f, 1f, 1f );
-			SpriteComponent.FlashAmount = 0f;
+			//SpriteComponent.FlashAmount = 0f;
 			_isFlipped = false;
 		}
 		else if ( Input.Pressed( "Slot2" ) )
@@ -40,7 +40,7 @@ public class PlayerTest : Component
 			//SpriteComponent.Tint = Color.White.WithAlpha(0.5f);
 			//Transform.LocalScale = new Vector3( 1f, -1f, 1f );
 
-			SpriteComponent.FlashAmount = 1f;
+			//SpriteComponent.FlashAmount = 1f;
 			_isFlipped = true;
 		}
 
