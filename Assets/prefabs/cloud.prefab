@@ -1,42 +1,43 @@
 {
   "RootObject": {
     "__guid": "a10dd2a6-ec28-4627-9934-c976997b4fb1",
+    "Flags": 0,
     "Name": "cloud",
+    "Scale": "0.01,0.01,1",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Sandbox.SpriteRenderer",
-        "__guid": "81d7ded8-9745-4d55-be71-24303b70454a",
-        "Additive": false,
-        "CastShadows": false,
-        "Color": "1,1,1,0",
-        "DepthFeather": 0,
-        "FlipHorizontal": false,
-        "FlipVertical": false,
-        "FogStrength": 1,
-        "Opaque": false,
-        "Size": "0.8,0.7",
-        "Texture": "textures/sprites/cloud.vtex"
+        "__type": "SpriteTools.SpriteComponent",
+        "__guid": "edd70bb8-e7b5-48d6-aba6-18aac692ff33",
+        "_broadcastEvents": {},
+        "CastShadows": "Off",
+        "CreateAttachPoints": false,
+        "FlashTint": "1,1,1,0",
+        "PlaybackSpeed": 1,
+        "Sprite": "textures/sprites/cloud/cloud.sprite",
+        "StartingAnimationName": "idle",
+        "Tint": "1,1,1,1"
       },
       {
         "__type": "Cloud",
         "__guid": "5a608731-2633-4b68-b162-61d339427cba",
         "Sprite": {
           "_type": "component",
-          "component_id": "81d7ded8-9745-4d55-be71-24303b70454a",
+          "component_id": "edd70bb8-e7b5-48d6-aba6-18aac692ff33",
           "go": "a10dd2a6-ec28-4627-9934-c976997b4fb1",
-          "component_type": "SpriteRenderer"
+          "component_type": "SpriteComponent"
         }
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

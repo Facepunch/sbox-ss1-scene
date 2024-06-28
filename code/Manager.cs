@@ -588,7 +588,7 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public Cloud SpawnCloud( Vector2 pos )
 	{
-		var cloudObj = CloudPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+		var cloudObj = CloudPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ), new Angles(0f, -90f, 0f) );
 		var cloud = cloudObj.Components.Get<Cloud>();
 		cloud.Lifetime = 0.7f * Game.Random.Float( 0.8f, 1.2f );
 

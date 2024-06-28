@@ -1,4 +1,5 @@
 ﻿using Sandbox.UI;
+using SpriteTools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using static Manager;
 
 public class Cloud : Component
 {
-	[Property] public SpriteRenderer Sprite { get; set; }
+	[Property] public SpriteComponent Sprite { get; set; }
 
 	private TimeSince _spawnTime;
 	public float Lifetime { get; set; }
@@ -19,8 +20,8 @@ public class Cloud : Component
 	{
 		base.OnAwake();
 
-		Sprite.FlipHorizontal = Game.Random.Float( 0f, 1f ) < 0.5f;
-		Sprite.Size = new Vector2( Game.Random.Float( 0.7f, 0.95f ), Game.Random.Float( 0.5f, 0.65f ) ) * 0.55f;
+		Transform.LocalRotation = new Angles( 0f, -90f, Game.Random.Float( 0f, 1f ) < 0.5f ? 180f : 0f );
+		Transform.LocalScale = new Vector3( Game.Random.Float( 0.65f, 0.75f ), Game.Random.Float( 0.7f, 0.9f ), 1f ) * 0.01f;
 		_spawnTime = 0f;
 	}
 
@@ -33,7 +34,7 @@ public class Cloud : Component
 		Transform.Position = Transform.Position.WithZ( Globals.GetZPos( Transform.Position.y ) );
 
 		var opacity = Utils.Map( _spawnTime, 0f, 0.2f, 0f, 1f ) * Utils.Map( _spawnTime, 0f, Lifetime - 0.03f, 1f, 0f );
-		Sprite.Color = Color.White.WithAlpha( opacity );
+		Sprite.Tint = Color.White.WithAlpha( opacity );
 
 		if ( _spawnTime > Lifetime )
 		{
