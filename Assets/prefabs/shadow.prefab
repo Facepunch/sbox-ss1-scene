@@ -1,31 +1,34 @@
 {
   "RootObject": {
     "__guid": "5591cbbd-d869-459d-a83c-db30b9aad4a6",
+    "Flags": 0,
     "Name": "shadow",
+    "Position": "3.190994,0,2.056729",
+    "Scale": "0.1,0.1,0.1",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Sandbox.SpriteRenderer",
-        "__guid": "ba3e8272-b483-4f90-b89e-ca8ebb119c60",
-        "Additive": false,
-        "CastShadows": false,
-        "Color": "0,0,0,1",
-        "DepthFeather": 0,
-        "FlipHorizontal": false,
-        "FlipVertical": false,
-        "FogStrength": 1,
-        "Opaque": false,
-        "Size": "1,1",
-        "Texture": "textures/sprites/shadow3.vtex"
+        "__type": "SpriteTools.SpriteComponent",
+        "__guid": "883c093f-51ab-4992-b09d-0e0d0853e384",
+        "_broadcastEvents": {},
+        "CastShadows": "Off",
+        "CreateAttachPoints": false,
+        "FlashTint": "1,1,1,0",
+        "PlaybackSpeed": 1,
+        "Sprite": "textures/sprites/shadow/shadow.sprite",
+        "StartingAnimationName": "",
+        "Tint": "0,0,0,1"
       }
-    ]
+    ],
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

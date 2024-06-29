@@ -302,7 +302,7 @@ public abstract class Enemy : Thing
 			Sprite.Tint = Color.White.WithAlpha( Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, FullOpacity, EasingType.SineIn ) );
 		}
 
-		ShadowSprite.Color = Color.Black.WithAlpha( ShadowOpacity );
+		ShadowSprite.Tint = Color.Black.WithAlpha( ShadowOpacity );
 	}
 
 	void ClampToBounds()

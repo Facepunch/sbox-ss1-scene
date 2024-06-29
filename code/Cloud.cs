@@ -20,9 +20,12 @@ public class Cloud : Component
 	{
 		base.OnAwake();
 
-		Transform.LocalRotation = new Angles( 0f, -90f, Game.Random.Float( 0f, 1f ) < 0.5f ? 180f : 0f );
+		Transform.LocalRotation = new Angles( 0f, -90f, 0f );
 		Transform.LocalScale = new Vector3( Game.Random.Float( 0.65f, 0.75f ), Game.Random.Float( 0.7f, 0.9f ), 1f ) * 0.01f;
 		_spawnTime = 0f;
+
+		if ( Game.Random.Float( 0f, 1f ) < 0.5f )
+			Sprite.SpriteFlags = SpriteFlags.HorizontalFlip;
 	}
 
 	protected override void OnUpdate()

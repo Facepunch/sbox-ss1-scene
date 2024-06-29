@@ -46,7 +46,7 @@ public class ReviveSoul : Thing
 
 		float opacity = 0.3f + Utils.FastSin( SpawnTime * 5f ) * 0.2f;
 		Sprite.Tint = Color.White.WithAlpha( opacity );
-		ShadowSprite.Color = Color.Black.WithAlpha( opacity );
+		ShadowSprite.Tint = Color.Black.WithAlpha( opacity );
 
 		if ( IsProxy )
 			return;

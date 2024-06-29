@@ -1,0 +1,18 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 1,
+      "Origin": "0.5,0.5",
+      "Name": "idle",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/shadow/shadow.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__references": [],
+  "__version": 0
+}

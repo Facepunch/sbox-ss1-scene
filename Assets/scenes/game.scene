@@ -222,55 +222,6 @@
           "Surface": "surfaces/default.surface"
         }
       ]
-    },
-    {
-      "__guid": "51719456-ae97-412d-84a0-628acd7fc4cc",
-      "Flags": 0,
-      "Name": "player_new",
-      "Position": "0,-50.13117,0.4160827",
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
-      "Components": [
-        {
-          "__type": "PlayerTest",
-          "__guid": "11f93709-bdf2-40a7-b505-d17a051b32d6",
-          "Body": {
-            "_type": "gameobject",
-            "go": "83ebf3df-7192-4a91-94e2-370230f3347f"
-          },
-          "SpriteComponent": {
-            "_type": "component",
-            "component_id": "3e065552-7424-4557-8177-48cec17e1039",
-            "go": "e2cafd9d-9539-4ef7-bfe9-5b2d41eed7e1",
-            "component_type": null
-          }
-        }
-      ],
-      "Children": [
-        {
-          "__guid": "83ebf3df-7192-4a91-94e2-370230f3347f",
-          "Flags": 0,
-          "Name": "body",
-          "Position": "0,0,0",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "NetworkInterpolation": true,
-          "Children": [
-            {
-              "__guid": "e2cafd9d-9539-4ef7-bfe9-5b2d41eed7e1",
-              "Flags": 0,
-              "Name": "sprite",
-              "Position": "0,0,0",
-              "Rotation": "0,-0,-0.7071068,0.7071068",
-              "Scale": "0.01,0.01,1",
-              "Enabled": true,
-              "NetworkMode": 2,
-              "NetworkInterpolation": true,
-              "Components": []
-            }
-          ]
-        }
-      ]
     }
   ],
   "SceneProperties": {
@@ -296,7 +247,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-06-28T15:07:34.6348584-07:00",
+  "LastSaved": "2024-06-28T20:06:34.1137229-07:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

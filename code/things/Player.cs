@@ -289,8 +289,8 @@ public class Player : Thing
 
 		if ( ShadowSprite != null )
 		{
-			ShadowSprite.Color = Color.Black.WithAlpha( ShadowOpacity );
-			ShadowSprite.Size = new Vector2( ShadowScale );
+			ShadowSprite.Tint = Color.Black.WithAlpha( ShadowOpacity );
+			ShadowSprite.Transform.LocalScale = new Vector2( ShadowScale * 0.01f );
 		}
 
 		if ( Manager.Instance.IsGameOver )
@@ -298,7 +298,8 @@ public class Player : Thing
 
 		float dt = Time.Delta;
 
-		SetFlipHorizontal( Velocity.x > 0f );
+		//SetFlipHorizontal( Velocity.x > 0f );
+		Sprite.SpriteFlags = Velocity.x > 0f ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
 
 		bool hurting = TimeSinceHurt < 0.15f;
 		bool attacking = !IsReloading;
@@ -315,7 +316,7 @@ public class Player : Thing
 		Sprite.PlayAnimation( $"{stateStr}{(moving ? "walk" : "idle")}" );
 		Sprite.PlaybackSpeed = moving ? Utils.Map( Velocity.Length, 0f, 2f, 1.5f, 2f ) : 0.66f;
 
-		Sprite.Transform.LocalRotation = new Angles( 0f, -90f + (Velocity.Length * Utils.FastSin( Time.Now * MathF.PI * 6f ) * 1.6f) * (IsFlippedHorizontal ? -1f : 1f), 0f );
+		Sprite.Transform.LocalRotation = new Angles( 0f, -90f + (Velocity.Length * Utils.FastSin( Time.Now * MathF.PI * 6f ) * 1.6f) * (Sprite.SpriteFlags.HasFlag(SpriteFlags.HorizontalFlip) ? -1f : 1f), 0f );
 
 		if ( !IsDead )
 		{
@@ -929,7 +930,7 @@ public class Player : Thing
 			Timer -= dt * Stats[PlayerStat.AttackSpeed] * (IsMoving ? 1f : Stats[PlayerStat.AttackSpeedStill]);
 			if ( Timer <= 0f )
 			{
-				//Shoot( isLastAmmo: AmmoCount == 1 );
+				Shoot( isLastAmmo: AmmoCount == 1 );
 				AmmoCount--;
 
 				if ( AmmoCount <= 0 )

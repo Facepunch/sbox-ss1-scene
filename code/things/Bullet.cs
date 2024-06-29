@@ -77,8 +77,11 @@ public class Bullet : Thing
 			? Utils.Map( damage, 0f, 30f, 0.1f, 0.5f, EasingType.QuadOut )
 			: Utils.Map( damage, 30f, 150f, 0.5f, 1.75f, EasingType.QuadIn );
 
+		scale *= 0.01f;
+
 		Scale = scale;
 		//Sprite.Size = new Vector2( scale );
+		Transform.LocalScale = new Vector3 ( scale, scale, 1f );
 		
 		Radius = 0.07f + scale * 0.2f;
 		ShadowScale = scale * 1.3f;

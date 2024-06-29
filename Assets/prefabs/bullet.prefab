@@ -1,42 +1,43 @@
 {
   "RootObject": {
     "__guid": "a2f37d05-cc60-42d0-81ff-3a69da9b1aaa",
+    "Flags": 0,
     "Name": "bullet",
+    "Scale": "0.0025,0.0025,1",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Sandbox.SpriteRenderer",
-        "__guid": "c2f6eb51-cd71-4774-8dbf-d77adc872889",
-        "Additive": false,
-        "CastShadows": false,
-        "Color": "1,1,1,1",
-        "DepthFeather": 0,
-        "FlipHorizontal": false,
-        "FlipVertical": false,
-        "FogStrength": 1,
-        "Opaque": false,
-        "Size": "0.25,0.25",
-        "Texture": "textures/sprites/bullet.vtex"
+        "__type": "SpriteTools.SpriteComponent",
+        "__guid": "babc53ce-9482-4ab3-afa3-5780c5210f7e",
+        "_broadcastEvents": {},
+        "CastShadows": "Off",
+        "CreateAttachPoints": false,
+        "FlashTint": "1,1,1,0",
+        "PlaybackSpeed": 1,
+        "Sprite": "textures/sprites/bullet/bullet.sprite",
+        "StartingAnimationName": "idle",
+        "Tint": "1,1,1,1"
       },
       {
         "__type": "Bullet",
         "__guid": "933e3196-bf88-4ecb-b14f-7d74b7b2663e",
         "Sprite": {
           "_type": "component",
-          "component_id": "c2f6eb51-cd71-4774-8dbf-d77adc872889",
+          "component_id": "babc53ce-9482-4ab3-afa3-5780c5210f7e",
           "go": "a2f37d05-cc60-42d0-81ff-3a69da9b1aaa",
-          "component_type": "SpriteRenderer"
+          "component_type": "SpriteComponent"
         }
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

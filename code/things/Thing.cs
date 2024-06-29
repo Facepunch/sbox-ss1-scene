@@ -25,21 +25,21 @@ public class Thing : Component
 	public float OffsetY { get; set; }
 	[Sync] public float ShadowOpacity { get; set; }
 	[Sync] public float ShadowScale { get; set; }
-	public SpriteRenderer ShadowSprite { get; set; }
+	public SpriteComponent ShadowSprite { get; set; }
 
 	[Sync] public bool SpriteDirty { get; set; }
 
-	//public Vector2 Position2D
-	//{
-	//	get { return (Vector2)Transform.Position + new Vector2(0f, OffsetY); }
-	//	set { Transform.Position = new Vector3( value.x, value.y - OffsetY, Transform.Position.z ); }
-	//}
-
 	public Vector2 Position2D
 	{
-		get { return (Vector2)Transform.Position; }
-		set { Transform.Position = new Vector3( value.x, value.y, Transform.Position.z ); }
+		get { return (Vector2)Transform.Position + new Vector2( 0f, OffsetY ); }
+		set { Transform.Position = new Vector3( value.x, value.y - OffsetY, Transform.Position.z ); }
 	}
+
+	//public Vector2 Position2D
+	//{
+	//	get { return (Vector2)Transform.Position; }
+	//	set { Transform.Position = new Vector3( value.x, value.y, Transform.Position.z ); }
+	//}
 
 	public Thing()
 	{
@@ -63,7 +63,7 @@ public class Thing : Component
 		if( Sprite != null && SpriteDirty && ShadowSprite != null )
 		{
 			//Sprite.Size = new Vector2( Scale );
-			ShadowSprite.Size = new Vector2( ShadowScale );
+			ShadowSprite.Transform.LocalScale = new Vector2( ShadowScale );
 
 			SpriteDirty = false;
 		}
@@ -104,9 +104,9 @@ public class Thing : Component
 		shadowObj.Transform.LocalPosition = new Vector3(0f, OffsetY, Globals.SHADOW_DEPTH_OFFSET );
 		shadowObj.NetworkMode = NetworkMode.Never;
 
-		ShadowSprite = shadowObj.Components.Get<SpriteRenderer>();
-		ShadowSprite.Size = new Vector2( size );
-		ShadowSprite.Color = Color.Black.WithAlpha( opacity );
+		ShadowSprite = shadowObj.Components.Get<SpriteComponent>();
+		ShadowSprite.Transform.LocalScale = new Vector2( size );
+		ShadowSprite.Tint = Color.Black.WithAlpha( opacity );
 	}
 
 	protected void UpdateGridPos()
