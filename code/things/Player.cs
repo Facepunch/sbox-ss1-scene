@@ -287,11 +287,11 @@ public class Player : Thing
 		//Gizmo.Draw.Color = Color.White.WithAlpha(0.05f);
 		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
-		if ( ShadowSprite != null )
-		{
-			ShadowSprite.Tint = Color.Black.WithAlpha( ShadowOpacity );
-			ShadowSprite.Transform.LocalScale = new Vector2( ShadowScale * 0.01f );
-		}
+		//if ( ShadowSprite != null )
+		//{
+		//	ShadowSprite.Tint = Color.Black.WithAlpha( ShadowOpacity );
+		//	ShadowSprite.Transform.LocalScale = new Vector2( ShadowScale * Globals.SPRITE_SCALE );
+		//}
 
 		if ( Manager.Instance.IsGameOver )
 			return;
@@ -957,7 +957,9 @@ public class Player : Thing
 		float currAngleOffset = num_bullets_int == 1 ? 0f : -Stats[PlayerStat.BulletSpread] * 0.5f;
 		float increment = num_bullets_int == 1 ? 0f : Stats[PlayerStat.BulletSpread] / (float)(num_bullets_int - 1);
 
-		var pos = Position2D + AimDir * 0.5f + new Vector2(0f, -OffsetY);
+		//var pos = Position2D + AimDir * 0.5f + new Vector2(0f, -OffsetY);
+		//var pos = Position2D + AimDir * 0.5f + new Vector2( 0f, 0.42f );
+		var pos = Position2D + AimDir * 0.5f;
 
 		for ( int i = 0; i < num_bullets_int; i++ )
 		{

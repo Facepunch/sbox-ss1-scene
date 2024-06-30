@@ -13,6 +13,8 @@ public class Globals
 	public const float SFX_DIST_MODIFIER = 1.3f;
 	public const float SFX_PITCH_MODIFIER = 0.775f;
 
+	public const float SPRITE_SCALE = 0.01f;
+
 	public static float GetZPos( float yPos )
 	{
 		return -yPos * 10f;

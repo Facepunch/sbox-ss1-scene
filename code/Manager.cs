@@ -25,6 +25,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public GameObject EnemySpikeElitePrefab { get; set; }
 	[Property] public GameObject FirePrefab { get; set; }
 	[Property] public GameObject ShieldVfxPrefab { get; set; }
+	[Property] public GameObject CratePrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
@@ -108,8 +109,6 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public void SpawnStartingThings()
 	{
-		return;
-
 		for ( int i = 0; i < 3; i++ )
 		{
 			var pos = new Vector2( Game.Random.Float( BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x ), Game.Random.Float( BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y ) );
@@ -270,8 +269,21 @@ public sealed class Manager : Component, Component.INetworkListener
 		if ( EnemyCount >= MAX_ENEMY_COUNT && !forceSpawn )
 			return;
 
-		var enemyObj = EnemyPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
-		var enemy = enemyObj.Components.Create( type ) as Enemy;
+		GameObject enemyObj;
+		Enemy enemy;
+		if ( type == TypeLibrary.GetType( typeof( Crate ) ) )
+		{
+			enemyObj = CratePrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+			enemy = enemyObj.Components.Get<Enemy>();
+
+			CrateCount++;
+		}
+		else
+		{
+			enemyObj = EnemyPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+			enemy = enemyObj.Components.Create( type ) as Enemy;
+		}
+		
 		enemyObj.Name = type.ToString();
 		enemyObj.NetworkSpawn();
 		//enemyObj.Transform.Position = new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) );
@@ -282,9 +294,6 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		AddThing( enemy );
 		EnemyCount++;
-
-		if ( type == TypeLibrary.GetType( typeof( Crate ) ) )
-			CrateCount++;
 
 		PlaySfxNearby( "zombie.dirt", pos, pitch: Game.Random.Float( 0.6f, 0.8f ), volume: 0.7f, maxDist: 7.5f );
 	}

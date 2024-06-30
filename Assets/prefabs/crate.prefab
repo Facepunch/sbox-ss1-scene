@@ -1,41 +1,42 @@
 {
   "RootObject": {
-    "__guid": "a2f37d05-cc60-42d0-81ff-3a69da9b1aaa",
+    "__guid": "7cf26868-d35f-45b9-9f4b-1db58e4e14f4",
     "Flags": 0,
-    "Name": "bullet",
+    "Name": "crate",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Bullet",
-        "__guid": "933e3196-bf88-4ecb-b14f-7d74b7b2663e",
+        "__type": "Crate",
+        "__guid": "8425429c-2471-48b5-ae1f-c1daf59c8a3e",
         "Sprite": {
           "_type": "component",
-          "component_id": "0c2090d1-716f-47c4-86f1-205343dd0398",
-          "go": "984beea5-a2f4-4327-8a7f-c8e061830742",
+          "component_id": "a861b4d1-977c-487f-a869-af1faf5b0088",
+          "go": "61cb6ed7-876b-49ad-af48-89e9babad40d",
           "component_type": "SpriteComponent"
         }
       }
     ],
     "Children": [
       {
-        "__guid": "984beea5-a2f4-4327-8a7f-c8e061830742",
+        "__guid": "61cb6ed7-876b-49ad-af48-89e9babad40d",
         "Flags": 0,
         "Name": "sprite",
+        "Rotation": "0,-0,-0.7071068,0.7071068",
         "Enabled": true,
         "NetworkMode": 2,
         "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "SpriteTools.SpriteComponent",
-            "__guid": "0c2090d1-716f-47c4-86f1-205343dd0398",
+            "__guid": "a861b4d1-977c-487f-a869-af1faf5b0088",
             "_broadcastEvents": {},
             "CastShadows": "Off",
             "CreateAttachPoints": false,
             "FlashTint": "1,1,1,0",
             "PlaybackSpeed": 1,
-            "Sprite": "textures/sprites/bullet/bullet.sprite",
+            "Sprite": "textures/sprites/crate/crate.sprite",
             "SpriteFlags": "None",
             "StartingAnimationName": "idle",
             "Tint": "1,1,1,1"

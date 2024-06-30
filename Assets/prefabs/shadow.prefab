@@ -3,8 +3,6 @@
     "__guid": "5591cbbd-d869-459d-a83c-db30b9aad4a6",
     "Flags": 0,
     "Name": "shadow",
-    "Position": "3.190994,0,2.056729",
-    "Scale": "0.1,0.1,0.1",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
@@ -18,8 +16,9 @@
         "FlashTint": "1,1,1,0",
         "PlaybackSpeed": 1,
         "Sprite": "textures/sprites/shadow/shadow.sprite",
-        "StartingAnimationName": "",
-        "Tint": "0,0,0,1"
+        "SpriteFlags": "None",
+        "StartingAnimationName": "idle",
+        "Tint": "1,1,1,1"
       }
     ],
     "Children": [],

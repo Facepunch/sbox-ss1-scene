@@ -1,0 +1,98 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.941",
+      "Name": "idle",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/crate/crate_00.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.9411765",
+      "Name": "spawn",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/crate/crate_01.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/crate/crate_02.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/crate/crate_04.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/crate/crate_05.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/crate/crate_06.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/crate/crate_07.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/crate/crate_08.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/crate/crate_09.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/crate/crate_00.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.941",
+      "Name": "die",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/crate/crate_10.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/crate/crate_11.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/crate/crate_12.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/crate/crate_13.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/crate/crate_14.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/crate/crate_15.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/crate/crate_16.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__references": [],
+  "__version": 0
+}

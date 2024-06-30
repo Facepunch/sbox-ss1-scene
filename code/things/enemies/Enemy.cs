@@ -74,8 +74,14 @@ public abstract class Enemy : Thing
 	{
 		base.OnAwake();
 
-		Sprite = Components.Get<SpriteComponent>();
+		//Sprite = Components.Get<SpriteComponent>();
+		Sprite.Transform.LocalScale *= Globals.SPRITE_SCALE; 
 		Sprite.Tint = Color.White.WithAlpha( 0f );
+
+		AnimSpawnPath = "spawn";
+		AnimIdlePath = "idle";
+		AnimAttackPath = "attack";
+		AnimDiePath = "die";
 
 		//_animSpeed = 1f;
 		//_animSpeedModifier = 1f;

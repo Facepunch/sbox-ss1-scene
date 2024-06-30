@@ -29,17 +29,17 @@ public class Thing : Component
 
 	[Sync] public bool SpriteDirty { get; set; }
 
-	public Vector2 Position2D
-	{
-		get { return (Vector2)Transform.Position + new Vector2( 0f, OffsetY ); }
-		set { Transform.Position = new Vector3( value.x, value.y - OffsetY, Transform.Position.z ); }
-	}
-
 	//public Vector2 Position2D
 	//{
-	//	get { return (Vector2)Transform.Position; }
-	//	set { Transform.Position = new Vector3( value.x, value.y, Transform.Position.z ); }
+	//	get { return (Vector2)Transform.Position + new Vector2( 0f, OffsetY ); }
+	//	set { Transform.Position = new Vector3( value.x, value.y - OffsetY, Transform.Position.z ); }
 	//}
+
+	public Vector2 Position2D
+	{
+		get { return (Vector2)Transform.Position; }
+		set { Transform.Position = new Vector3( value.x, value.y, Transform.Position.z ); }
+	}
 
 	public Thing()
 	{
@@ -54,7 +54,7 @@ public class Thing : Component
 		Gizmo.Draw.Color = Color.Black.WithAlpha(0.2f);
 		Gizmo.Draw.Text( $"{GameObject.Name}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.2f, 0f ) ) );
 
-		Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
+		Gizmo.Draw.Color = Color.White.WithAlpha( 0.01f );
 		Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
 		// todo: optimize?
@@ -63,7 +63,7 @@ public class Thing : Component
 		if( Sprite != null && SpriteDirty && ShadowSprite != null )
 		{
 			//Sprite.Size = new Vector2( Scale );
-			ShadowSprite.Transform.LocalScale = new Vector2( ShadowScale );
+			ShadowSprite.Transform.LocalScale = new Vector3( ShadowScale * Globals.SPRITE_SCALE, ShadowScale * Globals.SPRITE_SCALE, 1f );
 
 			SpriteDirty = false;
 		}
@@ -101,11 +101,13 @@ public class Thing : Component
 	{
 		var shadowObj = Manager.Instance.ShadowPrefab.Clone( Transform.Position );
 		shadowObj.SetParent( GameObject );
-		shadowObj.Transform.LocalPosition = new Vector3(0f, OffsetY, Globals.SHADOW_DEPTH_OFFSET );
+		//shadowObj.Transform.LocalPosition = new Vector3(0f, OffsetY, Globals.SHADOW_DEPTH_OFFSET );
+		shadowObj.Transform.LocalPosition = new Vector3( 0f, 0f, Globals.SHADOW_DEPTH_OFFSET );
+		shadowObj.Transform.LocalRotation = new Angles( 0f, -90f, 0f );
 		shadowObj.NetworkMode = NetworkMode.Never;
 
 		ShadowSprite = shadowObj.Components.Get<SpriteComponent>();
-		ShadowSprite.Transform.LocalScale = new Vector2( size );
+		ShadowSprite.Transform.LocalScale = new Vector3( size * Globals.SPRITE_SCALE, size * Globals.SPRITE_SCALE, 1f );
 		ShadowSprite.Tint = Color.Black.WithAlpha( opacity );
 	}
 

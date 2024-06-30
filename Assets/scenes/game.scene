@@ -1,5 +1,5 @@
 {
-  "__guid": "a343e18e-c11d-4e22-8097-90af8da470c9",
+  "__guid": "5a32a485-0aae-40af-a70c-b9ab5b9d7fae",
   "GameObjects": [
     {
       "__guid": "0ee658db-c168-4901-afd1-af4fa0ad5c51",
@@ -39,6 +39,10 @@
           "CoinPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/coin.prefab"
+          },
+          "CratePrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/crate.prefab"
           },
           "EnemyBulletPrefab": {
             "_type": "gameobject",
@@ -247,7 +251,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-06-28T20:06:34.1137229-07:00",
+  "LastSaved": "2024-06-29T14:04:24.7948376-07:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

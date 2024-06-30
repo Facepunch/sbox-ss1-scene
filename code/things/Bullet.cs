@@ -30,11 +30,14 @@ public class Bullet : Thing
 
 		OffsetY = -0.45f;
 
+		Sprite.Transform.LocalPosition = new Vector3( 0f, -OffsetY, 0f );
+
 		Radius = 0.1f;
 
 		ShadowOpacity = 0.8f;
 		ShadowScale = 0.3f;
 		SpawnShadow( ShadowScale, ShadowOpacity );
+		//Log.Info( $"ShadowScale: {ShadowScale} ShadowSprite.Transform.LocalScale: {ShadowSprite.Transform.LocalScale}" );
 
 		if ( IsProxy )
 			return;
@@ -77,11 +80,9 @@ public class Bullet : Thing
 			? Utils.Map( damage, 0f, 30f, 0.1f, 0.5f, EasingType.QuadOut )
 			: Utils.Map( damage, 30f, 150f, 0.5f, 1.75f, EasingType.QuadIn );
 
-		scale *= 0.01f;
-
 		Scale = scale;
 		//Sprite.Size = new Vector2( scale );
-		Transform.LocalScale = new Vector3 ( scale, scale, 1f );
+		Sprite.Transform.LocalScale = new Vector3 ( scale * Globals.SPRITE_SCALE, scale * Globals.SPRITE_SCALE, 1f );
 		
 		Radius = 0.07f + scale * 0.2f;
 		ShadowScale = scale * 1.3f;
