@@ -1,0 +1,131 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.8125",
+      "Looping": true,
+      "Name": "xp_1",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/xp/xp_00.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/xp/xp_01.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/xp/xp_02.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/xp/xp_03.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.8125",
+      "Looping": true,
+      "Name": "xp_2",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/xp/xp_04.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/xp/xp_05.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/xp/xp_06.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/xp/xp_07.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.875",
+      "Looping": true,
+      "Name": "xp_3",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/xp/xp_08.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/xp/xp_09.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/xp/xp_10.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/xp/xp_11.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.875",
+      "Looping": true,
+      "Name": "xp_4",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/xp/xp_12.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/xp/xp_13.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/xp/xp_14.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/xp/xp_15.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.9375",
+      "Looping": true,
+      "Name": "xp_5",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/xp/xp_16.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/xp/xp_17.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/xp/xp_18.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/xp/xp_19.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__references": [],
+  "__version": 0
+}

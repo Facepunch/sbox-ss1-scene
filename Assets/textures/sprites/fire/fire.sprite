@@ -1,0 +1,31 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 12,
+      "Origin": "0.5,0.5",
+      "Looping": true,
+      "Name": "idle",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/fire/fire_00.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/fire/fire_01.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/fire/fire_02.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/fire/fire_03.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__references": [],
+  "__version": 0
+}

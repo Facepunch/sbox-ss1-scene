@@ -1,11 +1,194 @@
 {
   "Animations": [
     {
-      "FrameRate": 15,
-      "Origin": "0.5,0.5",
+      "FrameRate": 4,
+      "Origin": "0.5,0.9210526",
       "Looping": true,
-      "Name": "animation_01",
-      "Frames": [],
+      "Name": "walk",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/charger/charger_00.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_01.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 4,
+      "Origin": "0.5,0.921",
+      "Name": "spawn",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/charger/charger_02.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_03.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_04.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_05.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_06.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_07.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_08.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_09.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_10.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_11.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_12.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_13.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_14.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_15.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_16.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 4,
+      "Origin": "0.5,0.921",
+      "Name": "die",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/charger/charger_17.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_18.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_19.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_20.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_21.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_22.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_23.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_24.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.921",
+      "Looping": true,
+      "Name": "attack",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/charger/charger_25.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_26.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_25.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_27.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.921",
+      "Name": "charge_start",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/charger/charger_28.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_29.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_30.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_31.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.921",
+      "Looping": true,
+      "Name": "charge_loop",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/charger/charger_31.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/charger/charger_32.png",
+          "Events": []
+        }
+      ],
       "Attachments": []
     }
   ],

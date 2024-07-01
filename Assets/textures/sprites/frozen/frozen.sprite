@@ -1,0 +1,35 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 10,
+      "Origin": "0.5,0.5",
+      "Looping": true,
+      "Name": "idle",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/frozen/frozen_00.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/frozen/frozen_01.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/frozen/frozen_02.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/frozen/frozen_03.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/frozen/frozen_04.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__references": [],
+  "__version": 0
+}

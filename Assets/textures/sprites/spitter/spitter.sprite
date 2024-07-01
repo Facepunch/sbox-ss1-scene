@@ -1,0 +1,224 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 4,
+      "Origin": "0.5,0.9117647",
+      "Looping": true,
+      "Name": "walk",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/spitter/spitter_00.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_01.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.912",
+      "Name": "spawn",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/spitter/spitter_02.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_03.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_04.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_05.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_06.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_07.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_08.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_09.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_10.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_11.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_12.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_13.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_14.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_15.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_16.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_17.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.912",
+      "Name": "die",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/spitter/spitter_18.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_19.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_20.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_21.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_22.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_23.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_24.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_25.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.912",
+      "Looping": true,
+      "Name": "attack",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/spitter/spitter_26.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_27.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_26.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_28.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.912",
+      "Name": "shoot",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/spitter/spitter_29.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_30.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_31.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_32.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_33.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_34.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_35.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_36.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.912",
+      "Name": "shoot_reverse",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/spitter/spitter_32.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_31.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_30.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spitter/spitter_29.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__references": [],
+  "__version": 0
+}

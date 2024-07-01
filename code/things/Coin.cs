@@ -18,7 +18,9 @@ public class Coin : Thing
 	{
 		base.OnAwake();
 
-		OffsetY = -0.12f;
+		//OffsetY = -0.12f;
+		Sprite.Transform.LocalScale = new Vector3( 0.4f * Globals.SPRITE_SCALE, 0.4f * Globals.SPRITE_SCALE, 1f );
+		Sprite.Transform.LocalRotation = new Angles( 0f, -90f, 0f );
 
 		Scale = 0.4f;
 
@@ -142,30 +144,30 @@ public class Coin : Thing
 		int tier_shape = 1 + MathX.FloorToInt( (value - 1) / 5f );
 		int tier_color = value % 5;
 
-		//switch ( tier_shape )
-		//{
-		//	case 1:
-		//		AnimationPath = "textures/sprites/xp_1.frames";
-		//		BasePivotY = 0.225f;
-		//		break;
-		//	case 2:
-		//		AnimationPath = "textures/sprites/xp_2.frames";
-		//		BasePivotY = 0.225f;
-		//		break;
-		//	case 3:
-		//		AnimationPath = "textures/sprites/xp_3.frames";
-		//		BasePivotY = 0.15f;
-		//		break;
-		//	case 4:
-		//		AnimationPath = "textures/sprites/xp_4.frames";
-		//		BasePivotY = 0.1f;
-		//		break;
-		//	case 5:
-		//	default:
-		//		AnimationPath = "textures/sprites/xp_5.frames";
-		//		BasePivotY = 0.05f;
-		//		break;
-		//}
+		switch ( tier_shape )
+		{
+			case 1:
+				Sprite.PlayAnimation( "xp_1" );
+				//BasePivotY = 0.225f;
+				break;
+			case 2:
+				Sprite.PlayAnimation( "xp_2" );
+				//BasePivotY = 0.225f;
+				break;
+			case 3:
+				Sprite.PlayAnimation( "xp_3" );
+				//BasePivotY = 0.15f;
+				break;
+			case 4:
+				Sprite.PlayAnimation( "xp_4" );
+				//BasePivotY = 0.1f;
+				break;
+			case 5:
+			default:
+				Sprite.PlayAnimation( "xp_5" );
+				//BasePivotY = 0.05f;
+				break;
+		}
 
 		switch ( tier_color )
 		{

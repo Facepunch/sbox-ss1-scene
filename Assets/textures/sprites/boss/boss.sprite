@@ -1,0 +1,368 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 4,
+      "Origin": "0.5,0.95",
+      "Looping": true,
+      "Name": "walk",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/boss/boss_00.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_01.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 4,
+      "Origin": "0.5,0.95",
+      "Name": "spawn",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/boss/boss_02.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_03.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_04.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_05.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_06.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_07.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_08.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_09.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_10.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_11.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_12.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_13.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_14.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_15.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_16.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_17.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 4,
+      "Origin": "0.5,0.95",
+      "Name": "die",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/boss/boss_18.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_19.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_20.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_21.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_22.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_23.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_24.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_25.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_26.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_27.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_28.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_29.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_30.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_31.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 4,
+      "Origin": "0.5,0.95",
+      "Looping": true,
+      "Name": "attack",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/boss/boss_32.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_33.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_32.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_34.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 8,
+      "Origin": "0.5,0.95",
+      "Name": "shoot",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/boss/boss_35.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_36.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_37.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_38.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_39.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_40.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_41.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_42.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 8,
+      "Origin": "0.5,0.95",
+      "Name": "shoot_reverse",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/boss/boss_42.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_41.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_40.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_39.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_38.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_37.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_36.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_35.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 12,
+      "Origin": "0.5,0.95",
+      "Name": "charge",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/boss/boss_35.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_36.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_37.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_38.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_39.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_40.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_41.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_42.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_43.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_44.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_45.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 12,
+      "Origin": "0.5,0.95",
+      "Name": "charge_reverse",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/boss/boss_45.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_44.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_43.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_42.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_41.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_40.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_39.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_38.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_37.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_36.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/boss/boss_35.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__references": [],
+  "__version": 0
+}

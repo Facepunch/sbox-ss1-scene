@@ -1,0 +1,156 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 4,
+      "Origin": "0.5,0.9375",
+      "Looping": true,
+      "Name": "walk",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_00.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_01.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.938",
+      "Name": "spawn",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_02.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_03.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_04.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_05.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_06.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_07.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_08.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_09.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_10.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_11.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_12.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_13.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_14.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_15.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_16.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.938",
+      "Name": "die",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_17.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_18.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_19.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_20.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_21.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_22.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_23.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_24.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.938",
+      "Looping": true,
+      "Name": "attack",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_25.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_26.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_25.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/zombie_elite/zombie_elite_27.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__references": [],
+  "__version": 0
+}

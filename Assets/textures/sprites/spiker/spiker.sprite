@@ -1,0 +1,284 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 4,
+      "Origin": "0.5,0.952381",
+      "Looping": true,
+      "Name": "walk",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/spiker/spiker_00.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_01.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.952",
+      "Name": "spawn",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/spiker/spiker_02.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_03.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_04.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_05.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_06.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_07.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_08.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_09.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_10.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_11.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_12.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_13.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_14.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_15.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_16.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_17.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_18.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_19.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.952",
+      "Name": "die",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/spiker/spiker_20.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_21.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_22.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_23.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_24.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_25.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_26.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.952",
+      "Looping": true,
+      "Name": "attack",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/spiker/spiker_27.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_28.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_27.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_29.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.952",
+      "Name": "shoot",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/spiker/spiker_30.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_31.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_32.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_33.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_34.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_35.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_36.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_37.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_38.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_39.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_40.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_41.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_42.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.952",
+      "Name": "shoot_reverse",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/spiker/spiker_42.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_41.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_40.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_39.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_38.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_37.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_36.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_35.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_34.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_33.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_32.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_31.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker/spiker_30.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__references": [],
+  "__version": 0
+}

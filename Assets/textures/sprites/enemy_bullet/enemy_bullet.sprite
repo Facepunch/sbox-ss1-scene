@@ -1,0 +1,55 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.5",
+      "Looping": true,
+      "Name": "idle",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/enemy_bullet/enemy_bullet_00.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/enemy_bullet/enemy_bullet_01.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/enemy_bullet/enemy_bullet_02.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/enemy_bullet/enemy_bullet_03.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/enemy_bullet/enemy_bullet_04.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/enemy_bullet/enemy_bullet_05.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/enemy_bullet/enemy_bullet_06.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/enemy_bullet/enemy_bullet_07.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/enemy_bullet/enemy_bullet_08.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/enemy_bullet/enemy_bullet_09.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__references": [],
+  "__version": 0
+}

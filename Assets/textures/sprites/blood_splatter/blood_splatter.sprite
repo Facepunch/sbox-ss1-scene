@@ -1,0 +1,138 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.5",
+      "Looping": true,
+      "Name": "blood_splatter_0",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_00.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_01.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_02.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_03.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_04.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_05.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.5",
+      "Looping": true,
+      "Name": "blood_splatter_1",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_00.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_01.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_02.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_03.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_04.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_06.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.5",
+      "Looping": true,
+      "Name": "blood_splatter_2",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_00.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_01.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_02.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_03.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_04.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_07.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.5",
+      "Looping": true,
+      "Name": "blood_splatter_3",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_00.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_01.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_02.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_03.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_04.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/blood_splatter/blood_splatter_08.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__references": [],
+  "__version": 0
+}

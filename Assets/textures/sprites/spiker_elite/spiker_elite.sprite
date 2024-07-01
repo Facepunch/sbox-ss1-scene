@@ -1,0 +1,284 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.952381",
+      "Looping": true,
+      "Name": "walk",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_00.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_01.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.952",
+      "Name": "spawn",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_02.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_03.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_04.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_05.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_06.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_07.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_08.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_09.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_10.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_11.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_12.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_13.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_14.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_15.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_16.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_17.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_18.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_19.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.952",
+      "Name": "die",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_20.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_21.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_22.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_23.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_24.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_25.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_26.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.952",
+      "Looping": true,
+      "Name": "attack",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_27.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_28.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_27.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_29.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.952",
+      "Name": "shoot",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_30.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_31.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_32.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_33.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_34.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_35.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_36.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_37.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_38.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_39.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_40.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_41.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_42.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.952",
+      "Name": "shoot_reverse",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_42.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_41.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_40.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_39.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_38.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_37.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_36.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_35.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_34.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_33.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_32.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_31.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/spiker_elite/spiker_elite_30.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__references": [],
+  "__version": 0
+}

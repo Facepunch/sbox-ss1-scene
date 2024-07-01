@@ -958,7 +958,6 @@ public class Player : Thing
 		float increment = num_bullets_int == 1 ? 0f : Stats[PlayerStat.BulletSpread] / (float)(num_bullets_int - 1);
 
 		//var pos = Position2D + AimDir * 0.5f + new Vector2(0f, -OffsetY);
-		//var pos = Position2D + AimDir * 0.5f + new Vector2( 0f, 0.42f );
 		var pos = Position2D + AimDir * 0.5f;
 
 		for ( int i = 0; i < num_bullets_int; i++ )

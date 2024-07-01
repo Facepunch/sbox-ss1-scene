@@ -1,0 +1,54 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.5",
+      "Name": "idle",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/explosion/explosion_00.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/explosion/explosion_01.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/explosion/explosion_02.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/explosion/explosion_03.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/explosion/explosion_04.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/explosion/explosion_05.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/explosion/explosion_06.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/explosion/explosion_07.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/explosion/explosion_08.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/explosion/explosion_09.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__references": [],
+  "__version": 0
+}

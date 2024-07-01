@@ -1,0 +1,156 @@
+{
+  "Animations": [
+    {
+      "FrameRate": 4,
+      "Origin": "0.5,0.9210526",
+      "Looping": true,
+      "Name": "idle",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/runner/runner_00.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_01.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.921",
+      "Name": "spawn",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/runner/runner_02.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_03.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_04.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_05.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_06.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_07.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_08.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_09.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_10.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_11.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_12.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_13.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_14.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_15.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_16.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.921",
+      "Name": "die",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/runner/runner_17.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_18.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_19.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_20.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_21.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_22.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_23.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_24.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    },
+    {
+      "FrameRate": 15,
+      "Origin": "0.5,0.921",
+      "Looping": true,
+      "Name": "attack",
+      "Frames": [
+        {
+          "FilePath": "textures/sprites/runner/runner_25.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_26.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_25.png",
+          "Events": []
+        },
+        {
+          "FilePath": "textures/sprites/runner/runner_27.png",
+          "Events": []
+        }
+      ],
+      "Attachments": []
+    }
+  ],
+  "__references": [],
+  "__version": 0
+}
