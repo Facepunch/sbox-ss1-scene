@@ -26,6 +26,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public GameObject FirePrefab { get; set; }
 	[Property] public GameObject ShieldVfxPrefab { get; set; }
 	[Property] public GameObject CratePrefab { get; set; }
+	[Property] public GameObject ZombiePrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
@@ -175,8 +176,6 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	void HandleEnemySpawn()
 	{
-		return;
-
 		var spawnTime = Utils.Map( EnemyCount, 0, MAX_ENEMY_COUNT, 0.05f, 0.33f, EasingType.QuadOut ) * Utils.Map( ElapsedTime, 0f, 80f, 1.5f, 1f ) * Utils.Map( ElapsedTime, 0f, 250f, 3f, 1f ) * Utils.Map( ElapsedTime, 0f, 900f, 1.2f, 1f );
 		if ( _enemySpawnTime > spawnTime )
 		{
@@ -278,12 +277,19 @@ public sealed class Manager : Component, Component.INetworkListener
 
 			CrateCount++;
 		}
+		else if( type == TypeLibrary.GetType( typeof( Zombie ) ) )
+		{
+			enemyObj = ZombiePrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+			enemy = enemyObj.Components.Get<Enemy>();
+		}
 		else
 		{
+			return;
+
 			enemyObj = EnemyPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
 			enemy = enemyObj.Components.Create( type ) as Enemy;
 		}
-		
+
 		enemyObj.Name = type.ToString();
 		enemyObj.NetworkSpawn();
 		//enemyObj.Transform.Position = new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) );

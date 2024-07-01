@@ -107,6 +107,10 @@
           "ShieldVfxPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/shield_vfx.prefab"
+          },
+          "ZombiePrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/zombie.prefab"
           }
         },
         {
@@ -251,7 +255,7 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-06-29T22:09:37.326669-07:00",
+  "LastSaved": "2024-07-01T09:14:30.6626559-07:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

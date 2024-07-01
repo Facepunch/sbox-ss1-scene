@@ -77,7 +77,7 @@ public class Player : Thing
 
 	private float _flashTimer;
 	private bool _isFlashing;
-	public float TimeSinceHurt { get; private set; }
+	public TimeSince TimeSinceHurt { get; private set; }
 
 	//public Nametag Nametag { get; private set; }
 
@@ -126,12 +126,20 @@ public class Player : Thing
 
 	public void InitializeStats()
 	{
-		//AnimationPath = "textures/sprites/player_idle.frames";
-		//AnimationSpeed = 0.66f;
-
 		_original_properties_stat.Clear();
 
-		RemoveShieldVfx();
+		if(Network.Active)
+		{
+			RemoveShieldVfx();
+		}
+		else
+		{
+			if ( _shieldVfx != null )
+			{
+				_shieldVfx.Destroy();
+				_shieldVfx = null;
+			}
+		}
 
 		Level = 0;
 		ExperienceRequired = GetExperienceReqForLevel( Level + 1 );
@@ -301,7 +309,7 @@ public class Player : Thing
 		//SetFlipHorizontal( Velocity.x > 0f );
 		Sprite.SpriteFlags = Velocity.x > 0f ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
 
-		bool hurting = TimeSinceHurt < 0.15f;
+		bool hurting = TimeSinceHurt < 0.25f;
 		bool attacking = !IsReloading;
 		bool moving = Velocity.LengthSquared > 0.01f && InputVector.LengthSquared > 0.1f;
 
@@ -855,10 +863,11 @@ public class Player : Thing
 
 		Manager.Instance.PlaySfxNearbyLocal( "die", Position2D, pitch: Game.Random.Float( 1f, 1.2f ), volume: 1.5f, maxDist: 12f );
 
+		Sprite.PlayAnimation( "ghost_idle" );
+
 		if ( IsProxy )
 			return;
 		
-		//AnimationPath = $"textures/sprites/player_ghost_idle.frames";
 		Manager.Instance.PlayerDied( this );
 
 		//Game.Hud.RemoveChoicePanel();
@@ -1101,6 +1110,9 @@ public class Player : Thing
 	[Broadcast]
 	public void Restart()
 	{
+		Sprite.PlayAnimation( "idle" );
+		//AnimationSpeed = 0.66f;
+
 		if ( IsProxy )
 			return;
 

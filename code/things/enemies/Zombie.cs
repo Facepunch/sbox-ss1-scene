@@ -35,6 +35,8 @@ public class Zombie : Enemy
 		MaxHealth = Health;
 		DamageToPlayer = 7f;
 
+		Sprite.PlayAnimation( AnimSpawnPath );
+
 		if ( IsProxy )
 			return;
 		
@@ -47,8 +49,6 @@ public class Zombie : Enemy
 		HasTarget = false;
 
 		_wanderPos = new Vector2( Game.Random.Float( Manager.Instance.BOUNDS_MIN.x + 10f, Manager.Instance.BOUNDS_MAX.x - 10f ), Game.Random.Float( Manager.Instance.BOUNDS_MIN.y + 10f, Manager.Instance.BOUNDS_MAX.y - 20f ) );
-
-		//AnimationPath = AnimSpawnPath;
 	}
 
 	protected override void UpdatePosition( float dt )
