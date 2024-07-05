@@ -12,6 +12,7 @@ public class FrameButton : Widget
     MainWindow MainWindow;
     Timeline Timeline;
     public int FrameIndex;
+    Pixmap Pixmap;
 
     public bool IsCurrentFrame => MainWindow.CurrentFrameIndex == FrameIndex;
 
@@ -37,11 +38,27 @@ public class FrameButton : Widget
         HorizontalSizeMode = SizeMode.Ignore;
         VerticalSizeMode = SizeMode.Ignore;
 
-        // var serializedObject = Animation.GetSerialized();
-        // serializedObject.TryGetProperty( nameof( SpriteAnimation.Name ), out var name );
-        // labelText = new LabelTextEntry( MainWindow, name );
-
-        // Layout.Add( labelText );
+        // Get the texture for the frame
+        var frame = MainWindow.SelectedAnimation.Frames[FrameIndex];
+        var texture = Texture.Load(Sandbox.FileSystem.Mounted, frame.FilePath);
+        Pixmap = new Pixmap(texture.Width, texture.Height);
+        var rect = frame.SpriteSheetRect;
+        if (rect.Width == 0 || rect.Height == 0)
+        {
+            rect = new Rect(0, 0, texture.Width, texture.Height);
+        }
+        var pixels = texture.GetPixels();
+        List<Color32> span = new();
+        for (int y = (int)rect.Top; y < rect.Bottom; y++)
+        {
+            for (int x = (int)rect.Left; x < rect.Right; x++)
+            {
+                // This has to go from RGB -> BGR for some reason?
+                var i = x + y * texture.Width;
+                span.Add(new Color32(pixels[i].b, pixels[i].g, pixels[i].r, pixels[i].a));
+            }
+        }
+        Pixmap.UpdateFromPixels(MemoryMarshal.AsBytes<Color32>(span.ToArray()), (int)rect.Width, (int)rect.Height);
 
         IsDraggable = true;
         AcceptDrops = true;
@@ -100,12 +117,8 @@ public class FrameButton : Widget
         }
 
         //Log.Info( MainWindow.SelectedAnimation.Frames[FrameIndex] );
-        Texture texture = Texture.Load(Sandbox.FileSystem.Mounted, MainWindow.SelectedAnimation.Frames[FrameIndex].FilePath);
 
-        Pixmap pix = new Pixmap(texture.Width, texture.Height);
-        var pixels = texture.GetPixels();
-        pix.UpdateFromPixels(MemoryMarshal.AsBytes<Color32>(pixels), texture.Width, texture.Height, ImageFormat.RGBA8888);
-        Paint.Draw(new Rect(LocalRect.TopLeft + Vector2.Up * 16f, LocalRect.BottomRight - Vector2.Up * 16f).Shrink(4), pix);
+        Paint.Draw(new Rect(LocalRect.TopLeft + Vector2.Up * 16f, LocalRect.BottomRight - Vector2.Up * 16f).Shrink(4), Pixmap);
 
         if (MainWindow.SelectedAnimation.Frames[FrameIndex].Events.Count > 0)
         {

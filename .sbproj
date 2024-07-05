@@ -5,6 +5,7 @@
   "Ident": "ss1",
   "Tags": null,
   "Schema": 1,
+  "IncludeSourceFiles": false,
   "Resources": null,
   "PackageReferences": [],
   "EditorReferences": null,
