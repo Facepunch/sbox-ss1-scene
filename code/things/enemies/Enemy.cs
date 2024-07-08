@@ -75,11 +75,12 @@ public abstract class Enemy : Thing
 		base.OnAwake();
 
 		//Sprite = Components.Get<SpriteComponent>();
-		Sprite.Transform.LocalScale *= Globals.SPRITE_SCALE; 
-		Sprite.Tint = Color.White.WithAlpha( 0f );
+		Sprite.Transform.LocalScale *= Globals.SPRITE_SCALE;
+		//Sprite.Tint = Color.White.WithAlpha( 0f );
+		//Sprite.Tint = Color.White.WithAlpha( 1f );
 
 		AnimSpawnPath = "spawn";
-		AnimIdlePath = "idle";
+		AnimIdlePath = "walk";
 		AnimAttackPath = "attack";
 		AnimDiePath = "die";
 
@@ -210,13 +211,13 @@ public abstract class Enemy : Thing
 				{
 					IsAttacking = false;
 
-					//if ( CanAttackAnim )
-					//	AnimationPath = AnimIdlePath;
+					if ( CanAttackAnim )
+						Sprite.PlayAnimation( AnimIdlePath );
 				}
 			}
 			else
 			{
-				//AnimSpeed = Utils.Map( dist_sqr, attack_dist_sqr, 0f, 1f, 4f, EasingType.Linear );
+				Sprite.PlaybackSpeed = Utils.Map( dist_sqr, attack_dist_sqr, 0f, 1f, 4f, EasingType.Linear );
 				_aggroTimer = 0f;
 			}
 		}
@@ -226,30 +227,31 @@ public abstract class Enemy : Thing
 	{
 		IsAttacking = true;
 
-		//if ( CanAttackAnim )
-		//	AnimationPath = AnimAttackPath;
+		if ( CanAttackAnim )
+			Sprite.PlayAnimation( AnimAttackPath );
 	}
 
 	protected virtual void UpdateSprite( Player targetPlayer )
 	{
 		if ( !IsAttacking )
 		{
-			//AnimSpeed = Utils.Map( Utils.FastSin( MoveTimeOffset + Time.Now * 7.5f ), -1f, 1f, 0.75f, 3f, EasingType.ExpoIn );
+			Sprite.PlaybackSpeed = Utils.Map( Utils.FastSin( MoveTimeOffset + Time.Now * 7.5f ), -1f, 1f, 0.75f, 3f, EasingType.ExpoIn );
 
-			//if ( MathF.Abs( Velocity.x ) > 0.175f && !IsFrozen && CanTurn )
-			//	Sprite.FlipHorizontal = Velocity.x > 0f;
+			if ( MathF.Abs( Velocity.x ) > 0.175f && !IsFrozen && CanTurn )
+				Sprite.SpriteFlags = Velocity.x > 0f ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
 		}
 		else
 		{
-			//float dist_sqr = (targetPlayer.Position - Position).LengthSquared;
-			//float attack_dist_sqr = MathF.Pow( AggroRange, 2f );
-			//AnimSpeed = Utils.Map( dist_sqr, attack_dist_sqr, 0f, 1f, 4f, EasingType.Linear );
+			float dist_sqr = (targetPlayer.Position2D - Position2D).LengthSquared;
+			float attack_dist_sqr = MathF.Pow( AggroRange, 2f );
+			Sprite.PlaybackSpeed = Utils.Map( dist_sqr, attack_dist_sqr, 0f, 1f, 4f, EasingType.Linear );
 
 			if ( !IsFrozen && CanTurn )
 			{
-				//Sprite.FlipHorizontal = (targetPlayer.Position2D.x < Position2D.x ? false : true);
-				//if ( IsFeared )
-				//	Sprite.FlipHorizontal = !Sprite.FlipHorizontal;
+				if ( IsFeared )
+					Sprite.SpriteFlags = targetPlayer.Position2D.x < Position2D.x ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
+				else
+					Sprite.SpriteFlags = targetPlayer.Position2D.x < Position2D.x ? SpriteFlags.None : SpriteFlags.HorizontalFlip;
 			}
 				
 			//Scale = new Vector2( (IsFeared ? -1f : 1f) * (targetPlayer.Position.x < Position.x ? 1f : -1f), 1f ) * ScaleFactor;
@@ -264,6 +266,7 @@ public abstract class Enemy : Thing
 			if ( _flashTimer < 0f )
 			{
 				_isFlashing = false;
+				Sprite.FlashTint = Color.White.WithAlpha( 0f );
 				Sprite.Tint = Color.Lerp( Color.White, Color.Black, Utils.Map(Health, MaxHealth, 0f, 0f, 0.7f) ).WithAlpha(FullOpacity);
 			}
 		}
@@ -291,9 +294,9 @@ public abstract class Enemy : Thing
 		if ( ElapsedTime > SpawnTime )
 		{
 			IsSpawning = false;
-			//AnimationPath = AnimIdlePath;
+			Sprite.PlayAnimation( AnimIdlePath );
 			ShadowOpacity = ShadowFullOpacity;
-			Sprite.Tint = Color.White.WithAlpha( FullOpacity );
+			//Sprite.Tint = Color.White.WithAlpha( FullOpacity );
 		}
 		else
 		{
@@ -305,7 +308,7 @@ public abstract class Enemy : Thing
 			}
 
 			ShadowOpacity = Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, ShadowFullOpacity );
-			Sprite.Tint = Color.White.WithAlpha( Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, FullOpacity, EasingType.SineIn ) );
+			//Sprite.Tint = Color.White.WithAlpha( Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, FullOpacity, EasingType.SineIn ) );
 		}
 
 		ShadowSprite.Tint = Color.Black.WithAlpha( ShadowOpacity );
@@ -378,10 +381,11 @@ public abstract class Enemy : Thing
 		IsDying = true;
 		DeathProgress = 0f;
 		DeathTimeElapsed = 0f;
-		//AnimationPath = AnimDiePath;
-		//AnimSpeed = 5.5f;
+		Sprite.PlayAnimation( AnimDiePath );
+		Sprite.PlaybackSpeed = 5.5f;
 
 		_isFlashing = false;
+		Sprite.FlashTint = Color.White.WithAlpha( 0f );
 
 		//_deathScale = Scale;
 
@@ -461,7 +465,7 @@ public abstract class Enemy : Thing
 		if ( _isFlashing )
 			return;
 
-		Sprite.Tint = Color.Red;
+		Sprite.FlashTint = Color.White.WithAlpha( 1f );
 		_isFlashing = true;
 		_flashTimer = time;
 	}

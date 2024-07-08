@@ -1,12 +1,11 @@
 {
   "Title": "ss1",
   "Type": "game",
-  "Org": "local",
+  "Org": "facepunch",
   "Ident": "ss1",
-  "Tags": null,
   "Schema": 1,
   "IncludeSourceFiles": false,
-  "Resources": null,
+  "Resources": "/textures/*\n/particles/*\n/sounds/*",
   "PackageReferences": [],
   "EditorReferences": null,
   "Metadata": {

@@ -1,9 +1,8 @@
 {
   "Animations": [
     {
-      "FrameRate": 15,
+      "FrameRate": 4,
       "Origin": "0.5,0.5",
-      "Looping": true,
       "Name": "blood_splatter_0",
       "Frames": [
         {
@@ -34,9 +33,8 @@
       "Attachments": []
     },
     {
-      "FrameRate": 15,
+      "FrameRate": 4,
       "Origin": "0.5,0.5",
-      "Looping": true,
       "Name": "blood_splatter_1",
       "Frames": [
         {
@@ -67,9 +65,8 @@
       "Attachments": []
     },
     {
-      "FrameRate": 15,
+      "FrameRate": 4,
       "Origin": "0.5,0.5",
-      "Looping": true,
       "Name": "blood_splatter_2",
       "Frames": [
         {
@@ -100,9 +97,8 @@
       "Attachments": []
     },
     {
-      "FrameRate": 15,
+      "FrameRate": 4,
       "Origin": "0.5,0.5",
-      "Looping": true,
       "Name": "blood_splatter_3",
       "Frames": [
         {

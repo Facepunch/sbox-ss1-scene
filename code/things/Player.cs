@@ -235,7 +235,8 @@ public class Player : Thing
 		_modifiers_stat.Clear();
 
 		_isFlashing = false;
-		//ColorTint = Color.White;
+		Sprite.FlashTint = Color.White.WithAlpha( 0f );
+		Sprite.Tint = Color.White;
 		//EnableDrawing = true;
 		IsChoosingLevelUpReward = false;
 		IsDashing = false;
@@ -247,10 +248,8 @@ public class Player : Thing
 		TempWeight = 0f;
 		_shotNum = 0;
 		TimeSinceHurt = 999f;
-		//ShadowOpacity = 0.8f;
-		//ShadowScale = 1.12f;
-		Sprite.Tint = Color.White;
 		ShadowOpacity = 0.8f;
+		//ShadowScale = 1.12f;
 
 		//AddStatus( TypeLibrary.GetType( typeof( DamageStatus) ) );
 	}
@@ -845,7 +844,8 @@ public class Player : Thing
 	public void SpawnBlood( float damage )
 	{
 		var blood = Manager.Instance.SpawnBloodSplatter( Position2D );
-		blood.Sprite.Size *= Utils.Map( damage, 1f, 20f, 0.3f, 0.5f, EasingType.QuadIn ) * Game.Random.Float( 0.8f, 1.2f );
+		//blood.Sprite.Size *= Utils.Map( damage, 1f, 20f, 0.3f, 0.5f, EasingType.QuadIn ) * Game.Random.Float( 0.8f, 1.2f );
+		blood.Transform.LocalScale *= Utils.Map( damage, 1f, 20f, 0.5f, 1.2f, EasingType.QuadIn ) * Game.Random.Float( 0.8f, 1.2f );
 		blood.Lifetime *= 0.3f;
 	}
 

@@ -51,11 +51,11 @@ public class Thing : Component
 	{
 		base.OnUpdate();
 
-		Gizmo.Draw.Color = Color.Black.WithAlpha(0.2f);
-		Gizmo.Draw.Text( $"{GameObject.Name}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.2f, 0f ) ) );
+		//Gizmo.Draw.Color = Color.Black.WithAlpha(0.2f);
+		//Gizmo.Draw.Text( $"{GameObject.Name}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.2f, 0f ) ) );
 
-		Gizmo.Draw.Color = Color.White.WithAlpha( 0.01f );
-		Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
+		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.01f );
+		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
 		// todo: optimize?
 		UpdateGridPos();

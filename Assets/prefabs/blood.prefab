@@ -1,42 +1,43 @@
 {
   "RootObject": {
     "__guid": "12613e0a-d7bd-42e3-bddd-023ae5f754e6",
+    "Flags": 0,
     "Name": "blood",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Sandbox.SpriteRenderer",
-        "__guid": "26eaae8a-778a-4387-b784-f2a5ca5e47b8",
-        "Additive": false,
-        "CastShadows": false,
-        "Color": "1,1,1,0",
-        "DepthFeather": 0,
-        "FlipHorizontal": false,
-        "FlipVertical": false,
-        "FogStrength": 1,
-        "Opaque": false,
-        "Size": "0.4,0.2",
-        "Texture": "textures/sprites/blood.vtex"
+        "__type": "SpriteTools.SpriteComponent",
+        "__guid": "85f3f5a6-aca7-4d57-93fd-13206391044e",
+        "_broadcastEvents": {},
+        "CastShadows": "Off",
+        "CreateAttachPoints": false,
+        "FlashTint": "1,1,1,0",
+        "PlaybackSpeed": 1,
+        "Sprite": "textures/sprites/blood_splatter/blood_splatter.sprite",
+        "SpriteFlags": "None",
+        "StartingAnimationName": "",
+        "Tint": "1,1,1,1"
       },
       {
         "__type": "BloodSplatter",
         "__guid": "ea48415f-8b27-4925-9d56-b606e09d6ec2",
         "Sprite": {
           "_type": "component",
-          "component_id": "26eaae8a-778a-4387-b784-f2a5ca5e47b8",
+          "component_id": "85f3f5a6-aca7-4d57-93fd-13206391044e",
           "go": "12613e0a-d7bd-42e3-bddd-023ae5f754e6",
-          "component_type": "SpriteRenderer"
+          "component_type": "SpriteComponent"
         }
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

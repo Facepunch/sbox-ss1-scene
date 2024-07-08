@@ -29,7 +29,9 @@ public class Crate : Enemy
 		Health = 45f;
 		MaxHealth = Health;
 
-		CanTurn = false; 
+		CanTurn = false;
+
+		Sprite.PlayAnimation( AnimSpawnPath );
 
 		if ( IsProxy )
 			return;
