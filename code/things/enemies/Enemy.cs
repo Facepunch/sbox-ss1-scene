@@ -117,6 +117,9 @@ public abstract class Enemy : Thing
 		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
 		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
+		//Gizmo.Draw.Color = Color.Black.WithAlpha( 0.2f );
+		//Gizmo.Draw.Text( $"IsSpawning: {IsSpawning}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.2f, 0f ) ) );
+
 		if ( Manager.Instance.IsGameOver )
 			return;
 
@@ -286,6 +289,7 @@ public abstract class Enemy : Thing
 		{
 			DeathProgress = Utils.Map( DeathTimeElapsed, 0f, DeathTime, 0f, 1f );
 			ShadowOpacity = Utils.Map( DeathProgress, 0f, 1f, ShadowFullOpacity, 0f, EasingType.QuadIn );
+			SpriteDirty = true;
 		}
 	}
 

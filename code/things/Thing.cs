@@ -64,6 +64,7 @@ public class Thing : Component
 		{
 			//Sprite.Size = new Vector2( Scale );
 			ShadowSprite.Transform.LocalScale = new Vector3( ShadowScale * Globals.SPRITE_SCALE, ShadowScale * Globals.SPRITE_SCALE, 1f );
+			ShadowSprite.Tint = Color.Black.WithAlpha(ShadowOpacity);
 
 			SpriteDirty = false;
 		}

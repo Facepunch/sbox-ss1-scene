@@ -23,7 +23,7 @@ public class Crate : Enemy
 		Scale = 0.95f;
 
 		PushStrength = 5f;
-		Deceleration = 10f;
+		Deceleration = 15f;
 
 		Radius = 0.25f;
 		Health = 45f;
