@@ -77,6 +77,7 @@ public class Crate : Enemy
 		}
 
 		var health_pack_chance = player != null ? Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.2f, 0.75f ) : 0.1f;
+		health_pack_chance = 1f;
 		if ( Game.Random.Float( 0f, 1f ) < health_pack_chance )
 		{
 			var pos = Position2D + new Vector2( Game.Random.Float( -RAND_POS, RAND_POS ), Game.Random.Float( -RAND_POS, RAND_POS ) );
