@@ -27,13 +27,14 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public GameObject ShieldVfxPrefab { get; set; }
 	[Property] public GameObject CratePrefab { get; set; }
 	[Property] public GameObject ZombiePrefab { get; set; }
+	[Property] public GameObject ExploderPrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
 
 	public int EnemyCount { get; private set; }
-	public const float MAX_ENEMY_COUNT = 350;
-	//public const float MAX_ENEMY_COUNT = 6;
+	//public const float MAX_ENEMY_COUNT = 350;
+	public const float MAX_ENEMY_COUNT = 0;
 
 	public int CrateCount { get; private set; }
 	public const float MAX_CRATE_COUNT = 7;
@@ -124,6 +125,8 @@ public sealed class Manager : Component, Component.INetworkListener
 		//	var pos = new Vector2(Game.Random.Float(BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x), Game.Random.Float(BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y));
 		//	SpawnEnemy(TypeLibrary.GetType(typeof(Zombie)), pos);
 		//}
+
+		SpawnEnemy( TypeLibrary.GetType( typeof( Exploder ) ), new Vector2(0f, 0f), forceSpawn: true );
 
 		//SpawnBoss( new Vector2(3f, 3f ) );
 		//HasSpawnedBoss = true;
@@ -258,6 +261,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		}
 
 		//type = Game.Random.Int(0, 2) == 0 ? TypeLibrary.GetType(typeof(RunnerElite)) : TypeLibrary.GetType(typeof(Runner));
+		//type = TypeLibrary.GetType( typeof( Exploder ) );
 
 		SpawnEnemy( type, pos );
 	}
@@ -282,8 +286,14 @@ public sealed class Manager : Component, Component.INetworkListener
 			enemyObj = ZombiePrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
 			enemy = enemyObj.Components.Get<Enemy>();
 		}
+		else if ( type == TypeLibrary.GetType( typeof( Exploder ) ) )
+		{
+			enemyObj = ExploderPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+			enemy = enemyObj.Components.Get<Enemy>();
+		}
 		else
 		{
+			Log.Info( $"Enemy {type} not implemented yet!" );
 			return;
 
 			enemyObj = EnemyPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );

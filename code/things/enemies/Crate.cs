@@ -96,7 +96,6 @@ public class Crate : Enemy
 		}
 
 		var revive_chance = Scene.GetAllComponents<Player>().Where( x => x.IsDead ).Count() * 0.4f;
-		revive_chance = 1f;
 		if ( Game.Random.Float( 0f, 1f ) < revive_chance )
 		{
 			var pos = Position2D + new Vector2( Game.Random.Float( -RAND_POS, RAND_POS ), Game.Random.Float( -RAND_POS, RAND_POS ) );

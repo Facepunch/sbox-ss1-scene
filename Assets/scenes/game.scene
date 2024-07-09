@@ -64,6 +64,10 @@
             "_type": "gameobject",
             "prefab": "prefabs/enemy_spike.prefab"
           },
+          "ExploderPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/exploder.prefab"
+          },
           "ExplosionEffectPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/explosion_effect.prefab"

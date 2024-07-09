@@ -18,7 +18,7 @@
       "Attachments": []
     },
     {
-      "FrameRate": 15,
+      "FrameRate": 8.5,
       "Origin": "0.5,0.952",
       "Name": "spawn",
       "Frames": [
@@ -98,7 +98,7 @@
       "Attachments": []
     },
     {
-      "FrameRate": 15,
+      "FrameRate": 4,
       "Origin": "0.5,0.952",
       "Name": "die",
       "Frames": [
@@ -134,7 +134,7 @@
       "Attachments": []
     },
     {
-      "FrameRate": 15,
+      "FrameRate": 4,
       "Origin": "0.5,0.952",
       "Looping": true,
       "Name": "attack",
@@ -159,7 +159,7 @@
       "Attachments": []
     },
     {
-      "FrameRate": 15,
+      "FrameRate": 4,
       "Origin": "0.5,0.952",
       "Name": "shoot",
       "Frames": [
@@ -219,7 +219,7 @@
       "Attachments": []
     },
     {
-      "FrameRate": 15,
+      "FrameRate": 4,
       "Origin": "0.5,0.952",
       "Name": "shoot_reverse",
       "Frames": [

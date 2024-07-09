@@ -240,8 +240,11 @@ public abstract class Enemy : Thing
 		{
 			Sprite.PlaybackSpeed = Utils.Map( Utils.FastSin( MoveTimeOffset + Time.Now * 7.5f ), -1f, 1f, 0.75f, 3f, EasingType.ExpoIn );
 
-			if ( MathF.Abs( Velocity.x ) > 0.175f && !IsFrozen && CanTurn )
-				Sprite.SpriteFlags = Velocity.x > 0f ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
+			if( CanTurn && !IsFrozen )
+			{
+				if ( MathF.Abs( Velocity.x ) > 0.175f )
+					Sprite.SpriteFlags = Velocity.x > 0f ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
+			}
 		}
 		else
 		{
@@ -249,7 +252,7 @@ public abstract class Enemy : Thing
 			float attack_dist_sqr = MathF.Pow( AggroRange, 2f );
 			Sprite.PlaybackSpeed = Utils.Map( dist_sqr, attack_dist_sqr, 0f, 1f, 4f, EasingType.Linear );
 
-			if ( !IsFrozen && CanTurn )
+			if ( CanTurn && !IsFrozen )
 			{
 				if ( IsFeared )
 					Sprite.SpriteFlags = targetPlayer.Position2D.x < Position2D.x ? SpriteFlags.HorizontalFlip : SpriteFlags.None;

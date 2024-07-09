@@ -23,12 +23,13 @@ public class Exploder : Enemy
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
 
+		Scale = 1.1f;
+
 		base.OnAwake();
 
 		//AnimSpeed = 2f;
 		//Sprite.Texture = Texture.Load("textures/sprites/exploder.vtex");
 
-		Scale = 1.1f;
 		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 12f;
@@ -46,6 +47,8 @@ public class Exploder : Enemy
 		CoinValueMin = 1;
 		CoinValueMax = 2;
 
+		Sprite.PlayAnimation( AnimSpawnPath );
+
 		if ( IsProxy )
 			return;
 		
@@ -53,22 +56,20 @@ public class Exploder : Enemy
 		CollideWith.Add( typeof( Player ) );
 
 		_damageTime = DAMAGE_TIME;
-
-		//AnimationPath = AnimSpawnPath;
 	}
 
 	protected override void OnUpdate()
 	{
 		//Gizmo.Draw.Color = Color.White;
-		//Gizmo.Draw.Text( $"IsExploding: {IsExploding}\n", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
+		//Gizmo.Draw.Text( $"IsAttacking: {IsAttacking}\nIsExploding: {IsExploding}\nCanTurn: {CanTurn}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
 
 		if ( Manager.Instance.IsGameOver )
 			return;
 
-		if ( IsExploding )
-		{
-			Sprite.Tint = Color.Lerp( Color.White, Color.Blue, 0.5f + Utils.FastSin( Time.Now * 24f ) * 0.5f );
-		}
+		//if ( IsExploding )
+		//{
+		//	Sprite.Tint = Color.Lerp( Color.White, Color.Blue, 0.5f + Utils.FastSin( Time.Now * 24f ) * 0.5f );
+		//}
 
 		if ( IsProxy )
 			return;
@@ -77,7 +78,7 @@ public class Exploder : Enemy
 		{
 			if ( !_hasStartedLooping && _explodeStartTime > 0.5f )
 			{
-				//AnimationPath = "textures/sprites/exploder_explode_loop.frames";
+				Sprite.PlayAnimation( "explode_loop" );
 				_hasStartedLooping = true;
 			}
 
@@ -102,6 +103,48 @@ public class Exploder : Enemy
 		{
 			float speed = (IsAttacking ? 1.3f : 0.7f) + Utils.FastSin( MoveTimeOffset + Time.Now * (IsAttacking ? 15f : 7.5f) ) * (IsAttacking ? 0.3f : 0.2f);
 			Transform.Position += (Vector3)Velocity * speed * dt;
+		}
+	}
+
+	protected override void UpdateSprite( Player targetPlayer )
+	{
+		if(!IsExploding)
+		{
+			if ( !IsAttacking )
+			{
+				if ( CanTurn && !IsFrozen )
+				{
+					if ( MathF.Abs( Velocity.x ) > 0.175f )
+					{
+						Sprite.SpriteFlags = Velocity.x > 0f ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
+
+						Log.Info( $"Sprite.SpriteFlags: {Sprite.SpriteFlags} CanTurn: {CanTurn} IsFrozen: {IsFrozen} IsExploding: {IsExploding}" );
+					}
+				}
+			}
+			else
+			{
+				if ( CanTurn && !IsFrozen )
+				{
+					if ( IsFeared )
+						Sprite.SpriteFlags = targetPlayer.Position2D.x < Position2D.x ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
+					else
+						Sprite.SpriteFlags = targetPlayer.Position2D.x < Position2D.x ? SpriteFlags.None : SpriteFlags.HorizontalFlip;
+
+					Log.Info( $"Sprite.SpriteFlags: {Sprite.SpriteFlags} CanTurn: {CanTurn} IsFrozen: {IsFrozen} IsExploding: {IsExploding}" );
+				}
+			}
+		}
+
+		if ( !IsAttacking )
+		{
+			Sprite.PlaybackSpeed = Utils.Map( Utils.FastSin( MoveTimeOffset + Time.Now * 7.5f ), -1f, 1f, 0.75f, 3f, EasingType.ExpoIn );
+		}
+		else
+		{
+			float dist_sqr = (targetPlayer.Position2D - Position2D).LengthSquared;
+			float attack_dist_sqr = MathF.Pow( AggroRange, 2f );
+			Sprite.PlaybackSpeed = Utils.Map( dist_sqr, attack_dist_sqr, 0f, 1f, 4f, EasingType.Linear );
 		}
 	}
 
@@ -154,9 +197,11 @@ public class Exploder : Enemy
 	{
 		IsExploding = true;
 		_explodeStartTime = 0f;
-		//AnimationPath = "textures/sprites/exploder_explode_start.frames";
+		Sprite.PlayAnimation( "explode_start" );
 		CanAttack = false;
 		CanTurn = false;
+
+		Log.Info( $"START EXPLODING --------------" );
 	}
 
 	[Broadcast]
