@@ -24,7 +24,7 @@ public class Crate : Enemy
 		//Sprite.Size = new Vector2( 1f, 1f ) * ScaleFactor;
 
 		PushStrength = 5f;
-		Deceleration = 18f;
+		Deceleration = 20f;
 
 		Radius = 0.25f;
 		Health = 45f;

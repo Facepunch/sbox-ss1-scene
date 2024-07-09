@@ -622,7 +622,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		var explosionObj = ExplosionEffectPrefab.Clone( new Vector3( pos.x, pos.y, 100f ) );
 		var explosion = explosionObj.Components.Get<ExplosionEffect>();
 		explosion.Lifetime = 0.5f;
-		explosion.Sprite.Size *= scaleModifier;
+		explosion.Transform.LocalScale *= scaleModifier;
 
 		_explosions.Add( explosion );
 		return explosion;

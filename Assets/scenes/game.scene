@@ -229,6 +229,17 @@
           "Static": true,
           "Surface": "surfaces/default.surface"
         }
+      ],
+      "Children": [
+        {
+          "__guid": "43dbb0a1-4c2b-49e9-a4ac-09e5b76b202d",
+          "Flags": 0,
+          "Name": "Object",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true
+        }
       ]
     }
   ],
@@ -255,7 +266,6 @@
   },
   "Title": "game",
   "Description": "",
-  "LastSaved": "2024-07-01T09:31:39.4465024-07:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

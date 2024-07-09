@@ -59,6 +59,10 @@ public class Grenade : Thing
 		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
 		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
+		//float radius = ExplosionRadius * BASE_EXPLOSION_MODIFIER * ExplosionSizeMultiplier;
+		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.1f );
+		//Gizmo.Draw.LineSphere( Transform.LocalPosition, radius );
+
 		if ( Manager.Instance.IsGameOver )
 			return;
 
