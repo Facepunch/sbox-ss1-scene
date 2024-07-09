@@ -106,48 +106,6 @@ public class Exploder : Enemy
 		}
 	}
 
-	protected override void UpdateSprite( Player targetPlayer )
-	{
-		if(!IsExploding)
-		{
-			if ( !IsAttacking )
-			{
-				if ( CanTurn && !IsFrozen )
-				{
-					if ( MathF.Abs( Velocity.x ) > 0.175f )
-					{
-						Sprite.SpriteFlags = Velocity.x > 0f ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
-
-						Log.Info( $"Sprite.SpriteFlags: {Sprite.SpriteFlags} CanTurn: {CanTurn} IsFrozen: {IsFrozen} IsExploding: {IsExploding}" );
-					}
-				}
-			}
-			else
-			{
-				if ( CanTurn && !IsFrozen )
-				{
-					if ( IsFeared )
-						Sprite.SpriteFlags = targetPlayer.Position2D.x < Position2D.x ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
-					else
-						Sprite.SpriteFlags = targetPlayer.Position2D.x < Position2D.x ? SpriteFlags.None : SpriteFlags.HorizontalFlip;
-
-					Log.Info( $"Sprite.SpriteFlags: {Sprite.SpriteFlags} CanTurn: {CanTurn} IsFrozen: {IsFrozen} IsExploding: {IsExploding}" );
-				}
-			}
-		}
-
-		if ( !IsAttacking )
-		{
-			Sprite.PlaybackSpeed = Utils.Map( Utils.FastSin( MoveTimeOffset + Time.Now * 7.5f ), -1f, 1f, 0.75f, 3f, EasingType.ExpoIn );
-		}
-		else
-		{
-			float dist_sqr = (targetPlayer.Position2D - Position2D).LengthSquared;
-			float attack_dist_sqr = MathF.Pow( AggroRange, 2f );
-			Sprite.PlaybackSpeed = Utils.Map( dist_sqr, attack_dist_sqr, 0f, 1f, 4f, EasingType.Linear );
-		}
-	}
-
 	public override void Colliding( Thing other, float percent, float dt )
 	{
 		base.Colliding( other, percent, dt );
@@ -200,8 +158,6 @@ public class Exploder : Enemy
 		Sprite.PlayAnimation( "explode_start" );
 		CanAttack = false;
 		CanTurn = false;
-
-		Log.Info( $"START EXPLODING --------------" );
 	}
 
 	[Broadcast]
