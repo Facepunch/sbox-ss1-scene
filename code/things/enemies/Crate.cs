@@ -84,16 +84,16 @@ public class Crate : Enemy
 			Manager.Instance.SpawnHealthPack( pos, vel: (pos - Position2D) * Game.Random.Float( 2f, 6f ) );
 		}
 
-		if ( Manager.Instance.TimeSinceMagnet > 50f )
-		{
-			var magnet_chance = 0.09f * Utils.Map( Manager.Instance.TimeSinceMagnet, 50f, 480f, 1f, 5.5f, EasingType.Linear );
-			if ( Game.Random.Float( 0f, 1f ) < magnet_chance )
+		//if ( Manager.Instance.TimeSinceMagnet > 50f )
+		//{
+		//	var magnet_chance = 0.09f * Utils.Map( Manager.Instance.TimeSinceMagnet, 50f, 480f, 1f, 5.5f, EasingType.Linear );
+		//	if ( Game.Random.Float( 0f, 1f ) < magnet_chance )
 			{
 				var pos = Position2D + new Vector2( Game.Random.Float( -RAND_POS, RAND_POS ), Game.Random.Float( -RAND_POS, RAND_POS ) );
 				var vel = (pos - Position2D) * Game.Random.Float( 2f, 6f );
 				Manager.Instance.SpawnMagnet( pos, vel );
 			}
-		}
+		//}
 
 		var revive_chance = Scene.GetAllComponents<Player>().Where( x => x.IsDead ).Count() * 0.4f;
 		if ( Game.Random.Float( 0f, 1f ) < revive_chance )
@@ -103,7 +103,6 @@ public class Crate : Enemy
 		}
 
 		var grenade_chance = 0.15f;
-		grenade_chance = 1f;
 		if ( player != null && Game.Random.Float( 0f, 1f ) < grenade_chance )
 		{
 			player.SpawnGrenade( Position2D, Vector2.Zero );

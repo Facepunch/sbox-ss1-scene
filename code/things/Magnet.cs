@@ -15,11 +15,13 @@ public class Magnet : Thing
 
 		OffsetY = -0.14f;
 
-		Scale = 0.4f;
+		Scale = 0.6f;
 
 		ShadowOpacity = 0.8f;
 		ShadowScale = 0.8f;
 		SpawnShadow( ShadowScale, ShadowOpacity );
+
+		Sprite.Transform.LocalScale = new Vector3( 1f ) * Scale * Globals.SPRITE_SCALE;
 
 		if ( IsProxy )
 			return;
@@ -45,6 +47,10 @@ public class Magnet : Thing
 
 		if ( Manager.Instance.IsGameOver )
 			return;
+
+		Sprite.Transform.LocalScale = new Vector3( Scale + MathF.Cos( SpawnTime * 8f ) * 0.025f, Scale + Utils.FastSin( SpawnTime * 8f ) * 0.025f, 1f ) * Globals.SPRITE_SCALE;
+		ShadowScale = 0.8f + Utils.FastSin( SpawnTime * 8f ) * 0.035f;
+		SpriteDirty = true;
 
 		if ( IsProxy )
 			return;

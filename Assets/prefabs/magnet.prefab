@@ -1,41 +1,55 @@
 {
   "RootObject": {
     "__guid": "03bedbdb-ea98-417a-ad41-fecab99658d2",
+    "Flags": 0,
     "Name": "magnet",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Sandbox.SpriteRenderer",
-        "__guid": "6b0a736a-9535-4178-bf9f-f9f82d4f4292",
-        "Additive": false,
-        "CastShadows": false,
-        "Color": "1,1,1,1",
-        "DepthFeather": 0,
-        "FlipHorizontal": false,
-        "FlipVertical": false,
-        "FogStrength": 1,
-        "Opaque": false,
-        "Size": "0.5,0.5",
-        "Texture": "textures/sprites/magnet.vtex"
-      },
-      {
         "__type": "Magnet",
         "__guid": "bbef656b-d4f0-45a9-b5af-4cf566b498e1",
         "Sprite": {
           "_type": "component",
-          "component_id": "6b0a736a-9535-4178-bf9f-f9f82d4f4292",
-          "go": "03bedbdb-ea98-417a-ad41-fecab99658d2",
-          "component_type": "SpriteRenderer"
+          "component_id": "7bf9312d-0c8f-4db5-868b-abe52adf1697",
+          "go": "39492474-122b-4d6a-8b21-eb53062746b3",
+          "component_type": "SpriteComponent"
         }
       }
-    ]
+    ],
+    "Children": [
+      {
+        "__guid": "39492474-122b-4d6a-8b21-eb53062746b3",
+        "Flags": 0,
+        "Name": "sprite",
+        "Rotation": "0,-0,-0.7071068,0.7071068",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "SpriteTools.SpriteComponent",
+            "__guid": "7bf9312d-0c8f-4db5-868b-abe52adf1697",
+            "_broadcastEvents": {},
+            "CastShadows": "Off",
+            "CreateAttachPoints": false,
+            "FlashTint": "1,1,1,0",
+            "PlaybackSpeed": 1,
+            "Sprite": "textures/sprites/magnet/magnet.sprite",
+            "SpriteFlags": "None",
+            "StartingAnimationName": "",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }
