@@ -21,7 +21,7 @@ public sealed class ExplosionEffect : Component
 
 	protected override void OnUpdate()
 	{
-		Sprite.Tint = Color.Red.WithAlpha( Utils.Map( _spawnTime, 0f, Lifetime, 0.8f, 0f ) );
+		Sprite.Tint = Color.Lerp(Color.Yellow, Color.Red, Utils.Map( _spawnTime, 0f, Lifetime, 0f, 1f, EasingType.QuartOut ) ).WithAlpha( Utils.Map( _spawnTime, 0f, Lifetime, 0.8f, 0f, EasingType.Linear ) );
 
 		if ( _spawnTime > Lifetime )
 		{
