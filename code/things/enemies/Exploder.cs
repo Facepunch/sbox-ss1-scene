@@ -18,7 +18,7 @@ public class Exploder : Enemy
 
 	protected override void OnAwake()
 	{
-		OffsetY = -0.52f;
+		//OffsetY = -0.52f;
 		ShadowScale = 1.05f;
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;

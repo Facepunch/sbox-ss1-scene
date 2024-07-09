@@ -12,7 +12,7 @@ public class RunnerElite : Enemy
 
 	protected override void OnAwake()
 	{
-		OffsetY = -0.54f;
+		//OffsetY = -0.54f;
 		ShadowScale = 1.3f;
 		ShadowFullOpacity = 0.2f;
 		ShadowOpacity = 0f;

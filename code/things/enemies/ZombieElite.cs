@@ -10,7 +10,7 @@ public class ZombieElite : Enemy
 
 	protected override void OnAwake()
 	{
-		OffsetY = -0.45f;
+		//OffsetY = -0.45f;
 		ShadowScale = 1f;
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;

@@ -20,7 +20,8 @@ public class EnemyBullet : Thing
 	{
 		base.OnAwake();
 
-		OffsetY = -0.4f;
+		//OffsetY = -0.4f;
+		Sprite.Transform.LocalPosition = new Vector3( 0f, 0.4f, 0f );
 
 		Radius = 0.066f;
 

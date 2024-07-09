@@ -23,7 +23,7 @@ public class Grenade : Thing
 	{
 		base.OnAwake();
 
-		OffsetY = -0.14f;
+		//OffsetY = -0.14f;
 
 		Scale = 0.3f;
 

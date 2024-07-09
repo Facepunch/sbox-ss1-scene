@@ -23,7 +23,7 @@ public class EnemySpikeElite : Thing
 	{
 		base.OnAwake();
 
-		OffsetY = -0.24f;
+		//OffsetY = -0.24f;
 
 		Radius = 0.29f;
 
@@ -38,7 +38,8 @@ public class EnemySpikeElite : Thing
 		// spawn background
 		var bgObj = Manager.Instance.EnemySpikeBgPrefab.Clone( Transform.Position );
 		bgObj.SetParent( GameObject );
-		bgObj.Transform.LocalPosition = new Vector3( 0f, OffsetY, Globals.SHADOW_DEPTH_OFFSET );
+		//bgObj.Transform.LocalPosition = new Vector3( 0f, OffsetY, Globals.SHADOW_DEPTH_OFFSET );
+		bgObj.Transform.LocalPosition = new Vector3( 0f, 0.24f, Globals.SHADOW_DEPTH_OFFSET );
 		bgObj.NetworkMode = NetworkMode.Never;
 
 		BgSprite = bgObj.Components.Get<SpriteRenderer>();

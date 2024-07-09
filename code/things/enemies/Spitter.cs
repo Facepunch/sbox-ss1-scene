@@ -16,7 +16,7 @@ public class Spitter : Enemy
 
 	protected override void OnAwake()
 	{
-		OffsetY = -0.45f;
+		//OffsetY = -0.45f;
 		ShadowScale = 1.1f;
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;

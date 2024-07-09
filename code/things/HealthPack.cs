@@ -15,7 +15,7 @@ public class HealthPack : Thing
 	{
 		base.OnAwake();
 
-		OffsetY = -0.16f;
+		//OffsetY = -0.16f;
 
 		Scale = 0.6f;
 

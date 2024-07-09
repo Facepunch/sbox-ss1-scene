@@ -22,7 +22,7 @@ public class Thing : Component
 	public List<Type> CollideWith = new List<Type>();
 	public float TimeScale { get; set; }
 
-	public float OffsetY { get; set; }
+	//public float OffsetY { get; set; }
 	[Sync] public float ShadowOpacity { get; set; }
 	[Sync] public float ShadowScale { get; set; }
 	public SpriteComponent ShadowSprite { get; set; }

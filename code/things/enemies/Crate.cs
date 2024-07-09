@@ -6,7 +6,7 @@ public class Crate : Enemy
 
 	protected override void OnAwake()
 	{
-		OffsetY = -0.4f;
+		//OffsetY = -0.4f;
 		ShadowScale = 1.3f;
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;

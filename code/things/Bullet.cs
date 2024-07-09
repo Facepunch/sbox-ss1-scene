@@ -28,9 +28,10 @@ public class Bullet : Thing
 	{
 		base.OnAwake();
 
-		OffsetY = -0.45f;
+		//OffsetY = -0.45f;
+		//Sprite.Transform.LocalPosition = new Vector3( 0f, -OffsetY, 0f );
 
-		Sprite.Transform.LocalPosition = new Vector3( 0f, -OffsetY, 0f );
+		Sprite.Transform.LocalPosition = new Vector3( 0f, 0.45f, 0f );
 
 		Radius = 0.1f;
 

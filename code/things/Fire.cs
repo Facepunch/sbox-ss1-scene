@@ -20,7 +20,7 @@ public class Fire : Thing
 	{
 		base.OnAwake();
 
-		OffsetY = -0.16f;
+		//OffsetY = -0.16f;
 
 		Radius = 0.27f;
 

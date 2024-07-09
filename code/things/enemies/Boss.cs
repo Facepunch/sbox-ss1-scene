@@ -36,7 +36,7 @@ public class Boss : Enemy
 
 	protected override void OnAwake()
 	{
-		OffsetY = -0.95f;
+		//OffsetY = -0.95f;
 		ShadowScale = 2.15f;
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;

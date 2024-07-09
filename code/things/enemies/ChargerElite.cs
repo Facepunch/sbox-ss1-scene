@@ -22,7 +22,7 @@ public class ChargerElite : Enemy
 
 	protected override void OnAwake()
 	{
-		OffsetY = -0.66f;
+		//OffsetY = -0.66f;
 		ShadowScale = 1.45f;
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;

@@ -101,7 +101,7 @@ public class Player : Thing
 		base.OnAwake();
 
 		//OffsetY = -0.42f;
-		OffsetY = 0f;
+		//OffsetY = 0f;
 
 		Scale = 1f;
 
@@ -360,7 +360,8 @@ public class Player : Thing
 		if ( ArrowAimer != null )
 		{
 			ArrowAimer.Transform.LocalRotation = new Angles(0f, MathF.Atan2( AimDir.y, AimDir.x ) * (180f / MathF.PI) - 180f, 0f);
-			ArrowAimer.Transform.LocalPosition = new Vector2( 0f, 0.4f + OffsetY ) + AimDir * 0.7f;
+			//ArrowAimer.Transform.LocalPosition = new Vector2( 0f, 0.4f + OffsetY ) + AimDir * 0.7f;
+			ArrowAimer.Transform.LocalPosition = new Vector2( 0f, 0.4f ) + AimDir * 0.7f;
 		}
 
 		for ( int dx = -1; dx <= 1; dx++ )
