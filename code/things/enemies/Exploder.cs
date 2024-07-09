@@ -8,6 +8,7 @@ public class Exploder : Enemy
 
 	private const float EXPLOSION_RADIUS = 1.45f;
 	private const float EXPLOSION_DAMAGE = 40f;
+	private const float EXPLODE_TIME = 1.5f;
 
 	[Sync] public bool IsExploding { get; set; }
 	private TimeSince _explodeStartTime;
@@ -66,10 +67,11 @@ public class Exploder : Enemy
 		if ( Manager.Instance.IsGameOver )
 			return;
 
-		//if ( IsExploding )
-		//{
-		//	Sprite.Tint = Color.Lerp( Color.White, Color.Blue, 0.5f + Utils.FastSin( Time.Now * 24f ) * 0.5f );
-		//}
+		if ( IsExploding )
+		{
+			//Sprite.Tint = Color.Lerp( Color.White, Color.Blue, 0.5f + Utils.FastSin( Time.Now * 24f ) * 0.5f );
+			Sprite.FlashTint = Color.Yellow.WithAlpha( (0.5f + Utils.FastSin( Time.Now * 32f ) * 0.5f) * Utils.Map(_explodeStartTime, 0.5f, EXPLODE_TIME, 0f, 0.75f, EasingType.QuadIn ) );
+		}
 
 		if ( IsProxy )
 			return;
@@ -81,8 +83,8 @@ public class Exploder : Enemy
 				Sprite.PlayAnimation( "explode_loop" );
 				_hasStartedLooping = true;
 			}
-
-			if ( !_hasExploded && _explodeStartTime > 1.5f )
+			
+			if ( !_hasExploded && _explodeStartTime > EXPLODE_TIME )
 				Explode();
 		}
 
