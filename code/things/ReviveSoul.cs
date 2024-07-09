@@ -15,7 +15,7 @@ public class ReviveSoul : Thing
 
 		OffsetY = -0.14f;
 
-		Scale = 0.4f;
+		Scale = 0.6f;
 
 		ShadowOpacity = 0.8f;
 		ShadowScale = 0.8f;
@@ -41,8 +41,9 @@ public class ReviveSoul : Thing
 		if ( Manager.Instance.IsGameOver )
 			return;
 
-		//Sprite.Size = new Vector2( 0.6f + Utils.FastSin( SpawnTime * 8f ) * 0.025f, 0.6f + MathF.Cos( SpawnTime * 8f ) * 0.025f );
-		//ShadowScale = 0.8f + Utils.FastSin( SpawnTime * 8f ) * 0.025f;
+		Sprite.Transform.LocalScale = new Vector3( Scale + MathF.Cos( SpawnTime * 8f ) * 0.025f, Scale + Utils.FastSin( SpawnTime * 8f ) * 0.025f, 1f ) * Globals.SPRITE_SCALE;
+		ShadowScale = 0.8f + Utils.FastSin( SpawnTime * 8f ) * 0.035f;
+		SpriteDirty = true;
 
 		float opacity = 0.3f + Utils.FastSin( SpawnTime * 5f ) * 0.2f;
 		Sprite.Tint = Color.White.WithAlpha( opacity );
