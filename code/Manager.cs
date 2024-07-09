@@ -28,6 +28,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public GameObject CratePrefab { get; set; }
 	[Property] public GameObject ZombiePrefab { get; set; }
 	[Property] public GameObject ExploderPrefab { get; set; }
+	[Property] public GameObject ExploderElitePrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
@@ -126,7 +127,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		//	SpawnEnemy(TypeLibrary.GetType(typeof(Zombie)), pos);
 		//}
 
-		SpawnEnemy( TypeLibrary.GetType( typeof( Exploder ) ), new Vector2(0f, 0f), forceSpawn: true );
+		SpawnEnemy( TypeLibrary.GetType( typeof( ExploderElite ) ), new Vector2(0f, 0f), forceSpawn: true );
 
 		//SpawnBoss( new Vector2(3f, 3f ) );
 		//HasSpawnedBoss = true;
@@ -289,6 +290,11 @@ public sealed class Manager : Component, Component.INetworkListener
 		else if ( type == TypeLibrary.GetType( typeof( Exploder ) ) )
 		{
 			enemyObj = ExploderPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+			enemy = enemyObj.Components.Get<Enemy>();
+		}
+		else if ( type == TypeLibrary.GetType( typeof( ExploderElite ) ) )
+		{
+			enemyObj = ExploderElitePrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
 			enemy = enemyObj.Components.Get<Enemy>();
 		}
 		else

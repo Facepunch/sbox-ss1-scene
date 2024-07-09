@@ -68,10 +68,7 @@ public class Exploder : Enemy
 			return;
 
 		if ( IsExploding )
-		{
-			//Sprite.Tint = Color.Lerp( Color.White, Color.Blue, 0.5f + Utils.FastSin( Time.Now * 24f ) * 0.5f );
 			Sprite.FlashTint = Color.Yellow.WithAlpha( (0.5f + Utils.FastSin( Time.Now * 32f ) * 0.5f) * Utils.Map(_explodeStartTime, 0.5f, EXPLODE_TIME, 0f, 0.75f, EasingType.QuadIn ) );
-		}
 
 		if ( IsProxy )
 			return;

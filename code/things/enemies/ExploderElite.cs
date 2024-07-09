@@ -8,6 +8,7 @@ public class ExploderElite : Enemy
 
 	private const float EXPLOSION_RADIUS = 1.45f;
 	private const float EXPLOSION_DAMAGE = 40f;
+	private const float EXPLODE_TIME = 3.5f;
 
 	[Sync] public bool IsExploding { get; set; }
 	private TimeSince _explodeStartTime;
@@ -23,12 +24,13 @@ public class ExploderElite : Enemy
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
 
+		Scale = 1.2f;
+
 		base.OnAwake();
 
 		//AnimSpeed = 2f;
 		//Sprite.Texture = Texture.Load("textures/sprites/exploder_elite.vtex");
-
-		Scale = 1.2f;
+		
 		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 12f;
@@ -46,6 +48,8 @@ public class ExploderElite : Enemy
 		CoinValueMin = 2;
 		CoinValueMax = 6;
 
+		Sprite.PlayAnimation( AnimSpawnPath );
+
 		if ( IsProxy )
 			return;
 		
@@ -53,8 +57,6 @@ public class ExploderElite : Enemy
 		CollideWith.Add( typeof( Player ) );
 
 		_damageTime = DAMAGE_TIME;
-
-		//AnimationPath = AnimSpawnPath;
 	}
 
 	protected override void OnUpdate()
@@ -66,9 +68,7 @@ public class ExploderElite : Enemy
 			return;
 
 		if ( IsExploding )
-		{
-			Sprite.Tint = Color.Lerp( Color.White, Color.Blue, 0.5f + Utils.FastSin( Time.Now * 24f ) * 0.5f );
-		}
+			Sprite.FlashTint = Color.Yellow.WithAlpha( (0.5f + Utils.FastSin( Time.Now * 32f ) * 0.5f) * Utils.Map( _explodeStartTime, 0.5f, EXPLODE_TIME, 0f, 0.75f, EasingType.QuadIn ) );
 
 		if ( IsProxy )
 			return;
@@ -77,11 +77,11 @@ public class ExploderElite : Enemy
 		{
 			if ( !_hasStartedLooping && _explodeStartTime > 0.5f )
 			{
-				//AnimationPath = "textures/sprites/exploder_explode_loop.frames";
+				Sprite.PlayAnimation( "explode_loop" );
 				_hasStartedLooping = true;
 			}
 
-			if ( !_hasExploded && _explodeStartTime > 3.5f )
+			if ( !_hasExploded && _explodeStartTime > EXPLODE_TIME )
 				Explode();
 		}
 
@@ -158,7 +158,7 @@ public class ExploderElite : Enemy
 	{
 		IsExploding = true;
 		_explodeStartTime = 0f;
-		//AnimationPath = "textures/sprites/exploder_explode_start.frames";
+		Sprite.PlayAnimation( "explode_start" );
 		CanAttack = false;
 		CanTurn = false;
 	}
