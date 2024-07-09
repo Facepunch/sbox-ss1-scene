@@ -15,6 +15,8 @@ public class Zombie : Enemy
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
 
+		Scale = 0.85f;
+
 		base.OnAwake();
 
 		//SpriteTexture = SpriteTexture.Atlas( "textures/sprites/zombie.png", 5, 6 );
@@ -24,7 +26,6 @@ public class Zombie : Enemy
 		//Sprite.Texture = Texture.Load("textures/sprites/zombie.vtex");
 
 		//ScaleFactor = 0.85f;
-		Scale = 0.85f;
 		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 10f;

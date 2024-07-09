@@ -8,35 +8,48 @@
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Sandbox.SpriteRenderer",
-        "__guid": "3c80f347-3bc3-49b6-bdd6-5385c3f718ae",
-        "Additive": false,
-        "CastShadows": false,
-        "Color": "0.31188,0.06176,0.06176,1",
-        "DepthFeather": 0,
-        "FlipHorizontal": false,
-        "FlipVertical": false,
-        "FogStrength": 1,
-        "Opaque": false,
-        "Size": "0.3,0.3",
-        "Texture": "textures/sprites/grenade.vtex"
-      },
-      {
         "__type": "Grenade",
         "__guid": "3977affe-3350-4e3e-8bae-ef5fc2a86915",
         "Sprite": {
           "_type": "component",
-          "component_id": "3c80f347-3bc3-49b6-bdd6-5385c3f718ae",
-          "go": "161f3bd9-e65a-4b64-883d-8c078a7d757f",
-          "component_type": "SpriteRenderer"
+          "component_id": "7f76d487-5659-41c3-9481-bcc698e8e151",
+          "go": "19c51983-0b3e-4318-967e-e8cf8a997207",
+          "component_type": "SpriteComponent"
         }
       }
-    ]
+    ],
+    "Children": [
+      {
+        "__guid": "19c51983-0b3e-4318-967e-e8cf8a997207",
+        "Flags": 0,
+        "Name": "sprite",
+        "Rotation": "0,-0,-0.7071068,0.7071068",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "SpriteTools.SpriteComponent",
+            "__guid": "7f76d487-5659-41c3-9481-bcc698e8e151",
+            "_broadcastEvents": {},
+            "CastShadows": "Off",
+            "CreateAttachPoints": false,
+            "FlashTint": "1,1,1,0",
+            "PlaybackSpeed": 1,
+            "Sprite": "textures/sprites/grenade/grenade.sprite",
+            "SpriteFlags": "None",
+            "StartingAnimationName": "",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

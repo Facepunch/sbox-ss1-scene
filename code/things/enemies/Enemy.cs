@@ -75,7 +75,7 @@ public abstract class Enemy : Thing
 		base.OnAwake();
 
 		//Sprite = Components.Get<SpriteComponent>();
-		Sprite.Transform.LocalScale *= Globals.SPRITE_SCALE;
+		Sprite.Transform.LocalScale *= Scale * Globals.SPRITE_SCALE;
 		//Sprite.Tint = Color.White.WithAlpha( 0f );
 		//Sprite.Tint = Color.White.WithAlpha( 1f );
 

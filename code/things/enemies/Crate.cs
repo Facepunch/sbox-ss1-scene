@@ -11,6 +11,8 @@ public class Crate : Enemy
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
 
+		Scale = 0.95f;
+
 		base.OnAwake();
 
 		//AnimSpeed = 2f;
@@ -20,10 +22,9 @@ public class Crate : Enemy
 
 		//ScaleFactor = 0.95f;
 		//Sprite.Size = new Vector2( 1f, 1f ) * ScaleFactor;
-		Scale = 0.95f;
 
 		PushStrength = 5f;
-		Deceleration = 15f;
+		Deceleration = 18f;
 
 		Radius = 0.25f;
 		Health = 45f;
@@ -77,7 +78,6 @@ public class Crate : Enemy
 		}
 
 		var health_pack_chance = player != null ? Utils.Map( player.Health, player.Stats[PlayerStat.MaxHp], 0f, 0.2f, 0.75f ) : 0.1f;
-		health_pack_chance = 1f;
 		if ( Game.Random.Float( 0f, 1f ) < health_pack_chance )
 		{
 			var pos = Position2D + new Vector2( Game.Random.Float( -RAND_POS, RAND_POS ), Game.Random.Float( -RAND_POS, RAND_POS ) );
@@ -103,6 +103,7 @@ public class Crate : Enemy
 		}
 
 		var grenade_chance = 0.15f;
+		grenade_chance = 1f;
 		if ( player != null && Game.Random.Float( 0f, 1f ) < grenade_chance )
 		{
 			player.SpawnGrenade( Position2D, Vector2.Zero );

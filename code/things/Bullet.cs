@@ -82,7 +82,7 @@ public class Bullet : Thing
 
 		Scale = scale;
 		//Sprite.Size = new Vector2( scale );
-		Sprite.Transform.LocalScale = new Vector3 ( scale * Globals.SPRITE_SCALE, scale * Globals.SPRITE_SCALE, 1f );
+		Sprite.Transform.LocalScale = new Vector3 ( 1f ) * scale * Globals.SPRITE_SCALE;
 		
 		Radius = 0.07f + scale * 0.2f;
 		ShadowScale = scale * 1.3f;

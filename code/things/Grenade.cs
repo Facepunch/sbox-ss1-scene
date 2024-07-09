@@ -31,6 +31,8 @@ public class Grenade : Thing
 		ShadowScale = 0.6f;
 		SpawnShadow( ShadowScale, ShadowOpacity );
 
+		Sprite.Transform.LocalScale = new Vector3( 1f ) * Scale * Globals.SPRITE_SCALE;
+
 		if ( IsProxy )
 			return;
 
@@ -61,6 +63,9 @@ public class Grenade : Thing
 			return;
 
 		Sprite.Tint = Color.Lerp( StickyPercent <= 0f ? Color.Red : Color.Magenta, new Color( 0f, 0.01f, 0f ), 0.5f + MathF.Sin( SpawnTime.Relative * Utils.Map( SpawnTime, 0f, Lifetime, 1f, 16f, EasingType.QuadIn ) ) * 0.5f );
+
+		Scale = 0.275f * (0.9f + Utils.FastSin( SpawnTime.Relative * Utils.Map( SpawnTime, 0f, Lifetime, 1f, 16f, EasingType.QuadIn ) ) * 0.1f);
+		Sprite.Transform.LocalScale = new Vector3( 1f ) * Scale * Globals.SPRITE_SCALE;
 
 		if ( IsProxy )
 			return;

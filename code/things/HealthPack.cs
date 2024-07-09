@@ -23,7 +23,7 @@ public class HealthPack : Thing
 		ShadowScale = 0.8f;
 		SpawnShadow( ShadowScale, ShadowOpacity );
 
-		Sprite.Transform.LocalScale = new Vector3( 0.6f, 0.6f, 1f ) * Globals.SPRITE_SCALE;
+		Sprite.Transform.LocalScale = new Vector3( 1f ) * Scale * Globals.SPRITE_SCALE;
 
 		if ( IsProxy )
 			return;
@@ -50,8 +50,9 @@ public class HealthPack : Thing
 		if ( Manager.Instance.IsGameOver )
 			return;
 
-		Sprite.Transform.LocalScale = new Vector3( 0.6f + Utils.FastSin( SpawnTime * 8f ) * 0.025f, 0.6f + MathF.Cos( SpawnTime * 8f ) * 0.025f, 1f ) * Globals.SPRITE_SCALE;
-		//ShadowScale = 0.8f + Utils.FastSin( SpawnTime * 8f ) * 0.025f;
+		Sprite.Transform.LocalScale = new Vector3( 0.6f + MathF.Cos( SpawnTime * 8f ) * 0.025f, 0.6f + Utils.FastSin( SpawnTime * 8f ) * 0.025f, 1f ) * Globals.SPRITE_SCALE;
+		ShadowScale = 0.8f + Utils.FastSin( SpawnTime * 8f ) * 0.035f;
+		SpriteDirty = true;
 
 		if ( IsProxy )
 			return;
