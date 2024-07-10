@@ -112,7 +112,7 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
     /// <summary>
     /// A dictionary of broadcast events that this component will send (populated based on the Sprite resource)
     /// </summary>
-    [JsonIgnore]
+    [Property, Hide]
     public Dictionary<string, Action<SpriteComponent>> BroadcastEvents = new();
 
     /// <summary>
@@ -146,7 +146,7 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
     string _startingAnimationName = "";
 
 
-    [Property, Category("Sprite"), JsonIgnore]
+    [JsonIgnore, Property, Category("Sprite")]
     BroadcastControls _broadcastEvents = new();
 
     [Property, Category("Sprite")]
@@ -176,6 +176,9 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
     [Property, Group("Sprite")]
     public Action<string> OnBroadcastEvent { get; set; }
 
+    /// <summary>
+    /// Invoked when an animation reaches the last frame.
+    /// </summary>
     [Property, Group("Sprite")]
     public Action<string> OnAnimationComplete { get; set; }
 
@@ -254,23 +257,19 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
     protected override void DrawGizmos()
     {
         base.DrawGizmos();
-
         if (Game.IsPlaying) return;
 
-        // Move bbox by origin
-        var bbox = SceneObject.LocalBounds;
-        bbox = bbox.Rotate(SceneObject.Transform.Rotation);
-        var pos = (Transform.Position - SceneObject.Transform.Position) * Transform.Rotation;
-        bbox = bbox.Translate(pos);
+        BBox bbox = new BBox(new Vector3(-50, -50, -0.1f), new Vector3(50, 50, 0.1f));
+        var origin = CurrentAnimation.Origin - new Vector2(0.5f, 0.5f);
+        bbox = bbox.Translate(new Vector3(-origin.y, origin.x, 0) * 100f);
         Gizmo.Hitbox.BBox(bbox);
 
-        if (Gizmo.IsHovered)
+        if (Gizmo.IsHovered || Gizmo.IsSelected)
         {
-            using (Gizmo.Scope("hover"))
-            {
-                Gizmo.Draw.Color = Color.Orange;
-                Gizmo.Draw.LineBBox(bbox);
-            }
+            bbox.Mins.z = 0;
+            bbox.Maxs.z = 0.0f;
+            Gizmo.Draw.Color = Gizmo.IsSelected ? Color.White : Color.Orange;
+            Gizmo.Draw.LineBBox(bbox);
         }
     }
 
@@ -405,12 +404,14 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
 
     internal void UpdateSprite()
     {
-        BroadcastEvents.Clear();
         if (Sprite == null)
         {
+            BroadcastEvents.Clear();
             CurrentAnimation = null;
             return;
         }
+
+        List<string> keysToRemove = BroadcastEvents.Keys.ToList();
 
         foreach (var animation in Sprite.Animations)
         {
@@ -418,16 +419,25 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
             {
                 foreach (var tag in frame.Events)
                 {
+                    if (keysToRemove.Contains(tag))
+                        keysToRemove.Remove(tag);
                     if (!BroadcastEvents.ContainsKey(tag))
                         BroadcastEvents[tag] = (_) => { };
                 }
             }
         }
+
+
+        foreach (var key in keysToRemove)
+        {
+            BroadcastEvents.Remove(key);
+        }
     }
 
-    public void PlayAnimation(string animationName)
+    public void PlayAnimation(string animationName, bool force = false)
     {
         if (Sprite == null) return;
+        if (!force && _currentAnimation?.Name == animationName) return;
 
         var animation = Sprite.Animations.FirstOrDefault(a => a.Name.ToLowerInvariant() == animationName.ToLowerInvariant());
         if (animation == null) return;

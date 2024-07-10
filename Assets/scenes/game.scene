@@ -232,15 +232,6 @@
           "Static": true,
           "Surface": "surfaces/default.surface"
         }
-      ],
-      "Children": [
-        {
-          "__guid": "43dbb0a1-4c2b-49e9-a4ac-09e5b76b202d",
-          "Flags": 0,
-          "Name": "Object",
-          "Position": "0,0,0",
-          "Enabled": true
-        }
       ]
     }
   ],

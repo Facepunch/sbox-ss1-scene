@@ -27,7 +27,7 @@
           {
             "__type": "SpriteTools.SpriteComponent",
             "__guid": "a7a21b8d-9462-468f-bae5-db51be495102",
-            "_broadcastEvents": {},
+            "BroadcastEvents": {},
             "CastShadows": "Off",
             "CreateAttachPoints": false,
             "FlashTint": "1,1,1,0",

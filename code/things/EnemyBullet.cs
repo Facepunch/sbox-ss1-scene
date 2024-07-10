@@ -31,7 +31,7 @@ public class EnemyBullet : Thing
 
 		Sprite.PlaybackSpeed = 2f;
 
-		Sprite.Tint = Color.Red;
+		//Sprite.Tint = Color.Red;
 
 		ShadowOpacity = 0.8f;
 		ShadowScale = 0.6f;
@@ -51,7 +51,7 @@ public class EnemyBullet : Thing
 	[Broadcast]
 	public void SetColor(Color color)
 	{
-		Sprite.Tint = color;
+		//Sprite.Tint = color;
 	}
 
 	protected override void OnUpdate()
