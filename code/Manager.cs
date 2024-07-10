@@ -385,6 +385,9 @@ public sealed class Manager : Component, Component.INetworkListener
 		enemyBullet.Direction = dir;
 		enemyBullet.Speed = speed;
 
+		if ( dir.x < 0f )
+			enemyBullet.Sprite.SpriteFlags = SpriteFlags.HorizontalFlip;
+
 		enemyBulletObj.NetworkSpawn();
 		AddThing( enemyBullet );
 

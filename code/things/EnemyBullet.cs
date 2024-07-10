@@ -21,7 +21,7 @@ public class EnemyBullet : Thing
 		base.OnAwake();
 
 		//OffsetY = -0.4f;
-		Sprite.Transform.LocalPosition = new Vector3( 0f, 0.4f, 0f );
+		Sprite.Transform.LocalPosition = new Vector3( 0f, 0.55f, 0f );
 
 		Radius = 0.066f;
 
@@ -31,7 +31,7 @@ public class EnemyBullet : Thing
 
 		Sprite.PlaybackSpeed = 2f;
 
-		//Sprite.Tint = Color.Red;
+		//Sprite.Tint = Color.Yellow;
 
 		ShadowOpacity = 0.8f;
 		ShadowScale = 0.6f;
@@ -58,11 +58,11 @@ public class EnemyBullet : Thing
 	{
 		base.OnUpdate();
 
-		Gizmo.Draw.Color = Color.White;
-		Gizmo.Draw.Text( $"Sprite.Tint: {Sprite.Tint}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
+		//Gizmo.Draw.Color = Color.White;
+		//Gizmo.Draw.Text( $"Sprite.Tint: {Sprite.Tint}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
 
-		Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
-		Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
+		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
+		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
 		if ( Manager.Instance.IsGameOver )
 			return;

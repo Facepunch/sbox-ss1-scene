@@ -31,6 +31,7 @@ public abstract class Enemy : Thing
 	public bool CanAttack { get; set; }
 	public bool CanAttackAnim { get; set; }
 	public bool CanTurn { get; set; }
+	public bool DontChangeSpritePlaybackSpeed { get; set; }
 	public virtual bool CanBleed => true;
 	public float AggroRange { get; protected set; }
 	protected const float AGGRO_START_TIME = 0.2f;
@@ -220,7 +221,9 @@ public abstract class Enemy : Thing
 			}
 			else
 			{
-				Sprite.PlaybackSpeed = Utils.Map( dist_sqr, attack_dist_sqr, 0f, 1f, 4f, EasingType.Linear );
+				if( !DontChangeSpritePlaybackSpeed )
+					Sprite.PlaybackSpeed = Utils.Map( dist_sqr, attack_dist_sqr, 0f, 1f, 4f, EasingType.Linear );
+
 				_aggroTimer = 0f;
 			}
 		}
@@ -238,7 +241,8 @@ public abstract class Enemy : Thing
 	{
 		if ( !IsAttacking )
 		{
-			Sprite.PlaybackSpeed = Utils.Map( Utils.FastSin( MoveTimeOffset + Time.Now * 7.5f ), -1f, 1f, 0.75f, 3f, EasingType.ExpoIn );
+			if ( !DontChangeSpritePlaybackSpeed )
+				Sprite.PlaybackSpeed = Utils.Map( Utils.FastSin( MoveTimeOffset + Time.Now * 7.5f ), -1f, 1f, 0.75f, 3f, EasingType.ExpoIn );
 
 			if( CanTurn && !IsFrozen )
 			{
@@ -248,9 +252,12 @@ public abstract class Enemy : Thing
 		}
 		else
 		{
-			float dist_sqr = (targetPlayer.Position2D - Position2D).LengthSquared;
-			float attack_dist_sqr = MathF.Pow( AggroRange, 2f );
-			Sprite.PlaybackSpeed = Utils.Map( dist_sqr, attack_dist_sqr, 0f, 1f, 4f, EasingType.Linear );
+			if ( !DontChangeSpritePlaybackSpeed )
+			{
+				float dist_sqr = (targetPlayer.Position2D - Position2D).LengthSquared;
+				float attack_dist_sqr = MathF.Pow( AggroRange, 2f );
+				Sprite.PlaybackSpeed = Utils.Map( dist_sqr, attack_dist_sqr, 0f, 1f, 4f, EasingType.Linear );
+			}
 
 			if ( CanTurn && !IsFrozen )
 			{

@@ -54,6 +54,9 @@ public class Spitter : Enemy
 
 	protected override void UpdatePosition( float dt )
 	{
+		//Gizmo.Draw.Color = Color.White;
+		//Gizmo.Draw.Text( $"Sprite.PlaybackSpeed: {Sprite.PlaybackSpeed}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
+
 		base.UpdatePosition( dt );
 
 		var closestPlayer = Manager.Instance.GetClosestPlayer( Position2D );
@@ -94,6 +97,8 @@ public class Spitter : Enemy
 		_prepareShootTime = 0f;
 		IsShooting = true;
 		_hasShot = false;
+		DontChangeSpritePlaybackSpeed = true;
+		Sprite.PlaybackSpeed = 1f;
 		Sprite.PlayAnimation( "shoot" );
 		Manager.Instance.PlaySfxNearby( "spitter.prepare", Position2D, pitch: Game.Random.Float( 1f, 1.1f ), volume: 0.6f, maxDist: 2.75f );
 		CanAttack = false;
@@ -123,6 +128,7 @@ public class Spitter : Enemy
 		CanAttack = true;
 		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
 		IsShooting = false;
+		DontChangeSpritePlaybackSpeed = false;
 	}
 
 	public override void Colliding( Thing other, float percent, float dt )
