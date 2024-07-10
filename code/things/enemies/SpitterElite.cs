@@ -22,11 +22,12 @@ public class SpitterElite : Enemy
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
 
+		Scale = 1.05f;
+
 		base.OnAwake();
 
 		//Sprite.Texture = Texture.Load("textures/sprites/spitter_elite.vtex");
 
-		Scale = 1.05f;
 		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 8f;
@@ -40,6 +41,8 @@ public class SpitterElite : Enemy
 		CoinValueMin = 1;
 		CoinValueMax = 2;
 
+		Sprite.PlayAnimation( AnimSpawnPath );
+
 		if ( IsProxy )
 			return;
 		
@@ -48,12 +51,13 @@ public class SpitterElite : Enemy
 
 		_damageTime = DAMAGE_TIME;
 		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
-
-		//AnimationPath = AnimSpawnPath;
 	}
 
 	protected override void UpdatePosition( float dt )
 	{
+		//Gizmo.Draw.Color = Color.White;
+		//Gizmo.Draw.Text( $"Sprite.PlaybackSpeed: {Sprite.PlaybackSpeed}\n{Sprite.CurrentAnimation.Name}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) ); 
+
 		base.UpdatePosition( dt );
 
 		var closestPlayer = Manager.Instance.GetClosestPlayer( Position2D );
@@ -92,9 +96,12 @@ public class SpitterElite : Enemy
 	{
 		_prepareShootTime = 0f;
 		IsShooting = true;
-		//AnimationPath = "textures/sprites/spitter_shoot.frames";
+		Sprite.PlayAnimation( "shoot" );
+		DontChangeSpritePlaybackSpeed = true;
+		Sprite.PlaybackSpeed = 1f;
 		Manager.Instance.PlaySfxNearby( "spitter.prepare", Position2D, pitch: Game.Random.Float( 1f, 1.1f ), volume: 0.6f, maxDist: 2.75f );
 		CanAttack = false;
+		CanAttackAnim = false;
 		_numVolleysShot = 0;
 		_currShootDelay = Game.Random.Float( 0.1f, 0.5f );
 	}
@@ -107,7 +114,8 @@ public class SpitterElite : Enemy
 
 		var target_pos = closestPlayer.Position2D + closestPlayer.Velocity * Game.Random.Float( 0.5f, 1.85f );
 		var dir = Utils.RotateVector( (target_pos - Position2D).Normal, Game.Random.Float( -14f, 14f ) );
-		var enemyBullet = Manager.Instance.SpawnEnemyBullet( Position2D + new Vector2(0f, 0.55f) + dir * 0.03f, dir, speed: 2.15f );
+		//var enemyBullet = Manager.Instance.SpawnEnemyBullet( Position2D + new Vector2(0f, 0.55f) + dir * 0.03f, dir, speed: 2.15f );
+		var enemyBullet = Manager.Instance.SpawnEnemyBullet( Position2D + dir * 0.03f, dir, speed: 2.15f );
 		enemyBullet.SetColor( new Color( 1f, 0.2f, 0f ) );
 		enemyBullet.Lifetime = 8f;
 
@@ -118,16 +126,18 @@ public class SpitterElite : Enemy
 
 		Manager.Instance.PlaySfxNearby( "spitter.shoot", Position2D, pitch: Game.Random.Float( 1.0f, 1.1f ), volume: 0.9f, maxDist: 5f );
 
-		//if ( _numVolleysShot >= 3 )
-		//	AnimationPath = "textures/sprites/spitter_shoot_reverse.frames";
+		if ( _numVolleysShot >= 3 )
+			Sprite.PlayAnimation( "shoot_reverse" );
 	}
 
 	public void FinishShooting()
 	{
-		//AnimationPath = AnimIdlePath;
+		Sprite.PlayAnimation( AnimIdlePath );
 		CanAttack = true;
+		CanAttackAnim = true;
 		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
 		IsShooting = false;
+		DontChangeSpritePlaybackSpeed = false;
 	}
 
 	public override void Colliding( Thing other, float percent, float dt )

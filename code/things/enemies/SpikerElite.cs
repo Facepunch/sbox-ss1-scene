@@ -113,6 +113,7 @@ public class SpikerElite : Enemy
 		_shotTimer = SHOOT_TIME;
 		IsShooting = true;
 		CanAttack = false;
+		CanAttackAnim = false;
 		CanTurn = false;
 		_hasShot = false;
 		_hasReversed = false;
@@ -143,6 +144,7 @@ public class SpikerElite : Enemy
 		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
 		IsShooting = false;
 		CanAttack = true;
+		CanAttackAnim = true;
 		CanTurn = true;
 		//AnimationPath = AnimIdlePath;
 	}

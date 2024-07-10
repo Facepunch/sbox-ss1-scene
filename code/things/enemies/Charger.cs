@@ -152,6 +152,7 @@ public class Charger : Enemy
 		//AnimationPath = "textures/sprites/charger_charge_start.frames";
 		CanTurn = false;
 		CanAttack = false;
+		CanAttackAnim = false;
 	}
 
 	public void Charge()
@@ -167,6 +168,7 @@ public class Charger : Enemy
 		IsCharging = true;
 		_chargeTimer = CHARGE_TIME;
 		CanAttack = true;
+		CanAttackAnim = true;
 
 		_chargeDelayTimer = Game.Random.Float( CHARGE_DELAY_MIN, CHARGE_DELAY_MAX );
 		_chargeVel = Vector2.Zero;

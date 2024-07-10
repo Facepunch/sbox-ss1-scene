@@ -102,6 +102,7 @@ public class Spitter : Enemy
 		Sprite.PlayAnimation( "shoot" );
 		Manager.Instance.PlaySfxNearby( "spitter.prepare", Position2D, pitch: Game.Random.Float( 1f, 1.1f ), volume: 0.6f, maxDist: 2.75f );
 		CanAttack = false;
+		CanAttackAnim = false;
 	}
 
 	public void Shoot()
@@ -126,6 +127,7 @@ public class Spitter : Enemy
 	{
 		Sprite.PlayAnimation( AnimIdlePath );
 		CanAttack = true;
+		CanAttackAnim = true;
 		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
 		IsShooting = false;
 		DontChangeSpritePlaybackSpeed = false;

@@ -160,6 +160,7 @@ public class ExploderElite : Enemy
 		_explodeStartTime = 0f;
 		Sprite.PlayAnimation( "explode_start" );
 		CanAttack = false;
+		CanAttackAnim = false;
 		CanTurn = false;
 	}
 

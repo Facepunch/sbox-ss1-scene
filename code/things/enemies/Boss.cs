@@ -191,6 +191,7 @@ public class Boss : Enemy
 		//AnimationPath = "textures/sprites/boss_shoot.frames";
 		Manager.Instance.PlaySfxNearby( "boss.prepare", Position2D, pitch: Game.Random.Float( 0.75f, 0.85f ), volume: 1.7f, maxDist: 16f );
 		CanAttack = false;
+		CanAttackAnim = false;
 	}
 
 	public void Shoot()
@@ -226,6 +227,7 @@ public class Boss : Enemy
 	{
 		//AnimationPath = AnimIdlePath;
 		CanAttack = true;
+		CanAttackAnim = true;
 		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX ) * Utils.Map( Health, MaxHealth, 0f, 1f, 0.5f, EasingType.QuadIn );
 		IsShooting = false;
 	}
@@ -255,6 +257,7 @@ public class Boss : Enemy
 		_chargeTime = Game.Random.Float( CHARGE_TIME_MIN, CHARGE_TIME_MAX );
 		_chargeTimer = _chargeTime;
 		CanAttack = true;
+		CanAttackAnim = true;
 		_hasLandedCharge = false;
 
 		_chargeDelayTimer = Game.Random.Float( CHARGE_DELAY_MIN, CHARGE_DELAY_MAX ) * Utils.Map( Health, MaxHealth, 0f, 1f, 0.5f, EasingType.SineIn );

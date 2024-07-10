@@ -51,7 +51,7 @@ public class EnemyBullet : Thing
 	[Broadcast]
 	public void SetColor(Color color)
 	{
-		//Sprite.Tint = color;
+		Sprite.Tint = color;
 	}
 
 	protected override void OnUpdate()
