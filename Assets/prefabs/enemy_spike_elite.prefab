@@ -4,39 +4,38 @@
     "Flags": 0,
     "Name": "enemy_spike_elite",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Sandbox.SpriteRenderer",
-        "__guid": "8408ab4f-3648-4d83-9cc0-0706e06ac2be",
-        "Additive": false,
-        "CastShadows": false,
-        "Color": "1,1,1,1",
-        "DepthFeather": 0,
-        "FlipHorizontal": false,
-        "FlipVertical": false,
-        "FogStrength": 1,
-        "Opaque": false,
-        "Size": "1,1",
-        "Texture": "textures/sprites/spike_top_elite.vtex"
+        "__type": "SpriteTools.SpriteComponent",
+        "__guid": "8593eadd-01f4-4e51-91b8-eb58886218b1",
+        "BroadcastEvents": {},
+        "CastShadows": "Off",
+        "CreateAttachPoints": false,
+        "FlashTint": "1,1,1,0",
+        "PlaybackSpeed": 1,
+        "Sprite": "textures/sprites/spike_top_elite/spike_top_elite.sprite",
+        "SpriteFlags": "None",
+        "StartingAnimationName": "",
+        "Tint": "1,1,1,1"
       },
       {
         "__type": "EnemySpikeElite",
         "__guid": "2b760c70-73f3-463f-ad7e-ab7f42382fc0",
         "Sprite": {
           "_type": "component",
-          "component_id": "8408ab4f-3648-4d83-9cc0-0706e06ac2be",
+          "component_id": "8593eadd-01f4-4e51-91b8-eb58886218b1",
           "go": "15f52c4e-78a3-4466-911d-1997f213efdc",
-          "component_type": "SpriteRenderer"
+          "component_type": "SpriteComponent"
         }
       }
-    ]
+    ],
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

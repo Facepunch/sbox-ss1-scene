@@ -4,29 +4,28 @@
     "Flags": 0,
     "Name": "enemy_spike_bg",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Sandbox.SpriteRenderer",
-        "__guid": "6864b13e-7489-4ee3-a218-cb8c847a6f92",
-        "Additive": false,
-        "CastShadows": false,
-        "Color": "1,1,1,1",
-        "DepthFeather": 0,
-        "FlipHorizontal": false,
-        "FlipVertical": false,
-        "FogStrength": 1,
-        "Opaque": false,
-        "Size": "1,1",
-        "Texture": "textures/sprites/spike_bottom.vtex"
+        "__type": "SpriteTools.SpriteComponent",
+        "__guid": "d16e8be1-852a-4287-a5c2-e23d95b2e7b2",
+        "BroadcastEvents": {},
+        "CastShadows": "Off",
+        "CreateAttachPoints": false,
+        "FlashTint": "1,1,1,0",
+        "PlaybackSpeed": 1,
+        "Sprite": "textures/sprites/spike_bottom/spike_bottom.sprite",
+        "SpriteFlags": "None",
+        "StartingAnimationName": "",
+        "Tint": "1,1,1,1"
       }
-    ]
+    ],
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

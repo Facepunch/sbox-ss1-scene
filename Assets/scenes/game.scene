@@ -115,6 +115,10 @@
             "_type": "gameobject",
             "prefab": "prefabs/shield_vfx.prefab"
           },
+          "SpikerPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/spiker.prefab"
+          },
           "SpitterElitePrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/spitter_elite.prefab"

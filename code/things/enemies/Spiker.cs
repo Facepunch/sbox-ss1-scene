@@ -23,13 +23,12 @@ public class Spiker : Enemy
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
 
+		Scale = 1.4f;
+
 		base.OnAwake();
 
 		//AnimSpeed = 4f;
 		//Sprite.Texture = Texture.Load("textures/sprites/spiker.vtex");
-
-		Scale = 1.4f;
-		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 8f;
 		Deceleration = 2.57f;
@@ -45,6 +44,8 @@ public class Spiker : Enemy
 		CoinValueMin = 2;
 		CoinValueMax = 4;
 
+		Sprite.PlayAnimation( AnimSpawnPath );
+
 		if ( IsProxy )
 			return;
 		
@@ -53,7 +54,6 @@ public class Spiker : Enemy
 
 		_damageTime = DAMAGE_TIME;
 		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
-		//AnimationPath = AnimSpawnPath;
 	}
 
 	protected override void UpdatePosition( float dt )
@@ -77,7 +77,7 @@ public class Spiker : Enemy
 			if ( !_hasReversed && _prepareStartTime > 3f )
 			{
 				_hasReversed = true;
-				//AnimationPath = "textures/sprites/spiker_shoot_reverse.frames";
+				Sprite.PlayAnimation( "shoot_reverse" );
 			}
 
 			Velocity *= (1f - dt * 4f);
@@ -119,7 +119,9 @@ public class Spiker : Enemy
 		_hasReversed = false;
 		_prepareStartTime = 0f;
 		Velocity *= 0.25f;
-		//AnimationPath = "textures/sprites/spiker_shoot.frames";
+		DontChangeSpritePlaybackSpeed = true;
+		Sprite.PlaybackSpeed = 1f;
+		Sprite.PlayAnimation( "shoot" );
 	}
 
 	public void CreateSpike()
@@ -143,7 +145,8 @@ public class Spiker : Enemy
 		CanAttack = true;
 		CanAttackAnim = true;
 		CanTurn = true;
-		//AnimationPath = AnimIdlePath;
+		DontChangeSpritePlaybackSpeed = false;
+		Sprite.PlayAnimation( AnimIdlePath );
 	}
 
 	public override void Colliding( Thing other, float percent, float dt )
