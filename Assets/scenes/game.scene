@@ -115,6 +115,10 @@
             "_type": "gameobject",
             "prefab": "prefabs/shield_vfx.prefab"
           },
+          "SpitterPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/spitter.prefab"
+          },
           "ZombiePrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/zombie.prefab"

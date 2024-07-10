@@ -21,11 +21,12 @@ public class Spitter : Enemy
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
 
+		Scale = 1f;
+
 		base.OnAwake();
 
 		//Sprite.Texture = Texture.Load("textures/sprites/spitter.vtex");
 
-		Scale = 1f;
 		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 8f;
@@ -39,6 +40,8 @@ public class Spitter : Enemy
 		CoinValueMin = 1;
 		CoinValueMax = 2;
 
+		Sprite.PlayAnimation( AnimSpawnPath );
+
 		if ( IsProxy )
 			return;
 		
@@ -47,8 +50,6 @@ public class Spitter : Enemy
 
 		_damageTime = DAMAGE_TIME;
 		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
-
-		//AnimationPath = AnimSpawnPath;
 	}
 
 	protected override void UpdatePosition( float dt )
@@ -93,7 +94,7 @@ public class Spitter : Enemy
 		_prepareShootTime = 0f;
 		IsShooting = true;
 		_hasShot = false;
-		//AnimationPath = "textures/sprites/spitter_shoot.frames";
+		Sprite.PlayAnimation( "shoot" );
 		Manager.Instance.PlaySfxNearby( "spitter.prepare", Position2D, pitch: Game.Random.Float( 1f, 1.1f ), volume: 0.6f, maxDist: 2.75f );
 		CanAttack = false;
 	}
@@ -112,12 +113,12 @@ public class Spitter : Enemy
 		_hasShot = true;
 
 		Manager.Instance.PlaySfxNearby( "spitter.shoot", Position2D, pitch: Game.Random.Float( 0.8f, 0.9f ), volume: 0.9f, maxDist: 5f );
-		//AnimationPath = "textures/sprites/spitter_shoot_reverse.frames";
+		Sprite.PlayAnimation( "shoot_reverse" );
 	}
 
 	public void FinishShooting()
 	{
-		//AnimationPath = AnimIdlePath;
+		Sprite.PlayAnimation( AnimIdlePath );
 		CanAttack = true;
 		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
 		IsShooting = false;
