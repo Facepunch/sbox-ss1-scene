@@ -3,41 +3,49 @@
     "__guid": "cd8376ce-c146-4364-9673-e0c43528b018",
     "Flags": 0,
     "Name": "enemy_bullet",
-    "Position": "1,1,1",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
-      {
-        "__type": "Sandbox.SpriteRenderer",
-        "__guid": "d0fba1d3-e13a-4593-9b14-4db906eb3108",
-        "Additive": false,
-        "CastShadows": false,
-        "Color": "1,0,0,1",
-        "DepthFeather": 0,
-        "FlipHorizontal": false,
-        "FlipVertical": false,
-        "FogStrength": 1,
-        "Opaque": false,
-        "Size": "0.35,0.35",
-        "Texture": "textures/sprites/enemy_bullet.vtex"
-      },
       {
         "__type": "EnemyBullet",
         "__guid": "9d2d178e-2e76-4b02-8c23-4a8d20a61959",
         "Sprite": {
           "_type": "component",
-          "component_id": "d0fba1d3-e13a-4593-9b14-4db906eb3108",
-          "go": "cd8376ce-c146-4364-9673-e0c43528b018",
-          "component_type": "SpriteRenderer"
+          "component_id": "a7a21b8d-9462-468f-bae5-db51be495102",
+          "go": "1c829afb-03b0-4272-8c59-2a27591f7ccf",
+          "component_type": "SpriteComponent"
         }
       }
-    ]
+    ],
+    "Children": [
+      {
+        "__guid": "1c829afb-03b0-4272-8c59-2a27591f7ccf",
+        "Flags": 0,
+        "Name": "sprite",
+        "Rotation": "0,-0,-0.7071068,0.7071068",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "SpriteTools.SpriteComponent",
+            "__guid": "a7a21b8d-9462-468f-bae5-db51be495102",
+            "_broadcastEvents": {},
+            "CastShadows": "Off",
+            "CreateAttachPoints": false,
+            "FlashTint": "1,1,1,0",
+            "PlaybackSpeed": 1,
+            "Sprite": "textures/sprites/enemy_bullet/enemy_bullet.sprite",
+            "SpriteFlags": "None",
+            "StartingAnimationName": "idle",
+            "Tint": "1,0,0,1"
+          }
+        ]
+      }
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

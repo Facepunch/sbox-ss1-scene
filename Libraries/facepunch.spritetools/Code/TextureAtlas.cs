@@ -16,6 +16,68 @@ public class TextureAtlas
     int MaxFrameSize;
     static Dictionary<string, TextureAtlas> Cache = new();
 
+    /// <summary>
+    /// Returns the UV tiling for the texture atlas.
+    /// </summary>
+    public Vector2 GetFrameTiling()
+    {
+        // inset by 1 pixel to avoid bleeding
+        return new Vector2(MaxFrameSize - 2, MaxFrameSize - 2) / ((float)MaxFrameSize * Size);
+    }
+
+    /// <summary>
+    /// Returns the UV offset for a specific frame in the texture atlas.
+    /// </summary>
+    /// <param name="index">The index of the frame</param>
+    public Vector2 GetFrameOffset(int index)
+    {
+        int x = index * MaxFrameSize % (Size * MaxFrameSize);
+        int y = index * MaxFrameSize / (Size * MaxFrameSize) * MaxFrameSize;
+        x += 1;
+        y += 1;
+        return new Vector2(x, y) / (float)(Size * MaxFrameSize);
+    }
+
+    public Texture GetTextureFromFrame(int index)
+    {
+        int x = index * MaxFrameSize % (Size * MaxFrameSize);
+        int y = index * MaxFrameSize / (Size * MaxFrameSize) * MaxFrameSize;
+        x += 1;
+        y += 1;
+        byte[] textureData = new byte[MaxFrameSize * MaxFrameSize * 4];
+        for (int i = 0; i < MaxFrameSize; i++)
+        {
+            for (int j = 0; j < MaxFrameSize; j++)
+            {
+                var ind = (i + j * MaxFrameSize) * 4;
+                var color = Texture.GetPixel(x + i, y + j);
+                textureData[ind + 0] = color.r;
+                textureData[ind + 1] = color.g;
+                textureData[ind + 2] = color.b;
+                textureData[ind + 3] = color.a;
+            }
+        }
+
+        var builder = Texture.Create(MaxFrameSize, MaxFrameSize);
+        builder.WithData(textureData);
+        builder.WithMips(0);
+        builder.WithMultisample(0);
+        return builder.Finish();
+    }
+
+    // Cast to texture
+    public static implicit operator Texture(TextureAtlas atlas)
+    {
+        return atlas.Texture;
+    }
+
+
+    //////////////////////////// STATIC METHODS //////////////////////////// 
+
+    /// <summary>
+    /// Returns a cached texture atlas given a sprite animation. Creates one if not in the cache. Returns null if there was an error and the atlas could not be created.
+    /// </summary>
+    /// <param name="animation">The sprite animation to create the atlas from</param>
     public static TextureAtlas FromAnimation(SpriteAnimation animation)
     {
         var key = "anim." + animation.Name + ".";
@@ -97,10 +159,9 @@ public class TextureAtlas
     }
 
     /// <summary>
-    /// Create a texture atlas from a list of texture paths. Returns null if there was an error and the texture cannot be loaded.
+    /// Returns a cached texture atlas given a list of texture paths. Creates one if not in the cache. Returns null if there was an error and the atlas could not be created.
     /// </summary>
-    /// <param name="texturePaths"></param>
-    /// <returns></returns>
+    /// <param name="texturePaths">A list containing a path to each frame</param>
     public static TextureAtlas FromTextures(List<string> texturePaths)
     {
         var key = string.Join(",", texturePaths.OrderBy(x => x));
@@ -172,6 +233,11 @@ public class TextureAtlas
         return atlas;
     }
 
+    /// <summary>
+    /// Returns a cached texture atlas given a spritesheet path and a list of sprite rects. Creates one if not in the cache. Returns null if there was an error and the atlas could not be created.
+    /// </summary>
+    /// <param name="path">The path to the spritesheet texture</param>
+    /// <param name="spriteRects">A list of rectangles representing the position of each sprite in the spritesheet</param>
     public static TextureAtlas FromSpritesheet(string path, List<Rect> spriteRects)
     {
         var key = path + string.Join(",", spriteRects.OrderBy(x => x));
@@ -241,24 +307,20 @@ public class TextureAtlas
         return atlas;
     }
 
-    public Vector2 GetFrameTiling()
+    /// <summary>
+    /// Clears the cache of texture atlases. If a path is provided, only the atlases that contain that path will be removed.
+    /// </summary>
+    /// <param name="path">The path to remove from the cache</param>
+    public static void ClearCache(string path = "")
     {
-        // inset by 1 pixel to avoid bleeding
-        return new Vector2(MaxFrameSize - 2, MaxFrameSize - 2) / ((float)MaxFrameSize * Size);
-    }
-
-    public Vector2 GetFrameOffset(int index)
-    {
-        int x = index * MaxFrameSize % (Size * MaxFrameSize);
-        int y = index * MaxFrameSize / (Size * MaxFrameSize) * MaxFrameSize;
-        x += 1;
-        y += 1;
-        return new Vector2(x, y) / (float)(Size * MaxFrameSize);
-    }
-
-    // Cast to texture
-    public static implicit operator Texture(TextureAtlas atlas)
-    {
-        return atlas.Texture;
+        if (path.StartsWith("/")) path = path.Substring(1);
+        if (string.IsNullOrEmpty(path))
+        {
+            Cache.Clear();
+        }
+        else
+        {
+            Cache = Cache.Where(x => !x.Key.Contains(path)).ToDictionary(x => x.Key, x => x.Value);
+        }
     }
 }

@@ -36,6 +36,27 @@ public class SpriteResource : GameResource
 		return attachmentNames;
 	}
 
+	/// <summary>
+	/// Try to load a sprite from a file path.
+	/// </summary>
+	/// <param name="path">The path to the sprite resource</param>
+	public static SpriteResource Load(string path)
+	{
+		return ResourceLibrary.Get<SpriteResource>(path);
+	}
+
+	/// <summary>
+	/// Returns the first frame of a sprite resource as a texture.
+	/// </summary>
+	/// <returns></returns>
+	public Texture GetPreviewTexture()
+	{
+		var anim = Animations.FirstOrDefault();
+		if (anim is null || anim.Frames.Count == 0) return Texture.Transparent;
+		var atlas = TextureAtlas.FromAnimation(anim);
+		return atlas.GetTextureFromFrame(0);
+	}
+
 }
 
 public class SpriteAnimation

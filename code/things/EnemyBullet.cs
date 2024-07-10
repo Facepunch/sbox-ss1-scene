@@ -26,7 +26,12 @@ public class EnemyBullet : Thing
 		Radius = 0.066f;
 
 		Scale = 0.35f;
+		Sprite.Transform.LocalScale *= Scale * Globals.SPRITE_SCALE;
 		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
+
+		Sprite.PlaybackSpeed = 2f;
+
+		Sprite.Tint = Color.Red;
 
 		ShadowOpacity = 0.8f;
 		ShadowScale = 0.6f;
@@ -53,8 +58,11 @@ public class EnemyBullet : Thing
 	{
 		base.OnUpdate();
 
-		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
-		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
+		Gizmo.Draw.Color = Color.White;
+		Gizmo.Draw.Text( $"Sprite.Tint: {Sprite.Tint}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
+
+		Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
+		Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
 		if ( Manager.Instance.IsGameOver )
 			return;
