@@ -32,6 +32,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public GameObject SpitterPrefab { get; set; }
 	[Property] public GameObject SpitterElitePrefab { get; set; }
 	[Property] public GameObject SpikerPrefab { get; set; }
+	[Property] public GameObject SpikerElitePrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
@@ -130,7 +131,8 @@ public sealed class Manager : Component, Component.INetworkListener
 		//	SpawnEnemy(TypeLibrary.GetType(typeof(Zombie)), pos);
 		//}
 
-		SpawnEnemy( TypeLibrary.GetType( typeof( Spiker ) ), new Vector2(0f, 0f), forceSpawn: true );
+		SpawnEnemy( TypeLibrary.GetType( typeof( Spiker ) ), new Vector2( 0f, 0f ), forceSpawn: true );
+		SpawnEnemy( TypeLibrary.GetType( typeof( SpikerElite ) ), new Vector2(0f, 0f), forceSpawn: true );
 
 		//SpawnBoss( new Vector2(3f, 3f ) );
 		//HasSpawnedBoss = true;
@@ -290,6 +292,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		else if ( type == TypeLibrary.GetType( typeof( Spitter ) ) ) { enemyObj = SpitterPrefab.Clone( pos3 ); }
 		else if ( type == TypeLibrary.GetType( typeof( SpitterElite ) ) ) { enemyObj = SpitterElitePrefab.Clone( pos3 ); }
 		else if ( type == TypeLibrary.GetType( typeof( Spiker ) ) ) { enemyObj = SpikerPrefab.Clone( pos3 ); }
+		else if ( type == TypeLibrary.GetType( typeof( SpikerElite ) ) ) { enemyObj = SpikerElitePrefab.Clone( pos3 ); }
 		else
 		{
 			Log.Info( $"Enemy {type} not implemented yet!" );

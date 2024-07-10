@@ -98,7 +98,7 @@
       "Attachments": []
     },
     {
-      "FrameRate": 4,
+      "FrameRate": 3.7,
       "Origin": "0.5,0.952",
       "Name": "die",
       "Frames": [
@@ -159,7 +159,7 @@
       "Attachments": []
     },
     {
-      "FrameRate": 13,
+      "FrameRate": 18,
       "Origin": "0.5,0.952",
       "Name": "shoot",
       "Frames": [
@@ -219,7 +219,7 @@
       "Attachments": []
     },
     {
-      "FrameRate": 13,
+      "FrameRate": 18,
       "Origin": "0.5,0.952",
       "Name": "shoot_reverse",
       "Frames": [

@@ -13,7 +13,7 @@ public class EnemySpikeElite : Thing
 	public Enemy Shooter { get; set; }
 	public float Damage { get; set; }
 	public float Lifetime { get; set; }
-	public SpriteRenderer BgSprite { get; set; }
+	public SpriteComponent BgSprite { get; set; }
 	//public SpikeBackground Background { get; set; }
 
 	public List<Thing> _hitThings = new List<Thing>();
@@ -26,13 +26,15 @@ public class EnemySpikeElite : Thing
 
 		//OffsetY = -0.24f;
 
-		Radius = 0.29f;
+		Radius = 0.43f;
 
-		Scale = 1f;
+		Scale = 2.1f;
 		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
-		//Sprite.FlipHorizontal = Game.Random.Float( 0f, 1f ) < 0.5f;
+		Sprite.SpriteFlags = Game.Random.Int( 0, 1 ) == 0 ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
 
-		Lifetime = 2.1f;
+		Sprite.Transform.LocalScale = new Vector3( 1f ) * Scale * Globals.SPRITE_SCALE;
+
+		Lifetime = 1.9f;
 		Damage = 30f;
 		SpawnTime = 0f;
 
@@ -40,15 +42,13 @@ public class EnemySpikeElite : Thing
 		var bgObj = Manager.Instance.EnemySpikeBgPrefab.Clone( Transform.Position );
 		bgObj.SetParent( GameObject );
 		//bgObj.Transform.LocalPosition = new Vector3( 0f, OffsetY, Globals.SHADOW_DEPTH_OFFSET );
-		bgObj.Transform.LocalPosition = new Vector3( 0f, 0.24f, Globals.SHADOW_DEPTH_OFFSET );
+		bgObj.Transform.LocalPosition = new Vector3( 0f, 0f, Globals.SHADOW_DEPTH_OFFSET );
 		bgObj.NetworkMode = NetworkMode.Never;
 
-		BgSprite = bgObj.Components.Get<SpriteRenderer>();
-		BgSprite.FlipHorizontal = Game.Random.Float( 0f, 1f ) < 0.5f;
-		BgSprite.Size = new Vector2( 1f, 1f ) * 1.3f;
-
-		Sprite.Tint = Color.White.WithAlpha( 0f );
-		BgSprite.Color = Color.White.WithAlpha( 0f );
+		BgSprite = bgObj.Components.Get<SpriteComponent>();
+		BgSprite.SpriteFlags = Game.Random.Int( 0, 1 ) == 0 ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
+		BgSprite.Transform.LocalScale = new Vector3( 1f ) * 2.2f * Globals.SPRITE_SCALE;
+		BgSprite.Transform.LocalRotation = new Angles( 0f, -90f, 0f );
 
 		if ( IsProxy )
 			return;
@@ -60,14 +60,11 @@ public class EnemySpikeElite : Thing
 	{
 		base.OnUpdate();
 
-		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
+		//Gizmo.Draw.Color = SpawnTime < 1.25f || SpawnTime > 1.6f ? Color.White.WithAlpha( 0.05f ) : Color.Red.WithAlpha( 0.1f );
 		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
 
 		if ( Manager.Instance.IsGameOver )
 			return;
-
-		Sprite.Tint = Color.White.WithAlpha( Utils.Map( SpawnTime, 0.8f, 1.25f, 0f, 1f, EasingType.SineOut ) * Utils.Map( SpawnTime, 1.25f, 1.4f, 1f, 0f, EasingType.SineOut ) );
-		BgSprite.Color = Color.White.WithAlpha( Utils.Map( SpawnTime, 0f, 1f, 0f, 1f, EasingType.SineOut ) * Utils.Map( SpawnTime, Lifetime - 0.3f, Lifetime, 1f, 0f ) );
 
 		if ( IsProxy )
 			return;

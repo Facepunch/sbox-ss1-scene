@@ -1,40 +1,40 @@
 {
   "RootObject": {
-    "__guid": "15f52c4e-78a3-4466-911d-1997f213efdc",
+    "__guid": "a5added3-367f-42a6-8a3d-1df2d73be74c",
     "Flags": 0,
-    "Name": "enemy_spike_elite",
+    "Name": "spiker_elite",
     "Enabled": true,
     "Components": [
       {
-        "__type": "EnemySpikeElite",
-        "__guid": "2b760c70-73f3-463f-ad7e-ab7f42382fc0",
+        "__type": "SpikerElite",
+        "__guid": "caba7b5f-4329-4d16-b3fe-cdc25e2d2a8e",
         "Sprite": {
           "_type": "component",
-          "component_id": "e6fcfda0-d918-43cb-8c1e-9ad92b561273",
-          "go": "0dc11ec5-d4a9-494e-bc68-9633773b13d2",
+          "component_id": "bd087230-ab93-4d54-b103-921babc1fc61",
+          "go": "32c670bc-3ffd-4b40-b7b6-b1ee45cc1064",
           "component_type": "SpriteComponent"
         }
       }
     ],
     "Children": [
       {
-        "__guid": "0dc11ec5-d4a9-494e-bc68-9633773b13d2",
+        "__guid": "32c670bc-3ffd-4b40-b7b6-b1ee45cc1064",
         "Flags": 0,
         "Name": "sprite",
-        "Rotation": "0,0,-0.7071068,0.7071068",
+        "Rotation": "0,-0,-0.7071068,0.7071068",
         "Enabled": true,
         "Components": [
           {
             "__type": "SpriteTools.SpriteComponent",
-            "__guid": "e6fcfda0-d918-43cb-8c1e-9ad92b561273",
+            "__guid": "bd087230-ab93-4d54-b103-921babc1fc61",
             "BroadcastEvents": {},
             "CastShadows": "Off",
             "CreateAttachPoints": false,
             "FlashTint": "1,1,1,0",
             "PlaybackSpeed": 1,
-            "Sprite": "textures/sprites/spike_top_elite/spike_top_elite.sprite",
+            "Sprite": "textures/sprites/spiker_elite/spiker_elite.sprite",
             "SpriteFlags": "None",
-            "StartingAnimationName": "",
+            "StartingAnimationName": "walk",
             "Tint": "1,1,1,1"
           }
         ]

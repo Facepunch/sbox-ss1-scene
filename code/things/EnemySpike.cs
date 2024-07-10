@@ -31,10 +31,11 @@ public class EnemySpike : Thing
 		Scale = 1.2f;
 		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 		//Sprite.FlipHorizontal = Game.Random.Float( 0f, 1f ) < 0.5f;
+		Sprite.SpriteFlags = Game.Random.Int( 0, 1 ) == 0 ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
 
 		Sprite.Transform.LocalScale = new Vector3( 1f ) * Scale * Globals.SPRITE_SCALE;
 
-		Lifetime = 2.1f;
+		Lifetime = 1.9f;
 		Damage = 10f;
 		SpawnTime = 0f;
 

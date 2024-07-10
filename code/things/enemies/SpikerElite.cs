@@ -23,12 +23,13 @@ public class SpikerElite : Enemy
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
 
+		Scale = 1.9f;
+
 		base.OnAwake();
 
 		//AnimSpeed = 3f;
 		//Sprite.Texture = Texture.Load("textures/sprites/spiker_elite.vtex");
 
-		Scale = 1.9f;
 		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 12f;
@@ -45,6 +46,8 @@ public class SpikerElite : Enemy
 		CoinValueMin = 7;
 		CoinValueMax = 15;
 
+		Sprite.PlayAnimation( AnimSpawnPath );
+
 		if ( IsProxy )
 			return;
 		
@@ -53,7 +56,6 @@ public class SpikerElite : Enemy
 
 		_damageTime = DAMAGE_TIME;
 		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
-		//AnimationPath = AnimSpawnPath;
 	}
 
 	protected override void UpdatePosition( float dt )
@@ -77,7 +79,7 @@ public class SpikerElite : Enemy
 			if ( !_hasReversed && _prepareStartTime > 3f )
 			{
 				_hasReversed = true;
-				//AnimationPath = "textures/sprites/spiker_shoot_reverse.frames";
+				Sprite.PlayAnimation( "shoot_reverse" );
 			}
 
 			Velocity *= (1f - dt * 4f);
@@ -119,7 +121,9 @@ public class SpikerElite : Enemy
 		_hasReversed = false;
 		_prepareStartTime = 0f;
 		Velocity *= 0.25f;
-		//AnimationPath = "textures/sprites/spiker_shoot.frames";
+		DontChangeSpritePlaybackSpeed = true;
+		Sprite.PlaybackSpeed = 1f;
+		Sprite.PlayAnimation( "shoot" );
 	}
 
 	public void CreateSpike()
@@ -146,7 +150,8 @@ public class SpikerElite : Enemy
 		CanAttack = true;
 		CanAttackAnim = true;
 		CanTurn = true;
-		//AnimationPath = AnimIdlePath;
+		Sprite.PlayAnimation( AnimIdlePath );
+		DontChangeSpritePlaybackSpeed = false;
 	}
 
 	public override void Colliding( Thing other, float percent, float dt )
