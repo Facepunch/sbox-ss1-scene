@@ -15,6 +15,10 @@
             "_type": "gameobject",
             "prefab": "prefabs/blood.prefab"
           },
+          "BossPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/boss.prefab"
+          },
           "BurningVfxPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/burning_vfx.prefab"

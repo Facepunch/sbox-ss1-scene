@@ -1,0 +1,51 @@
+{
+  "RootObject": {
+    "__guid": "a5added3-367f-42a6-8a3d-1df2d73be74c",
+    "Flags": 0,
+    "Name": "boss",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Boss",
+        "__guid": "fd70e7ac-0068-4288-9348-d529178758b9",
+        "Sprite": {
+          "_type": "component",
+          "component_id": "bd087230-ab93-4d54-b103-921babc1fc61",
+          "go": "32c670bc-3ffd-4b40-b7b6-b1ee45cc1064",
+          "component_type": "SpriteComponent"
+        }
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "32c670bc-3ffd-4b40-b7b6-b1ee45cc1064",
+        "Flags": 0,
+        "Name": "sprite",
+        "Rotation": "0,-0,-0.7071068,0.7071068",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "SpriteTools.SpriteComponent",
+            "__guid": "bd087230-ab93-4d54-b103-921babc1fc61",
+            "BroadcastEvents": {},
+            "CastShadows": "Off",
+            "CreateAttachPoints": false,
+            "FlashTint": "1,1,1,0",
+            "PlaybackSpeed": 1,
+            "Sprite": "textures/sprites/boss/boss.sprite",
+            "SpriteFlags": "None",
+            "StartingAnimationName": "walk",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

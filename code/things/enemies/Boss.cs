@@ -41,6 +41,8 @@ public class Boss : Enemy
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
 
+		Scale = 2.5f;
+
 		base.OnAwake();
 
 		//AnimSpeed = 3f;
@@ -49,7 +51,6 @@ public class Boss : Enemy
 		//Sprite.Texture = Texture.Load("textures/sprites/boss.vtex");
 
 		//ScaleFactor = 0.85f;
-		Scale = 2.5f;
 		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 50f;
@@ -64,6 +65,8 @@ public class Boss : Enemy
 		MaxHealth = Health;
 		DamageToPlayer = 32f;
 
+		Sprite.PlayAnimation( AnimSpawnPath );
+
 		Manager.Instance.Boss = this;
 
 		if ( IsProxy )
@@ -75,13 +78,15 @@ public class Boss : Enemy
 		_damageTime = DAMAGE_TIME;
 		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
 		_chargeDelayTimer = Game.Random.Float( CHARGE_DELAY_MIN, CHARGE_DELAY_MAX );
-		//AnimationPath = AnimSpawnPath;
 	}
 
 	protected override void UpdatePosition( float dt )
 	{
 		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
 		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
+
+		//Gizmo.Draw.Color = Color.White;
+		//Gizmo.Draw.Text( $"Sprite.PlaybackSpeed: {Sprite.PlaybackSpeed}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
 
 		base.UpdatePosition( dt );
 
@@ -105,16 +110,17 @@ public class Boss : Enemy
 
 			if ( !_hasLandedCharge && _chargeTimer < 0.5f )
 			{
-				//AnimationPath = "textures/sprites/boss_charge_reverse.frames";
+				Sprite.PlayAnimation( "charge_reverse" );
 				_hasLandedCharge = true;
 			}
 
 			if ( _chargeTimer < 0f )
 			{
 				IsCharging = false;
-				//AnimationPath = AnimIdlePath;
+				Sprite.PlayAnimation( AnimIdlePath );
 				CanTurn = true;
 				CanAttackAnim = true;
+				DontChangeSpritePlaybackSpeed = false;
 			}
 			else
 			{
@@ -188,10 +194,12 @@ public class Boss : Enemy
 		_prepareShootTime = 0f;
 		IsShooting = true;
 		_hasShot = false;
-		//AnimationPath = "textures/sprites/boss_shoot.frames";
+		Sprite.PlayAnimation( "shoot" );
 		Manager.Instance.PlaySfxNearby( "boss.prepare", Position2D, pitch: Game.Random.Float( 0.75f, 0.85f ), volume: 1.7f, maxDist: 16f );
 		CanAttack = false;
 		CanAttackAnim = false;
+		Sprite.PlaybackSpeed = 1f;
+		DontChangeSpritePlaybackSpeed = true;
 	}
 
 	public void Shoot()
@@ -212,22 +220,23 @@ public class Boss : Enemy
 		for ( int i = 0; i < num_bullets; i++ )
 		{
 			var dir = Utils.RotateVector( aim_dir, currAngleOffset + increment * i );
-			var enemyBullet = Manager.Instance.SpawnEnemyBullet( Position2D + new Vector2( 0f, 0.55f ) + dir * 0.03f, dir, speed: 3f );
+			var enemyBullet = Manager.Instance.SpawnEnemyBullet( Position2D + dir * 0.03f, dir, speed: 3f );
 			enemyBullet.SetColor( new Color( 1f, 1f, 0f ) );
 		}
 
 		Velocity *= 0.25f;
 		_hasShot = true;
 
-		//AnimationPath = "textures/sprites/boss_shoot_reverse.frames";
-		Manager.Instance.PlaySfxNearby( "boss.shoot", Position2D, pitch: Game.Random.Float( 0.65f, 0.75f ), volume: 1.5f, maxDist: 9f );
+		Sprite.PlayAnimation( "shoot_reverse" );
+		Manager.Instance.PlaySfxNearby( "boss.shoot", Position2D, pitch: Game.Random.Float( 0.65f, 0.75f ), volume: 1.4f, maxDist: 9f );
 	}
 
 	public void FinishShooting()
 	{
-		//AnimationPath = AnimIdlePath;
+		Sprite.PlayAnimation( AnimIdlePath );
 		CanAttack = true;
 		CanAttackAnim = true;
+		DontChangeSpritePlaybackSpeed = false;
 		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX ) * Utils.Map( Health, MaxHealth, 0f, 1f, 0.5f, EasingType.QuadIn );
 		IsShooting = false;
 	}
@@ -237,10 +246,12 @@ public class Boss : Enemy
 		_prepareTimer = PREPARE_TIME;
 		IsPreparingToCharge = true;
 		Manager.Instance.PlaySfxNearby( "boss.prepare", Position2D, pitch: Game.Random.Float( 1.05f, 1.1f ), volume: 1.75f, maxDist: 10f );
-		//AnimationPath = "textures/sprites/boss_charge.frames";
+		Sprite.PlayAnimation( "charge" );
 		CanTurn = false;
 		CanAttack = false;
 		CanAttackAnim = false;
+		Sprite.PlaybackSpeed = 1f;
+		DontChangeSpritePlaybackSpeed = true;
 	}
 
 	public void Charge()

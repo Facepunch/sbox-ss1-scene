@@ -18,7 +18,7 @@
       "Attachments": []
     },
     {
-      "FrameRate": 8.5,
+      "FrameRate": 11,
       "Origin": "0.5,0.95",
       "Name": "spawn",
       "Frames": [
@@ -179,7 +179,7 @@
       "Attachments": []
     },
     {
-      "FrameRate": 8,
+      "FrameRate": 9,
       "Origin": "0.5,0.95",
       "Name": "shoot",
       "Frames": [
@@ -219,7 +219,7 @@
       "Attachments": []
     },
     {
-      "FrameRate": 8,
+      "FrameRate": 9,
       "Origin": "0.5,0.95",
       "Name": "shoot_reverse",
       "Frames": [
@@ -259,7 +259,7 @@
       "Attachments": []
     },
     {
-      "FrameRate": 6,
+      "FrameRate": 9,
       "Origin": "0.5,0.95",
       "Name": "charge",
       "Frames": [
@@ -311,7 +311,7 @@
       "Attachments": []
     },
     {
-      "FrameRate": 6,
+      "FrameRate": 9,
       "Origin": "0.5,0.95",
       "Name": "charge_reverse",
       "Frames": [
