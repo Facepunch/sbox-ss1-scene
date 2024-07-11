@@ -44,8 +44,8 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public Camera2D Camera2D { get; set; }
 
 	public int EnemyCount { get; private set; }
-	//public const float MAX_ENEMY_COUNT = 350;
-	public const float MAX_ENEMY_COUNT = 0;
+	public const float MAX_ENEMY_COUNT = 350;
+	//public const float MAX_ENEMY_COUNT = 0;
 
 	public int CrateCount { get; private set; }
 	public const float MAX_CRATE_COUNT = 7;
@@ -138,6 +138,9 @@ public sealed class Manager : Component, Component.INetworkListener
 		//}
 
 		SpawnEnemy( TypeLibrary.GetType( typeof( Boss ) ), new Vector2( -2f, 0f ), forceSpawn: true );
+		SpawnEnemy( TypeLibrary.GetType( typeof( Spiker ) ), new Vector2( -2f, 0f ), forceSpawn: true );
+		SpawnEnemy( TypeLibrary.GetType( typeof( SpikerElite ) ), new Vector2( -2f, 0f ), forceSpawn: true );
+		SpawnEnemy( TypeLibrary.GetType( typeof( RunnerElite ) ), new Vector2( -2f, 0f ), forceSpawn: true );
 
 		//SpawnBoss( new Vector2(3f, 3f ) );
 		//HasSpawnedBoss = true;

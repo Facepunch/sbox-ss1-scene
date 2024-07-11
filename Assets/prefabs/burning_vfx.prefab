@@ -4,40 +4,38 @@
     "Flags": 0,
     "Name": "burning_vfx",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Sandbox.SpriteRenderer",
-        "__guid": "f9678e28-5d92-413a-9316-6a152163f35b",
-        "Additive": false,
-        "CastShadows": false,
-        "Color": "1,1,1,1",
-        "DepthFeather": 0,
-        "FlipHorizontal": false,
-        "FlipVertical": false,
-        "FogStrength": 1,
-        "Opaque": false,
-        "Size": "1,1",
-        "Texture": "textures/sprites/fire.vtex"
+        "__type": "SpriteTools.SpriteComponent",
+        "__guid": "036f6d41-c4f4-442f-aa89-cd6d54ff530d",
+        "BroadcastEvents": {},
+        "CastShadows": "Off",
+        "CreateAttachPoints": false,
+        "FlashTint": "1,1,1,0",
+        "PlaybackSpeed": 1,
+        "Sprite": "textures/sprites/fire/fire.sprite",
+        "SpriteFlags": "None",
+        "StartingAnimationName": "",
+        "Tint": "1,1,1,1"
       },
       {
         "__type": "BurningVfx",
         "__guid": "ad587cf1-a4f1-45c1-877e-a3085f452625",
         "Sprite": {
           "_type": "component",
-          "component_id": "f9678e28-5d92-413a-9316-6a152163f35b",
+          "component_id": "036f6d41-c4f4-442f-aa89-cd6d54ff530d",
           "go": "bff3dfd6-e72c-4aa5-a4cd-bf2aea459b98",
-          "component_type": "SpriteRenderer"
+          "component_type": "SpriteComponent"
         }
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }
