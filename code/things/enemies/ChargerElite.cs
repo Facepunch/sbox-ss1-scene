@@ -93,6 +93,36 @@ public class ChargerElite : Enemy
 			{
 				_chargeVel += _chargeDir * 4f * Utils.MapReturn( _chargeTimer, CHARGE_TIME, 0f, 0f, 1f, EasingType.Linear ) * dt;
 				TempWeight += Utils.MapReturn( _chargeTimer, CHARGE_TIME, 0f, 1f, 6f, EasingType.Linear ) * dt;
+
+				float BUFFER = 0.01f;
+				var x_min = Manager.Instance.BOUNDS_MIN.x + Radius + BUFFER;
+				var x_max = Manager.Instance.BOUNDS_MAX.x - Radius - BUFFER;
+				var y_min = Manager.Instance.BOUNDS_MIN.y + BUFFER;
+				var y_max = Manager.Instance.BOUNDS_MAX.y - Radius - BUFFER;
+
+				if ( Position2D.x < x_min && _chargeDir.x < 0f )
+				{
+					_chargeDir = _chargeDir.WithX( Math.Abs( _chargeDir.x ) );
+					_chargeVel = _chargeVel.WithX( Math.Abs(_chargeVel.x) * 0.25f );
+					Sprite.SpriteFlags = SpriteFlags.HorizontalFlip;
+				}
+				else if ( Position2D.x > x_max && _chargeDir.x > 0f )
+				{
+					_chargeDir = _chargeDir.WithX( -Math.Abs( _chargeDir.x ) );
+					_chargeVel = _chargeVel.WithX( -Math.Abs( _chargeVel.x ) * 0.25f );
+					Sprite.SpriteFlags = SpriteFlags.None;
+				}
+
+				if ( Position2D.y < y_min && _chargeDir.y < 0f )
+				{
+					_chargeDir = _chargeDir.WithY( Math.Abs( _chargeDir.y ) );
+					_chargeVel = _chargeDir.WithY( Math.Abs( _chargeVel.y ) * 0.25f );
+				}
+				else if ( Position2D.y > y_max && _chargeDir.y > 0f )
+				{
+					_chargeDir = _chargeDir.WithY( -Math.Abs( _chargeDir.y ) );
+					_chargeVel = _chargeDir.WithY( -Math.Abs( _chargeVel.y ) * 0.25f );
+				}
 			}
 
 			Transform.Position += (Vector3)(_chargeVel + Velocity) * dt;
@@ -120,7 +150,7 @@ public class ChargerElite : Enemy
 		}
 
 		var player_dist_sqr = (closestPlayer.Position2D - Position2D).LengthSquared;
-		if ( !IsPreparingToCharge && !IsCharging && !IsAttacking && player_dist_sqr < 5.5f * 5.5f )
+		if ( !IsPreparingToCharge && !IsCharging && !IsAttacking && player_dist_sqr < 8.5f * 8.5f )
 		{
 			_chargeDelayTimer -= dt;
 			if ( _chargeDelayTimer < 0f )

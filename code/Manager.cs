@@ -133,8 +133,8 @@ public sealed class Manager : Component, Component.INetworkListener
 		//	SpawnEnemy(TypeLibrary.GetType(typeof(Zombie)), pos);
 		//}
 
-		SpawnEnemy( TypeLibrary.GetType( typeof( Charger ) ), new Vector2( 0f, 0f ), forceSpawn: true );
-		//SpawnEnemy( TypeLibrary.GetType( typeof( ChargerElite ) ), new Vector2(0f, 0f), forceSpawn: true );
+		SpawnEnemy( TypeLibrary.GetType( typeof( Charger ) ), new Vector2( -2f, 0f ), forceSpawn: true );
+		SpawnEnemy( TypeLibrary.GetType( typeof( ChargerElite ) ), new Vector2(0f, 0f), forceSpawn: true );
 
 		//SpawnBoss( new Vector2(3f, 3f ) );
 		//HasSpawnedBoss = true;
