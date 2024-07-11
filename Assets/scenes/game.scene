@@ -139,6 +139,10 @@
             "_type": "gameobject",
             "prefab": "prefabs/spitter.prefab"
           },
+          "ZombieElitePrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/zombie_elite.prefab"
+          },
           "ZombiePrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/zombie.prefab"

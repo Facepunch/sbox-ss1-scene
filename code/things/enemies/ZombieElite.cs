@@ -15,13 +15,14 @@ public class ZombieElite : Enemy
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
 
+		Scale = 0.95f;
+
 		base.OnAwake();
 
 		//AnimSpeed = 2f;
 		//Sprite.Texture = Texture.Load("textures/sprites/zombie_elite.vtex");
 
 		//ScaleFactor = 0.85f;
-		Scale = 0.95f;
 		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 12f;
@@ -31,6 +32,8 @@ public class ZombieElite : Enemy
 		Health = 55f;
 		MaxHealth = Health;
 		DamageToPlayer = 10f;
+
+		Sprite.PlayAnimation( AnimSpawnPath );
 
 		if ( IsProxy )
 			return;
@@ -44,8 +47,6 @@ public class ZombieElite : Enemy
 		HasTarget = false;
 
 		_wanderPos = new Vector2( Game.Random.Float( Manager.Instance.BOUNDS_MIN.x + 10f, Manager.Instance.BOUNDS_MAX.x - 10f ), Game.Random.Float( Manager.Instance.BOUNDS_MIN.y + 10f, Manager.Instance.BOUNDS_MAX.y - 20f ) );
-
-		//AnimationPath = AnimSpawnPath;
 	}
 
 	protected override void UpdatePosition( float dt )

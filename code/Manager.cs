@@ -27,6 +27,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public GameObject ShieldVfxPrefab { get; set; }
 	[Property] public GameObject CratePrefab { get; set; }
 	[Property] public GameObject ZombiePrefab { get; set; }
+	[Property] public GameObject ZombieElitePrefab { get; set; }
 	[Property] public GameObject ExploderPrefab { get; set; }
 	[Property] public GameObject ExploderElitePrefab { get; set; }
 	[Property] public GameObject SpitterPrefab { get; set; }
@@ -133,8 +134,8 @@ public sealed class Manager : Component, Component.INetworkListener
 		//	SpawnEnemy(TypeLibrary.GetType(typeof(Zombie)), pos);
 		//}
 
-		SpawnEnemy( TypeLibrary.GetType( typeof( Charger ) ), new Vector2( -2f, 0f ), forceSpawn: true );
-		SpawnEnemy( TypeLibrary.GetType( typeof( ChargerElite ) ), new Vector2(0f, 0f), forceSpawn: true );
+		SpawnEnemy( TypeLibrary.GetType( typeof( Zombie ) ), new Vector2( -2f, 0f ), forceSpawn: true );
+		SpawnEnemy( TypeLibrary.GetType( typeof( ZombieElite ) ), new Vector2(0f, 0f), forceSpawn: true );
 
 		//SpawnBoss( new Vector2(3f, 3f ) );
 		//HasSpawnedBoss = true;
@@ -288,7 +289,8 @@ public sealed class Manager : Component, Component.INetworkListener
 			enemyObj = CratePrefab.Clone( pos3 );
 			CrateCount++;
 		}
-		else if( type == TypeLibrary.GetType( typeof( Zombie ) ) ) { enemyObj = ZombiePrefab.Clone( pos3 ); }
+		else if ( type == TypeLibrary.GetType( typeof( Zombie ) ) ) { enemyObj = ZombiePrefab.Clone( pos3 ); }
+		else if ( type == TypeLibrary.GetType( typeof( ZombieElite ) ) ) { enemyObj = ZombieElitePrefab.Clone( pos3 ); }
 		else if ( type == TypeLibrary.GetType( typeof( Exploder ) ) ) { enemyObj = ExploderPrefab.Clone( pos3 ); }
 		else if ( type == TypeLibrary.GetType( typeof( ExploderElite ) ) ) { enemyObj = ExploderElitePrefab.Clone( pos3 ); }
 		else if ( type == TypeLibrary.GetType( typeof( Spitter ) ) ) { enemyObj = SpitterPrefab.Clone( pos3 ); }
