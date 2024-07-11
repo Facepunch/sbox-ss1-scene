@@ -27,12 +27,12 @@ public class ChargerElite : Enemy
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
 
+		Scale = 1.45f;
+
 		base.OnAwake();
 
 		//Sprite.Texture = Texture.Load("textures/sprites/charger_elite.vtex");
 
-		//ScaleFactor = 0.85f;
-		Scale = 1.45f;
 		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 30f;
@@ -46,6 +46,8 @@ public class ChargerElite : Enemy
 		CoinValueMin = 3;
 		CoinValueMax = 6;
 
+		Sprite.PlayAnimation( AnimSpawnPath );
+
 		if ( IsProxy )
 			return;
 		
@@ -53,7 +55,7 @@ public class ChargerElite : Enemy
 		CollideWith.Add( typeof( Player ) );
 
 		_damageTime = DAMAGE_TIME;
-		//AnimationPath = AnimSpawnPath;
+		_chargeDelayTimer = Game.Random.Float( CHARGE_DELAY_MIN, CHARGE_DELAY_MAX );
 	}
 
 	protected override void UpdatePosition( float dt )
@@ -83,8 +85,9 @@ public class ChargerElite : Enemy
 			if ( _chargeTimer < 0f )
 			{
 				IsCharging = false;
-				//AnimationPath = AnimIdlePath;
+				Sprite.PlayAnimation( AnimIdlePath );
 				CanTurn = true;
+				DontChangeSpritePlaybackSpeed = false;
 			}
 			else
 			{
@@ -157,10 +160,11 @@ public class ChargerElite : Enemy
 		_prepareTimer = PREPARE_TIME;
 		IsPreparingToCharge = true;
 		Manager.Instance.PlaySfxNearby( "enemy.roar.prepare", Position2D, pitch: Game.Random.Float( 0.95f, 1.05f ), volume: 1f, maxDist: 5f );
-		//AnimationPath = "textures/sprites/charger_charge_start.frames";
+		Sprite.PlayAnimation( "charge_start" );
 		CanTurn = false;
 		CanAttack = false;
 		CanAttackAnim = false;
+		DontChangeSpritePlaybackSpeed = true;
 	}
 
 	public void Charge()
@@ -180,10 +184,9 @@ public class ChargerElite : Enemy
 
 		_chargeDelayTimer = Game.Random.Float( CHARGE_DELAY_MIN, CHARGE_DELAY_MAX );
 		_chargeVel = Vector2.Zero;
-		//AnimationPath = "textures/sprites/charger_charge_loop.frames";
-
-		//AnimSpeed = 3f;
-		//Sprite.FlipHorizontal = target_pos.x > Position2D.x;
+		Sprite.PlayAnimation( "charge_loop" );
+		Sprite.PlaybackSpeed = 3f;
+		Sprite.SpriteFlags = target_pos.x > Position2D.x ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
 
 		Manager.Instance.PlaySfxNearby( "enemy.roar", Position2D, pitch: Game.Random.Float( 0.825f, 0.875f ), volume: 1f, maxDist: 8f );
 	}

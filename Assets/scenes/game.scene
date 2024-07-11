@@ -31,6 +31,14 @@
             "go": "2dae15f1-83ec-4e7f-ac1e-5487524a3567",
             "component_type": "Camera2D"
           },
+          "ChargerElitePrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/charger_elite.prefab"
+          },
+          "ChargerPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/charger.prefab"
+          },
           "CloudPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/cloud.prefab"

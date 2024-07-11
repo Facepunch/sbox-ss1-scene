@@ -75,7 +75,7 @@ public class EnemySpikeElite : Thing
 
 		if ( !_playedSfx && SpawnTime > 1.15f )
 		{
-			Manager.Instance.PlaySfxNearby( "spike.thrust", Position2D, pitch: Game.Random.Float( 1.15f, 1.3f ), volume: 1.5f, maxDist: 6f );
+			Manager.Instance.PlaySfxNearby( "spike.thrust", Position2D, pitch: Game.Random.Float( 1.15f, 1.3f ), volume: 1.25f, maxDist: 6f );
 			_playedSfx = true;
 		}
 
