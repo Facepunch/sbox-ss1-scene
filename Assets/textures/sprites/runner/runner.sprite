@@ -4,7 +4,7 @@
       "FrameRate": 4,
       "Origin": "0.5,0.9210526",
       "Looping": true,
-      "Name": "idle",
+      "Name": "walk",
       "Frames": [
         {
           "FilePath": "textures/sprites/runner/runner_00.png",

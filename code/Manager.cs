@@ -36,6 +36,8 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public GameObject SpikerElitePrefab { get; set; }
 	[Property] public GameObject ChargerPrefab { get; set; }
 	[Property] public GameObject ChargerElitePrefab { get; set; }
+	[Property] public GameObject RunnerPrefab { get; set; }
+	[Property] public GameObject RunnerElitePrefab { get; set; }
 
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
@@ -134,8 +136,8 @@ public sealed class Manager : Component, Component.INetworkListener
 		//	SpawnEnemy(TypeLibrary.GetType(typeof(Zombie)), pos);
 		//}
 
-		SpawnEnemy( TypeLibrary.GetType( typeof( Zombie ) ), new Vector2( -2f, 0f ), forceSpawn: true );
-		SpawnEnemy( TypeLibrary.GetType( typeof( ZombieElite ) ), new Vector2(0f, 0f), forceSpawn: true );
+		SpawnEnemy( TypeLibrary.GetType( typeof( Runner ) ), new Vector2( -2f, 0f ), forceSpawn: true );
+		SpawnEnemy( TypeLibrary.GetType( typeof( RunnerElite ) ), new Vector2( 0f, 0f), forceSpawn: true );
 
 		//SpawnBoss( new Vector2(3f, 3f ) );
 		//HasSpawnedBoss = true;
@@ -299,6 +301,8 @@ public sealed class Manager : Component, Component.INetworkListener
 		else if ( type == TypeLibrary.GetType( typeof( SpikerElite ) ) ) { enemyObj = SpikerElitePrefab.Clone( pos3 ); }
 		else if ( type == TypeLibrary.GetType( typeof( Charger ) ) ) { enemyObj = ChargerPrefab.Clone( pos3 ); }
 		else if ( type == TypeLibrary.GetType( typeof( ChargerElite ) ) ) { enemyObj = ChargerElitePrefab.Clone( pos3 ); }
+		else if ( type == TypeLibrary.GetType( typeof( Runner ) ) ) { enemyObj = RunnerPrefab.Clone( pos3 ); }
+		else if ( type == TypeLibrary.GetType( typeof( RunnerElite ) ) ) { enemyObj = RunnerElitePrefab.Clone( pos3 ); }
 		else
 		{
 			Log.Info( $"Enemy {type} not implemented yet!" );

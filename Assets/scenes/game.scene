@@ -115,6 +115,14 @@
             "_type": "gameobject",
             "prefab": "prefabs/revive_soul.prefab"
           },
+          "RunnerElitePrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/runner_elite.prefab"
+          },
+          "RunnerPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/runner.prefab"
+          },
           "ShadowPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/shadow.prefab"

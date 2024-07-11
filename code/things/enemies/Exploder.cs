@@ -15,7 +15,7 @@ public class Exploder : Enemy
 	private bool _hasExploded;
 	private bool _hasStartedLooping;
 
-	private Player _playerWhoKilledUs;
+	private Guid _playerWhoKilledUsId;
 
 	protected override void OnAwake()
 	{
@@ -141,12 +141,12 @@ public class Exploder : Enemy
 		}
 	}
 
-	public override void StartDying( Player player )
+	public override void StartDying( Guid playerId )
 	{
 		if ( !IsExploding )
 		{
 			StartExploding();
-			_playerWhoKilledUs = player;
+			_playerWhoKilledUsId = playerId;
 		}
 	}
 
@@ -172,7 +172,7 @@ public class Exploder : Enemy
 		if ( IsProxy )
 			return;
 
-		base.StartDying( _playerWhoKilledUs );
+		base.StartDying( _playerWhoKilledUsId );
 	}
 
 	public override void FinishDying()

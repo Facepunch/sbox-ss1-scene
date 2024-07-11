@@ -17,12 +17,13 @@ public class RunnerElite : Enemy
 		ShadowFullOpacity = 0.2f;
 		ShadowOpacity = 0f;
 
+		Scale = 1.3f;
+
 		base.OnAwake();
 
 		//AnimSpeed = 2f;
 		//Sprite.Texture = Texture.Load("textures/sprites/runner.vtex");
 
-		Scale = 1.3f;
 		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 10f;
@@ -39,6 +40,10 @@ public class RunnerElite : Enemy
 		CoinValueMin = 1;
 		CoinValueMax = 4;
 
+		Sprite.PlayAnimation( AnimSpawnPath );
+
+		Sprite.Tint = Color.White.WithAlpha( FullOpacity );
+
 		if ( IsProxy )
 			return;
 		
@@ -51,8 +56,6 @@ public class RunnerElite : Enemy
 		HasTarget = false;
 
 		_wanderPos = new Vector2( Game.Random.Float( Manager.Instance.BOUNDS_MIN.x + 10f, Manager.Instance.BOUNDS_MAX.x - 10f ), Game.Random.Float( Manager.Instance.BOUNDS_MIN.y + 10f, Manager.Instance.BOUNDS_MAX.y - 20f ) );
-
-		//AnimationPath = AnimSpawnPath;
 	}
 
 	protected override void UpdatePosition( float dt )
@@ -131,5 +134,12 @@ public class RunnerElite : Enemy
 				}
 			}
 		}
+	}
+
+	public override void StartDying( Guid playerId )
+	{
+		Sprite.Tint = Sprite.Tint.WithAlpha( 1f );
+
+		base.StartDying( playerId );
 	}
 }

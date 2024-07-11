@@ -304,9 +304,9 @@ public class Boss : Enemy
 		}
 	}
 
-	public override void StartDying( Player player )
+	public override void StartDying( Guid playerId )
 	{
-		base.StartDying( player );
+		base.StartDying( playerId );
 
 		//ColorFill = new ColorHsv( 0f, 0f, 0f, 0f );
 

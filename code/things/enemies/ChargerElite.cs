@@ -141,7 +141,7 @@ public class ChargerElite : Enemy
 			var newPos = Position2D + Velocity * dt * speed;
 			if ( float.IsNaN( newPos.x ) || float.IsNaN( newPos.y ) )
 			{
-				StartDying( null );
+				StartDying( Guid.Empty );
 				Flash( 0.05f );
 				return;
 			}

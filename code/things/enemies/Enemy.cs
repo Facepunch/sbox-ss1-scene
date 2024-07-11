@@ -113,7 +113,7 @@ public abstract class Enemy : Thing
 	protected override void OnUpdate()
 	{
 		//Gizmo.Draw.Color = Color.White;
-		//Gizmo.Draw.Text( $"Scale: {Scale}\nSprite.Size: {Sprite.Size}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
+		//Gizmo.Draw.Text( $"Anim: {Sprite.CurrentAnimation.Name}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
 
 		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
 		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
@@ -379,7 +379,7 @@ public abstract class Enemy : Thing
 		Health -= damage;
 
 		if ( Health <= 0f )
-			StartDying( player );
+			StartDying( player.GameObject.Id );
 	}
 
 	public virtual void DamageFire( float damage, Player player )
@@ -390,7 +390,8 @@ public abstract class Enemy : Thing
 		Damage( damage, player.GameObject.Id, addVel: Vector2.Zero, addTempWeight: 0f );
 	}
 
-	public virtual void StartDying( Player player )
+	[Broadcast]
+	public virtual void StartDying( Guid playerId )
 	{
 		IsDying = true;
 		DeathProgress = 0f;
@@ -399,41 +400,51 @@ public abstract class Enemy : Thing
 		Sprite.PlaybackSpeed = 5.5f;
 
 		_isFlashing = false;
+
 		Sprite.FlashTint = Color.White.WithAlpha( 0f );
 
 		//_deathScale = Scale;
 
-		if ( player is not null )
+		if ( CanBleed )
+			Manager.Instance.SpawnBloodSplatter( Position2D );
+
+		Manager.Instance.PlaySfxNearby( "enemy.die", Position2D, pitch: 1f, volume: 1f, maxDist: 5.5f );
+
+		if ( IsProxy )
+			return;
+
+		Player player = null;
+		if ( playerId != Guid.Empty )
 		{
-			player.ForEachStatus( status => status.OnKill( this ) );
+			var playerObj = Scene.Directory.FindByGuid( playerId );
+			player = playerObj?.Components.Get<Player>() ?? null;
+			if ( player is not null )
+			{
+				player.ForEachStatus( status => status.OnKill( this ) );
 
-			//if ( this is not Crate )
-			//{
-			//	Sandbox.Services.Stats.Increment( player.Client, "kills", 1, $"{GetType().Name.ToLowerInvariant()}" );
-			//}
-			//else
-			//{
-			//	Sandbox.Services.Stats.Increment( player.Client, "crates", 1 );
-			//}
+				//if ( this is not Crate )
+				//{
+				//	Sandbox.Services.Stats.Increment( player.Client, "kills", 1, $"{GetType().Name.ToLowerInvariant()}" );
+				//}
+				//else
+				//{
+				//	Sandbox.Services.Stats.Increment( player.Client, "crates", 1 );
+				//}
+			}
+
+			DropLoot( player );
 		}
-
-		DropLoot( player );
 
 		for ( int i = EnemyStatuses.Count - 1; i >= 0; i-- )
 			EnemyStatuses.Values.ElementAt( i ).StartDying();
 
-		Manager.Instance.PlaySfxNearby( "enemy.die", Position2D, pitch: 1f, volume: 1f, maxDist: 5.5f );
 		//StartDyingClient();
-
-		if ( CanBleed )
-			SpawnBloodClient();
 	}
 
-	[Broadcast]
-	public void SpawnBloodClient()
-	{
-		Manager.Instance.SpawnBloodSplatter( Position2D );
-	}
+	//public void SpawnBloodClient()
+	//{
+	//	Manager.Instance.SpawnBloodSplatter( Position2D );
+	//}
 
 	public virtual void DropLoot( Player player )
 	{
@@ -479,6 +490,7 @@ public abstract class Enemy : Thing
 		if ( _isFlashing )
 			return;
 
+		Sprite.Tint = Color.White.WithAlpha( 1f );
 		Sprite.FlashTint = Color.White.WithAlpha( 1f );
 		_isFlashing = true;
 		_flashTimer = time;
