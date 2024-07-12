@@ -81,6 +81,8 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public Status HoveredStatus { get; set; }
 
+	private int _numEnemyDeathSfxs;
+
 	protected override void OnAwake()
 	{
 		base.OnAwake();
@@ -131,10 +133,12 @@ public sealed class Manager : Component, Component.INetworkListener
 		//SpawnMagnet( new Vector2( 3f, 3f ) );
 		//SpawnCoin( new Vector2( 4f, 4f ) );
 
-		//for(int i = 0; i < 555; i++)
+		//for( int i = 0; i < 22; i++ )
 		//{
-		//	var pos = new Vector2(Game.Random.Float(BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x), Game.Random.Float(BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y));
-		//	SpawnEnemy(TypeLibrary.GetType(typeof(Zombie)), pos);
+		//	//var pos = new Vector2( Game.Random.Float( BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x ), Game.Random.Float( BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y ) );
+		//	//SpawnEnemy( TypeLibrary.GetType( typeof( Zombie ) ), pos );
+
+		//	SpawnEnemy( TypeLibrary.GetType( typeof( Zombie ) ), new Vector2( Game.Random.Float(-1, 1f), Game.Random.Float( -1, 1f ) ), forceSpawn: true );
 		//}
 
 		//SpawnEnemy( TypeLibrary.GetType( typeof( Boss ) ), new Vector2( -2f, 0f ), forceSpawn: true );
@@ -169,6 +173,9 @@ public sealed class Manager : Component, Component.INetworkListener
 		{
 			MouseWorldPos = (Vector2)tr.HitPosition;
 		}
+
+		if ( _numEnemyDeathSfxs > 0 )
+			_numEnemyDeathSfxs--;
 
 		if ( IsProxy )
 			return;
@@ -708,6 +715,16 @@ public sealed class Manager : Component, Component.INetworkListener
 			number.GameObject.Destroy();
 
 		SpawnStartingThings();
+	}
+
+	public void PlayEnemyDeathSfx(Vector3 worldPos)
+	{
+		if ( _numEnemyDeathSfxs >= 3 )
+			return;
+
+		PlaySfxNearby( "enemy.die", worldPos, pitch: Game.Random.Float(0.85f, 1.15f), volume: 1f, maxDist: 5.5f );
+
+		_numEnemyDeathSfxs++;
 	}
 
 	public void PlaySfxNearby( string name, Vector2 worldPos, float pitch, float volume, float maxDist )

@@ -409,7 +409,8 @@ public abstract class Enemy : Thing
 		if ( CanBleed )
 			Manager.Instance.SpawnBloodSplatter( Position2D );
 
-		Manager.Instance.PlaySfxNearby( "enemy.die", Position2D, pitch: 1f, volume: 1f, maxDist: 5.5f );
+		//Manager.Instance.PlaySfxNearby( "enemy.die", Position2D, pitch: 1f, volume: 1f, maxDist: 5.5f );
+		Manager.Instance.PlayEnemyDeathSfx( Position2D );
 
 		if ( IsProxy )
 			return;
