@@ -147,8 +147,8 @@ public sealed class Manager : Component, Component.INetworkListener
 		//SpawnEnemy( TypeLibrary.GetType( typeof( RunnerElite ) ), new Vector2( -2f, 0f ), forceSpawn: true );
 		//SpawnEnemy( TypeLibrary.GetType( typeof( Exploder ) ), new Vector2( -2f, 0f ), forceSpawn: true );
 
-		//SpawnBoss( new Vector2(3f, 3f ) );
-		//HasSpawnedBoss = true;
+		SpawnBoss( new Vector2( 3f, 3f ) );
+		HasSpawnedBoss = true;
 	}
 
 	protected override void OnUpdate()

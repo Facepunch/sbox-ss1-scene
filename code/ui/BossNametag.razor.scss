@@ -17,6 +17,7 @@ BossNametag {
         align-self: center;
         border-radius: 3px;
         overflow: hidden;
+        position: relative;
 
         &.invisible {
             display: none;
@@ -50,7 +51,7 @@ BossNametag {
     }
 
     .label {
-        position: absolute;
+        position: relative;
         color: white;
         text-align: center;
         width: 100%;
