@@ -518,23 +518,23 @@ public class Player : Thing
 		if ( Position2D.x < x_min )
 		{
 			Position2D = new Vector2( x_min, Position2D.y );
-			Velocity = new Vector2( Velocity.x * -1f, Velocity.y );
+			//Velocity = new Vector2( Velocity.x * -1f, Velocity.y );
 		}
 		else if ( Position2D.x > x_max )
 		{
 			Position2D = new Vector2( x_max, Position2D.y );
-			Velocity = new Vector2( Velocity.x * -1f, Velocity.y );
+			//Velocity = new Vector2( Velocity.x * -1f, Velocity.y );
 		}
 
 		if ( Position2D.y < y_min )
 		{
 			Position2D = new Vector2( Position2D.x, y_min );
-			Velocity = new Vector2( Velocity.x, Velocity.y * -1f );
+			//Velocity = new Vector2( Velocity.x, Velocity.y * -1f );
 		}
 		else if ( Position2D.y > y_max )
 		{
 			Position2D = new Vector2( Position2D.x, y_max );
-			Velocity = new Vector2( Velocity.x, Velocity.y * -1f );
+			//Velocity = new Vector2( Velocity.x, Velocity.y * -1f );
 		}
 	}
 
