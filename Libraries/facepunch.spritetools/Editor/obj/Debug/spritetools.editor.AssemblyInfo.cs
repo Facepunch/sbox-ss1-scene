@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("spritetools.editor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1a1d3fc558be6d5e16d2637cf5c6152a65379c88")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+71db159d5689b99717f45ddbb31d2a2e1b19a860")]
 [assembly: System.Reflection.AssemblyProductAttribute("spritetools.editor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("spritetools.editor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

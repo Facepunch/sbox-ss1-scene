@@ -19,7 +19,7 @@ public partial class MainWindow : DockWindow, IAssetEditor
     public Action OnPlayPause;
 
     internal static List<MainWindow> AllWindows { get; } = new List<MainWindow>();
-    public bool CanOpenMultipleAssets => true;
+    public bool CanOpenMultipleAssets => false;
 
     private readonly UndoStack _undoStack = new();
     public UndoStack UndoStack => _undoStack;
@@ -62,6 +62,7 @@ public partial class MainWindow : DockWindow, IAssetEditor
 
     public bool Playing = true;
     public Timeline.Timeline Timeline;
+    ToolBar toolBar;
 
     Option _undoMenuOption;
     Option _redoMenuOption;
@@ -294,11 +295,6 @@ public partial class MainWindow : DockWindow, IAssetEditor
         var savePath = (_asset == null || saveAs) ? GetSavePath() : _asset.AbsolutePath;
         if (string.IsNullOrWhiteSpace(savePath)) return false;
 
-        // Write serialized data to file
-        //Log.Info(JsonSerializer.Serialize(Sprite, new JsonSerializerOptions { WriteIndented = true }));
-        // System.IO.File.WriteAllText(savePath, _json);
-        // Log.Info(_json);
-
         if (saveAs)
         {
             // If we're saving as, we want to register the new asset
@@ -527,7 +523,8 @@ public partial class MainWindow : DockWindow, IAssetEditor
 
     private void CreateToolBar()
     {
-        var toolBar = new ToolBar(this, "ShaderGraphToolbar");
+        toolBar?.Destroy();
+        toolBar = new ToolBar(this, "SpriteEditorToolbar");
         AddToolBar(toolBar, ToolbarPosition.Top);
 
         toolBar.AddOption("New", "common/new.png", New).StatusText = "New Sprite";

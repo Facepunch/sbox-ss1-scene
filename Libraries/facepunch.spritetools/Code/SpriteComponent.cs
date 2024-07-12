@@ -135,17 +135,15 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
     [Property, Category("Sprite"), Title("Current Animation"), AnimationName]
     private string StartingAnimationName
     {
-        get => CurrentAnimation?.Name ?? "";
+        get => CurrentAnimation?.Name ?? Sprite.Animations.FirstOrDefault()?.Name;
         set
         {
             if (Sprite == null) return;
             var animation = Sprite.Animations.Find(a => a.Name.ToLowerInvariant() == value.ToLowerInvariant());
             if (animation == null) return;
             PlayAnimation(animation.Name);
-            _startingAnimationName = value.ToLowerInvariant();
         }
     }
-    string _startingAnimationName = "";
 
 
     [JsonIgnore, Property, Category("Sprite")]
@@ -263,7 +261,7 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
         if (Game.IsPlaying) return;
 
         BBox bbox = new BBox(new Vector3(-50, -50, -0.1f), new Vector3(50, 50, 0.1f));
-        var origin = CurrentAnimation.Origin - new Vector2(0.5f, 0.5f);
+        var origin = (CurrentAnimation?.Origin ?? new Vector2(0.5f, 0.5f)) - new Vector2(0.5f, 0.5f);
         bbox = bbox.Translate(new Vector3(-origin.y, origin.x, 0) * 100f);
         Gizmo.Hitbox.BBox(bbox);
 
@@ -443,10 +441,15 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
         if (!force && _currentAnimation?.Name == animationName) return;
 
         var animation = Sprite.Animations.FirstOrDefault(a => a.Name.ToLowerInvariant() == animationName.ToLowerInvariant());
-        if (animation == null) return;
+        if (animation == null)
+        {
+            Log.Warning($"Could not find animation \"{animationName}\" in sprite \"{Sprite.ResourceName}\".");
+            return;
+        }
 
         _currentAnimation = animation;
-        CurrentFrameIndex = 0;
+        _currentFrameIndex = 0;
+        _timeSinceLastFrame = 0;
 
         var atlas = TextureAtlas.FromAnimation(animation);
         CurrentTexture = atlas;
