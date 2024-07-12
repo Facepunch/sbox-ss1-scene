@@ -121,8 +121,8 @@ public class SpikerElite : Enemy
 		_hasReversed = false;
 		_prepareStartTime = 0f;
 		Velocity *= 0.25f;
-		DontChangeSpritePlaybackSpeed = true;
-		Sprite.PlaybackSpeed = 1f;
+		DontChangeAnimSpeed = true;
+		AnimSpeed = 1f;
 		Sprite.PlayAnimation( "shoot" );
 	}
 
@@ -151,7 +151,7 @@ public class SpikerElite : Enemy
 		CanAttackAnim = true;
 		CanTurn = true;
 		Sprite.PlayAnimation( AnimIdlePath );
-		DontChangeSpritePlaybackSpeed = false;
+		DontChangeAnimSpeed = false;
 	}
 
 	public override void Colliding( Thing other, float percent, float dt )

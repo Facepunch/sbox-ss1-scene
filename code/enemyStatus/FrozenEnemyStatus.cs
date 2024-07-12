@@ -36,7 +36,7 @@ public class FrozenEnemyStatus : EnemyStatus
 
 		if ( timeScale < TimeScale )
 		{
-			//Enemy.AnimSpeedModifier = timeScale;
+			Enemy.AnimSpeedModifier = timeScale;
 			Enemy.TimeScale = timeScale;
 		}
 	}
@@ -54,7 +54,7 @@ public class FrozenEnemyStatus : EnemyStatus
 
 	public override void StartDying()
 	{
-		//Enemy.AnimSpeedModifier = 1f;
+		Enemy.AnimSpeedModifier = 1f;
 		Enemy.TimeScale = 1f;
 		Enemy.IsFrozen = false;
 
@@ -69,7 +69,7 @@ public class FrozenEnemyStatus : EnemyStatus
 
 	public override void Remove()
 	{
-		//Enemy.AnimSpeedModifier = 1f;
+		Enemy.AnimSpeedModifier = 1f;
 		Enemy.TimeScale = 1f;
 		Enemy.IsFrozen = false;
 

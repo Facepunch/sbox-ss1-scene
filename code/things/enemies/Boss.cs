@@ -120,7 +120,7 @@ public class Boss : Enemy
 				Sprite.PlayAnimation( AnimIdlePath );
 				CanTurn = true;
 				CanAttackAnim = true;
-				DontChangeSpritePlaybackSpeed = false;
+				DontChangeAnimSpeed = false;
 			}
 			else
 			{
@@ -198,8 +198,8 @@ public class Boss : Enemy
 		Manager.Instance.PlaySfxNearby( "boss.prepare", Position2D, pitch: Game.Random.Float( 0.75f, 0.85f ), volume: 1.7f, maxDist: 16f );
 		CanAttack = false;
 		CanAttackAnim = false;
-		Sprite.PlaybackSpeed = 1f;
-		DontChangeSpritePlaybackSpeed = true;
+		AnimSpeed = 1f;
+		DontChangeAnimSpeed = true;
 	}
 
 	public void Shoot()
@@ -236,7 +236,7 @@ public class Boss : Enemy
 		Sprite.PlayAnimation( AnimIdlePath );
 		CanAttack = true;
 		CanAttackAnim = true;
-		DontChangeSpritePlaybackSpeed = false;
+		DontChangeAnimSpeed = false;
 		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX ) * Utils.Map( Health, MaxHealth, 0f, 1f, 0.5f, EasingType.QuadIn );
 		IsShooting = false;
 	}
@@ -250,8 +250,8 @@ public class Boss : Enemy
 		CanTurn = false;
 		CanAttack = false;
 		CanAttackAnim = false;
-		Sprite.PlaybackSpeed = 1f;
-		DontChangeSpritePlaybackSpeed = true;
+		AnimSpeed = 1f;
+		DontChangeAnimSpeed = true;
 	}
 
 	public void Charge()

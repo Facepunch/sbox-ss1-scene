@@ -119,8 +119,8 @@ public class Spiker : Enemy
 		_hasReversed = false;
 		_prepareStartTime = 0f;
 		Velocity *= 0.25f;
-		DontChangeSpritePlaybackSpeed = true;
-		Sprite.PlaybackSpeed = 1f;
+		DontChangeAnimSpeed = true;
+		AnimSpeed = 1f;
 		Sprite.PlayAnimation( "shoot" );
 	}
 
@@ -145,7 +145,7 @@ public class Spiker : Enemy
 		CanAttack = true;
 		CanAttackAnim = true;
 		CanTurn = true;
-		DontChangeSpritePlaybackSpeed = false;
+		DontChangeAnimSpeed = false;
 		Sprite.PlayAnimation( AnimIdlePath );
 	}
 

@@ -97,8 +97,8 @@ public class Spitter : Enemy
 		_prepareShootTime = 0f;
 		IsShooting = true;
 		_hasShot = false;
-		DontChangeSpritePlaybackSpeed = true;
-		Sprite.PlaybackSpeed = 1f;
+		DontChangeAnimSpeed = true;
+		AnimSpeed = 1f;
 		Sprite.PlayAnimation( "shoot" );
 		Manager.Instance.PlaySfxNearby( "spitter.prepare", Position2D, pitch: Game.Random.Float( 1f, 1.1f ), volume: 0.6f, maxDist: 2.75f );
 		CanAttack = false;
@@ -130,7 +130,7 @@ public class Spitter : Enemy
 		CanAttackAnim = true;
 		_shootDelayTimer = Game.Random.Float( SHOOT_DELAY_MIN, SHOOT_DELAY_MAX );
 		IsShooting = false;
-		DontChangeSpritePlaybackSpeed = false;
+		DontChangeAnimSpeed = false;
 	}
 
 	public override void Colliding( Thing other, float percent, float dt )

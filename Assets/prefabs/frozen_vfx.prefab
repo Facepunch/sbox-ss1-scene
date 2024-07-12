@@ -4,40 +4,38 @@
     "Flags": 0,
     "Name": "frozen_vfx",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Sandbox.SpriteRenderer",
-        "__guid": "068fd55d-8f90-4c7e-aed8-41a276cdc022",
-        "Additive": false,
-        "CastShadows": false,
-        "Color": "1,1,1,1",
-        "DepthFeather": 0,
-        "FlipHorizontal": false,
-        "FlipVertical": false,
-        "FogStrength": 1,
-        "Opaque": false,
-        "Size": "1,1",
-        "Texture": "textures/sprites/frozen.vtex"
+        "__type": "SpriteTools.SpriteComponent",
+        "__guid": "b2cf2f34-cb91-4058-90d5-326326500bcd",
+        "BroadcastEvents": {},
+        "CastShadows": "Off",
+        "CreateAttachPoints": false,
+        "FlashTint": "1,1,1,0",
+        "PlaybackSpeed": 1,
+        "Sprite": "textures/sprites/frozen/frozen.sprite",
+        "SpriteFlags": "None",
+        "StartingAnimationName": "",
+        "Tint": "1,1,1,1"
       },
       {
         "__type": "FrozenVfx",
         "__guid": "299e4f9c-8df3-4fef-8d48-e086d5fa404d",
         "Sprite": {
           "_type": "component",
-          "component_id": "068fd55d-8f90-4c7e-aed8-41a276cdc022",
+          "component_id": "b2cf2f34-cb91-4058-90d5-326326500bcd",
           "go": "3df2b77a-9ceb-4c30-8785-cd96ded0dd39",
-          "component_type": "SpriteRenderer"
+          "component_type": "SpriteComponent"
         }
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }

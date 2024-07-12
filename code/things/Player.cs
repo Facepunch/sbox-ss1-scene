@@ -186,7 +186,7 @@ public class Player : Thing
 		Stats[PlayerStat.FireLifetime] = 2.0f;
 		Stats[PlayerStat.ShootFireIgniteChance] = 0f;
 		Stats[PlayerStat.FireSpreadChance] = 0f;
-		Stats[PlayerStat.ShootFreezeChance] = 0f;
+		Stats[PlayerStat.ShootFreezeChance] = 0.8f;
 		Stats[PlayerStat.FreezeLifetime] = 3f;
 		Stats[PlayerStat.FreezeTimeScale] = 0.6f;
 		Stats[PlayerStat.FreezeOnMeleeChance] = 0f;

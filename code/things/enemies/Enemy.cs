@@ -31,7 +31,7 @@ public abstract class Enemy : Thing
 	public bool CanAttack { get; set; }
 	public bool CanAttackAnim { get; set; }
 	public bool CanTurn { get; set; }
-	public bool DontChangeSpritePlaybackSpeed { get; set; }
+	public bool DontChangeAnimSpeed { get; set; }
 	public virtual bool CanBleed => true;
 	public float AggroRange { get; protected set; }
 	protected const float AGGRO_START_TIME = 0.2f;
@@ -64,10 +64,11 @@ public abstract class Enemy : Thing
 	public bool IsFrozen { get; set; }
 	public bool IsFeared { get; set; }
 
-	//private float _animSpeed;
-	//public float AnimSpeed { get { return _animSpeed; } set { _animSpeed = value; AnimationSpeed = _animSpeed * _animSpeedModifier; } }
-	//private float _animSpeedModifier;
-	//public float AnimSpeedModifier { get { return _animSpeedModifier; } set { _animSpeedModifier = value; AnimationSpeed = _animSpeed * _animSpeedModifier; } }
+	private float _animSpeed;
+	public float AnimSpeed { get { return _animSpeed; } set { _animSpeed = value; Sprite.PlaybackSpeed = _animSpeed * _animSpeedModifier; } }
+	private float _animSpeedModifier;
+	public float AnimSpeedModifier { get { return _animSpeedModifier; } set { _animSpeedModifier = value; Sprite.PlaybackSpeed = _animSpeed * _animSpeedModifier; } }
+
 	public int CoinValueMin { get; protected set; }
 	public int CoinValueMax { get; protected set; }
 
@@ -85,8 +86,8 @@ public abstract class Enemy : Thing
 		AnimAttackPath = "attack";
 		AnimDiePath = "die";
 
-		//_animSpeed = 1f;
-		//_animSpeedModifier = 1f;
+		_animSpeed = 1f;
+		_animSpeedModifier = 1f;
 
 		SpawnShadow( ShadowScale, ShadowOpacity );
 
@@ -221,8 +222,8 @@ public abstract class Enemy : Thing
 			}
 			else
 			{
-				if( !DontChangeSpritePlaybackSpeed )
-					Sprite.PlaybackSpeed = Utils.Map( dist_sqr, attack_dist_sqr, 0f, 1f, 4f, EasingType.Linear );
+				if( !DontChangeAnimSpeed )
+					AnimSpeed = Utils.Map( dist_sqr, attack_dist_sqr, 0f, 1f, 4f, EasingType.Linear );
 
 				_aggroTimer = 0f;
 			}
@@ -241,8 +242,8 @@ public abstract class Enemy : Thing
 	{
 		if ( !IsAttacking )
 		{
-			if ( !DontChangeSpritePlaybackSpeed )
-				Sprite.PlaybackSpeed = Utils.Map( Utils.FastSin( MoveTimeOffset + Time.Now * 7.5f ), -1f, 1f, 0.75f, 3f, EasingType.ExpoIn );
+			if ( !DontChangeAnimSpeed )
+				AnimSpeed = Utils.Map( Utils.FastSin( MoveTimeOffset + Time.Now * 7.5f ), -1f, 1f, 0.75f, 3f, EasingType.ExpoIn );
 
 			if( CanTurn && !IsFrozen )
 			{
@@ -252,11 +253,11 @@ public abstract class Enemy : Thing
 		}
 		else
 		{
-			if ( !DontChangeSpritePlaybackSpeed )
+			if ( !DontChangeAnimSpeed )
 			{
 				float dist_sqr = (targetPlayer.Position2D - Position2D).LengthSquared;
 				float attack_dist_sqr = MathF.Pow( AggroRange, 2f );
-				Sprite.PlaybackSpeed = Utils.Map( dist_sqr, attack_dist_sqr, 0f, 1f, 4f, EasingType.Linear );
+				AnimSpeed = Utils.Map( dist_sqr, attack_dist_sqr, 0f, 1f, 4f, EasingType.Linear );
 			}
 
 			if ( CanTurn && !IsFrozen )
@@ -397,7 +398,7 @@ public abstract class Enemy : Thing
 		DeathProgress = 0f;
 		DeathTimeElapsed = 0f;
 		Sprite.PlayAnimation( AnimDiePath );
-		Sprite.PlaybackSpeed = 5.5f;
+		AnimSpeed = 5.5f;
 
 		_isFlashing = false;
 

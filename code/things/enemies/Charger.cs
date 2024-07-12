@@ -86,7 +86,7 @@ public class Charger : Enemy
 				IsCharging = false;
 				Sprite.PlayAnimation( AnimIdlePath );
 				CanTurn = true;
-				DontChangeSpritePlaybackSpeed = false;
+				DontChangeAnimSpeed = false;
 			}
 			else
 			{
@@ -185,7 +185,7 @@ public class Charger : Enemy
 		CanTurn = false;
 		CanAttack = false;
 		CanAttackAnim = false;
-		DontChangeSpritePlaybackSpeed = true;
+		DontChangeAnimSpeed = true;
 	}
 
 	public void Charge()
@@ -206,7 +206,7 @@ public class Charger : Enemy
 		_chargeDelayTimer = Game.Random.Float( CHARGE_DELAY_MIN, CHARGE_DELAY_MAX );
 		_chargeVel = Vector2.Zero;
 		Sprite.PlayAnimation( "charge_loop" );
-		Sprite.PlaybackSpeed = 3f;
+		AnimSpeed = 3f;
 		Sprite.SpriteFlags = target_pos.x > Position2D.x ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
 
 		Manager.Instance.PlaySfxNearby( "enemy.roar", Position2D, pitch: Game.Random.Float( 0.925f, 1.075f ), volume: 1f, maxDist: 8f );
