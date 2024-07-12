@@ -19,6 +19,8 @@ public sealed class FrozenVfx : Component
 
 		Transform.LocalRotation = new Angles( 0f, -90f, 0f );
 		Transform.LocalPosition = new Vector3( 0f, 0f, 0.1f );
+		Sprite.Transform.LocalScale = new Vector3( 1f ) * Globals.SPRITE_SCALE;
+		Sprite.Tint = Color.White.WithAlpha( 0f );
 	}
 
 	protected override void OnUpdate()

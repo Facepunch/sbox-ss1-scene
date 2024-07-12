@@ -14,6 +14,9 @@ public class ShieldVfx : Component
 
 		_timeSince = 0f;
 		_timeOffset = Game.Random.Float( 0f, 10f );
+
+		Sprite.Transform.LocalScale = new Vector3( 1f ) * Globals.SPRITE_SCALE;
+		Sprite.Tint = Color.White.WithAlpha( 0f );
 	}
 
 	protected override void OnUpdate()
