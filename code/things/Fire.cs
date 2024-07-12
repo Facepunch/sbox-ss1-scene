@@ -25,7 +25,8 @@ public class Fire : Thing
 		Radius = 0.27f;
 
 		Scale = 0.9f;
-		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
+		Sprite.Transform.LocalScale = new Vector3( Scale * Globals.SPRITE_SCALE, Scale * Globals.SPRITE_SCALE, 1f );
+		Sprite.Transform.LocalRotation = new Angles( 0f, -90f, 0f );
 
 		//ShadowOpacity = 0.8f;
 		//ShadowScale = 0.3f;

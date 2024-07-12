@@ -193,7 +193,7 @@ public class Player : Thing
 		Stats[PlayerStat.FreezeFireDamageMultiplier] = 1f;
 		Stats[PlayerStat.FearLifetime] = 4f;
 		Stats[PlayerStat.FearDamageMultiplier] = 1f;
-		Stats[PlayerStat.FearOnMeleeChance] = 0.99f;
+		Stats[PlayerStat.FearOnMeleeChance] = 0f;
 
 		Stats[PlayerStat.CoinAttractRange] = 1.7f;
 		Stats[PlayerStat.CoinAttractStrength] = 3.1f;
@@ -251,7 +251,9 @@ public class Player : Thing
 		ShadowOpacity = 0.8f;
 		//ShadowScale = 1.12f;
 
-		//AddStatus( TypeLibrary.GetType( typeof( DamageStatus) ) );
+		AddStatus( TypeLibrary.GetType( typeof( DashFireStatus) ) );
+		AddStatus( TypeLibrary.GetType( typeof( DashFireStatus ) ) );
+		AddStatus( TypeLibrary.GetType( typeof( DashFireStatus ) ) );
 	}
 
 	protected override void OnUpdate()
