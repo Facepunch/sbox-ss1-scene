@@ -251,9 +251,7 @@ public class Player : Thing
 		ShadowOpacity = 0.8f;
 		//ShadowScale = 1.12f;
 
-		AddStatus( TypeLibrary.GetType( typeof( DashFireStatus) ) );
-		AddStatus( TypeLibrary.GetType( typeof( DashFireStatus ) ) );
-		AddStatus( TypeLibrary.GetType( typeof( DashFireStatus ) ) );
+		//AddStatus( TypeLibrary.GetType( typeof( DashFireStatus) ) );
 	}
 
 	protected override void OnUpdate()
@@ -1170,8 +1168,9 @@ public class Player : Thing
 	{
 		_shieldVfx = Manager.Instance.ShieldVfxPrefab.Clone( Transform.Position );
 		_shieldVfx.Parent = GameObject;
-		_shieldVfx.Transform.LocalPosition = new Vector3( 0f, 0f, 1f );
-		_shieldVfx.Components.Get<SpriteRenderer>().Size = new Vector2(1.8f);
+		_shieldVfx.Transform.LocalPosition = new Vector3( 0f, 0f, 0.1f );
+		_shieldVfx.Transform.LocalScale = new Vector3( 1f ) * 1.8f * Globals.SPRITE_SCALE;
+		_shieldVfx.Transform.LocalRotation = new Angles( 0f, -90f, 0f );
 	}
 
 	[Broadcast]

@@ -4,30 +4,38 @@
     "Flags": 0,
     "Name": "shield_vfx",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Sandbox.SpriteRenderer",
-        "__guid": "f6c51b59-ef2e-4fba-937b-92d8cea88d94",
-        "Additive": false,
-        "CastShadows": false,
-        "Color": "1,1,0,0.64",
-        "DepthFeather": 0,
-        "FlipHorizontal": false,
-        "FlipVertical": false,
-        "FogStrength": 1,
-        "Opaque": false,
-        "Size": "1,1",
-        "Texture": "textures/sprites/shield.vtex"
+        "__type": "SpriteTools.SpriteComponent",
+        "__guid": "06e96e04-8c13-417d-be06-4ea89e038990",
+        "BroadcastEvents": {},
+        "CastShadows": "Off",
+        "CreateAttachPoints": false,
+        "FlashTint": "1,1,1,0",
+        "PlaybackSpeed": 1,
+        "Sprite": "textures/sprites/shield/shield.sprite",
+        "SpriteFlags": "None",
+        "StartingAnimationName": "",
+        "Tint": "1,1,0,1"
+      },
+      {
+        "__type": "ShieldVfx",
+        "__guid": "9d14b720-4125-42ac-b75f-d9a3101231f6",
+        "Sprite": {
+          "_type": "component",
+          "component_id": "06e96e04-8c13-417d-be06-4ea89e038990",
+          "go": "1168f658-504e-4196-9abc-df1faf90b26e",
+          "component_type": "SpriteComponent"
+        }
       }
     ],
-    "Children": []
+    "Children": [],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
   "ResourceVersion": 1,
-  "__version": 1,
-  "__references": []
+  "__references": [],
+  "__version": 1
 }
