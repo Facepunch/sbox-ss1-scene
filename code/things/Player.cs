@@ -186,14 +186,14 @@ public class Player : Thing
 		Stats[PlayerStat.FireLifetime] = 2.0f;
 		Stats[PlayerStat.ShootFireIgniteChance] = 0f;
 		Stats[PlayerStat.FireSpreadChance] = 0f;
-		Stats[PlayerStat.ShootFreezeChance] = 0.8f;
+		Stats[PlayerStat.ShootFreezeChance] = 0f;
 		Stats[PlayerStat.FreezeLifetime] = 3f;
 		Stats[PlayerStat.FreezeTimeScale] = 0.6f;
 		Stats[PlayerStat.FreezeOnMeleeChance] = 0f;
 		Stats[PlayerStat.FreezeFireDamageMultiplier] = 1f;
 		Stats[PlayerStat.FearLifetime] = 4f;
 		Stats[PlayerStat.FearDamageMultiplier] = 1f;
-		Stats[PlayerStat.FearOnMeleeChance] = 0f;
+		Stats[PlayerStat.FearOnMeleeChance] = 0.99f;
 
 		Stats[PlayerStat.CoinAttractRange] = 1.7f;
 		Stats[PlayerStat.CoinAttractStrength] = 3.1f;
