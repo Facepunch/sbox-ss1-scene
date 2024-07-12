@@ -380,7 +380,7 @@ public abstract class Enemy : Thing
 		Health -= damage;
 
 		if ( Health <= 0f )
-			StartDying( player.GameObject.Id );
+			StartDying( player?.GameObject.Id ?? Guid.Empty );
 	}
 
 	public virtual void DamageFire( float damage, Player player )
@@ -388,7 +388,7 @@ public abstract class Enemy : Thing
 		if ( IsFrozen )
 			damage *= player.Stats[PlayerStat.FreezeFireDamageMultiplier];
 
-		Damage( damage, player.GameObject.Id, addVel: Vector2.Zero, addTempWeight: 0f );
+		Damage( damage, player?.GameObject.Id ?? Guid.Empty, addVel: Vector2.Zero, addTempWeight: 0f );
 	}
 
 	[Broadcast]
