@@ -43,9 +43,11 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
 
+	private int _currPlayerNum;
+
 	public int EnemyCount { get; private set; }
-	public const float MAX_ENEMY_COUNT = 350;
-	//public const float MAX_ENEMY_COUNT = 0;
+	//public const float MAX_ENEMY_COUNT = 350;
+	public const float MAX_ENEMY_COUNT = 0;
 
 	public int CrateCount { get; private set; }
 	public const float MAX_CRATE_COUNT = 7;
@@ -83,6 +85,8 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	private int _numEnemyDeathSfxs;
 
+	public int NumPlayers { get; private set; }
+
 	protected override void OnAwake()
 	{
 		base.OnAwake();
@@ -104,8 +108,6 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		if ( IsProxy )
 			return;
-
-
 	}
 
 	protected override void OnStart()
@@ -164,6 +166,8 @@ public sealed class Manager : Component, Component.INetworkListener
 		//		//Gizmo.Draw.Text( (new Vector2( gridSquare.x, gridSquare.y )).ToString(), new global::Transform( new Vector3( x + 7f, y + 7f, 0f ) ) );
 		//	}
 		//}
+
+		NumPlayers = Scene.GetAllComponents<Player>().Count();
 
 		if ( IsGameOver )
 			return;

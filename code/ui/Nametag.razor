@@ -5,8 +5,12 @@
 
 
 <root style="opacity: @(Player.IsDead ? 0.6f : 1f);">
-	<label class="name">
-		@Player.Network.OwnerConnection.DisplayName.Truncate(12, "..")
+	@{
+		var displayName = Player.Network.OwnerConnection.DisplayName;
+	}
+
+	<label class="name" style="color:@(Globals.GetNameColor(displayName).Rgba);">
+		@displayName.Truncate(12, "..")
 	</label>
 
 	<label class="level">

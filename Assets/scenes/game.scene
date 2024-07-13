@@ -171,6 +171,10 @@
         {
           "__type": "Hud",
           "__guid": "a061b61e-8861-4c19-8dfe-a6ac8e281bb6"
+        },
+        {
+          "__type": "Chat",
+          "__guid": "f8f122d4-67ba-4953-aa71-7f409e7ac081"
         }
       ]
     },
