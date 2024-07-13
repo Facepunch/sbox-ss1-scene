@@ -19,7 +19,7 @@ public abstract class Enemy : Thing
 	[Sync] public float MaxHealth { get; protected set; }
 
 	public bool IsSpawning { get; private set; }
-	public float ElapsedTime { get; private set; }
+	public TimeSince TimeSinceSpawn { get; private set; }
 	public bool IsDying { get; private set; }
 	public float DeathTimeElapsed { get; private set; }
 	public float DeathTime { get; protected set; }
@@ -92,7 +92,7 @@ public abstract class Enemy : Thing
 		SpawnShadow( ShadowScale, ShadowOpacity );
 
 		IsSpawning = true;
-		ElapsedTime = 0f;
+		TimeSinceSpawn = 0f;
 		SpawnTime = 1.75f;
 
 		MoveTimeOffset = Game.Random.Float( 0f, 4f );
@@ -128,7 +128,6 @@ public abstract class Enemy : Thing
 		base.OnUpdate();
 
 		float dt = Time.Delta;
-		ElapsedTime += dt;
 
 		if ( IsSpawning )
 		{
@@ -306,7 +305,7 @@ public abstract class Enemy : Thing
 
 	void HandleSpawning()
 	{
-		if ( ElapsedTime > SpawnTime )
+		if ( TimeSinceSpawn > SpawnTime )
 		{
 			IsSpawning = false;
 			Sprite.PlayAnimation( AnimIdlePath );
@@ -322,7 +321,7 @@ public abstract class Enemy : Thing
 				_spawnCloudTime = Game.Random.Float( 0f, 0.15f );
 			}
 
-			ShadowOpacity = Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, ShadowFullOpacity );
+			ShadowOpacity = Utils.Map( TimeSinceSpawn, 0f, SpawnTime, 0f, ShadowFullOpacity );
 			//Sprite.Tint = Color.White.WithAlpha( Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, FullOpacity, EasingType.SineIn ) );
 		}
 

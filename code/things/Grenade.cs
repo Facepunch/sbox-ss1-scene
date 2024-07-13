@@ -152,7 +152,7 @@ public class Grenade : Thing
 			if ( isCrit )
 				damage *= CriticalMultiplier;
 
-			if ( thing is Enemy enemy && !enemy.IsDying && (!enemy.IsSpawning || enemy.ElapsedTime > 0.75f) )
+			if ( thing is Enemy enemy && !enemy.IsDying && (!enemy.IsSpawning || enemy.TimeSinceSpawn > 0.75f) )
 			{
 				var dist_sqr = (thing.Position2D - Position2D).LengthSquared;
 

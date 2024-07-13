@@ -179,7 +179,7 @@ public class Bullet : Thing
 
 		if ( other is Enemy enemy )
 		{
-			if ( !enemy.IsDying && (!enemy.IsSpawning || enemy.ElapsedTime > 1.5f) )
+			if ( !enemy.IsDying && (!enemy.IsSpawning || enemy.TimeSinceSpawn > 1.5f) )
 			{
 				if ( _hitThings.Contains( enemy ) )
 					return;

@@ -260,7 +260,7 @@ public class Player : Thing
 
 		//Gizmo.Draw.Color = Color.White.WithAlpha(0.5f);
 		//Gizmo.Draw.Text( $"IsGameOver: {Manager.Instance.IsGameOver}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
-
+		
 		string debug = "";
 
 		if (!_doneFirstUpdate)
@@ -1072,7 +1072,7 @@ public class Player : Thing
 		{
 			if ( !Position2D.Equals( other.Position2D ) )
 			{
-				var spawnFactor = Utils.Map( enemy.ElapsedTime, 0f, enemy.SpawnTime, 0f, 1f, EasingType.QuadIn );
+				var spawnFactor = Utils.Map( enemy.TimeSinceSpawn, 0f, enemy.SpawnTime, 0f, 1f, EasingType.QuadIn );
 				Velocity += (Position2D - other.Position2D).Normal * Utils.Map( percent, 0f, 1f, 0f, 100f ) * (1f + other.TempWeight) * spawnFactor * dt;
 			}
 		}

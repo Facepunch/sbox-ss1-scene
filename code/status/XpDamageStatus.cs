@@ -47,7 +47,7 @@ public class XpDamageStatus : Status
 
 		foreach ( Thing thing in nearbyThings )
 		{
-			if ( thing is Enemy enemy && !enemy.IsDying && (!enemy.IsSpawning || enemy.ElapsedTime > 0.75f) )
+			if ( thing is Enemy enemy && !enemy.IsDying && (!enemy.IsSpawning || enemy.TimeSinceSpawn > 0.75f) )
 			{
 				var dist_sqr = (thing.Position2D - Player.Position2D).LengthSquared;
 				if ( dist_sqr < MathF.Pow( radius, 2f ) )

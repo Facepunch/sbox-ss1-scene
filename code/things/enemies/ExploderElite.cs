@@ -115,7 +115,7 @@ public class ExploderElite : Enemy
 
 		if ( other is Enemy enemy && !enemy.IsDying )
 		{
-			var spawnFactor = Utils.Map( enemy.ElapsedTime, 0f, enemy.SpawnTime, 0f, 1f, EasingType.QuadIn );
+			var spawnFactor = Utils.Map( enemy.TimeSinceSpawn, 0f, enemy.SpawnTime, 0f, 1f, EasingType.QuadIn );
 			Velocity += (Position2D - enemy.Position2D).Normal * Utils.Map( percent, 0f, 1f, 0f, 1f ) * enemy.PushStrength * (1f + enemy.TempWeight) * spawnFactor * dt;
 		}
 		// todo: move collision check to player instead to prevent laggy hits?
@@ -192,7 +192,7 @@ public class ExploderElite : Enemy
 			if ( thing == this )
 				continue;
 
-			if ( thing is Enemy enemy && !enemy.IsDying && (!enemy.IsSpawning || enemy.ElapsedTime > 0.75f) )
+			if ( thing is Enemy enemy && !enemy.IsDying && (!enemy.IsSpawning || enemy.TimeSinceSpawn > 0.75f) )
 			{
 				var dist_sqr = (thing.Position2D - Position2D).LengthSquared;
 				if ( dist_sqr < MathF.Pow( EXPLOSION_RADIUS, 2f ) )

@@ -95,7 +95,7 @@ public class Fire : Thing
 		if ( Shooter == null )
 			return;
 
-		if ( other is Enemy enemy && !enemy.IsDying && ( !enemy.IsSpawning || enemy.ElapsedTime > 1.0f ) )
+		if ( other is Enemy enemy && !enemy.IsDying && ( !enemy.IsSpawning || enemy.TimeSinceSpawn > 1.0f ) )
 		{
 			if ( !enemy.HasEnemyStatus<BurningEnemyStatus>() )
 			{
