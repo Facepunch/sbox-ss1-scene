@@ -178,7 +178,7 @@
       "__guid": "2dae15f1-83ec-4e7f-ac1e-5487524a3567",
       "Flags": 0,
       "Name": "Camera",
-      "Position": "0,0,250",
+      "Position": "-8.457853,0,250",
       "Rotation": "-0.5,0.5,0.5,0.5",
       "Enabled": true,
       "Components": [
@@ -226,9 +226,843 @@
       ]
     },
     {
+      "__guid": "841d1d39-ecc9-4244-8d4c-23adedf423d7",
+      "Flags": 0,
+      "Name": "bg_top",
+      "Position": "0,0,-495",
+      "Enabled": true,
+      "Children": [
+        {
+          "__guid": "7d2ca8a2-1003-4906-90e0-8fcbff273159",
+          "Flags": 0,
+          "Name": "bg_top",
+          "Position": "0,-18.01,0",
+          "Scale": "0.906584,0.2213332,0.01",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "b0af0e44-ca5f-413a-963f-45d1604670e1",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/dev/box.vmdl",
+              "RenderType": "Off",
+              "Tint": "0.0026,0.0093,0.00461,1"
+            },
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "a5b70b69-1674-4725-bdaa-b6c14dd23b35",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "50,50,50",
+              "Static": true,
+              "Surface": "surfaces/default.surface"
+            }
+          ]
+        },
+        {
+          "__guid": "5e2d0a3f-b570-4cc3-bdb9-5bb669c7e863",
+          "Flags": 0,
+          "Name": "bg_top",
+          "Position": "20.72,0,0",
+          "Scale": "0.1791963,0.6263379,0.01",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "06148860-d4c4-46b2-92bc-f089e062d94d",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/dev/box.vmdl",
+              "RenderType": "Off",
+              "Tint": "0.0026,0.0093,0.00461,1"
+            },
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "d5fc521b-8f8c-4d4c-972c-8db83581d356",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "50,50,50",
+              "Static": true,
+              "Surface": "surfaces/default.surface"
+            }
+          ]
+        },
+        {
+          "__guid": "6b99336f-10b5-4c8b-9fcf-6a21eaa5491f",
+          "Flags": 0,
+          "Name": "bg_top",
+          "Position": "-20.72,0,0",
+          "Scale": "0.1791963,0.6263379,0.01",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "4cc73a4c-8a00-4d3c-92b0-07d46b417052",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/dev/box.vmdl",
+              "RenderType": "Off",
+              "Tint": "0.0026,0.0093,0.00461,1"
+            },
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "c29692e4-02e9-4828-902b-68ad5b9f1f61",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "50,50,50",
+              "Static": true,
+              "Surface": "surfaces/default.surface"
+            }
+          ]
+        },
+        {
+          "__guid": "4cbeb195-2e1b-4ae9-b76f-ae732eca9d0d",
+          "Flags": 0,
+          "Name": "bg_top",
+          "Position": "0,18.01,0",
+          "Scale": "0.906584,0.2213332,0.01",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ModelRenderer",
+              "__guid": "4493ced2-e27b-4558-bfad-1f4186652e02",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/dev/box.vmdl",
+              "RenderType": "Off",
+              "Tint": "0.0026,0.0093,0.00461,1"
+            },
+            {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "a22acc41-2dd0-458d-8a44-6633b5d8c51f",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "50,50,50",
+              "Static": true,
+              "Surface": "surfaces/default.surface"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "__guid": "231a4171-16f2-4747-be71-eb4930acb20c",
+      "Flags": 0,
+      "Name": "bg_camo",
+      "Position": "0,0.6,-499",
+      "Scale": "0.45,0.4,1",
+      "Enabled": true,
+      "Children": [
+        {
+          "__guid": "2d80a4ff-d901-4f13-a16d-139dc55d5d5e",
+          "Flags": 0,
+          "Name": "row",
+          "Position": "-14.03262,4.255624,0",
+          "Enabled": true,
+          "Children": [
+            {
+              "__guid": "fd168f01-6b08-4a6c-9943-ec47bb4bceaf",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "-18.89,22,0",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "03e83f91-ca9e-4d16-bc55-e8b4efd68946",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square_3.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "86a94991-a7f3-4d3d-a568-ece35494890c",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "5.446898,22,0.2999878",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "917ff487-8a9c-4223-b4b4-5350b7d7eef8",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "1e18cb99-51b5-4ca1-9045-98ce8ff0aacc",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "29.81305,22,0",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "e66cc17b-2dd2-44ed-b968-ecf553e1e9fa",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square_2.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "c4a1f0f1-21f8-4dab-8abb-d8d0e3531f68",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "54.23394,22,0.3",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "6749ccbf-c755-431a-8e6a-1fc7a1ef1b38",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "__guid": "4d510bc8-960c-496f-8e6c-e3411ac2453e",
+          "Flags": 0,
+          "Name": "row",
+          "Position": "-14.03262,-4.854,0",
+          "Enabled": true,
+          "Children": [
+            {
+              "__guid": "0067ef7a-2aa4-441d-9e46-e060da909e70",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "-18.89,22,0",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "b42c5a1f-c4ac-4085-aa9c-70e61549bf90",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "fffc5295-efbc-46b9-ad0d-fd91474f423e",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "5.446898,22,0.2999878",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "1a79ad8d-d521-492a-833c-b44c36704635",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square_2.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "983e71ba-d107-48ff-83ce-c6489640ebbd",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "29.81305,22,0",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "10bffd07-74ed-4939-b3ae-02d1747ba1a9",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "582412c3-2572-421d-a15d-727b3f830ae4",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "54.23394,22,0.3",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "9fa1b237-5e11-4f9c-9b16-f90464a7ea38",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square_3.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "__guid": "f8ce9aa0-1386-4149-8e98-842d7cdf59e0",
+          "Flags": 0,
+          "Name": "row",
+          "Position": "-14.03262,-13.964,0",
+          "Enabled": true,
+          "Children": [
+            {
+              "__guid": "49d26939-91be-489b-8f52-363ca51cee95",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "-18.89,22,0",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "91c54127-be86-4785-a876-fdb195a55bf8",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "27b81784-27e4-4e88-a63f-ba4c496071d7",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "5.446898,22,0.2999878",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "3a3c382c-8d27-4821-be9b-3e1cb8c60916",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square_3.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "92bc4ae1-22d7-48ca-ad48-94f86f014c3e",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "29.81305,22,0",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "d4d7795c-8ca7-4ce6-ba30-93fb834f5234",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "56a62cca-3272-4b5b-bae0-4ca896f40d25",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "54.23394,22,0.3",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "21345869-8fe1-4ae2-afa7-ecec83c8e400",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square_2.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "__guid": "bac13a23-f709-4fd3-9bc9-e758e41e7b5c",
+          "Flags": 0,
+          "Name": "row",
+          "Position": "-14.03262,-23.074,0",
+          "Enabled": true,
+          "Children": [
+            {
+              "__guid": "2a469a36-db26-4a99-a67e-1c0931244a9f",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "-18.89,22,0",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "4fc23619-d1b0-4f48-ad91-f516b767dfd4",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square_2.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "603dd3b2-40c6-4a98-987b-b2877b38a6a3",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "5.446898,22,0.2999878",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "c279a2f3-f01c-44fe-9d06-ab104d70f5cb",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square_3.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "a3b1e3df-643f-4776-8b6e-540b0c54c13c",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "29.81305,22,0",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "4085ade1-ba38-4efb-8c3c-d5d990f5005c",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square_2.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "da012172-6a43-46c8-b365-84b19eb3639e",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "54.23394,22,0.3",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "edaaaae4-3b2a-447e-ba27-ba172de2bd2d",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "__guid": "0154312d-752a-42dd-ada2-0fd2087ee6d6",
+          "Flags": 0,
+          "Name": "row",
+          "Position": "-14.03262,-32.084,0",
+          "Enabled": true,
+          "Children": [
+            {
+              "__guid": "dc94d3d1-0c61-4b08-83cb-7980059d1d00",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "-18.89,22,0",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "c042a8ab-347b-4fcf-b3b6-973b929912bb",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "feef9d5f-a56c-45ca-9967-08fd2a5f8a33",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "5.446898,22,0.2999878",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "c5b789f8-9440-4771-a021-8cb93374e132",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square_2.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "6fcd46cb-9f3c-4326-bdd9-4d3be9c0e616",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "29.81305,22,0",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "7c6a1f8e-7050-483f-809e-c4f6e99cf466",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square_3.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "969ce424-9e51-4b0b-ae81-578c10efd63a",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "54.23394,22,0.3",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "a74b8abe-3be0-44b5-88dc-e2e383fa5a09",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "__guid": "01841775-98c3-4c88-a248-152d0b2c5644",
+          "Flags": 0,
+          "Name": "row",
+          "Position": "-14.03262,-41.094,0",
+          "Enabled": true,
+          "Children": [
+            {
+              "__guid": "313d6bb8-6f4c-48c5-a212-bda8ed634e2b",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "-18.89,22,0",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "78162e3e-dc4d-4aeb-aa3c-5905e92e01aa",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square_3.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "1aa8e85d-3de8-4039-83cf-6ad10e4f1a76",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "5.446898,22,0.2999878",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "c866f7cc-09a1-4406-a798-85bcf7b5f219",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square_3.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "b9f42611-f277-43a3-84c8-d8b7a1643ea8",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "29.81305,22,0",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "882e4ea2-4359-4a06-9123-e1f1eb6199c9",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "b85d36e0-d6f5-40a8-bff5-c3b9b717dc46",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "54.23394,22,0.3",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "589d64a1-9fd9-447a-a8f0-f7bc9d8c5991",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square_3.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "__guid": "a4a84e0b-a8d2-48e2-81cf-2abfc30f319d",
+          "Flags": 0,
+          "Name": "row",
+          "Position": "-14.03262,-50.204,0",
+          "Enabled": true,
+          "Children": [
+            {
+              "__guid": "27a13b4f-63a9-4561-b5f8-b0753d950856",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "-18.89,22,0",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "d37f79ba-460b-4b67-8ac4-0e7cda094e09",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square_2.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "0d9e7434-8934-4e44-b4d1-932edbae83f4",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "5.446898,22,0.2999878",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "780255bd-5755-402b-8ebb-4601919c7605",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "9f4dfab3-84e6-415c-9afe-7671db157ce9",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "29.81305,22,0",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "910ecf1d-1109-42d3-a765-9a8253f73136",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square_3.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            },
+            {
+              "__guid": "f47c325c-8b41-4961-b435-73e78fa2aed7",
+              "Flags": 0,
+              "Name": "square",
+              "Position": "54.23394,22,0.3",
+              "Scale": "0.2445,0.0915,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpriteTools.SpriteComponent",
+                  "__guid": "067a126a-762d-4957-b9be-678471f68037",
+                  "BroadcastEvents": {},
+                  "CastShadows": "Off",
+                  "CreateAttachPoints": false,
+                  "FlashTint": "1,1,1,0",
+                  "PlaybackSpeed": 1,
+                  "Sprite": "textures/sprites/bg_square.sprite",
+                  "SpriteFlags": "None",
+                  "StartingAnimationName": "animation_01",
+                  "Tint": "0.01176,0.01961,0.00392,1"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "__guid": "c13b0129-7c1f-4c62-868f-f751f9b228eb",
       "Flags": 0,
-      "Name": "bg_front",
+      "Name": "bg_mid",
       "Position": "0,0,-500",
       "Scale": "0.65,0.5,0.01",
       "Enabled": true,
@@ -246,7 +1080,7 @@
     {
       "__guid": "cf4c92f3-aec7-41ef-bfcf-ab2500938bcc",
       "Flags": 0,
-      "Name": "bg",
+      "Name": "bg_back",
       "Position": "0,0,-501",
       "Scale": "0.8,0.8,0.01",
       "Enabled": true,
@@ -257,7 +1091,7 @@
           "BodyGroups": 18446744073709551615,
           "Model": "models/dev/box.vmdl",
           "RenderType": "Off",
-          "Tint": "0.0026,0.0093,0.00461,1"
+          "Tint": "0,0.00784,0.00392,1"
         },
         {
           "__type": "Sandbox.BoxCollider",
