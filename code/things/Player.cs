@@ -45,6 +45,7 @@ public class Player : Thing
 	[Sync] public Vector2 InputVector { get; set; }
 
 	public GameObject ArrowAimer { get; private set; }
+	public SpriteComponent ArrowSprite { get; private set; }
 	public Vector2 AimDir { get; private set; }
 
 	[Sync] public bool IsDead { get; private set; }
@@ -95,6 +96,7 @@ public class Player : Thing
 	private Dictionary<PlayerStat, float> _original_properties_stat = new Dictionary<PlayerStat, float>();
 
 	private bool _doneFirstUpdate;
+	private TimeSince _timeSinceShoot;
 
 	protected override void OnAwake()
 	{
@@ -122,6 +124,9 @@ public class Player : Thing
 		ArrowAimer = ArrowAimerPrefab.Clone(Transform.Position);
 		ArrowAimer.SetParent( GameObject );
 		ArrowAimer.NetworkMode = NetworkMode.Never;
+		ArrowSprite = ArrowAimer.Components.Get<SpriteComponent>();
+
+		_timeSinceShoot = 999f;
 	}
 
 	public void InitializeStats()
@@ -361,7 +366,9 @@ public class Player : Thing
 		{
 			ArrowAimer.Transform.LocalRotation = new Angles(0f, MathF.Atan2( AimDir.y, AimDir.x ) * (180f / MathF.PI) - 180f, 0f);
 			//ArrowAimer.Transform.LocalPosition = new Vector2( 0f, 0.4f + OffsetY ) + AimDir * 0.7f;
-			ArrowAimer.Transform.LocalPosition = new Vector2( 0f, 0.4f ) + AimDir * 0.7f;
+			ArrowAimer.Transform.LocalPosition = new Vector2( 0f, 0.4f ) + AimDir * Utils.Map( _timeSinceShoot, 0f, 0.25f, 0.6f, 0.55f, EasingType.QuadOut );
+			ArrowAimer.Transform.LocalScale = new Vector3(Utils.Map(_timeSinceShoot, 0f, 0.25f, 1.25f, 0.75f, EasingType.QuadOut), 1f, 1f) * 0.005f;
+			ArrowSprite.Tint = Color.White.WithAlpha( Utils.Map( _timeSinceShoot, 0f, 0.3f, 1f, 0.3f, EasingType.QuadOut ) );
 		}
 
 		for ( int dx = -1; dx <= 1; dx++ )
@@ -981,6 +988,7 @@ public class Player : Thing
 		Velocity -= AimDir * Stats[PlayerStat.Recoil];
 
 		_shotNum++;
+		_timeSinceShoot = 0f;
 	}
 
 	void SpawnBullet( Vector2 pos, Vector2 dir, bool isLastAmmo = false )
