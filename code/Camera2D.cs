@@ -10,8 +10,9 @@ public class Camera2D : Component
 
 		Vector2 newPos = Vector2.Lerp( (Vector2)Transform.Position, TargetPos, 0.075f );
 		var XDIST = 10.75f;
-		var YDIST = 8.3f;
-		newPos = new Vector2( MathX.Clamp( newPos.x, -XDIST, XDIST ), MathX.Clamp( newPos.y, -YDIST, YDIST ) );
+		var Y_MIN = -8.3f;
+		var Y_MAX = 8.9f;
+		newPos = new Vector2( MathX.Clamp( newPos.x, -XDIST, XDIST ), MathX.Clamp( newPos.y, Y_MIN, Y_MAX ) );
 
 		Transform.Position = ((Vector3)newPos).WithZ( Transform.Position.z );
 	}

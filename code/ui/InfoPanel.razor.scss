@@ -1,14 +1,15 @@
 InfoPanel {
     position: absolute;
     width: 180px;
-    right: 50px;
-    bottom: 50px;
-    top: 32px;
+    right: 20px;
+    bottom: 20px;
+    top: 20px;
     align-self: flex-end;
     pointer-events: none;
     justify-content: flex-start;
     flex-direction: column-reverse;
-    gap: 15px;
+    gap: 10px;
+    //background-color: red;
 
     .info_dash_container {
         width: 100%;
