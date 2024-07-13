@@ -19,6 +19,13 @@ code/Editor/*.sln
 code/Editor/.vs/*
 code/Editor/.vscode/*
 
+# Auto-generated code editor files
+.vs/*
+.vscode/*
+*.csproj
+obj
+bin
+
 # Auto-generated asset related files
 *.generated.*
 *.*_c
