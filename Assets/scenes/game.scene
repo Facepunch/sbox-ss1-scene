@@ -175,6 +175,12 @@
         {
           "__type": "Chat",
           "__guid": "f8f122d4-67ba-4953-aa71-7f409e7ac081"
+        },
+        {
+          "__type": "Battlebugs.PauseMenu",
+          "__guid": "2cca5dd6-e3b5-4c1b-809e-84ab7a41b22b",
+          "GameScene": "scenes/game.scene",
+          "MenuScene": "scenes/menu.scene"
         }
       ]
     },
@@ -214,7 +220,7 @@
       "Flags": 0,
       "Name": "Directional Light",
       "Position": "0,0,200",
-      "Rotation": "-0.2764369,0.6673765,0.2646312,0.6388752",
+      "Rotation": "-0.2705981,0.6532815,0.2705981,0.6532815",
       "Tags": "light_directional,light",
       "Enabled": true,
       "Components": [

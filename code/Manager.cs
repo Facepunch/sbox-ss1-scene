@@ -1,3 +1,4 @@
+using Battlebugs;
 using Sandbox;
 using Sandbox.Network;
 
@@ -97,6 +98,8 @@ public sealed class Manager : Component, Component.INetworkListener
 		BOUNDS_MAX = new Vector2( 16f, 12f );
 		BOUNDS_MIN_SPAWN = new Vector2( -15.5f, -11.75f );
 		BOUNDS_MAX_SPAWN = new Vector2( 15.5f, 11.5f );
+
+		ElapsedTime = 0f;
 
 		for ( float x = BOUNDS_MIN.x; x < BOUNDS_MAX.x; x += GRID_SIZE )
 		{
@@ -703,6 +706,8 @@ public sealed class Manager : Component, Component.INetworkListener
 		HasSpawnedBoss = false;
 		Boss = null;
 		TimeSinceMagnet = 0f;
+
+		Components.Get<PauseMenu>().IsOpen = false;
 
 		if ( IsProxy )
 			return;

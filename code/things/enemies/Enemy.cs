@@ -432,9 +432,9 @@ public abstract class Enemy : Thing
 				//	Sandbox.Services.Stats.Increment( player.Client, "crates", 1 );
 				//}
 			}
-
-			DropLoot( player );
 		}
+
+		DropLoot( player );
 
 		for ( int i = EnemyStatuses.Count - 1; i >= 0; i-- )
 			EnemyStatuses.Values.ElementAt( i ).StartDying();

@@ -1,0 +1,100 @@
+@using Sandbox;
+@using Sandbox.UI;
+@namespace Battlebugs
+@inherits PanelComponent
+
+<root>
+	<div class="title">Sausage Survivors</div>
+	<div class="content">
+		<div class="button-container">
+			@if (State == MenuState.Main)
+			{
+				<div class="button" onclick="@(() => ButtonStart())">Start</div>
+				<div class="button blue" onclick="@(() => ButtonLobbies())">Lobbies</div>
+				<div class="button red" onclick="@(() => Quit())">Quit</div>
+			}
+			else if (State == MenuState.Lobbies)
+			{
+				<div class="button red" onclick="@(() => ButtonBack())">Back</div>
+			}
+		</div>
+		@if (State == MenuState.Lobbies)
+		{
+			<div class="content-panel">
+				<LobbyList />
+			</div>
+		}
+		else if (State == MenuState.Stats)
+		{
+			<div class="content-panel">
+				
+
+
+
+			</div>
+		}
+	</div>
+</root>
+
+@code
+{
+	public static MainMenu Instance { get; private set; }
+	public static bool IsCpuGame { get; private set; } = true;
+
+	public MenuState State = MenuState.Main;
+	Angles cameraAngles = Angles.Zero;
+
+	public enum MenuState
+	{
+		Main,
+		Lobbies,
+		Stats
+	}
+
+	protected override void OnAwake()
+	{
+		Instance = this;
+	}
+
+	protected override void OnStart()
+	{
+		cameraAngles = Scene.Camera.Transform.Rotation;
+	}
+
+	protected override void OnUpdate()
+	{
+		// var camAngles = cameraAngles + new Angles(Mouse.Position.y - (Screen.Height / 2f), -Mouse.Position.x - (-Screen.Width / 2f), 0) * 0.0015f;
+		// Scene.Camera.Transform.Rotation = Angles.Lerp(Scene.Camera.Transform.Rotation, camAngles, Time.Delta * 5.0f);
+	}
+
+	void ButtonStart()
+	{
+		Game.ActiveScene.LoadFromFile("scenes/game.scene");
+	}
+
+	void ButtonLobbies()
+	{
+		State = MenuState.Lobbies;
+		Sound.Play("ui.button.press");
+	}
+
+	void ButtonBack()
+	{
+		State = MenuState.Main;
+		Sound.Play("ui.navigate.back");
+	}
+
+	void Quit()
+	{
+		if (Game.IsEditor)
+		{
+			Log.Info("Quit");
+		}
+		else
+		{
+			Game.Close();
+		}
+	}
+
+	protected override int BuildHash() => System.HashCode.Combine(State);
+}

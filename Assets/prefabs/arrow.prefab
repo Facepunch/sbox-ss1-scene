@@ -5,20 +5,19 @@
     "Name": "arrow",
     "Scale": "0.005,0.005,1",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "SpriteTools.SpriteComponent",
         "__guid": "994c2676-244b-47f0-a5ce-afe24259dc94",
-        "_broadcastEvents": {},
+        "BroadcastEvents": {},
         "CastShadows": "Off",
         "CreateAttachPoints": false,
         "FlashTint": "1,1,1,0",
         "PlaybackSpeed": 1,
         "Sprite": "textures/sprites/arrow/arrow.sprite",
-        "StartingAnimationName": "",
-        "Tint": "1,1,1,1"
+        "SpriteFlags": "None",
+        "StartingAnimationName": "idle",
+        "Tint": "1,1,1,0"
       }
     ],
     "Children": [],

@@ -97,6 +97,7 @@ public class Player : Thing
 
 	private bool _doneFirstUpdate;
 	private TimeSince _timeSinceShoot;
+	private TimeSince _timeSinceSpawn;
 
 	protected override void OnAwake()
 	{
@@ -125,8 +126,10 @@ public class Player : Thing
 		ArrowAimer.SetParent( GameObject );
 		ArrowAimer.NetworkMode = NetworkMode.Never;
 		ArrowSprite = ArrowAimer.Components.Get<SpriteComponent>();
+		ArrowSprite.Tint = Color.White.WithAlpha( 0f );
 
 		_timeSinceShoot = 999f;
+		_timeSinceSpawn = 0f;
 	}
 
 	public void InitializeStats()
@@ -368,7 +371,7 @@ public class Player : Thing
 			//ArrowAimer.Transform.LocalPosition = new Vector2( 0f, 0.4f + OffsetY ) + AimDir * 0.7f;
 			ArrowAimer.Transform.LocalPosition = new Vector2( 0f, 0.4f ) + AimDir * Utils.Map( _timeSinceShoot, 0f, 0.25f, 0.6f, 0.55f, EasingType.QuadOut );
 			ArrowAimer.Transform.LocalScale = new Vector3(Utils.Map(_timeSinceShoot, 0f, 0.25f, 1.25f, 0.75f, EasingType.QuadOut), 1f, 1f) * 0.005f;
-			ArrowSprite.Tint = Color.White.WithAlpha( Utils.Map( _timeSinceShoot, 0f, 0.3f, 1f, 0.3f, EasingType.QuadOut ) );
+			ArrowSprite.Tint = Color.White.WithAlpha( Utils.Map( _timeSinceShoot, 0f, 0.3f, 1f, 0.3f, EasingType.QuadOut ) * Utils.Map( _timeSinceSpawn, 0f, 1f, 0f, 1f, EasingType.Linear ) );
 		}
 
 		for ( int dx = -1; dx <= 1; dx++ )

@@ -1,0 +1,91 @@
+@using System.Threading.Tasks;
+@using Sandbox;
+@using Sandbox.UI;
+@using Sandbox.Network;
+@namespace Battlebugs
+@inherits Panel
+@attribute [StyleSheet]
+
+<root>
+	<label class="header">Lobbies</label>
+	<div class="lobbies">
+		@if(!refreshing && list.Count > 0)
+		{
+			@foreach(var lobby in list)
+			{
+				<div class="lobby" onclick=@(() => JoinLobby(lobby))>
+					<img src="ui/gamepad.png" />
+					<div class="info">
+						<label class="name">@lobby.Name</label>
+						@* <label class="desc">Looking for opponent...</label> *@
+					</div>
+					<div class="players">
+						<i>person</i>
+						<label>@lobby.Members/2</label>
+					</div>
+				</div>
+			}
+		}
+		else
+		{
+			<div class="no-lobbies">
+				No lobbies found...
+			</div>
+		}
+		@* Uncomment the block below to preview a lobby entry *@
+		@* <div class="lobby">
+		<img src="ui/gamepad.png" />
+		<div class="info">
+		<label class="name">Carson vs Bakscratch</label>
+		<label class="desc">Waiting for players...</label>
+		</div>
+		<div class="players">
+		<i>person</i>
+		<label>1/2</label>
+		</div>
+		</div> *@
+	</div>
+</root>
+
+@code
+{
+	List<LobbyInformation> list = new();
+	bool refreshing = true;
+
+	protected override void OnAfterTreeRender(bool firstTime)
+	{
+		base.OnAfterTreeRender(firstTime);
+
+		if(firstTime)
+		{
+			_ = RefreshLobbyList();
+		}
+	}
+
+	async Task RefreshLobbyList()
+	{
+		while(true)
+		{
+			await Refresh();
+			await Task.DelayRealtimeSeconds(5f);
+		}
+	}
+
+	async Task Refresh()
+	{
+		refreshing = true;
+		StateHasChanged();
+
+		list = await Networking.QueryLobbies();
+
+		refreshing = false;
+		StateHasChanged();
+	}
+
+	void JoinLobby(LobbyInformation lobby)
+	{
+		GameNetworkSystem.Connect(lobby.LobbyId);
+	}
+
+	protected override int BuildHash() => System.HashCode.Combine("");
+}

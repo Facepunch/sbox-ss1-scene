@@ -1,0 +1,122 @@
+{
+  "__guid": "a3df3b11-b3a8-4597-8baa-ea229a148530",
+  "GameObjects": [
+    {
+      "__guid": "2dc89d4e-d940-4469-be15-2e4446e8d5ea",
+      "Flags": 0,
+      "Name": "MenuManager",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ScreenPanel",
+          "__guid": "e2c6065c-f3a3-4d18-bccd-cbd63f120505",
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ZIndex": 100
+        },
+        {
+          "__type": "Battlebugs.MainMenu",
+          "__guid": "c69081a5-45a5-4cbb-be60-4c3f3751f87d"
+        }
+      ]
+    },
+    {
+      "__guid": "fe926556-9549-4b43-81e7-48b53baf56c9",
+      "Flags": 0,
+      "Name": "Directional Light",
+      "Position": "0,0,200",
+      "Rotation": "-0.2705981,0.6532815,0.2705981,0.6532815",
+      "Tags": "light_directional,light",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.DirectionalLight",
+          "__guid": "3e20ddc2-02ce-4a62-bed1-d5d6df18d00e",
+          "FogMode": "Disabled",
+          "FogStrength": 0,
+          "LightColor": "1,1,1,1",
+          "Shadows": false,
+          "SkyColor": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "70620a80-df83-43e3-99a1-80518006f75f",
+      "Flags": 0,
+      "Name": "Camera",
+      "Position": "0,0,250",
+      "Rotation": "-0.5,0.5,0.5,0.5",
+      "Tags": "maincamera",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "ebf6d184-1602-48ba-8483-b9a29ffd869e",
+          "BackgroundColor": "0.01757,0.13023,0.0739,1",
+          "ClearFlags": "All",
+          "FieldOfView": 60,
+          "IsMainCamera": true,
+          "Orthographic": true,
+          "OrthographicHeight": 100,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
+        }
+      ]
+    },
+    {
+      "__guid": "2ae0da6a-7732-426c-ba30-63e3979158b7",
+      "Flags": 0,
+      "Name": "sprite",
+      "Position": "62.97562,-63.43427,0",
+      "Rotation": "0,-0,-0.7071068,0.7071068",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "SpriteTools.SpriteComponent",
+          "__guid": "fe2892cd-7d29-476c-978d-de0d6525d4e0",
+          "BroadcastEvents": {},
+          "CastShadows": "On",
+          "CreateAttachPoints": false,
+          "FlashTint": "1,1,1,0",
+          "PlaybackSpeed": 0.5,
+          "Sprite": "textures/sprites/zombie/zombie.sprite",
+          "SpriteFlags": "None",
+          "StartingAnimationName": "walk",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "NetworkInterpolation": true,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": "menu",
+  "Description": "",
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
