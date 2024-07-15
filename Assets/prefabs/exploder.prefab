@@ -4,8 +4,6 @@
     "Flags": 0,
     "Name": "exploder",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Exploder",
@@ -25,13 +23,12 @@
         "Name": "sprite",
         "Rotation": "0,-0,-0.7071068,0.7071068",
         "Enabled": true,
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "SpriteTools.SpriteComponent",
             "__guid": "bd087230-ab93-4d54-b103-921babc1fc61",
-            "_broadcastEvents": {},
+            "__version": 1,
+            "BroadcastEvents": {},
             "CastShadows": "Off",
             "CreateAttachPoints": false,
             "FlashTint": "1,1,1,0",
@@ -39,7 +36,8 @@
             "Sprite": "textures/sprites/exploder/exploder.sprite",
             "SpriteFlags": "None",
             "StartingAnimationName": "walk",
-            "Tint": "1,1,1,1"
+            "Tint": "1,1,1,1",
+            "UpDirection": "XNegative"
           }
         ]
       }

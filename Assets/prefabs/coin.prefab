@@ -4,8 +4,6 @@
     "Flags": 0,
     "Name": "coin",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Coin",
@@ -25,21 +23,21 @@
         "Flags": 0,
         "Name": "sprite",
         "Enabled": true,
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "SpriteTools.SpriteComponent",
             "__guid": "ef9923d1-a88e-4615-bac0-ede11a1a5fc1",
-            "_broadcastEvents": {},
+            "__version": 1,
+            "BroadcastEvents": {},
             "CastShadows": "Off",
             "CreateAttachPoints": false,
             "FlashTint": "1,1,1,0",
             "PlaybackSpeed": 1,
             "Sprite": "textures/sprites/xp/xp.sprite",
             "SpriteFlags": "None",
-            "StartingAnimationName": "",
-            "Tint": "1,1,1,1"
+            "StartingAnimationName": "xp_1",
+            "Tint": "1,1,1,1",
+            "UpDirection": "XNegative"
           }
         ]
       }

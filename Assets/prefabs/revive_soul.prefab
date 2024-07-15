@@ -4,8 +4,6 @@
     "Flags": 0,
     "Name": "revive_soul",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "ReviveSoul",
@@ -25,21 +23,21 @@
         "Name": "sprite",
         "Rotation": "0,-0,-0.7071068,0.7071068",
         "Enabled": true,
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "SpriteTools.SpriteComponent",
             "__guid": "2b90f7e2-30e3-4e09-a13e-ffe54e7bb822",
-            "_broadcastEvents": {},
+            "__version": 1,
+            "BroadcastEvents": {},
             "CastShadows": "Off",
             "CreateAttachPoints": false,
             "FlashTint": "1,1,1,0",
             "PlaybackSpeed": 1,
             "Sprite": "textures/sprites/soul/soul.sprite",
             "SpriteFlags": "None",
-            "StartingAnimationName": "",
-            "Tint": "1,1,1,1"
+            "StartingAnimationName": "idle",
+            "Tint": "1,1,1,1",
+            "UpDirection": "XNegative"
           }
         ]
       }

@@ -8,6 +8,7 @@
       {
         "__type": "SpriteTools.SpriteComponent",
         "__guid": "06e96e04-8c13-417d-be06-4ea89e038990",
+        "__version": 1,
         "BroadcastEvents": {},
         "CastShadows": "Off",
         "CreateAttachPoints": false,
@@ -15,8 +16,9 @@
         "PlaybackSpeed": 1,
         "Sprite": "textures/sprites/shield/shield.sprite",
         "SpriteFlags": "None",
-        "StartingAnimationName": "",
-        "Tint": "1,1,0,1"
+        "StartingAnimationName": "idle",
+        "Tint": "1,1,0,1",
+        "UpDirection": "XNegative"
       },
       {
         "__type": "ShieldVfx",

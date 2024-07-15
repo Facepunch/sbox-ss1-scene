@@ -4,13 +4,12 @@
     "Flags": 0,
     "Name": "shadow",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "SpriteTools.SpriteComponent",
         "__guid": "883c093f-51ab-4992-b09d-0e0d0853e384",
-        "_broadcastEvents": {},
+        "__version": 1,
+        "BroadcastEvents": {},
         "CastShadows": "Off",
         "CreateAttachPoints": false,
         "FlashTint": "1,1,1,0",
@@ -18,7 +17,8 @@
         "Sprite": "textures/sprites/shadow/shadow.sprite",
         "SpriteFlags": "None",
         "StartingAnimationName": "idle",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UpDirection": "XNegative"
       }
     ],
     "Children": [],

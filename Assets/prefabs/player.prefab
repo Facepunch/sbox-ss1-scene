@@ -4,8 +4,6 @@
     "Flags": 0,
     "Name": "player",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Player",
@@ -36,8 +34,6 @@
         "Flags": 0,
         "Name": "body",
         "Enabled": true,
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
         "Children": [
           {
             "__guid": "f45f7cab-0fd1-4590-86c0-ea7a817143d0",
@@ -46,21 +42,21 @@
             "Rotation": "0,-0,-0.7071068,0.7071068",
             "Scale": "0.01,0.01,1",
             "Enabled": true,
-            "NetworkMode": 2,
-            "NetworkInterpolation": true,
             "Components": [
               {
                 "__type": "SpriteTools.SpriteComponent",
                 "__guid": "302bca90-1290-4007-863d-daeb29706c46",
-                "_broadcastEvents": {},
+                "__version": 1,
+                "BroadcastEvents": {},
                 "CastShadows": "Off",
                 "CreateAttachPoints": false,
-                "FlashAmount": 0,
-                "FlashColor": "1,1,1,1",
+                "FlashTint": "1,1,1,0",
                 "PlaybackSpeed": 1,
                 "Sprite": "textures/sprites/player/player.sprite",
-                "StartingAnimationName": "",
-                "Tint": "1,1,1,1"
+                "SpriteFlags": "None",
+                "StartingAnimationName": "idle",
+                "Tint": "1,1,1,1",
+                "UpDirection": "XNegative"
               }
             ]
           }

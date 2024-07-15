@@ -4,8 +4,6 @@
     "Flags": 0,
     "Name": "health_pack",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "HealthPack",
@@ -25,13 +23,12 @@
         "Name": "sprite",
         "Rotation": "0,-0,-0.7071068,0.7071068",
         "Enabled": true,
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "SpriteTools.SpriteComponent",
             "__guid": "e8c7d0bc-5335-46f9-91fa-74ed9fe24545",
-            "_broadcastEvents": {},
+            "__version": 1,
+            "BroadcastEvents": {},
             "CastShadows": "Off",
             "CreateAttachPoints": false,
             "FlashTint": "1,1,1,0",
@@ -39,7 +36,8 @@
             "Sprite": "textures/sprites/health_pack/health_pack.sprite",
             "SpriteFlags": "None",
             "StartingAnimationName": "idle",
-            "Tint": "1,1,1,1"
+            "Tint": "1,1,1,1",
+            "UpDirection": "XNegative"
           }
         ]
       }

@@ -3,7 +3,6 @@
     "__guid": "eb5ea8d0-88d0-4199-8810-3fc01abb75f4",
     "Flags": 0,
     "Name": "fire",
-    "Rotation": "0,-0,-0.7071068,0.7071068",
     "Enabled": true,
     "Components": [
       {
@@ -28,6 +27,7 @@
           {
             "__type": "SpriteTools.SpriteComponent",
             "__guid": "481977d7-d94d-4fdc-8cef-8c5c6903b0bb",
+            "__version": 1,
             "BroadcastEvents": {},
             "CastShadows": "Off",
             "CreateAttachPoints": false,
@@ -36,7 +36,8 @@
             "Sprite": "textures/sprites/fire/fire.sprite",
             "SpriteFlags": "None",
             "StartingAnimationName": "idle",
-            "Tint": "1,1,1,1"
+            "Tint": "1,1,1,1",
+            "UpDirection": "XNegative"
           }
         ]
       }

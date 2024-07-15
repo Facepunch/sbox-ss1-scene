@@ -4,13 +4,12 @@
     "Flags": 0,
     "Name": "explosion_effect",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "SpriteTools.SpriteComponent",
         "__guid": "a6c626cf-4821-4df8-86f9-fc3781b01777",
-        "_broadcastEvents": {},
+        "__version": 1,
+        "BroadcastEvents": {},
         "CastShadows": "Off",
         "CreateAttachPoints": false,
         "FlashTint": "1,1,1,0",
@@ -18,7 +17,8 @@
         "Sprite": "textures/sprites/explosion/explosion.sprite",
         "SpriteFlags": "None",
         "StartingAnimationName": "idle",
-        "Tint": "1,0,0,1"
+        "Tint": "1,0,0,1",
+        "UpDirection": "XNegative"
       },
       {
         "__type": "ExplosionEffect",

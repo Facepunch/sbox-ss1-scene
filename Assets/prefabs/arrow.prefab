@@ -9,6 +9,7 @@
       {
         "__type": "SpriteTools.SpriteComponent",
         "__guid": "994c2676-244b-47f0-a5ce-afe24259dc94",
+        "__version": 1,
         "BroadcastEvents": {},
         "CastShadows": "Off",
         "CreateAttachPoints": false,
@@ -17,7 +18,8 @@
         "Sprite": "textures/sprites/arrow/arrow.sprite",
         "SpriteFlags": "None",
         "StartingAnimationName": "idle",
-        "Tint": "1,1,1,0"
+        "Tint": "1,1,1,0",
+        "UpDirection": "XNegative"
       }
     ],
     "Children": [],

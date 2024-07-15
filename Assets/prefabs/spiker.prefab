@@ -27,6 +27,7 @@
           {
             "__type": "SpriteTools.SpriteComponent",
             "__guid": "bd087230-ab93-4d54-b103-921babc1fc61",
+            "__version": 1,
             "BroadcastEvents": {},
             "CastShadows": "Off",
             "CreateAttachPoints": false,
@@ -35,7 +36,8 @@
             "Sprite": "textures/sprites/spiker/spiker.sprite",
             "SpriteFlags": "None",
             "StartingAnimationName": "walk",
-            "Tint": "1,1,1,1"
+            "Tint": "1,1,1,1",
+            "UpDirection": "XNegative"
           }
         ]
       }

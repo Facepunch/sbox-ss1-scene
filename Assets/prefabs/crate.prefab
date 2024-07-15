@@ -4,8 +4,6 @@
     "Flags": 0,
     "Name": "crate",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Crate",
@@ -25,13 +23,12 @@
         "Name": "sprite",
         "Rotation": "0,-0,-0.7071068,0.7071068",
         "Enabled": true,
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "SpriteTools.SpriteComponent",
             "__guid": "a861b4d1-977c-487f-a869-af1faf5b0088",
-            "_broadcastEvents": {},
+            "__version": 1,
+            "BroadcastEvents": {},
             "CastShadows": "Off",
             "CreateAttachPoints": false,
             "FlashTint": "1,1,1,0",
@@ -39,7 +36,8 @@
             "Sprite": "textures/sprites/crate/crate.sprite",
             "SpriteFlags": "None",
             "StartingAnimationName": "idle",
-            "Tint": "1,1,1,1"
+            "Tint": "1,1,1,1",
+            "UpDirection": "XNegative"
           }
         ]
       }

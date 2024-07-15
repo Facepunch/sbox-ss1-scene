@@ -27,6 +27,7 @@
           {
             "__type": "SpriteTools.SpriteComponent",
             "__guid": "a7a21b8d-9462-468f-bae5-db51be495102",
+            "__version": 1,
             "BroadcastEvents": {},
             "CastShadows": "Off",
             "CreateAttachPoints": false,
@@ -35,7 +36,8 @@
             "Sprite": "textures/sprites/enemy_bullet/enemy_bullet.sprite",
             "SpriteFlags": "None",
             "StartingAnimationName": "idle",
-            "Tint": "1,0,0,1"
+            "Tint": "1,0,0,1",
+            "UpDirection": "XNegative"
           }
         ]
       }

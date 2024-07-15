@@ -8,6 +8,7 @@
       {
         "__type": "SpriteTools.SpriteComponent",
         "__guid": "b2cf2f34-cb91-4058-90d5-326326500bcd",
+        "__version": 1,
         "BroadcastEvents": {},
         "CastShadows": "Off",
         "CreateAttachPoints": false,
@@ -15,8 +16,9 @@
         "PlaybackSpeed": 1,
         "Sprite": "textures/sprites/frozen/frozen.sprite",
         "SpriteFlags": "None",
-        "StartingAnimationName": "",
-        "Tint": "1,1,1,1"
+        "StartingAnimationName": "idle",
+        "Tint": "1,1,1,1",
+        "UpDirection": "XNegative"
       },
       {
         "__type": "FrozenVfx",

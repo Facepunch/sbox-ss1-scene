@@ -27,6 +27,7 @@
           {
             "__type": "SpriteTools.SpriteComponent",
             "__guid": "4fdec62b-19e0-4449-9382-2ca124011a43",
+            "__version": 1,
             "BroadcastEvents": {},
             "CastShadows": "Off",
             "CreateAttachPoints": false,
@@ -35,7 +36,8 @@
             "Sprite": "textures/sprites/spike_top/spike_top.sprite",
             "SpriteFlags": "None",
             "StartingAnimationName": "spike",
-            "Tint": "1,1,1,1"
+            "Tint": "1,1,1,1",
+            "UpDirection": "XNegative"
           }
         ]
       }

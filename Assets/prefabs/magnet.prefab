@@ -4,8 +4,6 @@
     "Flags": 0,
     "Name": "magnet",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Magnet",
@@ -25,21 +23,21 @@
         "Name": "sprite",
         "Rotation": "0,-0,-0.7071068,0.7071068",
         "Enabled": true,
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "SpriteTools.SpriteComponent",
             "__guid": "7bf9312d-0c8f-4db5-868b-abe52adf1697",
-            "_broadcastEvents": {},
+            "__version": 1,
+            "BroadcastEvents": {},
             "CastShadows": "Off",
             "CreateAttachPoints": false,
             "FlashTint": "1,1,1,0",
             "PlaybackSpeed": 1,
             "Sprite": "textures/sprites/magnet/magnet.sprite",
             "SpriteFlags": "None",
-            "StartingAnimationName": "",
-            "Tint": "1,1,1,1"
+            "StartingAnimationName": "idle",
+            "Tint": "1,1,1,1",
+            "UpDirection": "XNegative"
           }
         ]
       }

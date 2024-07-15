@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
+using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using Sandbox;
 
@@ -30,6 +31,39 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
         }
     }
     SpriteResource _sprite;
+
+    [Property]
+    public Axis UpDirection
+    {
+        get => _upDirection;
+        set
+        {
+            _upDirection = value;
+            switch (value)
+            {
+                case Axis.XPositive:
+                    _rotationOffset = Rotation.From(0, 180, 0);
+                    break;
+                case Axis.XNegative:
+                    _rotationOffset = Rotation.From(0, 0, 0);
+                    break;
+                case Axis.YPositive:
+                    _rotationOffset = Rotation.From(0, -90, 0);
+                    break;
+                case Axis.YNegative:
+                    _rotationOffset = Rotation.From(0, 90, 0);
+                    break;
+                case Axis.ZPositive:
+                    _rotationOffset = Rotation.From(90, 0, 0);
+                    break;
+                case Axis.ZNegative:
+                    _rotationOffset = Rotation.From(-90, 0, 0);
+                    break;
+            }
+        }
+    }
+    Axis _upDirection = Axis.YPositive;
+    Rotation _rotationOffset = Rotation.Identity;
 
     /// <summary>
     /// The color tint of the Sprite.
@@ -145,8 +179,7 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
         }
     }
 
-
-    [JsonIgnore, Property, Category("Sprite")]
+    [JsonIgnore, Property, Category("Sprite"), HideIf("HasBroadcastEvents", false)]
     BroadcastControls _broadcastEvents = new();
 
     [Property, Category("Sprite")]
@@ -181,6 +214,22 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
     /// </summary>
     [Property, Group("Sprite")]
     public Action<string> OnAnimationComplete { get; set; }
+
+    /// <summary>
+    /// Whether or not the sprite has any broadcast events.
+    /// </summary>
+    public bool HasBroadcastEvents => BroadcastEvents.Count > 0;
+
+    public BBox Bounds
+    {
+        get
+        {
+            BBox bbox = new BBox(new Vector3(-50, -50, -0.1f), new Vector3(50, 50, 0.1f));
+            var origin = (CurrentAnimation?.Origin ?? new Vector2(0.5f, 0.5f)) - new Vector2(0.5f, 0.5f);
+            bbox = bbox.Translate(new Vector3(-origin.y, origin.x, 0) * 100f);
+            return bbox;
+        }
+    }
 
     /// <summary>
     /// The current frame index of the animation playing.
@@ -260,17 +309,19 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
         base.DrawGizmos();
         if (Game.IsPlaying) return;
 
-        BBox bbox = new BBox(new Vector3(-50, -50, -0.1f), new Vector3(50, 50, 0.1f));
-        var origin = (CurrentAnimation?.Origin ?? new Vector2(0.5f, 0.5f)) - new Vector2(0.5f, 0.5f);
-        bbox = bbox.Translate(new Vector3(-origin.y, origin.x, 0) * 100f);
-        Gizmo.Hitbox.BBox(bbox);
-
-        if (Gizmo.IsHovered || Gizmo.IsSelected)
+        using (Gizmo.Scope("sprite"))
         {
-            bbox.Mins.z = 0;
-            bbox.Maxs.z = 0.0f;
-            Gizmo.Draw.Color = Gizmo.IsSelected ? Color.White : Color.Orange;
-            Gizmo.Draw.LineBBox(bbox);
+            Gizmo.Transform = Gizmo.Transform.WithRotation(Transform.Rotation * _rotationOffset);
+            var bbox = Bounds;
+            Gizmo.Hitbox.BBox(bbox);
+
+            if (Gizmo.IsHovered || Gizmo.IsSelected)
+            {
+                bbox.Mins.z = 0;
+                bbox.Maxs.z = 0.0f;
+                Gizmo.Draw.Color = Gizmo.IsSelected ? Color.White : Color.Orange;
+                Gizmo.Draw.LineBBox(bbox);
+            }
         }
     }
 
@@ -310,17 +361,18 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
             if (CurrentAnimation.Looping || CurrentFrameIndex < lastFrame - 1)
             {
                 var frame = CurrentFrameIndex;
+                var currentFrame = CurrentAnimation.Frames[frame];
+                foreach (var tag in currentFrame.Events)
+                {
+                    BroadcastEvent(tag);
+                }
+
                 frame++;
                 if (CurrentAnimation.Looping && frame >= lastFrame)
                     frame = 0;
                 else if (frame >= lastFrame - 1)
                     OnAnimationComplete?.Invoke(CurrentAnimation.Name);
                 CurrentFrameIndex = frame;
-                var currentFrame = CurrentAnimation.Frames[CurrentFrameIndex];
-                foreach (var tag in currentFrame.Events)
-                {
-                    BroadcastEvent(tag);
-                }
                 _timeSinceLastFrame = 0;
             }
         }
@@ -329,6 +381,12 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
             if (CurrentAnimation.Looping || CurrentFrameIndex > 0)
             {
                 var frame = CurrentFrameIndex;
+                var currentFrame = CurrentAnimation.Frames[frame];
+                foreach (var tag in currentFrame.Events)
+                {
+                    BroadcastEvent(tag);
+                }
+
                 frame--;
                 if (CurrentAnimation.Looping && frame < 0)
                     frame = lastFrame - 1;
@@ -345,11 +403,12 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
 
         // Add pivot to transform
         var pos = Transform.Position;
+        var rot = Transform.Rotation * _rotationOffset;
         var scale = Transform.Scale;
         var origin = CurrentAnimation.Origin - new Vector2(0.5f, 0.5f);
         pos -= new Vector3(origin.y, origin.x, 0) * 100f * scale;
-        pos = pos.RotateAround(Transform.Position, Transform.Rotation);
-        SceneObject.Transform = new Transform(pos, Transform.Rotation, scale);
+        pos = pos.RotateAround(Transform.Position, rot);
+        SceneObject.Transform = new Transform(pos, rot, scale);
     }
 
     internal void UpdateAttachments()
@@ -361,8 +420,8 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
                 var attachPos = CurrentAnimation.GetAttachmentPosition(attachment.Key, CurrentFrameIndex);
                 var origin = CurrentAnimation.Origin - new Vector2(0.5f, 0.5f);
                 var pos = (new Vector3(attachPos.y, attachPos.x, 0) - (Vector3.One.WithZ(0) / 2f) - new Vector3(origin.y, origin.x, 0)) * 100f;
+                pos = pos.RotateAround(Vector3.Zero, _rotationOffset);
                 pos *= Transform.LocalScale;
-                // pos = pos.RotateAround(Transform.Position, Transform.Rotation);
                 attachment.Value.Transform.LocalPosition = pos;
             }
         }
@@ -483,6 +542,22 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
         }
     }
 
+    public enum Axis
+    {
+        [Title("+X")]
+        XPositive,
+        [Title("-X")]
+        XNegative,
+        [Title("+Y")]
+        YPositive,
+        [Title("-Y")]
+        YNegative,
+        [Title("+Z")]
+        ZPositive,
+        [Title("-Z")]
+        ZNegative
+    }
+
     public enum ShadowRenderType
     {
         [Icon("wb_shade")]
@@ -501,5 +576,16 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
     public class AnimationNameAttribute : Attribute
     {
         public string Parameter { get; set; } = "Sprite";
+    }
+
+    public override int ComponentVersion => 1;
+
+    [JsonUpgrader(typeof(SpriteComponent), 1)]
+    static void Upgrader_v1(JsonObject json)
+    {
+        if (!json.ContainsKey("UpDirection"))
+        {
+            json["UpDirection"] = (int)Axis.XNegative;
+        }
     }
 }

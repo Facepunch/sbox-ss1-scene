@@ -8,6 +8,7 @@
       {
         "__type": "SpriteTools.SpriteComponent",
         "__guid": "d16e8be1-852a-4287-a5c2-e23d95b2e7b2",
+        "__version": 1,
         "BroadcastEvents": {},
         "CastShadows": "Off",
         "CreateAttachPoints": false,
@@ -15,8 +16,9 @@
         "PlaybackSpeed": 1,
         "Sprite": "textures/sprites/spike_bottom/spike_bottom.sprite",
         "SpriteFlags": "None",
-        "StartingAnimationName": "",
-        "Tint": "1,1,1,1"
+        "StartingAnimationName": "spike",
+        "Tint": "1,1,1,1",
+        "UpDirection": "XNegative"
       }
     ],
     "Children": [],

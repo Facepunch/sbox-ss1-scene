@@ -27,7 +27,8 @@
           {
             "__type": "SpriteTools.SpriteComponent",
             "__guid": "bd087230-ab93-4d54-b103-921babc1fc61",
-            "_broadcastEvents": {},
+            "__version": 1,
+            "BroadcastEvents": {},
             "CastShadows": "Off",
             "CreateAttachPoints": false,
             "FlashTint": "1,1,1,0",
@@ -35,7 +36,8 @@
             "Sprite": "textures/sprites/exploder_elite/exploder_elite.sprite",
             "SpriteFlags": "None",
             "StartingAnimationName": "walk",
-            "Tint": "1,1,1,1"
+            "Tint": "1,1,1,1",
+            "UpDirection": "XNegative"
           }
         ]
       }

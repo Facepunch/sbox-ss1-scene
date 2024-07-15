@@ -8,6 +8,7 @@
       {
         "__type": "SpriteTools.SpriteComponent",
         "__guid": "036f6d41-c4f4-442f-aa89-cd6d54ff530d",
+        "__version": 1,
         "BroadcastEvents": {},
         "CastShadows": "Off",
         "CreateAttachPoints": false,
@@ -15,8 +16,9 @@
         "PlaybackSpeed": 1,
         "Sprite": "textures/sprites/fire/fire.sprite",
         "SpriteFlags": "None",
-        "StartingAnimationName": "",
-        "Tint": "1,1,1,1"
+        "StartingAnimationName": "idle",
+        "Tint": "1,1,1,1",
+        "UpDirection": "XNegative"
       },
       {
         "__type": "BurningVfx",

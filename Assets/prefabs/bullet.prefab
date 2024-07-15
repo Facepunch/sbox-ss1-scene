@@ -4,8 +4,6 @@
     "Flags": 0,
     "Name": "bullet",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Bullet",
@@ -24,13 +22,12 @@
         "Flags": 0,
         "Name": "sprite",
         "Enabled": true,
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "SpriteTools.SpriteComponent",
             "__guid": "0c2090d1-716f-47c4-86f1-205343dd0398",
-            "_broadcastEvents": {},
+            "__version": 1,
+            "BroadcastEvents": {},
             "CastShadows": "Off",
             "CreateAttachPoints": false,
             "FlashTint": "1,1,1,0",
@@ -38,7 +35,8 @@
             "Sprite": "textures/sprites/bullet/bullet.sprite",
             "SpriteFlags": "None",
             "StartingAnimationName": "idle",
-            "Tint": "1,1,1,1"
+            "Tint": "1,1,1,1",
+            "UpDirection": "XNegative"
           }
         ]
       }

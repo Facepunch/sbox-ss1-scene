@@ -4,21 +4,21 @@
     "Flags": 0,
     "Name": "blood",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "SpriteTools.SpriteComponent",
         "__guid": "85f3f5a6-aca7-4d57-93fd-13206391044e",
-        "_broadcastEvents": {},
+        "__version": 1,
+        "BroadcastEvents": {},
         "CastShadows": "Off",
         "CreateAttachPoints": false,
         "FlashTint": "1,1,1,0",
         "PlaybackSpeed": 1,
         "Sprite": "textures/sprites/blood_splatter/blood_splatter.sprite",
         "SpriteFlags": "None",
-        "StartingAnimationName": "",
-        "Tint": "1,1,1,1"
+        "StartingAnimationName": "blood_splatter_0",
+        "Tint": "1,1,1,1",
+        "UpDirection": "XNegative"
       },
       {
         "__type": "BloodSplatter",

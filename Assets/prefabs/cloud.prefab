@@ -5,20 +5,21 @@
     "Name": "cloud",
     "Scale": "0.01,0.01,1",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "SpriteTools.SpriteComponent",
         "__guid": "edd70bb8-e7b5-48d6-aba6-18aac692ff33",
-        "_broadcastEvents": {},
+        "__version": 1,
+        "BroadcastEvents": {},
         "CastShadows": "Off",
         "CreateAttachPoints": false,
         "FlashTint": "1,1,1,0",
         "PlaybackSpeed": 1,
         "Sprite": "textures/sprites/cloud/cloud.sprite",
+        "SpriteFlags": "None",
         "StartingAnimationName": "idle",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UpDirection": "XNegative"
       },
       {
         "__type": "Cloud",
