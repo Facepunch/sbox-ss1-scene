@@ -133,7 +133,7 @@ public class Spiker : Enemy
 		if ( closestPlayer == null )
 			return;
 
-		var target_pos = closestPlayer.Position2D + closestPlayer.Velocity * Game.Random.Float( 0.2f, 2f ) + new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) ) * 0.4f;
+		var target_pos = closestPlayer.Position2D + closestPlayer.Velocity * Game.Random.Float( 0.2f, 2f ) + new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) ) * 0.8f;
 		var BUFFER = 0.3f;
 
 		Manager.Instance.SpawnEnemySpike( new Vector2( Math.Clamp( target_pos.x, Manager.Instance.BOUNDS_MIN.x + BUFFER, Manager.Instance.BOUNDS_MAX.x - BUFFER ), Math.Clamp( target_pos.y, Manager.Instance.BOUNDS_MIN.y + BUFFER, Manager.Instance.BOUNDS_MAX.y - BUFFER ) ) );

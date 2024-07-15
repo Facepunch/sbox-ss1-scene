@@ -49,7 +49,7 @@ public class ShieldStatus : Status
             IsShielded = true;
             Player.CreateShieldVfx();
             _timer = 0f;
-            Manager.Instance.PlaySfxNearby( "shield_gain", Player.Position2D, pitch: Game.Random.Float(1.2f, 1.25f), volume: 0.7f, maxDist: 7.5f);
+            Manager.Instance.PlaySfxNearby( "shield_gain", Player.Position2D, pitch: Game.Random.Float(1.2f, 1.25f), volume: 0.5f, maxDist: 7.5f);
         }
     }
 

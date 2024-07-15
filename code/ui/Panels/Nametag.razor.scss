@@ -10,7 +10,9 @@ Nametag {
     overflow: hidden;
 
     .name, .level {
-        font-family: "NotJamSlab14";
+        //font-family: Sonic Mania Leaderboard Font;
+        //font-family: "VCRosdNEUE";
+        font-family: "RulerGold";
         opacity: 1;
         color: white;
         font-size: 14px;
@@ -38,7 +40,7 @@ Nametag {
         overflow: hidden;
         border-left: 2px solid #fff;
         border-right: 2px solid #fff;
-        align-self:center;
+        align-self: center;
 
         &.invisible {
             display: none;

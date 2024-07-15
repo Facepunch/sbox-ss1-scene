@@ -20,7 +20,7 @@
 					<div class="choice_icon" style="background-image: url(@(status.IconPath));"></div>
 
 					<div class="choice_title">
-						@($"{i + 1}. {status.Title}{lvlStr}")
+						@($"[{i + 1}] {status.Title}{lvlStr}")
 					</div>
 
 					<div class="choice_description">
@@ -32,7 +32,7 @@
 
 		<div class="reroll_button @(Player.NumRerollAvailable <= 0 ? "disabled" : "")" onclick=@(() => RerollButtonClicked())>
 			<div class="reroll_button_label @(Player.NumRerollAvailable <= 0 ? "disabled_text" : "")">
-				@($"Reroll [{Player.NumRerollAvailable}]")
+				@($"[R]eroll ({Player.NumRerollAvailable} left)")
 			</div>
 		</div>
 	</div>

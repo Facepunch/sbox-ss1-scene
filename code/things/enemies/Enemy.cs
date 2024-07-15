@@ -350,7 +350,23 @@ public abstract class Enemy : Thing
 		if ( IsDying )
 			return;
 
-		Flash( damage < Health ? 0.12f : 0.05f );
+		Player player = null;
+		if ( playerId != Guid.Empty )
+		{
+			var playerObj = Scene.Directory.FindByGuid( playerId );
+			player = playerObj?.Components.Get<Player>() ?? null;
+
+			if ( player != null )
+			{
+				if ( IsFeared )
+				{
+					damage *= player.Stats[PlayerStat.FearDamageMultiplier];
+				}
+			}
+		}
+
+		//Flash( damage < Health ? 0.12f : 0.05f );
+		Flash( 0.12f );
 
 		//DamageNumbers.Add( (int)damage, Position2D + Vector2.Up * Radius * 3f + new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) ) * 0.2f, color: isCrit ? Color.Yellow : Color.White );
 		DamageNumbersLegacy.Create( damage, Position2D + new Vector2(0.4f + Game.Random.Float(-0.1f, 0.1f), Radius * 3f + Game.Random.Float( -0.2f, 0.3f ) ), color: isCrit ? Color.Yellow : Color.White );
@@ -358,20 +374,12 @@ public abstract class Enemy : Thing
 		if ( IsProxy )
 			return;
 
-		Player player = null;
-		if ( playerId != Guid.Empty)
+		if ( player != null )
 		{
-			var playerObj = Scene.Directory.FindByGuid( playerId );
-			player = playerObj?.Components.Get<Player>() ?? null;
-			if ( player != null )
+			if ( IsFeared )
 			{
-				if ( IsFeared )
-				{
-					damage *= player.Stats[PlayerStat.FearDamageMultiplier];
-
-					if ( player.Stats[PlayerStat.FearDrainPercent] > 0f )
-						player.RegenHealth( damage * player.Stats[PlayerStat.FearDrainPercent] );
-				}
+				if ( player.Stats[PlayerStat.FearDrainPercent] > 0f )
+					player.RegenHealth( damage * player.Stats[PlayerStat.FearDrainPercent] );
 			}
 		}
 
@@ -387,7 +395,7 @@ public abstract class Enemy : Thing
 	public virtual void DamageFire( float damage, Player player )
 	{
 		if ( IsFrozen )
-			damage *= player.Stats[PlayerStat.FreezeFireDamageMultiplier];
+			damage *= player?.Stats[PlayerStat.FreezeFireDamageMultiplier] ?? 1f;
 
 		Damage( damage, player?.GameObject.Id ?? Guid.Empty, addVel: Vector2.Zero, addTempWeight: 0f );
 	}

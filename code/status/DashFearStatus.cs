@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sandbox;
 
-[Status( 1, 0, 1f )]
+[Status( 1, 0, 111f )]
 public class DashFearStatus : Status
 {
 	public DashFearStatus()

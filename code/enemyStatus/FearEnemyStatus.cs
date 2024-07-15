@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 
+// unused
 public class FearEnemyStatus : EnemyStatus
 {
 	public float Lifetime { get; set; }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sandbox;
 
-[Status( 7, 0, 1f, typeof( DashFearStatus ), typeof( GrenadeFearStatus ) )]
+[Status( 7, 0, 111f, typeof( DashFearStatus ), typeof( GrenadeFearStatus ) )]
 public class FearDamageStatus : Status
 {
 	public FearDamageStatus()

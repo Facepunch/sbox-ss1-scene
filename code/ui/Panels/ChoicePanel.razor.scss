@@ -17,13 +17,15 @@ ChoicePanel {
         align-items: center;
         justify-content: center;
         background-color: #000a;
-        font-family: "NotJamSlab14";
+        //font-family: Sonic Mania Leaderboard Font;
+        //font-family: "VCRosdNEUE";
+        font-family: "RulerGold";
 
         .choice_lvl_label {
             color: #fffe;
             font-size: 38px;
             font-weight: bold;
-            justify-content:center;
+            justify-content: center;
         }
 
         .choice_button_container {

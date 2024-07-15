@@ -132,7 +132,7 @@ public class SpikerElite : Enemy
 		if ( closestPlayer == null )
 			return;
 
-		var target_pos = closestPlayer.Position2D + closestPlayer.Velocity * Game.Random.Float( 0.1f, 3f ) + new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) ) * 0.5f;
+		var target_pos = closestPlayer.Position2D + closestPlayer.Velocity * Game.Random.Float( 0.1f, 3f ) + new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) ) * 1.2f;
 		var BUFFER = 0.3f;
 
 		Manager.Instance.SpawnEnemySpike( 

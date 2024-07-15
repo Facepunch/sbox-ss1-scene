@@ -7,13 +7,14 @@ MainMenu {
 	justify-content: center;
 	align-items: center;
 	font-weight: bold;
-	font-family: Poppins;
+	//font-family: Sonic Mania Leaderboard Font;
+	//font-family: "VCRosdNEUE";
+	font-family: "RulerGold";
 	pointer-events: all;
 	background-color: rgba(black, 0.2);
 	//backdrop-filter: blur( 1px );
 	flex-direction: column;
 	padding: 50px;
-	font-family: "NotJamSlab14";
 	cursor: "default-cursor";
 
 	.title {
