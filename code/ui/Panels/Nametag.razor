@@ -24,8 +24,8 @@
 		var reloadProgress = Utils.EasePercent(Player.ReloadProgress, EasingType.CubicInOut);
 
 		<div class="hpbar">
-			<div class="hpbardelta" style="width:@(hpPercent * 100f)%;"></div>
-			<div class="hpbaroverlay" style="width:@(hpPercent * 100f)%; background-color:@(bgColor.Rgba);"></div>
+			<div class="hpbardelta" style="width:@(hpPercent * 91f)%;"></div>
+			<div class="hpbaroverlay" style="width:@(hpPercent * 91f)%; background-color:@(bgColor.Rgba);"></div>
 		</div>
 
 		<div class="reload_bar @(Player.IsReloading ? "showing" : "")" style="width:@(reloadProgress * 100f)%; opacity: @(Utils.MapReturn(reloadProgress, 0f, 1f, 0f, 1f, EasingType.ExtremeOut));"></div>

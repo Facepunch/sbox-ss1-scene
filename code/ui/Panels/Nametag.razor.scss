@@ -29,7 +29,7 @@ Nametag {
         right: 0px;
         top: 0px;
         color: #bbb;
-        padding-right: 6px;
+        padding-right: 5px;
         padding-top: 1px;
     }
 
@@ -44,8 +44,8 @@ Nametag {
         margin: 5px;
         margin-top: 0;
         overflow: hidden;
-        border-left: 2px solid #fff;
-        border-right: 2px solid #fff;
+        //border-left: 2px solid #fff;
+        //border-right: 2px solid #fff;
         align-self: center;
 
         &.invisible {
@@ -55,6 +55,7 @@ Nametag {
         .hpbaroverlay {
             top: 0px;
             bottom: 0px;
+            //left: 0px;
             width: 0px;
             background-color: green;
             position: absolute;
@@ -71,6 +72,7 @@ Nametag {
         .hpbardelta {
             top: 0px;
             bottom: 0px;
+            //left: 0px;
             width: 0px;
             //border: 2px solid blue;
             background-color: white;

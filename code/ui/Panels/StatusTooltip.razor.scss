@@ -9,7 +9,10 @@ StatusTooltip {
     margin-left: 6px;
     margin-top: 6px;
     flex-direction: column;
-    padding: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
     //overflow: visible;
     //box-shadow: -2px 2px 2px #00000022;
     backdrop-filter: blur( 5px );
@@ -29,17 +32,17 @@ StatusTooltip {
 
     .tooltip_title {
         color: #66ff66;
-        font-size: 22px;
+        font-size: 32px;
     }
 
     .tooltip_level {
         color: #ffffff55;
-        font-size: 22px;
+        font-size: 32px;
         padding-left: 8px;
     }
 
     .tooltip_description {
         font-style: italic;
-        font-size: 18px;
+        font-size: 24px;
     }
 }

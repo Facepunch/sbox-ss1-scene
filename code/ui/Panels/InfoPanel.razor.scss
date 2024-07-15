@@ -23,13 +23,12 @@ InfoPanel {
         overflow: hidden;
         height: 28px;
         background-color: #0005;
-        border-left: 2px solid #fff;
-        border-right: 2px solid #fff;
-
+        //border-left: 2px solid #fff;
+        //border-right: 2px solid #fff;
 
         .info_bar_label {
             color: #fff;
-            font-size: 24px;
+            font-size: 28px;
             align-items: center;
             font-weight: bolder;
             //font-family: Sonic Mania Leaderboard Font;
@@ -39,7 +38,8 @@ InfoPanel {
             width: 100%;
             right: 0px;
             justify-content: flex-end;
-            padding: 1px 10px;
+            padding-right: 5px;
+            padding-top: 0px;
             position: absolute;
             text-stroke: 5px black;
             opacity: 0.7;
