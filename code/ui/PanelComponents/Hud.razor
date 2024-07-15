@@ -43,6 +43,11 @@
 			<BossNametag Boss=@Manager.Instance.Boss />
 		}
 	}
+
+	@if(Manager.Instance.ElapsedTime < 0.75f)
+	{
+		<div class="fade_in" style="background-color:@(Color.Black.WithAlpha(Utils.Map(Manager.Instance.ElapsedTime, 0f, 0.75f, 1f, 0f)).Rgba);"></div>
+	}
 </root>
 
 @code

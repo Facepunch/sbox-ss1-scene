@@ -38,5 +38,6 @@ StatusIcon {
         color: white;
         opacity: 1;
         text-shadow: -3px 3px 0px #000000;
+        pointer-events: none;
     }
 }
