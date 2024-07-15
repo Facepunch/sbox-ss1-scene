@@ -20,7 +20,7 @@ LobbyList {
         overflow-y: scroll;
         padding: 16px;
         flex-direction: column;
-        border-radius: 10px;
+        //border-radius: 10px;
 
         .lobby {
             width: 100%;
@@ -29,7 +29,7 @@ LobbyList {
             flex-shrink: 0;
             align-items: center;
             gap: 16px;
-            border-radius: 10px;
+            //border-radius: 10px;
             cursor: "select-cursor";
 
             img {

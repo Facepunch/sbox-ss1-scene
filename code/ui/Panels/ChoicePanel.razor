@@ -14,13 +14,20 @@
 			@for(int i = 0; i < Player.LevelUpChoices.Count; i++)
 			{
 				var status = Player.LevelUpChoices[i];
-				var lvlStr = status.Level > 1 ? $" [{status.Level}]" : "";
 
 				<div class="choice_button" onclick=@(() => ChoiceButtonClicked(TypeLibrary.GetType( status.GetType() )))>
-					<div class="choice_icon" style="background-image: url(@(status.IconPath));"></div>
+					<div class="choice_icon" style="background-image: url(@(status.IconPath));">
+
+						@if(status.Level > 1)
+						{
+							<div class="status_level_label">
+								@status.Level
+							</div>
+						}
+					</div>
 
 					<div class="choice_title">
-						@($"[{i + 1}] {status.Title}{lvlStr}")
+						@($"[{i + 1}] {status.Title}")
 					</div>
 
 					<div class="choice_description">
@@ -32,7 +39,7 @@
 
 		<div class="reroll_button @(Player.NumRerollAvailable <= 0 ? "disabled" : "")" onclick=@(() => RerollButtonClicked())>
 			<div class="reroll_button_label @(Player.NumRerollAvailable <= 0 ? "disabled_text" : "")">
-				@($"[R]eroll ({Player.NumRerollAvailable} left)")
+				@($"[R]eroll - {Player.NumRerollAvailable}")
 			</div>
 		</div>
 	</div>
