@@ -22,6 +22,7 @@ DeathPanel {
         align-items: center;
         justify-content: center;
         margin-bottom: 200px;
+        font-family: "NotJamSlab14";
 
         .death_label {
             color: #66ffaa;
@@ -42,6 +43,7 @@ DeathPanel {
             justify-content: center;
             color: #aaaaaa;
             font-size: 24px;
+            cursor: "select-cursor";
 
             &:hover {
                 border: 3px solid #66669999;

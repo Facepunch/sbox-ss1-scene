@@ -7,7 +7,7 @@ PauseMenu {
 	background-color: rgba(black, 0.9);
 	z-index: 1000;
 	cursor: "bug-default";
-	font-family: "paper cuts 2";
+	font-family: "NotJamSlab14";
 	color: white;
 	font-size: 32px;
 	padding: 256px;
@@ -41,7 +41,6 @@ PauseMenu {
 			margin: 4px 2px;
 			cursor: pointer;
 			box-shadow: 6px 6px 0px black;
-			border-radius: 5px;
 
 			&:hover {
 				background-color: #45a049;

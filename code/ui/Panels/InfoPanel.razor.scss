@@ -1,6 +1,6 @@
 InfoPanel {
     position: absolute;
-    width: 180px;
+    width: 240px;
     right: 20px;
     bottom: 20px;
     top: 20px;
@@ -20,16 +20,19 @@ InfoPanel {
 
     .info_bar {
         width: 100%;
-        border-radius: 4px;
         overflow: hidden;
         height: 28px;
         background-color: #0005;
+        border-left: 2px solid #fff;
+        border-right: 2px solid #fff;
+
 
         .info_bar_label {
             color: #fff;
-            font-size: 18px;
+            font-size: 24px;
+            align-items: center;
             font-weight: bolder;
-            font-family: Poppins;
+            font-family: "NotJamSlab14";
             width: 100%;
             right: 0px;
             justify-content: flex-end;
