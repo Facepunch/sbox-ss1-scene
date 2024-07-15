@@ -8,6 +8,14 @@
       "Enabled": true,
       "Components": [
         {
+          "__type": "MenuManager",
+          "__guid": "81af79ad-e242-4dba-9f12-b3610704a70b",
+          "MenuZombiePrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/menu/menu_zombie.prefab"
+          }
+        },
+        {
           "__type": "Sandbox.ScreenPanel",
           "__guid": "e2c6065c-f3a3-4d18-bccd-cbd63f120505",
           "AutoScreenScale": true,
@@ -53,7 +61,7 @@
         {
           "__type": "Sandbox.CameraComponent",
           "__guid": "ebf6d184-1602-48ba-8483-b9a29ffd869e",
-          "BackgroundColor": "0.01757,0.13023,0.0739,1",
+          "BackgroundColor": "0.10196,0.10196,0.10196,1",
           "ClearFlags": "All",
           "FieldOfView": 60,
           "IsMainCamera": true,
@@ -66,29 +74,10 @@
           "Viewport": "0,0,1,1",
           "ZFar": 10000,
           "ZNear": 10
-        }
-      ]
-    },
-    {
-      "__guid": "2ae0da6a-7732-426c-ba30-63e3979158b7",
-      "Flags": 0,
-      "Name": "sprite",
-      "Position": "62.97562,-63.43427,0",
-      "Rotation": "0,-0,-0.7071068,0.7071068",
-      "Enabled": true,
-      "Components": [
+        },
         {
-          "__type": "SpriteTools.SpriteComponent",
-          "__guid": "fe2892cd-7d29-476c-978d-de0d6525d4e0",
-          "BroadcastEvents": {},
-          "CastShadows": "On",
-          "CreateAttachPoints": false,
-          "FlashTint": "1,1,1,0",
-          "PlaybackSpeed": 0.5,
-          "Sprite": "textures/sprites/zombie/zombie.sprite",
-          "SpriteFlags": "None",
-          "StartingAnimationName": "walk",
-          "Tint": "1,1,1,1"
+          "__type": "MenuCamera",
+          "__guid": "7de4db23-45b1-445d-9f5e-b0df496c06a5"
         }
       ]
     }

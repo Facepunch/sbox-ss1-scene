@@ -1,0 +1,41 @@
+{
+  "RootObject": {
+    "__guid": "2ae0da6a-7732-426c-ba30-63e3979158b7",
+    "Flags": 0,
+    "Name": "menu_zombie",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "SpriteTools.SpriteComponent",
+        "__guid": "fe2892cd-7d29-476c-978d-de0d6525d4e0",
+        "BroadcastEvents": {},
+        "CastShadows": "On",
+        "CreateAttachPoints": false,
+        "FlashTint": "1,1,1,0",
+        "PlaybackSpeed": 0.5,
+        "Sprite": "textures/sprites/zombie/zombie.sprite",
+        "SpriteFlags": "None",
+        "StartingAnimationName": "walk",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "MenuZombie",
+        "__guid": "64d71859-8b42-40dc-bad0-8b12405a0dd4",
+        "Sprite": {
+          "_type": "component",
+          "component_id": "fe2892cd-7d29-476c-978d-de0d6525d4e0",
+          "go": "2ae0da6a-7732-426c-ba30-63e3979158b7",
+          "component_type": "SpriteComponent"
+        }
+      }
+    ],
+    "Children": [],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
