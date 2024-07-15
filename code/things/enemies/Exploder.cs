@@ -17,6 +17,9 @@ public class Exploder : Enemy
 
 	private Guid _playerWhoKilledUsId;
 
+	public override float HeightVariance => 0.03f;
+	public override float WidthVariance => 0.015f;
+
 	protected override void OnAwake()
 	{
 		//OffsetY = -0.52f;

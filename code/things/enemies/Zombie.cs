@@ -8,6 +8,9 @@ public class Zombie : Enemy
 	public bool HasTarget { get; private set; }
 	private Vector2 _wanderPos;
 
+	public override float HeightVariance => 0.065f;
+	public override float WidthVariance => 0.035f;
+
 	protected override void OnAwake()
 	{
 		//OffsetY = -0.38f;
@@ -18,6 +21,8 @@ public class Zombie : Enemy
 		Scale = 0.85f;
 
 		base.OnAwake();
+
+		Sprite.Transform.LocalScale = Sprite.Transform.LocalScale.WithX( Sprite.Transform.LocalScale.x * Game.Random.Float( 0.9f, 1.1f ) );
 
 		//SpriteTexture = SpriteTexture.Atlas( "textures/sprites/zombie.png", 5, 6 );
 		//AnimSpeed = 2f;

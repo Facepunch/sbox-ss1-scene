@@ -16,6 +16,9 @@ public class Spiker : Enemy
 	private TimeSince _prepareStartTime;
 	private bool _hasReversed;
 
+	public override float HeightVariance => 0.02f;
+	public override float WidthVariance => 0.01f;
+
 	protected override void OnAwake()
 	{
 		//OffsetY = -0.58f;

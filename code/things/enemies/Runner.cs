@@ -8,6 +8,9 @@ public class Runner : Enemy
 	public bool HasTarget { get; private set; }
 	private Vector2 _wanderPos;
 
+	public override float HeightVariance => 0.04f;
+	public override float WidthVariance => 0.02f;
+
 	protected override void OnAwake()
 	{
 		//OffsetY = -0.45f;

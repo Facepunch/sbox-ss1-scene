@@ -72,14 +72,16 @@ public abstract class Enemy : Thing
 	public int CoinValueMin { get; protected set; }
 	public int CoinValueMax { get; protected set; }
 
+	public virtual float HeightVariance => 0f;
+	public virtual float WidthVariance => 0f;
+
 	protected override void OnAwake()
 	{
 		base.OnAwake();
 
-		//Sprite = Components.Get<SpriteComponent>();
-		Sprite.Transform.LocalScale *= Scale * Globals.SPRITE_SCALE;
-		//Sprite.Tint = Color.White.WithAlpha( 0f );
-		//Sprite.Tint = Color.White.WithAlpha( 1f );
+		//Sprite.Transform.LocalScale *= Scale * Globals.SPRITE_SCALE;
+
+		Sprite.Transform.LocalScale = new Vector3(Scale * Game.Random.Float(1f - HeightVariance, 1f + HeightVariance), Scale * Game.Random.Float( 1f - WidthVariance, 1f + WidthVariance), 1f) * Globals.SPRITE_SCALE;
 
 		AnimSpawnPath = "spawn";
 		AnimIdlePath = "walk";

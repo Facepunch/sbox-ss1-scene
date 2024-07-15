@@ -14,6 +14,9 @@ public class Spitter : Enemy
 
 	private TimeSince _prepareShootTime;
 
+	public override float HeightVariance => 0.04f;
+	public override float WidthVariance => 0.02f;
+
 	protected override void OnAwake()
 	{
 		//OffsetY = -0.45f;

@@ -20,6 +20,9 @@ public class Charger : Enemy
 	private Vector2 _chargeVel;
 	private TimeSince _chargeCloudTimer;
 
+	public override float HeightVariance => 0.03f;
+	public override float WidthVariance => 0.015f;
+
 	protected override void OnAwake()
 	{
 		//OffsetY = -0.57f;

@@ -15,6 +15,9 @@ public class SpitterElite : Enemy
 	private int _numVolleysShot;
 	private float _currShootDelay;
 
+	public override float HeightVariance => 0.03f;
+	public override float WidthVariance => 0.02f;
+
 	protected override void OnAwake()
 	{
 		//OffsetY = -0.47f;
