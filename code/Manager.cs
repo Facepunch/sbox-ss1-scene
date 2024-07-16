@@ -115,10 +115,13 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	protected override void OnStart()
 	{
-		if ( MainMenu.IsSingleplayerGame )
-			CreatePlayer( Connection.Local );
-		else if ( !GameNetworkSystem.IsActive )
-			GameNetworkSystem.CreateLobby();
+		if ( !GameNetworkSystem.IsActive )
+		{
+			if ( MainMenu.IsSingleplayerGame )
+				CreatePlayer( Connection.Local );
+			else
+				GameNetworkSystem.CreateLobby();
+		}
 
 		if ( Networking.IsHost )
 			Network.TakeOwnership();
