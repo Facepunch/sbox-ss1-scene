@@ -88,12 +88,9 @@ public class Thing : Component
 		GameObject.Destroy();
 	}
 
-	[Broadcast]
+	[Authority]
 	public void DestroyCmd()
 	{
-		if ( IsProxy )
-			return;
-
 		GameObject.Destroy();
 	}
 

@@ -200,7 +200,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	{
 		Log.Info( $"Player '{channel.DisplayName}' is becoming active (local = {channel == Connection.Local}) (host = {channel.IsHost})" );
 
-		var playerObj = PlayerPrefab.Clone( new Vector3( Game.Random.Float(-3f, 3f), Game.Random.Float( -3f, 3f ), Globals.GetZPos( 0f ) ) );
+		var playerObj = PlayerPrefab.Clone( new Vector3( Game.Random.Float( -3f, 3f ), Game.Random.Float( -3f, 3f ), Globals.GetZPos( 0f ) ) );
 		var player = playerObj.Components.Get<Player>();
 
 		playerObj.NetworkSpawn( channel );
@@ -235,7 +235,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		{
 			float crateChance = ElapsedTime < 20f ? 0f : Utils.Map( ElapsedTime, 20f, 200f, 0.005f, 0.01f );
 			float additionalCrateChance = 0f;
-			foreach ( Player player in Scene.GetAllComponents<Player>().Where(x => !x.IsDead) )
+			foreach ( Player player in Scene.GetAllComponents<Player>().Where( x => !x.IsDead ) )
 			{
 				if ( player.Stats[PlayerStat.CrateChanceAdditional] > 0f )
 					additionalCrateChance += player.Stats[PlayerStat.CrateChanceAdditional];
@@ -350,12 +350,9 @@ public sealed class Manager : Component, Component.INetworkListener
 		PlaySfxNearby( "zombie.dirt", pos, pitch: Game.Random.Float( 0.6f, 0.8f ), volume: 0.7f, maxDist: 7.5f );
 	}
 
-	[Broadcast]
+	[Authority]
 	public void SpawnCoin( Vector2 pos, Vector2 vel, int value = 1 )
 	{
-		if ( IsProxy )
-			return;
-
 		// todo: spawn larger amounts less often if reaching max coin cap
 		if ( CoinCount >= MAX_COIN_COUNT )
 			return;
@@ -366,20 +363,20 @@ public sealed class Manager : Component, Component.INetworkListener
 		coin.SetValue( value );
 
 		coinObj.NetworkSpawn();
-		
+
 		AddThing( coin );
 		CoinCount++;
 
 		return;
 	}
 
-	public Magnet SpawnMagnet( Vector2 pos, Vector2 vel)
+	public Magnet SpawnMagnet( Vector2 pos, Vector2 vel )
 	{
 		var magnetObj = MagnetPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
 		var magnet = magnetObj.Components.Get<Magnet>();
 		magnet.Velocity = vel;
 		magnetObj.NetworkSpawn();
-		
+
 		TimeSinceMagnet = 0f;
 
 		AddThing( magnet );
@@ -441,12 +438,9 @@ public sealed class Manager : Component, Component.INetworkListener
 		}
 	}
 
-	[Broadcast]
+	[Authority]
 	public void SpawnFire( Vector2 pos, Guid playerId )
 	{
-		if ( IsProxy )
-			return;
-
 		var playerObj = Scene.Directory.FindByGuid( playerId );
 		Player player = playerObj?.Components.Get<Player>() ?? null;
 		if ( player == null )
@@ -605,12 +599,9 @@ public sealed class Manager : Component, Component.INetworkListener
 		things.AddRange( ThingGridPositions[gridSquare] );
 	}
 
-	[Broadcast]
+	[Authority]
 	public void PlayerDied( Player player )
 	{
-		if ( IsProxy )
-			return;
-
 		int numPlayersAlive = Scene.GetAllComponents<Player>().Where( x => !x.IsDead ).Count();
 		if ( numPlayersAlive == 0 )
 			GameOver();
@@ -656,7 +647,7 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public Cloud SpawnCloud( Vector2 pos )
 	{
-		var cloudObj = CloudPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ), new Angles(0f, -90f, 0f) );
+		var cloudObj = CloudPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ), new Angles( 0f, -90f, 0f ) );
 		var cloud = cloudObj.Components.Get<Cloud>();
 		cloud.Lifetime = 0.7f * Game.Random.Float( 0.8f, 1.2f );
 
@@ -720,7 +711,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		if ( IsProxy )
 			return;
 
-		foreach ( Thing thing in Scene.GetAllComponents<Thing>())
+		foreach ( Thing thing in Scene.GetAllComponents<Thing>() )
 		{
 			if ( thing is Player player )
 				player.Restart();
@@ -734,12 +725,12 @@ public sealed class Manager : Component, Component.INetworkListener
 		SpawnStartingThings();
 	}
 
-	public void PlayEnemyDeathSfx(Vector3 worldPos)
+	public void PlayEnemyDeathSfx( Vector3 worldPos )
 	{
 		if ( _numEnemyDeathSfxs >= 3 )
 			return;
 
-		PlaySfxNearby( "enemy.die", worldPos, pitch: Game.Random.Float(0.85f, 1.15f), volume: 1f, maxDist: 5.5f );
+		PlaySfxNearby( "enemy.die", worldPos, pitch: Game.Random.Float( 0.85f, 1.15f ), volume: 1f, maxDist: 5.5f );
 
 		_numEnemyDeathSfxs++;
 	}

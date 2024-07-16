@@ -37,7 +37,7 @@ public enum DamageType { Melee, Ranged, Explosion, Fire, }
 public class Player : Thing
 {
 	[Property] public GameObject Body { get; set; }
-	[Property] public GameObject ArrowAimerPrefab { get; set;  }
+	[Property] public GameObject ArrowAimerPrefab { get; set; }
 	[Property] public GameObject BulletPrefab { get; set; }
 
 	[Sync] public float Health { get; set; }
@@ -122,7 +122,7 @@ public class Player : Thing
 		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );
 
-		ArrowAimer = ArrowAimerPrefab.Clone(Transform.Position);
+		ArrowAimer = ArrowAimerPrefab.Clone( Transform.Position );
 		ArrowAimer.SetParent( GameObject );
 		ArrowAimer.NetworkMode = NetworkMode.Never;
 		ArrowSprite = ArrowAimer.Components.Get<SpriteComponent>();
@@ -136,7 +136,7 @@ public class Player : Thing
 	{
 		_original_properties_stat.Clear();
 
-		if(Network.Active)
+		if ( Network.Active )
 		{
 			RemoveShieldVfx();
 		}
@@ -187,7 +187,7 @@ public class Player : Thing
 		IsDead = false;
 		Radius = 0.10f;
 		GridPos = Manager.Instance.GetGridSquareForPos( Position2D );
-		AimDir = new Vector2(0f, 1f);
+		AimDir = new Vector2( 0f, 1f );
 		NumRerollAvailable = 2;
 
 		Stats[PlayerStat.FireDamage] = 1.0f;
@@ -268,10 +268,10 @@ public class Player : Thing
 
 		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.5f );
 		//Gizmo.Draw.Text( $"IsGameOver: {Manager.Instance.IsGameOver}\nIsDead: {IsDead}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
-		
+
 		string debug = "";
 
-		if (!_doneFirstUpdate)
+		if ( !_doneFirstUpdate )
 		{
 			SpawnShadow( ShadowScale, ShadowOpacity );
 			Manager.Instance.Camera2D.SetPos( Position2D );
@@ -279,7 +279,7 @@ public class Player : Thing
 			_doneFirstUpdate = true;
 		}
 
-		if (!IsProxy )
+		if ( !IsProxy )
 		{
 			InputVector = new Vector2( -Input.AnalogMove.y, Input.AnalogMove.x );
 
@@ -321,7 +321,7 @@ public class Player : Thing
 		bool moving = Velocity.LengthSquared > 0.01f && InputVector.LengthSquared > 0.1f;
 
 		string stateStr = "";
-		if( IsDead )
+		if ( IsDead )
 			stateStr = "ghost_";
 		else if ( hurting && attacking )
 			stateStr = "hurt_attack_";
@@ -333,7 +333,7 @@ public class Player : Thing
 		Sprite.PlayAnimation( $"{stateStr}{(moving ? "walk" : "idle")}" );
 		Sprite.PlaybackSpeed = moving ? Utils.Map( Velocity.Length, 0f, 2f, 1.5f, 2f ) : 0.66f;
 
-		Sprite.Transform.LocalRotation = new Angles( 0f, -90f + (Velocity.Length * Utils.FastSin( Time.Now * MathF.PI * 6f ) * 1.6f) * (Sprite.SpriteFlags.HasFlag(SpriteFlags.HorizontalFlip) ? -1f : 1f), 0f );
+		Sprite.Transform.LocalRotation = new Angles( 0f, -90f + (Velocity.Length * Utils.FastSin( Time.Now * MathF.PI * 6f ) * 1.6f) * (Sprite.SpriteFlags.HasFlag( SpriteFlags.HorizontalFlip ) ? -1f : 1f), 0f );
 
 		if ( !IsDead )
 		{
@@ -349,7 +349,7 @@ public class Player : Thing
 		var velocity = Velocity + (IsDashing ? DashVelocity : Vector2.Zero);
 		Position2D += velocity * dt;
 
-		Transform.Position = Transform.Position.WithZ( Globals.GetZPos(Position2D.y) );
+		Transform.Position = Transform.Position.WithZ( Globals.GetZPos( Position2D.y ) );
 
 		Velocity = Utils.DynamicEaseTo( Velocity, Vector2.Zero, 0.2f, dt );
 		TempWeight *= (1f - dt * 4.7f);
@@ -358,21 +358,21 @@ public class Player : Thing
 
 		Manager.Instance.Camera2D.TargetPos = Position2D;
 
-		if(Input.UsingController)
+		if ( Input.UsingController )
 		{
 
 		}
 		else
 		{
-			AimDir = (Manager.Instance.MouseWorldPos - (Position2D + new Vector2(0f, 0.5f))).Normal;
+			AimDir = (Manager.Instance.MouseWorldPos - (Position2D + new Vector2( 0f, 0.5f ))).Normal;
 		}
 
 		if ( ArrowAimer != null )
 		{
-			ArrowAimer.Transform.LocalRotation = new Angles(0f, MathF.Atan2( AimDir.y, AimDir.x ) * (180f / MathF.PI) - 180f, 0f);
+			ArrowAimer.Transform.LocalRotation = new Angles( 0f, MathF.Atan2( AimDir.y, AimDir.x ) * (180f / MathF.PI) - 180f, 0f );
 			//ArrowAimer.Transform.LocalPosition = new Vector2( 0f, 0.4f + OffsetY ) + AimDir * 0.7f;
 			ArrowAimer.Transform.LocalPosition = new Vector2( 0f, 0.4f ) + AimDir * Utils.Map( _timeSinceShoot, 0f, 0.25f, 0.6f, 0.55f, EasingType.QuadOut );
-			ArrowAimer.Transform.LocalScale = new Vector3(Utils.Map(_timeSinceShoot, 0f, 0.25f, 1.25f, 0.75f, EasingType.QuadOut), 1f, 1f) * 0.005f;
+			ArrowAimer.Transform.LocalScale = new Vector3( Utils.Map( _timeSinceShoot, 0f, 0.25f, 1.25f, 0.75f, EasingType.QuadOut ), 1f, 1f ) * 0.005f;
 			ArrowSprite.Tint = Color.White.WithAlpha( Utils.Map( _timeSinceShoot, 0f, 0.3f, 1f, 0.3f, EasingType.QuadOut ) * Utils.Map( _timeSinceSpawn, 0f, 1f, 0f, 1f, EasingType.Linear ) );
 		}
 
@@ -392,18 +392,18 @@ public class Player : Thing
 			HandleRegen( dt );
 		}
 
-		if(IsChoosingLevelUpReward)
+		if ( IsChoosingLevelUpReward )
 		{
-			if ( Input.Pressed( "reload" ) )		UseReroll();
-			else if ( Input.Pressed( "Slot1" ) )	UseChoiceHotkey( 1 );
-			else if ( Input.Pressed( "Slot2" ) )	UseChoiceHotkey( 2 );
-			else if ( Input.Pressed( "Slot3" ) )	UseChoiceHotkey( 3 );
-			else if ( Input.Pressed( "Slot4" ) )	UseChoiceHotkey( 4 );
-			else if ( Input.Pressed( "Slot5" ) )	UseChoiceHotkey( 5 );
-			else if ( Input.Pressed( "Slot6" ) )	UseChoiceHotkey( 6 );
+			if ( Input.Pressed( "reload" ) ) UseReroll();
+			else if ( Input.Pressed( "Slot1" ) ) UseChoiceHotkey( 1 );
+			else if ( Input.Pressed( "Slot2" ) ) UseChoiceHotkey( 2 );
+			else if ( Input.Pressed( "Slot3" ) ) UseChoiceHotkey( 3 );
+			else if ( Input.Pressed( "Slot4" ) ) UseChoiceHotkey( 4 );
+			else if ( Input.Pressed( "Slot5" ) ) UseChoiceHotkey( 5 );
+			else if ( Input.Pressed( "Slot6" ) ) UseChoiceHotkey( 6 );
 		}
 
-		if(Input.Pressed("use"))
+		if ( Input.Pressed( "use" ) )
 		{
 			AddExperience( 1 );
 		}
@@ -717,12 +717,9 @@ public class Player : Thing
 		Stats[statType] = curr_value;
 	}
 
-	[Broadcast]
+	[Authority]
 	public void AddExperience( int xp )
 	{
-		if ( IsProxy )
-			return;
-
 		ExperienceTotal += xp;
 		ExperienceCurrent += xp;
 
@@ -739,12 +736,9 @@ public class Player : Thing
 			LevelUp();
 	}
 
-	[Broadcast]
+	[Authority]
 	public void LevelUp()
 	{
-		if ( IsProxy )
-			return;
-
 		ExperienceCurrent -= ExperienceRequired;
 
 		Level++;
@@ -761,7 +755,7 @@ public class Player : Thing
 
 	public void UseReroll()
 	{
-		if(NumRerollAvailable <= 0)
+		if ( NumRerollAvailable <= 0 )
 		{
 			// todo: sfx
 			return;
@@ -776,7 +770,7 @@ public class Player : Thing
 		ForEachStatus( status => status.OnReroll() );
 	}
 
-	public void UseChoiceHotkey(int num)
+	public void UseChoiceHotkey( int num )
 	{
 		var index = num - 1;
 
@@ -845,12 +839,9 @@ public class Player : Thing
 			Die();
 	}
 
-	[Broadcast]
-	public void AddVelocity(Vector2 vel)
+	[Authority]
+	public void AddVelocity( Vector2 vel )
 	{
-		if ( IsProxy )
-			return;
-
 		Velocity += vel;
 	}
 
@@ -881,7 +872,7 @@ public class Player : Thing
 
 		if ( IsProxy )
 			return;
-		
+
 		Manager.Instance.PlayerDied( this );
 
 		//Game.Hud.RemoveChoicePanel();
@@ -986,7 +977,7 @@ public class Player : Thing
 		for ( int i = 0; i < num_bullets_int; i++ )
 		{
 			var dir = Utils.RotateVector( AimDir, start_angle + currAngleOffset + increment * i );
-				SpawnBullet( pos, dir, isLastAmmo );
+			SpawnBullet( pos, dir, isLastAmmo );
 		}
 
 		Manager.Instance.PlaySfxNearby( "shoot", pos, pitch: Utils.Map( _shotNum, 0f, (float)Stats[PlayerStat.MaxAmmoCount], 1f, 1.25f ), volume: 1f, maxDist: 4f );
@@ -1042,8 +1033,8 @@ public class Player : Thing
 
 		bullet.Init();
 
-		bullet.GameObject.NetworkSpawn(Network.OwnerConnection); // todo: not necessary to specify connection?
-		//bullet.Transform.Position = (Vector3)pos;
+		bullet.GameObject.NetworkSpawn( Network.OwnerConnection ); // todo: not necessary to specify connection?
+																   //bullet.Transform.Position = (Vector3)pos;
 
 		//Game.AddThing( bullet );
 	}
@@ -1133,12 +1124,12 @@ public class Player : Thing
 		if ( IsProxy )
 			return;
 
-		Position2D = new Vector3( Game.Random.Float( -3f, 3f ), Game.Random.Float( -3f, 3f ));
+		Position2D = new Vector3( Game.Random.Float( -3f, 3f ), Game.Random.Float( -3f, 3f ) );
 		Manager.Instance.Camera2D.SetPos( Position2D );
 
 		InitializeStats();
 
-		Manager.Instance.PlaySfxNearbyLocal("restart", Position2D, Game.Random.Float( 0.95f, 1.05f ), 0.66f, 4f );
+		Manager.Instance.PlaySfxNearbyLocal( "restart", Position2D, Game.Random.Float( 0.95f, 1.05f ), 0.66f, 4f );
 	}
 
 	public void SpawnBulletRing( Vector2 pos, int numBullets, Vector2 aimDir )
@@ -1171,7 +1162,7 @@ public class Player : Thing
 			grenade.CriticalMultiplier = Stats[PlayerStat.CritMultiplier];
 		}
 
-		grenadeObj.NetworkSpawn(Network.OwnerConnection);
+		grenadeObj.NetworkSpawn( Network.OwnerConnection );
 		grenadeObj.Transform.Position = new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) );
 
 		Manager.Instance.AddThing( grenade );
@@ -1199,12 +1190,9 @@ public class Player : Thing
 		}
 	}
 
-	[Broadcast]
-	public void PlaySfx(string name, Vector2 pos, float pitch, float volume)
+	[Authority]
+	public void PlaySfx( string name, Vector2 pos, float pitch, float volume )
 	{
-		if ( IsProxy )
-			return;
-
 		var sfx = Sound.Play( name, new Vector3( pos.x, pos.y, Globals.SFX_DEPTH ) );
 		if ( sfx != null )
 		{
