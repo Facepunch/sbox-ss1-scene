@@ -13,7 +13,6 @@ public class Thing : Component
 {
 	[Property] public SpriteComponent Sprite { get; set; }
 	[Sync] public float Scale { get; set; }
-	[Sync] public bool IsFlippedHorizontal { get; set; }
 
 	[Sync] public float Radius { get; set; }
 	public float TempWeight { get; set; }
@@ -133,6 +132,5 @@ public class Thing : Component
 	public virtual void SetFlipHorizontal(bool flip)
 	{
 		Transform.LocalRotation = new Angles( flip ? 180f : 0f, 0f, 0f );
-		IsFlippedHorizontal = flip;
 	}
 }
