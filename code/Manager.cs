@@ -115,7 +115,9 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	protected override void OnStart()
 	{
-		if ( !GameNetworkSystem.IsActive )
+		if ( MainMenu.IsSingleplayerGame )
+			CreatePlayer( Connection.Local );
+		else if ( !GameNetworkSystem.IsActive )
 			GameNetworkSystem.CreateLobby();
 
 		if ( Networking.IsHost )
@@ -200,6 +202,11 @@ public sealed class Manager : Component, Component.INetworkListener
 	{
 		Log.Info( $"Player '{channel.DisplayName}' is becoming active (local = {channel == Connection.Local}) (host = {channel.IsHost})" );
 
+		CreatePlayer( channel );
+	}
+
+	void CreatePlayer( Connection channel )
+	{
 		var playerObj = PlayerPrefab.Clone( new Vector3( Game.Random.Float( -3f, 3f ), Game.Random.Float( -3f, 3f ), Globals.GetZPos( 0f ) ) );
 		var player = playerObj.Components.Get<Player>();
 

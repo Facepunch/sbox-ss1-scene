@@ -9,7 +9,8 @@
 		<div class="button-container">
 			@if (State == MenuState.Main)
 			{
-				<div class="button" onclick="@(() => ButtonStart())">Start</div>
+				<div class="button" onclick="@(() => ButtonStart(true))">Start Singleplayer</div>
+				<div class="button" onclick="@(() => ButtonStart())">Start Multiplayer</div>
 				<div class="button blue" onclick="@(() => ButtonLobbies())">Lobbies</div>
 				<div class="button red" onclick="@(() => Quit())">Quit</div>
 			}
@@ -27,7 +28,7 @@
 		else if (State == MenuState.Stats)
 		{
 			<div class="content-panel">
-				
+
 
 
 
@@ -35,7 +36,7 @@
 		}
 	</div>
 
-	@if(MenuManager.Instance.ElapsedTime < 0.75f)
+	@if (MenuManager.Instance.ElapsedTime < 0.75f)
 	{
 		<div class="fade_in" style="background-color:@(Color.Black.WithAlpha(Utils.Map(MenuManager.Instance.ElapsedTime, 0f, 0.75f, 1f, 0f)).Rgba);"></div>
 	}
@@ -44,7 +45,7 @@
 @code
 {
 	public static MainMenu Instance { get; private set; }
-	public static bool IsCpuGame { get; private set; } = true;
+	public static bool IsSingleplayerGame { get; private set; } = true;
 
 	public MenuState State = MenuState.Main;
 	Angles cameraAngles = Angles.Zero;
@@ -72,8 +73,9 @@
 		// Scene.Camera.Transform.Rotation = Angles.Lerp(Scene.Camera.Transform.Rotation, camAngles, Time.Delta * 5.0f);
 	}
 
-	void ButtonStart()
+	void ButtonStart(bool isSingleplayer = false)
 	{
+		IsSingleplayerGame = isSingleplayer;
 		Game.ActiveScene.LoadFromFile("scenes/game.scene");
 	}
 
@@ -105,8 +107,8 @@
 	{
 		float timeHash = MenuManager.Instance.ElapsedTime < 0.75f ? MenuManager.Instance.ElapsedTime : 0f;
 		return HashCode.Combine(
-			State,
-			timeHash
+		State,
+		timeHash
 		);
-	} 
+	}
 }
