@@ -64,17 +64,13 @@ public class ExploderElite : Enemy
 
 	protected override void OnUpdate()
 	{
-		//Gizmo.Draw.Color = Color.White;
-		//Gizmo.Draw.Text( $"IsExploding: {IsExploding}\n", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
+		base.OnUpdate();
 
 		if ( Manager.Instance.IsGameOver )
 			return;
 
 		if ( IsExploding )
 			Sprite.FlashTint = Color.Yellow.WithAlpha( (0.5f + Utils.FastSin( Time.Now * 32f ) * 0.5f) * Utils.Map( _explodeStartTime, 0.5f, EXPLODE_TIME, 0f, 0.75f, EasingType.QuadIn ) );
-
-		if ( IsProxy )
-			return;
 
 		if ( IsExploding )
 		{
@@ -84,11 +80,9 @@ public class ExploderElite : Enemy
 				_hasStartedLooping = true;
 			}
 
-			if ( !_hasExploded && _explodeStartTime > EXPLODE_TIME )
+			if ( !IsProxy && !_hasExploded && _explodeStartTime > EXPLODE_TIME )
 				Explode();
 		}
-
-		base.OnUpdate();
 	}
 
 	protected override void UpdatePosition( float dt )
