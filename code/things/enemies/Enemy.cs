@@ -24,7 +24,7 @@ public abstract class Enemy : Thing
 	public bool IsDying { get; private set; }
 	public float DeathTimeElapsed { get; private set; }
 	public float DeathTime { get; protected set; }
-	[Sync] public float DeathProgress { get; private set; }
+	public float DeathProgress { get; private set; }
 	//private Vector2 _deathScale;
 
 	public bool IsAttacking { get; private set; }
@@ -82,7 +82,7 @@ public abstract class Enemy : Thing
 
 		//Sprite.Transform.LocalScale *= Scale * Globals.SPRITE_SCALE;
 
-		Sprite.Transform.LocalScale = new Vector3(Scale * Game.Random.Float(1f - HeightVariance, 1f + HeightVariance), Scale * Game.Random.Float( 1f - WidthVariance, 1f + WidthVariance), 1f) * Globals.SPRITE_SCALE;
+		Sprite.Transform.LocalScale = new Vector3( Scale * Game.Random.Float( 1f - HeightVariance, 1f + HeightVariance ), Scale * Game.Random.Float( 1f - WidthVariance, 1f + WidthVariance ), 1f ) * Globals.SPRITE_SCALE;
 
 		AnimSpawnPath = "spawn";
 		AnimIdlePath = "walk";
@@ -140,16 +140,16 @@ public abstract class Enemy : Thing
 
 		HandleFlashing( dt );
 
-		if ( IsProxy )
-			return;
-
-		HandleStatuses( dt );
-
 		if ( IsDying )
 		{
 			HandleDying( dt );
 			return;
 		}
+
+		if ( IsProxy )
+			return;
+
+		HandleStatuses( dt );
 
 		UpdatePosition( dt );
 		Transform.Position = Transform.Position.WithZ( Globals.GetZPos( Position2D.y ) );
@@ -224,7 +224,7 @@ public abstract class Enemy : Thing
 			}
 			else
 			{
-				if( !DontChangeAnimSpeed )
+				if ( !DontChangeAnimSpeed )
 					AnimSpeed = Utils.Map( dist_sqr, attack_dist_sqr, 0f, 1f, 4f, EasingType.Linear );
 
 				_aggroTimer = 0f;
@@ -247,7 +247,7 @@ public abstract class Enemy : Thing
 			if ( !DontChangeAnimSpeed )
 				AnimSpeed = Utils.Map( Utils.FastSin( MoveTimeOffset + Time.Now * 7.5f ), -1f, 1f, 0.75f, 3f, EasingType.ExpoIn );
 
-			if( CanTurn && !IsFrozen )
+			if ( CanTurn && !IsFrozen )
 			{
 				if ( MathF.Abs( Velocity.x ) > 0.175f )
 					Sprite.SpriteFlags = Velocity.x > 0f ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
@@ -269,7 +269,7 @@ public abstract class Enemy : Thing
 				else
 					Sprite.SpriteFlags = targetPlayer.Position2D.x < Position2D.x ? SpriteFlags.None : SpriteFlags.HorizontalFlip;
 			}
-				
+
 			//Scale = new Vector2( (IsFeared ? -1f : 1f) * (targetPlayer.Position.x < Position.x ? 1f : -1f), 1f ) * ScaleFactor;
 		}
 	}
@@ -283,7 +283,7 @@ public abstract class Enemy : Thing
 			{
 				_isFlashing = false;
 				Sprite.FlashTint = Color.White.WithAlpha( 0f );
-				Sprite.Tint = Color.Lerp( Color.White, Color.Black, Utils.Map(Health, MaxHealth, 0f, 0f, 0.7f) ).WithAlpha(FullOpacity);
+				Sprite.Tint = Color.Lerp( Color.White, Color.Black, Utils.Map( Health, MaxHealth, 0f, 0f, 0.7f ) ).WithAlpha( FullOpacity );
 			}
 		}
 	}
@@ -370,7 +370,7 @@ public abstract class Enemy : Thing
 		Flash( 0.12f );
 
 		//DamageNumbers.Add( (int)damage, Position2D + Vector2.Up * Radius * 3f + new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) ) * 0.2f, color: isCrit ? Color.Yellow : Color.White );
-		DamageNumbersLegacy.Create( damage, Position2D + new Vector2(0.4f + Game.Random.Float(-0.1f, 0.1f), Radius * 3f + Game.Random.Float( -0.2f, 0.3f ) ), color: isCrit ? Color.Yellow : Color.White );
+		DamageNumbersLegacy.Create( damage, Position2D + new Vector2( 0.4f + Game.Random.Float( -0.1f, 0.1f ), Radius * 3f + Game.Random.Float( -0.2f, 0.3f ) ), color: isCrit ? Color.Yellow : Color.White );
 
 		if ( IsProxy )
 			return;
@@ -468,13 +468,13 @@ public abstract class Enemy : Thing
 		else
 		{
 			var lowest_hp_percent = 1f;
-			foreach ( Player p in Scene.GetAllComponents<Player>().Where(x => !x.IsDead) )
+			foreach ( Player p in Scene.GetAllComponents<Player>().Where( x => !x.IsDead ) )
 				lowest_hp_percent = MathF.Min( lowest_hp_percent, p.Health / p.Stats[PlayerStat.MaxHp] );
 
 			var health_pack_chance = Utils.Map( lowest_hp_percent, 1f, 0f, 0f, 0.1f );
 			if ( Game.Random.Float( 0f, 1f ) < health_pack_chance )
 			{
-				Manager.Instance.SpawnHealthPack(Position2D, vel: Vector2.Zero);
+				Manager.Instance.SpawnHealthPack( Position2D, vel: Vector2.Zero );
 			}
 		}
 	}
@@ -486,7 +486,7 @@ public abstract class Enemy : Thing
 
 	public override void Remove()
 	{
-		if(!IsProxy)
+		if ( !IsProxy )
 		{
 			for ( int i = EnemyStatuses.Count - 1; i >= 0; i-- )
 				EnemyStatuses.Values.ElementAt( i ).Remove();
