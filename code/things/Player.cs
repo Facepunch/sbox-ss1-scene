@@ -267,7 +267,7 @@ public class Player : Thing
 		base.OnUpdate();
 
 		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.5f );
-		//Gizmo.Draw.Text( $"Health: {Health}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
+		//Gizmo.Draw.Text( $"IsGameOver: {Manager.Instance.IsGameOver}\nIsDead: {IsDead}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
 		
 		string debug = "";
 
@@ -321,7 +321,9 @@ public class Player : Thing
 		bool moving = Velocity.LengthSquared > 0.01f && InputVector.LengthSquared > 0.1f;
 
 		string stateStr = "";
-		if ( hurting && attacking )
+		if( IsDead )
+			stateStr = "ghost_";
+		else if ( hurting && attacking )
 			stateStr = "hurt_attack_";
 		else if ( hurting )
 			stateStr = "hurt_";
@@ -868,6 +870,7 @@ public class Player : Thing
 
 		IsDead = true;
 		Sprite.Tint = new Color( 1f, 1f, 1f, 0.05f );
+		Sprite.FlashTint = new Color( 1f, 1f, 1f, 0f );
 		ShadowOpacity = 0.2f;
 		_isFlashing = false;
 		IsReloading = false;
@@ -1124,6 +1127,8 @@ public class Player : Thing
 	{
 		Sprite.PlayAnimation( "idle" );
 		//AnimationSpeed = 0.66f;
+
+		Sprite.Tint = new Color( 1f, 1f, 1f, 1f );
 
 		if ( IsProxy )
 			return;

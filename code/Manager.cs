@@ -208,7 +208,11 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	void HandleEnemySpawn()
 	{
-		var spawnTime = Utils.Map( EnemyCount, 0, MAX_ENEMY_COUNT, 0.05f, 0.33f, EasingType.QuadOut ) * Utils.Map( ElapsedTime, 0f, 80f, 1.5f, 1f ) * Utils.Map( ElapsedTime, 0f, 250f, 3f, 1f ) * Utils.Map( ElapsedTime, 0f, 900f, 1.2f, 1f );
+		var spawnTime = Utils.Map( EnemyCount, 0, MAX_ENEMY_COUNT, 0.05f, 0.3f, EasingType.QuadOut )
+			* Utils.Map( ElapsedTime, 0f, 80f, 1.5f, 1f )
+			* Utils.Map( ElapsedTime, 0f, 250f, 3f, 1f )
+			* Utils.Map( ElapsedTime, 0f, 700f, 1.2f, 1f );
+
 		if ( _enemySpawnTime > spawnTime )
 		{
 			SpawnEnemy();
@@ -601,8 +605,12 @@ public sealed class Manager : Component, Component.INetworkListener
 		things.AddRange( ThingGridPositions[gridSquare] );
 	}
 
+	[Broadcast]
 	public void PlayerDied( Player player )
 	{
+		if ( IsProxy )
+			return;
+
 		int numPlayersAlive = Scene.GetAllComponents<Player>().Where( x => !x.IsDead ).Count();
 		if ( numPlayersAlive == 0 )
 			GameOver();

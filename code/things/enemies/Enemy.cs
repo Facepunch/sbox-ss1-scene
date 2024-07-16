@@ -10,7 +10,8 @@ using static Manager;
 public abstract class Enemy : Thing
 {
 	[Sync] public float Health { get; set; }
-	[Sync] public Vector2 Velocity { get; set; }
+	//[Sync] public Vector2 Velocity { get; set; }
+	public Vector2 Velocity { get; set; }
 	public float MoveTimeOffset { get; set; }
 
 	private float _flashTimer;

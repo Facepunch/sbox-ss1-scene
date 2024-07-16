@@ -5,11 +5,11 @@
   "Ident": "ss1",
   "Schema": 1,
   "IncludeSourceFiles": false,
-  "Resources": "/textures/*\n/particles/*\n/sounds/*",
+  "Resources": "/textures/*\n/particles/*\n/sounds/*\n/fonts/*\n/cursors/*",
   "PackageReferences": [],
   "EditorReferences": null,
   "Metadata": {
-    "MaxPlayers": 1,
+    "MaxPlayers": 4,
     "MinPlayers": 1,
     "TickRate": 50,
     "GameNetworkType": "Multiplayer",

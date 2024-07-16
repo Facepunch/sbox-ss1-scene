@@ -3,7 +3,6 @@
 @inherits Panel
 @attribute [StyleSheet("Nametag.razor.scss")]
 
-
 <root style="opacity: @(Player.IsDead ? 0.6f : 1f);">
 	@{
 		var displayName = Player.Network.OwnerConnection.DisplayName;
