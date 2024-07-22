@@ -22,7 +22,6 @@ public class Exploder : Enemy
 
 	protected override void OnAwake()
 	{
-		//OffsetY = -0.52f;
 		ShadowScale = 1.05f;
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
@@ -30,11 +29,6 @@ public class Exploder : Enemy
 		Scale = 1.1f;
 
 		base.OnAwake();
-
-		//AnimSpeed = 2f;
-		//Sprite.Texture = Texture.Load("textures/sprites/exploder.vtex");
-
-		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 12f;
 		Deceleration = 1.87f;

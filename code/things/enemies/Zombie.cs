@@ -13,7 +13,6 @@ public class Zombie : Enemy
 
 	protected override void OnAwake()
 	{
-		//OffsetY = -0.38f;
 		ShadowScale = 0.95f;
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
@@ -23,15 +22,6 @@ public class Zombie : Enemy
 		base.OnAwake();
 
 		Sprite.Transform.LocalScale = Sprite.Transform.LocalScale.WithX( Sprite.Transform.LocalScale.x * Game.Random.Float( 0.9f, 1.1f ) );
-
-		//SpriteTexture = SpriteTexture.Atlas( "textures/sprites/zombie.png", 5, 6 );
-		//AnimSpeed = 2f;
-		//BasePivotY = 0.05f;
-
-		//Sprite.Texture = Texture.Load("textures/sprites/zombie.vtex");
-
-		//ScaleFactor = 0.85f;
-		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 10f;
 
@@ -49,7 +39,6 @@ public class Zombie : Enemy
 		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );
 
-		//ShadowScale = 0.95f;
 		_damageTime = DAMAGE_TIME;
 
 		HasTarget = false;
@@ -87,9 +76,6 @@ public class Zombie : Enemy
 				Manager.Instance.PlaySfxNearby( "zombie.spawn0", Position2D, pitch: Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 4f );
 			}
 		}
-
-		//if(!HasTarget)
-		//    DebugOverlay.Line(Position, _wanderPos, 0f, false);
 
 		float speed = (IsAttacking ? 1.3f : 0.7f) + Utils.FastSin( MoveTimeOffset + Time.Now * (IsAttacking ? 15f : 7.5f) ) * (IsAttacking ? 0.66f : 0.35f);
 		Transform.Position += (Vector3)Velocity * speed * dt;

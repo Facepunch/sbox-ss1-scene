@@ -710,12 +710,12 @@ public sealed class Manager : Component, Component.INetworkListener
 		SpawnStartingThings();
 	}
 
-	public void PlayEnemyDeathSfx( Vector3 worldPos )
+	public void PlayEnemyDeathSfxLocal( Vector3 worldPos )
 	{
 		if ( _numEnemyDeathSfxs >= 3 )
 			return;
 
-		PlaySfxNearby( "enemy.die", worldPos, pitch: Game.Random.Float( 0.85f, 1.15f ), volume: 1f, maxDist: 5.5f );
+		PlaySfxNearbyLocal( "enemy.die", worldPos, pitch: Game.Random.Float( 0.85f, 1.15f ), volume: 1f, maxDist: 5.5f );
 
 		_numEnemyDeathSfxs++;
 	}

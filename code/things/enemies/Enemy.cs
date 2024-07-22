@@ -25,7 +25,7 @@ public abstract class Enemy : Thing
 	public float DeathTimeElapsed { get; private set; }
 	public float DeathTime { get; protected set; }
 	public float DeathProgress { get; private set; }
-	//private Vector2 _deathScale;
+	private Vector3 _deathScale;
 
 	public bool IsAttacking { get; private set; }
 	private float _aggroTimer;
@@ -79,8 +79,6 @@ public abstract class Enemy : Thing
 	protected override void OnAwake()
 	{
 		base.OnAwake();
-
-		//Sprite.Transform.LocalScale *= Scale * Globals.SPRITE_SCALE;
 
 		Sprite.Transform.LocalScale = new Vector3( Scale * Game.Random.Float( 1f - HeightVariance, 1f + HeightVariance ), Scale * Game.Random.Float( 1f - WidthVariance, 1f + WidthVariance ), 1f ) * Globals.SPRITE_SCALE;
 
@@ -291,7 +289,8 @@ public abstract class Enemy : Thing
 	void HandleDying( float dt )
 	{
 		DeathTimeElapsed += dt;
-		//Scale = _deathScale * Utils.Map( DeathTimeElapsed, 0f, DeathTime, 1f, 1.2f );
+
+		Sprite.Transform.LocalScale = _deathScale * Utils.Map( DeathTimeElapsed, 0f, DeathTime, 1f, 1.2f );
 
 		if ( DeathTimeElapsed > DeathTime )
 		{
@@ -405,19 +404,18 @@ public abstract class Enemy : Thing
 		DeathProgress = 0f;
 		DeathTimeElapsed = 0f;
 		Sprite.PlayAnimation( AnimDiePath );
-		AnimSpeed = 5.5f;
+		AnimSpeed = Game.Random.Float( 6.5f, 9f );
 
 		_isFlashing = false;
 
 		Sprite.FlashTint = Color.White.WithAlpha( 0f );
 
-		//_deathScale = Scale;
+		_deathScale = Sprite.Transform.LocalScale;
 
 		if ( CanBleed )
 			Manager.Instance.SpawnBloodSplatter( Position2D );
 
-		//Manager.Instance.PlaySfxNearby( "enemy.die", Position2D, pitch: 1f, volume: 1f, maxDist: 5.5f );
-		Manager.Instance.PlayEnemyDeathSfx( Position2D );
+		Manager.Instance.PlayEnemyDeathSfxLocal( Position2D );
 
 		if ( IsProxy )
 			return;
@@ -446,14 +444,7 @@ public abstract class Enemy : Thing
 
 		for ( int i = EnemyStatuses.Count - 1; i >= 0; i-- )
 			EnemyStatuses.Values.ElementAt( i ).StartDying();
-
-		//StartDyingClient();
 	}
-
-	//public void SpawnBloodClient()
-	//{
-	//	Manager.Instance.SpawnBloodSplatter( Position2D );
-	//}
 
 	public virtual void DropLoot( Player player )
 	{
