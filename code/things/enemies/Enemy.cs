@@ -10,8 +10,8 @@ using static Manager;
 public abstract class Enemy : Thing
 {
 	[Sync] public float Health { get; set; }
-	//[Sync] public Vector2 Velocity { get; set; }
 	public Vector2 Velocity { get; set; }
+	[Sync] public bool FlipX { get; set; }
 	public float MoveTimeOffset { get; set; }
 
 	private float _flashTimer;
@@ -146,6 +146,8 @@ public abstract class Enemy : Thing
 			return;
 		}
 
+		Sprite.SpriteFlags = FlipX ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
+
 		if ( IsProxy )
 			return;
 
@@ -247,10 +249,10 @@ public abstract class Enemy : Thing
 			if ( !DontChangeAnimSpeed )
 				AnimSpeed = Utils.Map( Utils.FastSin( MoveTimeOffset + Time.Now * 7.5f ), -1f, 1f, 0.75f, 3f, EasingType.ExpoIn );
 
-			if ( CanTurn && !IsFrozen )
+			if ( !IsProxy && CanTurn && !IsFrozen )
 			{
 				if ( MathF.Abs( Velocity.x ) > 0.175f )
-					Sprite.SpriteFlags = Velocity.x > 0f ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
+					FlipX = Velocity.x > 0f;
 			}
 		}
 		else
@@ -262,15 +264,13 @@ public abstract class Enemy : Thing
 				AnimSpeed = Utils.Map( dist_sqr, attack_dist_sqr, 0f, 1f, 4f, EasingType.Linear );
 			}
 
-			if ( CanTurn && !IsFrozen )
+			if ( !IsProxy && CanTurn && !IsFrozen )
 			{
 				if ( IsFeared )
-					Sprite.SpriteFlags = targetPlayer.Position2D.x < Position2D.x ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
+					FlipX = targetPlayer.Position2D.x < Position2D.x;
 				else
-					Sprite.SpriteFlags = targetPlayer.Position2D.x < Position2D.x ? SpriteFlags.None : SpriteFlags.HorizontalFlip;
+					FlipX = targetPlayer.Position2D.x > Position2D.x;
 			}
-
-			//Scale = new Vector2( (IsFeared ? -1f : 1f) * (targetPlayer.Position.x < Position.x ? 1f : -1f), 1f ) * ScaleFactor;
 		}
 	}
 
@@ -313,7 +313,6 @@ public abstract class Enemy : Thing
 			IsSpawning = false;
 			Sprite.PlayAnimation( AnimIdlePath );
 			ShadowOpacity = ShadowFullOpacity;
-			//Sprite.Tint = Color.White.WithAlpha( FullOpacity );
 		}
 		else
 		{
@@ -325,7 +324,6 @@ public abstract class Enemy : Thing
 			}
 
 			ShadowOpacity = Utils.Map( TimeSinceSpawn, 0f, SpawnTime, 0f, ShadowFullOpacity );
-			//Sprite.Tint = Color.White.WithAlpha( Utils.Map( ElapsedTime, 0f, SpawnTime, 0f, FullOpacity, EasingType.SineIn ) );
 		}
 
 		ShadowSprite.Tint = Color.Black.WithAlpha( ShadowOpacity );
@@ -366,7 +364,6 @@ public abstract class Enemy : Thing
 			}
 		}
 
-		//Flash( damage < Health ? 0.12f : 0.05f );
 		Flash( 0.12f );
 
 		//DamageNumbers.Add( (int)damage, Position2D + Vector2.Up * Radius * 3f + new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) ) * 0.2f, color: isCrit ? Color.Yellow : Color.White );

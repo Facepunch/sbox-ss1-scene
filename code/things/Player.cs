@@ -80,16 +80,12 @@ public class Player : Thing
 	private bool _isFlashing;
 	public TimeSince TimeSinceHurt { get; private set; }
 
-	//public Nametag Nametag { get; private set; }
-
 	private GameObject _shieldVfx;
 
 	[Sync] public int NumRerollAvailable { get; set; }
 
-	// STATS
 	[Sync] public NetDictionary<PlayerStat, float> Stats { get; private set; } = new();
 
-	// STATUS
 	public Dictionary<int, Status> Statuses { get; private set; }
 
 	private Dictionary<Status, Dictionary<PlayerStat, ModifierData>> _modifiers_stat = new Dictionary<Status, Dictionary<PlayerStat, ModifierData>>();
@@ -103,14 +99,10 @@ public class Player : Thing
 	{
 		base.OnAwake();
 
-		//OffsetY = -0.42f;
-		//OffsetY = 0f;
-
 		Scale = 1f;
 
 		ShadowOpacity = 0.8f;
 		ShadowScale = 1.12f;
-		//SpawnShadow( ShadowScale, ShadowOpacity );
 
 		Statuses = new Dictionary<int, Status>();
 		LevelUpChoices = new List<Status>();
@@ -239,13 +231,11 @@ public class Player : Thing
 		Stats[PlayerStat.BulletHealTeammateAmount] = 0f;
 
 		Statuses.Clear();
-		//_statusesToRemove.Clear();
 		_modifiers_stat.Clear();
 
 		_isFlashing = false;
 		Sprite.FlashTint = Color.White.WithAlpha( 0f );
 		Sprite.Tint = Color.White;
-		//EnableDrawing = true;
 		IsChoosingLevelUpReward = false;
 		IsDashing = false;
 		IsReloading = true;
@@ -257,9 +247,8 @@ public class Player : Thing
 		_shotNum = 0;
 		TimeSinceHurt = 999f;
 		ShadowOpacity = 0.8f;
-		//ShadowScale = 1.12f;
 
-		//AddStatus( TypeLibrary.GetType( typeof( DashFireStatus) ) );
+		//AddStatus( TypeLibrary.GetType( typeof( ShieldStatus ) ) );
 	}
 
 	protected override void OnUpdate()
@@ -294,26 +283,13 @@ public class Player : Thing
 				Status status = pair.Value;
 				debug += status.ToString() + "\n";
 			}
-
-			//Gizmo.Draw.Color = Color.White.WithAlpha(0.5f);
-			//Gizmo.Draw.Text( $"{debug}\nIsGameOver: {Manager.Instance.IsGameOver}\nIsReloading: {IsReloading}\nHealth: {Health}/{Stats[PlayerStat.MaxHp]}\nExperienceTotal: {ExperienceTotal}\nGridPos: {GridPos}\nRadius: {Radius}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
 		}
-
-		//Gizmo.Draw.Color = Color.White.WithAlpha(0.05f);
-		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
-
-		//if ( ShadowSprite != null )
-		//{
-		//	ShadowSprite.Tint = Color.Black.WithAlpha( ShadowOpacity );
-		//	ShadowSprite.Transform.LocalScale = new Vector2( ShadowScale * Globals.SPRITE_SCALE );
-		//}
 
 		if ( Manager.Instance.IsGameOver )
 			return;
 
 		float dt = Time.Delta;
 
-		//SetFlipHorizontal( Velocity.x > 0f );
 		Sprite.SpriteFlags = Velocity.x > 0f ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
 
 		bool hurting = TimeSinceHurt < 0.25f;
@@ -370,7 +346,6 @@ public class Player : Thing
 		if ( ArrowAimer != null )
 		{
 			ArrowAimer.Transform.LocalRotation = new Angles( 0f, MathF.Atan2( AimDir.y, AimDir.x ) * (180f / MathF.PI) - 180f, 0f );
-			//ArrowAimer.Transform.LocalPosition = new Vector2( 0f, 0.4f + OffsetY ) + AimDir * 0.7f;
 			ArrowAimer.Transform.LocalPosition = new Vector2( 0f, 0.4f ) + AimDir * Utils.Map( _timeSinceShoot, 0f, 0.25f, 0.6f, 0.55f, EasingType.QuadOut );
 			ArrowAimer.Transform.LocalScale = new Vector3( Utils.Map( _timeSinceShoot, 0f, 0.25f, 1.25f, 0.75f, EasingType.QuadOut ), 1f, 1f ) * 0.005f;
 			ArrowSprite.Tint = Color.White.WithAlpha( Utils.Map( _timeSinceShoot, 0f, 0.3f, 1f, 0.3f, EasingType.QuadOut ) * Utils.Map( _timeSinceSpawn, 0f, 1f, 0f, 1f, EasingType.Linear ) );
@@ -528,26 +503,14 @@ public class Player : Thing
 		var y_max = Manager.Instance.BOUNDS_MAX.y - Radius;
 
 		if ( Position2D.x < x_min )
-		{
 			Position2D = new Vector2( x_min, Position2D.y );
-			//Velocity = new Vector2( Velocity.x * -1f, Velocity.y );
-		}
 		else if ( Position2D.x > x_max )
-		{
 			Position2D = new Vector2( x_max, Position2D.y );
-			//Velocity = new Vector2( Velocity.x * -1f, Velocity.y );
-		}
 
 		if ( Position2D.y < y_min )
-		{
 			Position2D = new Vector2( Position2D.x, y_min );
-			//Velocity = new Vector2( Velocity.x, Velocity.y * -1f );
-		}
 		else if ( Position2D.y > y_max )
-		{
 			Position2D = new Vector2( Position2D.x, y_max );
-			//Velocity = new Vector2( Velocity.x, Velocity.y * -1f );
-		}
 	}
 
 	public int GetExperienceReqForLevel( int level )
@@ -614,8 +577,6 @@ public class Player : Thing
 		//Sandbox.Services.Stats.Increment( Client, "status", 1, $"{type.Name.ToLowerInvariant()}", new { Status = type.Name.ToLowerInvariant(), Level = status.Level } );
 
 		status.Refresh();
-
-		//RefreshStatusHud();
 
 		Manager.Instance.PlaySfxNearbyLocal( "click", Position2D, 0.9f, 0.75f, 5f );
 
@@ -815,21 +776,12 @@ public class Player : Thing
 		TimeSinceHurt = 0f;
 		Flash( 0.125f );
 		SpawnBlood( damage );
+
 		//DamageNumbers.Add( (int)damage, Position2D + Vector2.Up * Radius * 3f + new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) ) * 0.2f, color: Color.Red );
 		DamageNumbersLegacy.Create( damage, Position2D + new Vector2( 0.4f + Game.Random.Float( -0.1f, 0.1f ), Radius * 3f + Game.Random.Float( -0.2f, 0.3f ) ), color: Color.Red );
 
 		if ( IsProxy )
 			return;
-
-		//if ( HasStatus( TypeLibrary.GetType( typeof( ShieldStatus ) ) ) )
-		//{
-		//	var shieldStatus = GetStatus( TypeLibrary.GetType( typeof( ShieldStatus ) ) ) as ShieldStatus;
-		//	if ( shieldStatus != null && shieldStatus.IsShielded )
-		//	{
-		//		shieldStatus.LoseShield();
-		//		return;
-		//	}
-		//}
 
 		ForEachStatus( status => status.OnHurt( damage ) );
 
@@ -848,7 +800,6 @@ public class Player : Thing
 	public void SpawnBlood( float damage )
 	{
 		var blood = Manager.Instance.SpawnBloodSplatter( Position2D );
-		//blood.Sprite.Size *= Utils.Map( damage, 1f, 20f, 0.3f, 0.5f, EasingType.QuadIn ) * Game.Random.Float( 0.8f, 1.2f );
 		blood.Transform.LocalScale *= Utils.Map( damage, 1f, 20f, 0.5f, 1.2f, EasingType.QuadIn ) * Game.Random.Float( 0.8f, 1.2f );
 		blood.Lifetime *= 0.3f;
 	}
@@ -874,8 +825,6 @@ public class Player : Thing
 			return;
 
 		Manager.Instance.PlayerDied( this );
-
-		//Game.Hud.RemoveChoicePanel();
 	}
 
 	[Broadcast]
@@ -900,11 +849,6 @@ public class Player : Thing
 		ExperienceCurrent = 0;
 
 		Health = Stats[PlayerStat.MaxHp] * 0.33f;
-
-		//Nametag.SetVisible( true );
-
-		//if ( ArrowAimer != null )
-		//	ArrowAimer.Opacity = 1f;
 	}
 
 	public void ForEachStatus( Action<Status> action )
@@ -959,8 +903,6 @@ public class Player : Thing
 				}
 			}
 		}
-
-		//DebugText(AmmoCount.ToString() + "\nreloading: " + IsReloading + "\ntimer: " + Timer + "\nShotDelay: " + AttackTime + "\nReloadTime: " + ReloadTime + "\nAttackSpeed: " + AttackSpeed);
 	}
 
 	public void Shoot( bool isLastAmmo = false )
@@ -971,7 +913,6 @@ public class Player : Thing
 		float currAngleOffset = num_bullets_int == 1 ? 0f : -Stats[PlayerStat.BulletSpread] * 0.5f;
 		float increment = num_bullets_int == 1 ? 0f : Stats[PlayerStat.BulletSpread] / (float)(num_bullets_int - 1);
 
-		//var pos = Position2D + AimDir * 0.5f + new Vector2(0f, -OffsetY);
 		var pos = Position2D + AimDir * 0.3f;
 
 		for ( int i = 0; i < num_bullets_int; i++ )
@@ -1008,11 +949,9 @@ public class Player : Thing
 		var bulletObj = BulletPrefab.Clone( (Vector3)pos );
 		var bullet = bulletObj.Components.Get<Bullet>();
 
-		//bullet.Depth = -1f;
 		bullet.Velocity = dir * Stats[PlayerStat.BulletSpeed];
 		bullet.Shooter = this;
 		bullet.TempWeight = 3f;
-		//bullet.BasePivotY = Utils.Map( damage, 5f, 30f, -1.2f, -0.3f );
 
 		bullet.Stats[BulletStat.Damage] = damage;
 		bullet.Stats[BulletStat.Force] = Stats[PlayerStat.BulletForce];
@@ -1034,9 +973,6 @@ public class Player : Thing
 		bullet.Init();
 
 		bullet.GameObject.NetworkSpawn( Network.OwnerConnection ); // todo: not necessary to specify connection?
-																   //bullet.Transform.Position = (Vector3)pos;
-
-		//Game.AddThing( bullet );
 	}
 
 	void Reload()
@@ -1047,8 +983,6 @@ public class Player : Thing
 		ReloadProgress = 0f;
 
 		ForEachStatus( status => status.OnReload() );
-
-		//Manager.Instance.PlaySfxNearbyLocal("reload.end", Position2D, pitch: 1f, volume: 0.5f, 5f);
 	}
 
 	public float GetDamageMultiplier()
@@ -1117,7 +1051,7 @@ public class Player : Thing
 	public void Restart()
 	{
 		Sprite.PlayAnimation( "idle" );
-		//AnimationSpeed = 0.66f;
+		Sprite.PlaybackSpeed = 0.66f;
 
 		Sprite.Tint = new Color( 1f, 1f, 1f, 1f );
 

@@ -85,37 +85,3 @@ public class ShieldStatus : Status
         Player.RemoveShieldVfx();
     }
 }
-
-//public partial class ShieldVfx : Sprite
-//{
-//    private PlayerCitizen _player;
-
-//    public ShieldVfx(PlayerCitizen player)
-//    {
-//        _player = player;
-//    }
-
-//    public override void Spawn()
-//    {
-//        base.Spawn();
-
-//        SpriteTexture = SpriteTexture.Atlas("textures/sprites/shield.png", 1, 1);
-//        AnimationPath = "textures/sprites/shield.frames";
-
-//        Scale = 1.8f;
-
-//        ColorTint = new Color(1f, 1f, 0f, 0.5f);
-//        Filter = SpriteFilter.Pixelated;
-//    }
-
-//    [Event.Tick.Client]
-//    public void ClientTick()
-//    {
-//        if (!_player.IsValid)
-//            return;
-
-//        Position = _player.Position + new Vector2(0f, 0.4f);
-//        Depth = _player.Depth + 2f;
-//        Opacity = (0.8f + Utils.FastSin(Time.Now * 20f) * 0.2f);
-//    }
-//}

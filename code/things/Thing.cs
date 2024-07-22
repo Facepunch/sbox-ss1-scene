@@ -21,18 +21,11 @@ public class Thing : Component
 	public List<Type> CollideWith = new List<Type>();
 	public float TimeScale { get; set; }
 
-	//public float OffsetY { get; set; }
 	[Sync] public float ShadowOpacity { get; set; }
 	[Sync] public float ShadowScale { get; set; }
 	public SpriteComponent ShadowSprite { get; set; }
 
 	[Sync] public bool SpriteDirty { get; set; }
-
-	//public Vector2 Position2D
-	//{
-	//	get { return (Vector2)Transform.Position + new Vector2( 0f, OffsetY ); }
-	//	set { Transform.Position = new Vector3( value.x, value.y - OffsetY, Transform.Position.z ); }
-	//}
 
 	public Vector2 Position2D
 	{
@@ -98,7 +91,6 @@ public class Thing : Component
 	{
 		var shadowObj = Manager.Instance.ShadowPrefab.Clone( Transform.Position );
 		shadowObj.SetParent( GameObject );
-		//shadowObj.Transform.LocalPosition = new Vector3(0f, OffsetY, Globals.SHADOW_DEPTH_OFFSET );
 		shadowObj.Transform.LocalPosition = new Vector3( 0f, 0f, Globals.SHADOW_DEPTH_OFFSET );
 		shadowObj.Transform.LocalRotation = new Angles( 0f, -90f, 0f );
 		shadowObj.NetworkMode = NetworkMode.Never;

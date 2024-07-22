@@ -7,7 +7,6 @@ public sealed class Manager : Component, Component.INetworkListener
 	public static Manager Instance { get; private set; }
 
 	[Property] public GameObject PlayerPrefab { get; set; }
-	[Property] public GameObject EnemyPrefab { get; set; }
 	[Property] public GameObject ShadowPrefab { get; set; }
 	[Property] public GameObject CoinPrefab { get; set; }
 	[Property] public GameObject MagnetPrefab { get; set; }
@@ -44,11 +43,8 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Property] public CameraComponent Camera { get; private set; }
 	[Property] public Camera2D Camera2D { get; set; }
 
-	private int _currPlayerNum;
-
 	public int EnemyCount { get; private set; }
 	public const float MAX_ENEMY_COUNT = 350;
-	//public const float MAX_ENEMY_COUNT = 0;
 
 	public int CrateCount { get; private set; }
 	public const float MAX_CRATE_COUNT = 7;
@@ -140,21 +136,9 @@ public sealed class Manager : Component, Component.INetworkListener
 			SpawnEnemy( TypeLibrary.GetType( typeof( Crate ) ), pos );
 		}
 
-		//SpawnMagnet( new Vector2( 3f, 3f ) );
-		//SpawnCoin( new Vector2( 4f, 4f ) );
-
 		//for( int i = 0; i < 22; i++ )
-		//{
-		//	//var pos = new Vector2( Game.Random.Float( BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x ), Game.Random.Float( BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y ) );
-		//	//SpawnEnemy( TypeLibrary.GetType( typeof( Zombie ) ), pos );
+		//	SpawnEnemy( TypeLibrary.GetType( typeof( Zombie ) ), new Vector2( Game.Random.Float( -1, 1f ), Game.Random.Float( -1, 1f ) ), forceSpawn: true );
 
-		//	SpawnEnemy( TypeLibrary.GetType( typeof( Zombie ) ), new Vector2( Game.Random.Float(-1, 1f), Game.Random.Float( -1, 1f ) ), forceSpawn: true );
-		//}
-
-		//SpawnEnemy( TypeLibrary.GetType( typeof( Boss ) ), new Vector2( -2f, 0f ), forceSpawn: true );
-		//SpawnEnemy( TypeLibrary.GetType( typeof( Spiker ) ), new Vector2( -2f, 0f ), forceSpawn: true );
-		//SpawnEnemy( TypeLibrary.GetType( typeof( SpikerElite ) ), new Vector2( -2f, 0f ), forceSpawn: true );
-		//SpawnEnemy( TypeLibrary.GetType( typeof( RunnerElite ) ), new Vector2( -2f, 0f ), forceSpawn: true );
 		//SpawnEnemy( TypeLibrary.GetType( typeof( Exploder ) ), new Vector2( -2f, 0f ), forceSpawn: true );
 
 		//SpawnBoss( new Vector2( 3f, 3f ) );
@@ -303,13 +287,9 @@ public sealed class Manager : Component, Component.INetworkListener
 			type = TypeLibrary.GetType( typeof( ZombieElite ) );
 		}
 
-		//type = Game.Random.Int(0, 2) == 0 ? TypeLibrary.GetType(typeof(RunnerElite)) : TypeLibrary.GetType(typeof(Runner));
-		//type = TypeLibrary.GetType( typeof( Exploder ) );
-
 		SpawnEnemy( type, pos );
 	}
 
-	//void SpawnEnemy( TypeDescription type, Vector2 pos, bool forceSpawn = false )
 	void SpawnEnemy( TypeDescription type, Vector2 pos, bool forceSpawn = false )
 	{
 		if ( EnemyCount >= MAX_ENEMY_COUNT && !forceSpawn )
@@ -340,19 +320,16 @@ public sealed class Manager : Component, Component.INetworkListener
 		{
 			Log.Info( $"Enemy {type} not implemented yet!" );
 			return;
-
-			//enemyObj = EnemyPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
-			//enemy = enemyObj.Components.Create( type ) as Enemy;
 		}
 
 		enemy = enemyObj.Components.Get<Enemy>();
+
+		var closestPlayer = GetClosestPlayer( pos );
+		if ( closestPlayer?.Position2D.x > pos.x )
+			enemy.FlipX = true;
+
 		enemyObj.Name = type.ToString();
 		enemyObj.NetworkSpawn();
-		//enemyObj.Transform.Position = new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) );
-
-		//var closestPlayer = GetClosestPlayer( pos );
-		//if ( closestPlayer?.Position2D.x > pos.x )
-		//	enemy.Scale = new Vector2( -1f, 1f ) * enemy.ScaleFactor;
 
 		AddThing( enemy );
 		EnemyCount++;
@@ -537,10 +514,8 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public void RemoveThing( Thing thing )
 	{
-		//if ( ThingGridPositions.ContainsKey( thing.GridPos ) )
-		//{
-		//	ThingGridPositions[thing.GridPos].Remove( thing );
-		//}
+		if ( ThingGridPositions.ContainsKey( thing.GridPos ) )
+			ThingGridPositions[thing.GridPos].Remove( thing );
 
 		if ( thing is Enemy ) // counts Crate too
 		{
@@ -568,7 +543,6 @@ public sealed class Manager : Component, Component.INetworkListener
 		{
 			if ( i >= things.Count )
 				continue;
-			//Log.Info("!!! " + thing.Name + " --- " + i.ToString() + " count: " + things.Count);
 
 			if ( thing == null || !thing.IsValid || thing.IsRemoved )
 				return;
@@ -595,7 +569,6 @@ public sealed class Manager : Component, Component.INetworkListener
 			if ( dist_sqr < total_radius_sqr )
 			{
 				float percent = Utils.Map( dist_sqr, total_radius_sqr, 0f, 0f, 1f );
-				//thing.Velocity += (thing.Position - other.Position).Normal * Utils.Map(dist_sqr, total_radius_sqr, 0f, 0f, 10f) * (1f + other.TempWeight) * dt;
 				thing.Colliding( other, percent, dt * thing.TimeScale );
 			}
 		}
@@ -624,7 +597,9 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		IsGameOver = true;
 		IsVictory = false;
-		//GameOverClient();
+
+		//Sandbox.Services.Stats.Increment( "failures", 1 );
+		//Sandbox.Services.Stats.SetValue( "failure-time", ElapsedTime.Relative );
 	}
 
 	public void Victory()
