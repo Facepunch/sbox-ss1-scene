@@ -47,7 +47,7 @@ public class Spitter : Enemy
 
 		if ( IsProxy )
 			return;
-		
+
 		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );
 
@@ -61,6 +61,9 @@ public class Spitter : Enemy
 		//Gizmo.Draw.Text( $"Sprite.PlaybackSpeed: {Sprite.PlaybackSpeed}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
 
 		base.UpdatePosition( dt );
+
+
+		if ( IsProxy ) return;
 
 		var closestPlayer = Manager.Instance.GetClosestPlayer( Position2D );
 		if ( closestPlayer == null )
@@ -110,7 +113,7 @@ public class Spitter : Enemy
 
 	public void Shoot()
 	{
-		if(IsProxy) return;
+		if ( IsProxy ) return;
 
 		var closestPlayer = Manager.Instance.GetClosestPlayer( Position2D );
 		if ( closestPlayer == null )
