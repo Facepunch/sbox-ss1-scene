@@ -972,7 +972,7 @@ public class Player : Thing
 
 		bullet.Init();
 
-		bullet.GameObject.NetworkSpawn( Network.OwnerConnection ); // todo: not necessary to specify connection?
+		bullet.GameObject.NetworkSpawn( Network.OwnerConnection );
 	}
 
 	void Reload()
