@@ -1134,9 +1134,4 @@ public class Player : Thing
 			sfx.Pitch = pitch;
 		}
 	}
-
-	public override void SetFlipHorizontal( bool flip )
-	{
-		Body.Transform.LocalRotation = new Angles( flip ? 180f : 0f, 0f, 0f );
-	}
 }

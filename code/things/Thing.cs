@@ -117,9 +117,4 @@ public class Thing : Component
 		var cloud = Manager.Instance.SpawnCloud( pos );
 		cloud.Velocity = vel;
 	}
-
-	public virtual void SetFlipHorizontal(bool flip)
-	{
-		Transform.LocalRotation = new Angles( flip ? 180f : 0f, 0f, 0f );
-	}
 }
