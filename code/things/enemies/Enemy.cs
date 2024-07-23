@@ -27,7 +27,7 @@ public abstract class Enemy : Thing
 	public float DeathProgress { get; private set; }
 	private Vector3 _deathScale;
 
-	public bool IsAttacking { get; private set; }
+	[Sync] public bool IsAttacking { get; private set; }
 	private float _aggroTimer;
 	public bool CanAttack { get; set; }
 	public bool CanAttackAnim { get; set; }
