@@ -33,7 +33,7 @@ public class ExploderElite : Enemy
 
 		//AnimSpeed = 2f;
 		//Sprite.Texture = Texture.Load("textures/sprites/exploder_elite.vtex");
-		
+
 		//Sprite.Size = new Vector2( 1f, 1f ) * Scale;
 
 		PushStrength = 12f;
@@ -55,7 +55,7 @@ public class ExploderElite : Enemy
 
 		if ( IsProxy )
 			return;
-		
+
 		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );
 
@@ -132,7 +132,7 @@ public class ExploderElite : Enemy
 
 						player.Damage( dmg );
 
-						if( dmg > 0f )
+						if ( dmg > 0f )
 							OnDamagePlayer( player, dmg );
 					}
 
@@ -165,7 +165,7 @@ public class ExploderElite : Enemy
 	public void Explode()
 	{
 		Manager.Instance.SpawnExplosionEffectLocal( Position2D );
-		Manager.Instance.PlaySfxNearbyLocal( "explode", Position2D, pitch: Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 6f );
+		Manager.Instance.PlaySfxNearby( "explode", Position2D, pitch: Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 6f );
 
 		_hasExploded = true;
 		IsExploding = false;

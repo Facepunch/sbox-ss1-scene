@@ -71,7 +71,7 @@ public class Boss : Enemy
 
 		if ( IsProxy )
 			return;
-		
+
 		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );
 
@@ -305,7 +305,7 @@ public class Boss : Enemy
 
 						player.Damage( dmg );
 
-						if( dmg > 0f )
+						if ( dmg > 0f )
 							OnDamagePlayer( player, dmg );
 					}
 
@@ -321,7 +321,7 @@ public class Boss : Enemy
 
 		//ColorFill = new ColorHsv( 0f, 0f, 0f, 0f );
 
-		Manager.Instance.PlaySfxNearbyLocal( "boss.die", Position2D, pitch: Game.Random.Float( 0.75f, 0.8f ), volume: 1.5f, maxDist: 15f );
+		Manager.Instance.PlaySfxNearby( "boss.die", Position2D, pitch: Game.Random.Float( 0.75f, 0.8f ), volume: 1.5f, maxDist: 15f );
 		Manager.Instance.Victory();
 	}
 }

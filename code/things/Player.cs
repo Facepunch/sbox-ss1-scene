@@ -492,7 +492,7 @@ public class Player : Thing
 
 		ForEachStatus( status => status.OnDashRecharged() );
 
-		Manager.Instance.PlaySfxNearbyLocal( "player.dash.recharge", Position2D, pitch: Utils.Map( NumDashesAvailable, 1, numDashes, 1f, 1.2f ), volume: 0.2f, maxDist: 5f );
+		Manager.Instance.PlaySfxNearby( "player.dash.recharge", Position2D, pitch: Utils.Map( NumDashesAvailable, 1, numDashes, 1f, 1.2f ), volume: 0.2f, maxDist: 5f );
 	}
 
 	void HandleBounds()
@@ -578,7 +578,7 @@ public class Player : Thing
 
 		status.Refresh();
 
-		Manager.Instance.PlaySfxNearbyLocal( "click", Position2D, 0.9f, 0.75f, 5f );
+		Manager.Instance.PlaySfxNearby( "click", Position2D, 0.9f, 0.75f, 5f );
 
 		LevelUpChoices.Clear();
 		IsChoosingLevelUpReward = false;
@@ -706,7 +706,7 @@ public class Player : Thing
 		ExperienceRequired = GetExperienceReqForLevel( Level + 1 );
 		NumRerollAvailable += (int)Stats[PlayerStat.NumRerollsPerLevel];
 
-		Manager.Instance.PlaySfxNearbyLocal( "levelup", Position2D, Game.Random.Float( 0.95f, 1.05f ), 0.5f, 5f );
+		Manager.Instance.PlaySfxNearby( "levelup", Position2D, Game.Random.Float( 0.95f, 1.05f ), 0.5f, 5f );
 
 		ForEachStatus( status => status.OnLevelUp() );
 
@@ -722,7 +722,7 @@ public class Player : Thing
 			return;
 		}
 
-		Manager.Instance.PlaySfxNearbyLocal( "reroll", Position2D, Utils.Map( NumRerollAvailable, 0, 20, 0.9f, 1.4f, EasingType.QuadIn ), 0.6f, 5f );
+		Manager.Instance.PlaySfxNearby( "reroll", Position2D, Utils.Map( NumRerollAvailable, 0, 20, 0.9f, 1.4f, EasingType.QuadIn ), 0.6f, 5f );
 
 		NumRerollAvailable--;
 
@@ -817,7 +817,7 @@ public class Player : Thing
 		_isFlashing = false;
 		IsReloading = false;
 
-		Manager.Instance.PlaySfxNearbyLocal( "die", Position2D, pitch: Game.Random.Float( 1f, 1.2f ), volume: 1.5f, maxDist: 12f );
+		Manager.Instance.PlaySfxNearby( "die", Position2D, pitch: Game.Random.Float( 1f, 1.2f ), volume: 1.5f, maxDist: 12f );
 
 		Sprite.PlayAnimation( "ghost_idle" );
 
@@ -1063,7 +1063,7 @@ public class Player : Thing
 
 		InitializeStats();
 
-		Manager.Instance.PlaySfxNearbyLocal( "restart", Position2D, Game.Random.Float( 0.95f, 1.05f ), 0.66f, 4f );
+		Manager.Instance.PlaySfxNearby( "restart", Position2D, Game.Random.Float( 0.95f, 1.05f ), 0.66f, 4f );
 	}
 
 	public void SpawnBulletRing( Vector2 pos, int numBullets, Vector2 aimDir )

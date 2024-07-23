@@ -712,7 +712,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		if ( _numEnemyDeathSfxs >= 3 )
 			return;
 
-		PlaySfxNearbyLocal( "enemy.die", worldPos, pitch: Game.Random.Float( 0.85f, 1.15f ), volume: 1f, maxDist: 5.5f );
+		PlaySfxNearby( "enemy.die", worldPos, pitch: Game.Random.Float( 0.85f, 1.15f ), volume: 1f, maxDist: 5.5f );
 
 		_numEnemyDeathSfxs++;
 	}
@@ -721,30 +721,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	{
 		maxDist *= Globals.SFX_DIST_MODIFIER;
 
-		foreach ( Player player in Scene.GetAllComponents<Player>() )
-		{
-			var playerPos = player.Position2D;
-
-			var distSqr = (player.Position2D - worldPos).LengthSquared;
-			if ( distSqr < maxDist * maxDist )
-			{
-				var dist = (player.Position2D - worldPos).Length;
-				var falloff = Utils.Map( dist, 0f, maxDist, 1f, 0f, EasingType.SineIn );
-				var pos = playerPos + (worldPos - playerPos) * 0.1f;
-
-				player.PlaySfx( name, pos, pitch * Globals.SFX_PITCH_MODIFIER, volume * falloff );
-			}
-		}
-	}
-
-	public void PlaySfxNearbyLocal( string name, Vector2 worldPos, float pitch, float volume, float maxDist )
-	{
-		maxDist *= Globals.SFX_DIST_MODIFIER;
-
 		var player = GetLocalPlayer();
-		if ( player == null )
-			return;
-
 		var playerPos = player.Position2D;
 
 		var distSqr = (player.Position2D - worldPos).LengthSquared;
@@ -754,12 +731,7 @@ public sealed class Manager : Component, Component.INetworkListener
 			var falloff = Utils.Map( dist, 0f, maxDist, 1f, 0f, EasingType.SineIn );
 			var pos = playerPos + (worldPos - playerPos) * 0.1f;
 
-			var sfx = Sound.Play( name, new Vector3( pos.x, pos.y, Globals.SFX_DEPTH ) );
-			if ( sfx != null )
-			{
-				sfx.Volume = volume * falloff;
-				sfx.Pitch = pitch * Globals.SFX_PITCH_MODIFIER;
-			}
+			player.PlaySfx( name, pos, pitch * Globals.SFX_PITCH_MODIFIER, volume * falloff );
 		}
 	}
 

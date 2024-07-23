@@ -49,7 +49,7 @@ public class Exploder : Enemy
 
 		if ( IsProxy )
 			return;
-		
+
 		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );
 
@@ -64,7 +64,7 @@ public class Exploder : Enemy
 			return;
 
 		if ( IsExploding )
-			Sprite.FlashTint = Color.Yellow.WithAlpha( (0.5f + Utils.FastSin( Time.Now * 32f ) * 0.5f) * Utils.Map(_explodeStartTime, 0.5f, EXPLODE_TIME, 0f, 0.75f, EasingType.QuadIn ) );
+			Sprite.FlashTint = Color.Yellow.WithAlpha( (0.5f + Utils.FastSin( Time.Now * 32f ) * 0.5f) * Utils.Map( _explodeStartTime, 0.5f, EXPLODE_TIME, 0f, 0.75f, EasingType.QuadIn ) );
 
 		if ( IsExploding )
 		{
@@ -73,7 +73,7 @@ public class Exploder : Enemy
 				Sprite.PlayAnimation( "explode_loop" );
 				_hasStartedLooping = true;
 			}
-			
+
 			if ( !IsProxy && !_hasExploded && _explodeStartTime > EXPLODE_TIME )
 				Explode();
 		}
@@ -122,7 +122,7 @@ public class Exploder : Enemy
 
 						player.Damage( dmg );
 
-						if( dmg > 0f )
+						if ( dmg > 0f )
 							OnDamagePlayer( player, dmg );
 					}
 
@@ -155,7 +155,7 @@ public class Exploder : Enemy
 	public void Explode()
 	{
 		Manager.Instance.SpawnExplosionEffectLocal( Position2D );
-		Manager.Instance.PlaySfxNearbyLocal( "explode", Position2D, pitch: Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 6f );
+		Manager.Instance.PlaySfxNearby( "explode", Position2D, pitch: Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 6f );
 
 		_hasExploded = true;
 		IsExploding = false;

@@ -136,7 +136,7 @@ public class Grenade : Thing
 	{
 		float scaleModifier = BASE_EXPLOSION_MODIFIER * ExplosionSizeMultiplier;
 		Manager.Instance.SpawnExplosionEffectLocal( Position2D, scaleModifier );
-		Manager.Instance.PlaySfxNearbyLocal( "explode", Position2D, pitch: Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 6f );
+		Manager.Instance.PlaySfxNearby( "explode", Position2D, pitch: Game.Random.Float( 0.9f, 1.1f ), volume: 1f, maxDist: 6f );
 
 		if ( IsProxy )
 			return;

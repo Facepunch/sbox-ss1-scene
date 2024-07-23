@@ -110,6 +110,8 @@ public class Spitter : Enemy
 
 	public void Shoot()
 	{
+		if(IsProxy) return;
+
 		var closestPlayer = Manager.Instance.GetClosestPlayer( Position2D );
 		if ( closestPlayer == null )
 			return;
