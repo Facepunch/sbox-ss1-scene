@@ -59,10 +59,6 @@
             "_type": "gameobject",
             "prefab": "prefabs/enemy_bullet.prefab"
           },
-          "EnemyPrefab": {
-            "_type": "gameobject",
-            "prefab": "prefabs/enemy.prefab"
-          },
           "EnemySpikeBgPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/enemy_spike_bg.prefab"
@@ -378,6 +374,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "03e83f91-ca9e-4d16-bc55-e8b4efd68946",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -386,7 +383,8 @@
                   "Sprite": "textures/sprites/bg_square_3.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -401,6 +399,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "917ff487-8a9c-4223-b4b4-5350b7d7eef8",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -409,7 +408,8 @@
                   "Sprite": "textures/sprites/bg_square.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -424,6 +424,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "e66cc17b-2dd2-44ed-b968-ecf553e1e9fa",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -432,7 +433,8 @@
                   "Sprite": "textures/sprites/bg_square_2.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -447,6 +449,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "6749ccbf-c755-431a-8e6a-1fc7a1ef1b38",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -455,7 +458,8 @@
                   "Sprite": "textures/sprites/bg_square.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             }
@@ -479,6 +483,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "b42c5a1f-c4ac-4085-aa9c-70e61549bf90",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -487,7 +492,8 @@
                   "Sprite": "textures/sprites/bg_square.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -502,6 +508,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "1a79ad8d-d521-492a-833c-b44c36704635",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -510,7 +517,8 @@
                   "Sprite": "textures/sprites/bg_square_2.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -525,6 +533,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "10bffd07-74ed-4939-b3ae-02d1747ba1a9",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -533,7 +542,8 @@
                   "Sprite": "textures/sprites/bg_square.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -548,6 +558,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "9fa1b237-5e11-4f9c-9b16-f90464a7ea38",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -556,7 +567,8 @@
                   "Sprite": "textures/sprites/bg_square_3.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             }
@@ -580,6 +592,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "91c54127-be86-4785-a876-fdb195a55bf8",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -588,7 +601,8 @@
                   "Sprite": "textures/sprites/bg_square.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -603,6 +617,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "3a3c382c-8d27-4821-be9b-3e1cb8c60916",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -611,7 +626,8 @@
                   "Sprite": "textures/sprites/bg_square_3.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -626,6 +642,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "d4d7795c-8ca7-4ce6-ba30-93fb834f5234",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -634,7 +651,8 @@
                   "Sprite": "textures/sprites/bg_square.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -649,6 +667,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "21345869-8fe1-4ae2-afa7-ecec83c8e400",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -657,7 +676,8 @@
                   "Sprite": "textures/sprites/bg_square_2.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             }
@@ -681,6 +701,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "4fc23619-d1b0-4f48-ad91-f516b767dfd4",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -689,7 +710,8 @@
                   "Sprite": "textures/sprites/bg_square_2.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -704,6 +726,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "c279a2f3-f01c-44fe-9d06-ab104d70f5cb",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -712,7 +735,8 @@
                   "Sprite": "textures/sprites/bg_square_3.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -727,6 +751,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "4085ade1-ba38-4efb-8c3c-d5d990f5005c",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -735,7 +760,8 @@
                   "Sprite": "textures/sprites/bg_square_2.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -750,6 +776,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "edaaaae4-3b2a-447e-ba27-ba172de2bd2d",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -758,7 +785,8 @@
                   "Sprite": "textures/sprites/bg_square.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             }
@@ -782,6 +810,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "c042a8ab-347b-4fcf-b3b6-973b929912bb",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -790,7 +819,8 @@
                   "Sprite": "textures/sprites/bg_square.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -805,6 +835,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "c5b789f8-9440-4771-a021-8cb93374e132",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -813,7 +844,8 @@
                   "Sprite": "textures/sprites/bg_square_2.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -828,6 +860,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "7c6a1f8e-7050-483f-809e-c4f6e99cf466",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -836,7 +869,8 @@
                   "Sprite": "textures/sprites/bg_square_3.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -851,6 +885,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "a74b8abe-3be0-44b5-88dc-e2e383fa5a09",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -859,7 +894,8 @@
                   "Sprite": "textures/sprites/bg_square.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             }
@@ -883,6 +919,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "78162e3e-dc4d-4aeb-aa3c-5905e92e01aa",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -891,7 +928,8 @@
                   "Sprite": "textures/sprites/bg_square_3.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -906,6 +944,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "c866f7cc-09a1-4406-a798-85bcf7b5f219",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -914,7 +953,8 @@
                   "Sprite": "textures/sprites/bg_square_3.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -929,6 +969,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "882e4ea2-4359-4a06-9123-e1f1eb6199c9",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -937,7 +978,8 @@
                   "Sprite": "textures/sprites/bg_square.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -952,6 +994,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "589d64a1-9fd9-447a-a8f0-f7bc9d8c5991",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -960,7 +1003,8 @@
                   "Sprite": "textures/sprites/bg_square_3.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             }
@@ -984,6 +1028,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "d37f79ba-460b-4b67-8ac4-0e7cda094e09",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -992,7 +1037,8 @@
                   "Sprite": "textures/sprites/bg_square_2.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -1007,6 +1053,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "780255bd-5755-402b-8ebb-4601919c7605",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -1015,7 +1062,8 @@
                   "Sprite": "textures/sprites/bg_square.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -1030,6 +1078,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "910ecf1d-1109-42d3-a765-9a8253f73136",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -1038,7 +1087,8 @@
                   "Sprite": "textures/sprites/bg_square_3.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             },
@@ -1053,6 +1103,7 @@
                 {
                   "__type": "SpriteTools.SpriteComponent",
                   "__guid": "067a126a-762d-4957-b9be-678471f68037",
+                  "__version": 1,
                   "BroadcastEvents": {},
                   "CastShadows": "Off",
                   "CreateAttachPoints": false,
@@ -1061,7 +1112,8 @@
                   "Sprite": "textures/sprites/bg_square.sprite",
                   "SpriteFlags": "None",
                   "StartingAnimationName": "animation_01",
-                  "Tint": "0.01569,0.01961,0.00784,1"
+                  "Tint": "0.01569,0.01961,0.00784,1",
+                  "UpDirection": "XNegative"
                 }
               ]
             }
