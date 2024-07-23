@@ -14,5 +14,13 @@ Hud {
 	.fade_in {
 		width: 100%;
 		height: 100%;
+		background-color: black;
+		opacity: 0;
+		transition: opacity 0.75s;
+
+		&:intro
+		{
+			opacity: 1;
+		}
 	}
 }

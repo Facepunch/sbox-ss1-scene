@@ -46,7 +46,7 @@
 
 	@if (Manager.Instance.ElapsedTime < 0.75f)
 	{
-		<div class="fade_in" style="background-color:@(Color.Black.WithAlpha(Utils.Map(Manager.Instance.ElapsedTime, 0f, 0.75f, 1f, 0f)).Rgba);"></div>
+		<div class="fade_in"></div>
 	}
 </root>
 
@@ -67,6 +67,6 @@
 
 	protected override int BuildHash()
 	{
-		return System.HashCode.Combine(fadeTime < 1f ? fadeTime : 0);
+		return System.HashCode.Combine(fadeTime < 0.8f);
 	}
 }
