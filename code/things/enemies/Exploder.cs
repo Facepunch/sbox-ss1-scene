@@ -141,6 +141,7 @@ public class Exploder : Enemy
 		}
 	}
 
+	[Broadcast]
 	public void StartExploding()
 	{
 		IsExploding = true;
