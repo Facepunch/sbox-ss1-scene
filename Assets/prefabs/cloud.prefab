@@ -5,6 +5,7 @@
     "Name": "cloud",
     "Scale": "0.01,0.01,1",
     "Enabled": true,
+    "NetworkMode": 0,
     "Components": [
       {
         "__type": "SpriteTools.SpriteComponent",

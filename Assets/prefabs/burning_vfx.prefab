@@ -4,6 +4,7 @@
     "Flags": 0,
     "Name": "burning_vfx",
     "Enabled": true,
+    "NetworkMode": 0,
     "Components": [
       {
         "__type": "SpriteTools.SpriteComponent",
