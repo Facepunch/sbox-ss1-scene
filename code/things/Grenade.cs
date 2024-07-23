@@ -29,7 +29,6 @@ public class Grenade : Thing
 
 		ShadowOpacity = 0.8f;
 		ShadowScale = 0.6f;
-		SpawnShadow( ShadowScale, ShadowOpacity );
 
 		Sprite.Transform.LocalScale = new Vector3( 1f ) * Scale * Globals.SPRITE_SCALE;
 
@@ -48,6 +47,13 @@ public class Grenade : Thing
 		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );
 		//CollideWith.Add( typeof( Coin ) );
+	}
+
+	protected override void OnStart()
+	{
+		base.OnStart();
+
+		SpawnShadow( ShadowScale, ShadowOpacity );
 	}
 
 	protected override void OnUpdate()
@@ -90,7 +96,7 @@ public class Grenade : Thing
 			Velocity = new Vector2( Velocity.x, -MathF.Abs( Velocity.y ) );
 
 		//Position2D = new Vector2( MathX.Clamp( Position2D.x, Manager.Instance.BOUNDS_MIN.x + Radius, Manager.Instance.BOUNDS_MAX.x - Radius ), MathX.Clamp( Position2D.y, Manager.Instance.BOUNDS_MIN.y + Radius, Manager.Instance.BOUNDS_MAX.y - Radius ) );
-		Transform.Position = Transform.Position.WithZ( Globals.GetZPos(Position2D.y) );
+		Transform.Position = Transform.Position.WithZ( Globals.GetZPos( Position2D.y ) );
 		Velocity *= (1f - dt * 0.95f);
 
 		//Scale = new Vector2( 0.6f + Utils.FastSin( SpawnTime * 8f ) * 0.025f, 0.6f + MathF.Cos( SpawnTime * 8f ) * 0.025f );

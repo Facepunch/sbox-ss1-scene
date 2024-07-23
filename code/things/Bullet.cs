@@ -37,7 +37,6 @@ public class Bullet : Thing
 
 		ShadowOpacity = 0.8f;
 		ShadowScale = 0.3f;
-		SpawnShadow( ShadowScale, ShadowOpacity );
 		//Log.Info( $"ShadowScale: {ShadowScale} ShadowSprite.Transform.LocalScale: {ShadowSprite.Transform.LocalScale}" );
 
 		if ( IsProxy )
@@ -59,6 +58,13 @@ public class Bullet : Thing
 		Stats[BulletStat.HealTeammateAmount] = 0f;
 
 		CollideWith.Add( typeof( Enemy ) );
+	}
+
+	protected override void OnStart()
+	{
+		base.OnStart();
+
+		SpawnShadow( ShadowScale, ShadowOpacity );
 	}
 
 	public void Init()
@@ -83,8 +89,8 @@ public class Bullet : Thing
 
 		Scale = scale;
 		//Sprite.Size = new Vector2( scale );
-		Sprite.Transform.LocalScale = new Vector3 ( 1f ) * scale * Globals.SPRITE_SCALE;
-		
+		Sprite.Transform.LocalScale = new Vector3( 1f ) * scale * Globals.SPRITE_SCALE;
+
 		Radius = 0.07f + scale * 0.2f;
 		ShadowScale = scale * 1.3f;
 
@@ -97,7 +103,7 @@ public class Bullet : Thing
 
 		//Log.Info( $"Stats: {Stats}" );
 
-		if (!IsProxy)
+		if ( !IsProxy )
 		{
 			//Gizmo.Draw.Color = Color.White;
 			//Gizmo.Draw.Text( $"TimeSinceSpawn: {TimeSinceSpawn}\nStats[BulletStat.Damage]: {Stats[BulletStat.Damage]}\nStats[BulletStat.Lifetime]: {Stats[BulletStat.Lifetime]}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.2f, 0f ) ) );

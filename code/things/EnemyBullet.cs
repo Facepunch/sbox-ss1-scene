@@ -35,7 +35,6 @@ public class EnemyBullet : Thing
 
 		ShadowOpacity = 0.8f;
 		ShadowScale = 0.6f;
-		SpawnShadow( ShadowScale, ShadowOpacity );
 
 		//Speed = 2f;
 		Lifetime = 6f;
@@ -48,8 +47,15 @@ public class EnemyBullet : Thing
 		CollideWith.Add( typeof( Player ) );
 	}
 
+	protected override void OnStart()
+	{
+		base.OnStart();
+
+		SpawnShadow( ShadowScale, ShadowOpacity );
+	}
+
 	[Broadcast]
-	public void SetColor(Color color)
+	public void SetColor( Color color )
 	{
 		Sprite.Tint = color;
 	}

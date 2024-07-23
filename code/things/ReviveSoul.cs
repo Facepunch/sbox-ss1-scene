@@ -19,7 +19,6 @@ public class ReviveSoul : Thing
 
 		ShadowOpacity = 0.8f;
 		ShadowScale = 0.8f;
-		SpawnShadow( ShadowScale, ShadowOpacity );
 
 		if ( IsProxy )
 			return;
@@ -32,6 +31,13 @@ public class ReviveSoul : Thing
 
 		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );
+	}
+
+	protected override void OnStart()
+	{
+		base.OnStart();
+
+		SpawnShadow( ShadowScale, ShadowOpacity );
 	}
 
 	protected override void OnUpdate()
@@ -68,7 +74,7 @@ public class ReviveSoul : Thing
 
 		if ( SpawnTime > 0.1f )
 		{
-			foreach ( Player player in Scene.GetAllComponents<Player>().Where(x => x.IsDead) )
+			foreach ( Player player in Scene.GetAllComponents<Player>().Where( x => x.IsDead ) )
 			{
 				var dist_sqr = (Position2D - player.Position2D).LengthSquared;
 				var req_dist_sqr = MathF.Pow( player.Stats[PlayerStat.CoinAttractRange], 2f );
