@@ -58,8 +58,8 @@ public class Player : Thing
 
 	[Sync] public int Level { get; protected set; }
 	public int ExperienceTotal { get; protected set; }
-	[Sync] public int ExperienceCurrent { get; protected set; }
-	[Sync] public int ExperienceRequired { get; protected set; }
+	public int ExperienceCurrent { get; protected set; }
+	public int ExperienceRequired { get; protected set; }
 	public bool IsChoosingLevelUpReward { get; protected set; }
 	public List<Status> LevelUpChoices { get; private set; }
 
