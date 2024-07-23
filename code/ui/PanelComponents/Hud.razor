@@ -5,20 +5,20 @@
 <root>
 	<TimerPanel></TimerPanel>
 
-	@foreach ( Player player in Scene.GetAllComponents<Player>() )
+	@foreach (Player player in Scene.GetAllComponents<Player>())
 	{
 		var screenPos = Scene.Camera.PointToScreenPixels(player.Position2D) * Panel.ScaleFromScreen;
 
-		<Nametag style="left: @(screenPos.x)px; top: @(screenPos.y - 140)px;" Player=@player ></Nametag>
+		<Nametag style="left: @(screenPos.x)px; top: @(screenPos.y - 140)px;" Player=@player></Nametag>
 
-		@if(player.Network.IsOwner)
+		@if (player.Network.IsOwner)
 		{
 			<InfoPanel Player=@player></InfoPanel>
 			<StatusPanel Player=@player></StatusPanel>
 
-			@if(player.IsChoosingLevelUpReward && !player.IsDead && !Manager.Instance.IsGameOver)
+			@if (player.IsChoosingLevelUpReward && !player.IsDead && !Manager.Instance.IsGameOver)
 			{
-				<ChoicePanel Player=@player></ChoicePanel>	
+				<ChoicePanel Player=@player></ChoicePanel>
 			}
 		}
 	}
@@ -27,24 +27,24 @@
 		var hoveredStatus = Manager.Instance.HoveredStatus;
 	}
 
-	@if(hoveredStatus != null)
+	@if (hoveredStatus != null)
 	{
 		<StatusTooltip Status=@hoveredStatus style="left:@(Mouse.Position.x * Panel.ScaleFromScreen + 50)px; top:@(Mouse.Position.y * Panel.ScaleFromScreen - 50)px;"></StatusTooltip>
 	}
 
-	@if(Manager.Instance.IsGameOver)
+	@if (Manager.Instance.IsGameOver)
 	{
 		<DeathPanel />
 	}
 	else
 	{
-		@if(Manager.Instance.HasSpawnedBoss && Manager.Instance.Boss != null)
+		@if (Manager.Instance.HasSpawnedBoss && Manager.Instance.Boss != null)
 		{
 			<BossNametag Boss=@Manager.Instance.Boss />
 		}
 	}
 
-	@if(Manager.Instance.ElapsedTime < 0.75f)
+	@if (Manager.Instance.ElapsedTime < 0.75f)
 	{
 		<div class="fade_in" style="background-color:@(Color.Black.WithAlpha(Utils.Map(Manager.Instance.ElapsedTime, 0f, 0.75f, 1f, 0f)).Rgba);"></div>
 	}
@@ -52,8 +52,21 @@
 
 @code
 {
+	public static Hud Instance { get; private set; }
+	TimeSince fadeTime = 0;
+
+	protected override void OnStart()
+	{
+		Instance = this;
+	}
+
+	public void FadeIn()
+	{
+		fadeTime = 0;
+	}
+
 	protected override int BuildHash()
 	{
-		return System.HashCode.Combine(Time.Now);
+		return System.HashCode.Combine(fadeTime < 1f ? fadeTime : 0);
 	}
 }

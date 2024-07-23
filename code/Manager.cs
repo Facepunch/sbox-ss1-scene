@@ -687,6 +687,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		HasSpawnedBoss = false;
 		Boss = null;
 		TimeSinceMagnet = 0f;
+		Hud.Instance?.FadeIn();
 
 		Components.Get<PauseMenu>().IsOpen = false;
 
