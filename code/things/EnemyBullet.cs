@@ -106,6 +106,8 @@ public class EnemyBullet : Thing
 	{
 		base.Colliding( other, percent, dt );
 
+		if ( IsProxy ) return;
+
 		if ( other is Player player && !player.IsDead )
 		{
 			float dmg = player.CheckDamageAmount( Damage, DamageType.Ranged );
