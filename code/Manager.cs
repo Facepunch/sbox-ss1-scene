@@ -52,7 +52,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	public int CoinCount { get; private set; }
 	public const float MAX_COIN_COUNT = 200;
 
-	public record struct GridSquare( int x, int y );
+	public record struct GridSquare(int x, int y);
 	public Dictionary<GridSquare, List<Thing>> ThingGridPositions = new Dictionary<GridSquare, List<Thing>>();
 
 	public float GRID_SIZE = 1f;
@@ -90,39 +90,36 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		Instance = this;
 
-		BOUNDS_MIN = new Vector2( -16f, -12.35f );
-		BOUNDS_MAX = new Vector2( 16f, 12f );
-		BOUNDS_MIN_SPAWN = new Vector2( -15.5f, -11.75f );
-		BOUNDS_MAX_SPAWN = new Vector2( 15.5f, 11.5f );
+		BOUNDS_MIN = new Vector2(-16f, -12.35f);
+		BOUNDS_MAX = new Vector2(16f, 12f);
+		BOUNDS_MIN_SPAWN = new Vector2(-15.5f, -11.75f);
+		BOUNDS_MAX_SPAWN = new Vector2(15.5f, 11.5f);
 
 		ElapsedTime = 0f;
 
-		for ( float x = BOUNDS_MIN.x; x < BOUNDS_MAX.x; x += GRID_SIZE )
+		for (float x = BOUNDS_MIN.x; x < BOUNDS_MAX.x; x += GRID_SIZE)
 		{
-			for ( float y = BOUNDS_MIN.y; y < BOUNDS_MAX.y; y += GRID_SIZE )
+			for (float y = BOUNDS_MIN.y; y < BOUNDS_MAX.y; y += GRID_SIZE)
 			{
-				ThingGridPositions.Add( GetGridSquareForPos( new Vector2( x, y ) ), new List<Thing>() );
+				ThingGridPositions.Add(GetGridSquareForPos(new Vector2(x, y)), new List<Thing>());
 			}
 		}
 
-		if ( IsProxy )
+		if (IsProxy)
 			return;
 	}
 
 	protected override void OnStart()
 	{
-		if ( !GameNetworkSystem.IsActive )
+		if (!GameNetworkSystem.IsActive)
 		{
-			if ( MainMenu.IsSingleplayerGame )
-				CreatePlayer( Connection.Local );
+			if (MainMenu.IsSingleplayerGame)
+				CreatePlayer(Connection.Local);
 			else
 				GameNetworkSystem.CreateLobby();
 		}
 
-		if ( Networking.IsHost )
-			Network.TakeOwnership();
-
-		if ( IsProxy )
+		if (IsProxy)
 			return;
 
 		SpawnStartingThings();
@@ -130,10 +127,10 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public void SpawnStartingThings()
 	{
-		for ( int i = 0; i < 3; i++ )
+		for (int i = 0; i < 3; i++)
 		{
-			var pos = new Vector2( Game.Random.Float( BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x ), Game.Random.Float( BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y ) );
-			SpawnEnemy( TypeLibrary.GetType( typeof( Crate ) ), pos );
+			var pos = new Vector2(Game.Random.Float(BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x), Game.Random.Float(BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y));
+			SpawnEnemy(TypeLibrary.GetType(typeof(Crate)), pos);
 		}
 
 		//for( int i = 0; i < 22; i++ )
@@ -161,53 +158,53 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		NumPlayers = Scene.GetAllComponents<Player>().Count();
 
-		if ( IsGameOver )
+		if (IsGameOver)
 			return;
 
-		var tr = Scene.Trace.Ray( Camera.ScreenPixelToRay( Mouse.Position ), 1500f ).Run();
-		if ( tr.Hit )
+		var tr = Scene.Trace.Ray(Camera.ScreenPixelToRay(Mouse.Position), 1500f).Run();
+		if (tr.Hit)
 		{
 			MouseWorldPos = (Vector2)tr.HitPosition;
 		}
 
-		if ( _numEnemyDeathSfxs > 0 )
+		if (_numEnemyDeathSfxs > 0)
 			_numEnemyDeathSfxs--;
 
-		if ( IsProxy )
+		if (IsProxy)
 			return;
 
 		HandleEnemySpawn();
 
-		if ( !HasSpawnedBoss && !IsGameOver && ElapsedTime > 15f * 60f )
+		if (!HasSpawnedBoss && !IsGameOver && ElapsedTime > 15f * 60f)
 		{
-			SpawnBoss( new Vector2( 0f, 0f ) );
+			SpawnBoss(new Vector2(0f, 0f));
 			HasSpawnedBoss = true;
 		}
 	}
 
-	public void OnActive( Connection channel )
+	public void OnActive(Connection channel)
 	{
-		Log.Info( $"Player '{channel.DisplayName}' is becoming active (local = {channel == Connection.Local}) (host = {channel.IsHost})" );
+		Log.Info($"Player '{channel.DisplayName}' is becoming active (local = {channel == Connection.Local}) (host = {channel.IsHost})");
 
-		CreatePlayer( channel );
+		CreatePlayer(channel);
 	}
 
-	void CreatePlayer( Connection channel )
+	void CreatePlayer(Connection channel)
 	{
-		var playerObj = PlayerPrefab.Clone( new Vector3( Game.Random.Float( -3f, 3f ), Game.Random.Float( -3f, 3f ), Globals.GetZPos( 0f ) ) );
+		var playerObj = PlayerPrefab.Clone(new Vector3(Game.Random.Float(-3f, 3f), Game.Random.Float(-3f, 3f), Globals.GetZPos(0f)));
 		var player = playerObj.Components.Get<Player>();
 
-		playerObj.NetworkSpawn( channel );
+		playerObj.NetworkSpawn(channel);
 	}
 
 	void HandleEnemySpawn()
 	{
-		var spawnTime = Utils.Map( EnemyCount, 0, MAX_ENEMY_COUNT, 0.05f, 0.3f, EasingType.QuadOut )
-			* Utils.Map( ElapsedTime, 0f, 80f, 1.5f, 1f )
-			* Utils.Map( ElapsedTime, 0f, 250f, 3f, 1f )
-			* Utils.Map( ElapsedTime, 0f, 700f, 1.2f, 1f );
+		var spawnTime = Utils.Map(EnemyCount, 0, MAX_ENEMY_COUNT, 0.05f, 0.3f, EasingType.QuadOut)
+			* Utils.Map(ElapsedTime, 0f, 80f, 1.5f, 1f)
+			* Utils.Map(ElapsedTime, 0f, 250f, 3f, 1f)
+			* Utils.Map(ElapsedTime, 0f, 700f, 1.2f, 1f);
 
-		if ( _enemySpawnTime > spawnTime )
+		if (_enemySpawnTime > spawnTime)
 		{
 			SpawnEnemy();
 			_enemySpawnTime = 0f;
@@ -216,269 +213,269 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	void SpawnEnemy()
 	{
-		if ( EnemyCount >= MAX_ENEMY_COUNT )
+		if (EnemyCount >= MAX_ENEMY_COUNT)
 			return;
 
-		var pos = new Vector2( Game.Random.Float( BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x ), Game.Random.Float( BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y ) );
+		var pos = new Vector2(Game.Random.Float(BOUNDS_MIN_SPAWN.x, BOUNDS_MAX_SPAWN.x), Game.Random.Float(BOUNDS_MIN_SPAWN.y, BOUNDS_MAX_SPAWN.y));
 
 		//// ZOMBIE (DEFAULT)
-		TypeDescription type = TypeLibrary.GetType( typeof( Zombie ) );
+		TypeDescription type = TypeLibrary.GetType(typeof(Zombie));
 
 		// CRATE
-		if ( CrateCount < MAX_CRATE_COUNT )
+		if (CrateCount < MAX_CRATE_COUNT)
 		{
-			float crateChance = ElapsedTime < 20f ? 0f : Utils.Map( ElapsedTime, 20f, 200f, 0.005f, 0.01f );
+			float crateChance = ElapsedTime < 20f ? 0f : Utils.Map(ElapsedTime, 20f, 200f, 0.005f, 0.01f);
 			float additionalCrateChance = 0f;
-			foreach ( Player player in Scene.GetAllComponents<Player>().Where( x => !x.IsDead ) )
+			foreach (Player player in Scene.GetAllComponents<Player>().Where(x => !x.IsDead))
 			{
-				if ( player.Stats[PlayerStat.CrateChanceAdditional] > 0f )
+				if (player.Stats[PlayerStat.CrateChanceAdditional] > 0f)
 					additionalCrateChance += player.Stats[PlayerStat.CrateChanceAdditional];
 			}
 			crateChance *= (1f + additionalCrateChance);
 
-			if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < crateChance )
-				type = TypeLibrary.GetType( typeof( Crate ) );
+			if (type == TypeLibrary.GetType(typeof(Zombie)) && Game.Random.Float(0f, 1f) < crateChance)
+				type = TypeLibrary.GetType(typeof(Crate));
 		}
 
 		// EXPLODER
-		float exploderChance = ElapsedTime < 35f ? 0f : Utils.Map( ElapsedTime, 35f, 700f, 0.022f, 0.08f );
-		if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < exploderChance )
+		float exploderChance = ElapsedTime < 35f ? 0f : Utils.Map(ElapsedTime, 35f, 700f, 0.022f, 0.08f);
+		if (type == TypeLibrary.GetType(typeof(Zombie)) && Game.Random.Float(0f, 1f) < exploderChance)
 		{
-			float eliteChance = ElapsedTime < 480f ? 0f : Utils.Map( ElapsedTime, 480f, 1200f, 0.025f, 1f, EasingType.SineIn );
-			type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( ExploderElite ) ) : TypeLibrary.GetType( typeof( Exploder ) );
+			float eliteChance = ElapsedTime < 480f ? 0f : Utils.Map(ElapsedTime, 480f, 1200f, 0.025f, 1f, EasingType.SineIn);
+			type = Game.Random.Float(0f, 1f) < eliteChance ? TypeLibrary.GetType(typeof(ExploderElite)) : TypeLibrary.GetType(typeof(Exploder));
 		}
 
 		// SPITTER
-		float spitterChance = ElapsedTime < 100f ? 0f : Utils.Map( ElapsedTime, 100f, 800f, 0.015f, 0.1f );
-		if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < spitterChance )
+		float spitterChance = ElapsedTime < 100f ? 0f : Utils.Map(ElapsedTime, 100f, 800f, 0.015f, 0.1f);
+		if (type == TypeLibrary.GetType(typeof(Zombie)) && Game.Random.Float(0f, 1f) < spitterChance)
 		{
-			float eliteChance = ElapsedTime < 540f ? 0f : Utils.Map( ElapsedTime, 540f, 1200f, 0.025f, 1f, EasingType.QuadIn );
-			type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( SpitterElite ) ) : TypeLibrary.GetType( typeof( Spitter ) );
+			float eliteChance = ElapsedTime < 540f ? 0f : Utils.Map(ElapsedTime, 540f, 1200f, 0.025f, 1f, EasingType.QuadIn);
+			type = Game.Random.Float(0f, 1f) < eliteChance ? TypeLibrary.GetType(typeof(SpitterElite)) : TypeLibrary.GetType(typeof(Spitter));
 		}
 
 		// SPIKER
-		float spikerChance = ElapsedTime < 320f ? 0f : Utils.Map( ElapsedTime, 320f, 800f, 0.018f, 0.1f, EasingType.SineIn );
-		if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < spikerChance )
+		float spikerChance = ElapsedTime < 320f ? 0f : Utils.Map(ElapsedTime, 320f, 800f, 0.018f, 0.1f, EasingType.SineIn);
+		if (type == TypeLibrary.GetType(typeof(Zombie)) && Game.Random.Float(0f, 1f) < spikerChance)
 		{
-			float eliteChance = ElapsedTime < 580f ? 0f : Utils.Map( ElapsedTime, 580f, 1300f, 0.008f, 1f, EasingType.SineIn );
-			type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( SpikerElite ) ) : TypeLibrary.GetType( typeof( Spiker ) );
+			float eliteChance = ElapsedTime < 580f ? 0f : Utils.Map(ElapsedTime, 580f, 1300f, 0.008f, 1f, EasingType.SineIn);
+			type = Game.Random.Float(0f, 1f) < eliteChance ? TypeLibrary.GetType(typeof(SpikerElite)) : TypeLibrary.GetType(typeof(Spiker));
 		}
 
 		// CHARGER
-		float chargerChance = ElapsedTime < 420f ? 0f : Utils.Map( ElapsedTime, 420f, 800f, 0.022f, 0.075f );
-		if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < chargerChance )
+		float chargerChance = ElapsedTime < 420f ? 0f : Utils.Map(ElapsedTime, 420f, 800f, 0.022f, 0.075f);
+		if (type == TypeLibrary.GetType(typeof(Zombie)) && Game.Random.Float(0f, 1f) < chargerChance)
 		{
-			float eliteChance = ElapsedTime < 660f ? 0f : Utils.Map( ElapsedTime, 660f, 1400f, 0.008f, 1f, EasingType.SineIn );
-			type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( ChargerElite ) ) : TypeLibrary.GetType( typeof( Charger ) );
+			float eliteChance = ElapsedTime < 660f ? 0f : Utils.Map(ElapsedTime, 660f, 1400f, 0.008f, 1f, EasingType.SineIn);
+			type = Game.Random.Float(0f, 1f) < eliteChance ? TypeLibrary.GetType(typeof(ChargerElite)) : TypeLibrary.GetType(typeof(Charger));
 		}
 
 		// RUNNER
-		float runnerChance = ElapsedTime < 500f ? 0f : Utils.Map( ElapsedTime, 500f, 900f, 0.035f, 0.15f, EasingType.QuadIn );
-		if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < runnerChance )
+		float runnerChance = ElapsedTime < 500f ? 0f : Utils.Map(ElapsedTime, 500f, 900f, 0.035f, 0.15f, EasingType.QuadIn);
+		if (type == TypeLibrary.GetType(typeof(Zombie)) && Game.Random.Float(0f, 1f) < runnerChance)
 		{
-			float eliteChance = ElapsedTime < 720f ? 0f : Utils.Map( ElapsedTime, 720f, 1500f, 0.01f, 1f, EasingType.QuadIn );
-			type = Game.Random.Float( 0f, 1f ) < eliteChance ? TypeLibrary.GetType( typeof( RunnerElite ) ) : TypeLibrary.GetType( typeof( Runner ) );
+			float eliteChance = ElapsedTime < 720f ? 0f : Utils.Map(ElapsedTime, 720f, 1500f, 0.01f, 1f, EasingType.QuadIn);
+			type = Game.Random.Float(0f, 1f) < eliteChance ? TypeLibrary.GetType(typeof(RunnerElite)) : TypeLibrary.GetType(typeof(Runner));
 		}
 
 		// ZOMBIE ELITE
-		var zombieEliteChance = ElapsedTime < 400f ? 0f : Utils.Map( ElapsedTime, 400f, 1200f, 0.0175f, 1f, EasingType.SineIn );
-		if ( type == TypeLibrary.GetType( typeof( Zombie ) ) && Game.Random.Float( 0f, 1f ) < zombieEliteChance )
+		var zombieEliteChance = ElapsedTime < 400f ? 0f : Utils.Map(ElapsedTime, 400f, 1200f, 0.0175f, 1f, EasingType.SineIn);
+		if (type == TypeLibrary.GetType(typeof(Zombie)) && Game.Random.Float(0f, 1f) < zombieEliteChance)
 		{
-			type = TypeLibrary.GetType( typeof( ZombieElite ) );
+			type = TypeLibrary.GetType(typeof(ZombieElite));
 		}
 
-		SpawnEnemy( type, pos );
+		SpawnEnemy(type, pos);
 	}
 
-	void SpawnEnemy( TypeDescription type, Vector2 pos, bool forceSpawn = false )
+	void SpawnEnemy(TypeDescription type, Vector2 pos, bool forceSpawn = false)
 	{
-		if ( EnemyCount >= MAX_ENEMY_COUNT && !forceSpawn )
+		if (EnemyCount >= MAX_ENEMY_COUNT && !forceSpawn)
 			return;
 
 		GameObject enemyObj;
 		Enemy enemy;
-		var pos3 = new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) );
-		if ( type == TypeLibrary.GetType( typeof( Crate ) ) )
+		var pos3 = new Vector3(pos.x, pos.y, Globals.GetZPos(pos.y));
+		if (type == TypeLibrary.GetType(typeof(Crate)))
 		{
-			enemyObj = CratePrefab.Clone( pos3 );
+			enemyObj = CratePrefab.Clone(pos3);
 			CrateCount++;
 		}
-		else if ( type == TypeLibrary.GetType( typeof( Zombie ) ) ) { enemyObj = ZombiePrefab.Clone( pos3 ); }
-		else if ( type == TypeLibrary.GetType( typeof( ZombieElite ) ) ) { enemyObj = ZombieElitePrefab.Clone( pos3 ); }
-		else if ( type == TypeLibrary.GetType( typeof( Exploder ) ) ) { enemyObj = ExploderPrefab.Clone( pos3 ); }
-		else if ( type == TypeLibrary.GetType( typeof( ExploderElite ) ) ) { enemyObj = ExploderElitePrefab.Clone( pos3 ); }
-		else if ( type == TypeLibrary.GetType( typeof( Spitter ) ) ) { enemyObj = SpitterPrefab.Clone( pos3 ); }
-		else if ( type == TypeLibrary.GetType( typeof( SpitterElite ) ) ) { enemyObj = SpitterElitePrefab.Clone( pos3 ); }
-		else if ( type == TypeLibrary.GetType( typeof( Spiker ) ) ) { enemyObj = SpikerPrefab.Clone( pos3 ); }
-		else if ( type == TypeLibrary.GetType( typeof( SpikerElite ) ) ) { enemyObj = SpikerElitePrefab.Clone( pos3 ); }
-		else if ( type == TypeLibrary.GetType( typeof( Charger ) ) ) { enemyObj = ChargerPrefab.Clone( pos3 ); }
-		else if ( type == TypeLibrary.GetType( typeof( ChargerElite ) ) ) { enemyObj = ChargerElitePrefab.Clone( pos3 ); }
-		else if ( type == TypeLibrary.GetType( typeof( Runner ) ) ) { enemyObj = RunnerPrefab.Clone( pos3 ); }
-		else if ( type == TypeLibrary.GetType( typeof( RunnerElite ) ) ) { enemyObj = RunnerElitePrefab.Clone( pos3 ); }
-		else if ( type == TypeLibrary.GetType( typeof( Boss ) ) ) { enemyObj = BossPrefab.Clone( pos3 ); }
+		else if (type == TypeLibrary.GetType(typeof(Zombie))) { enemyObj = ZombiePrefab.Clone(pos3); }
+		else if (type == TypeLibrary.GetType(typeof(ZombieElite))) { enemyObj = ZombieElitePrefab.Clone(pos3); }
+		else if (type == TypeLibrary.GetType(typeof(Exploder))) { enemyObj = ExploderPrefab.Clone(pos3); }
+		else if (type == TypeLibrary.GetType(typeof(ExploderElite))) { enemyObj = ExploderElitePrefab.Clone(pos3); }
+		else if (type == TypeLibrary.GetType(typeof(Spitter))) { enemyObj = SpitterPrefab.Clone(pos3); }
+		else if (type == TypeLibrary.GetType(typeof(SpitterElite))) { enemyObj = SpitterElitePrefab.Clone(pos3); }
+		else if (type == TypeLibrary.GetType(typeof(Spiker))) { enemyObj = SpikerPrefab.Clone(pos3); }
+		else if (type == TypeLibrary.GetType(typeof(SpikerElite))) { enemyObj = SpikerElitePrefab.Clone(pos3); }
+		else if (type == TypeLibrary.GetType(typeof(Charger))) { enemyObj = ChargerPrefab.Clone(pos3); }
+		else if (type == TypeLibrary.GetType(typeof(ChargerElite))) { enemyObj = ChargerElitePrefab.Clone(pos3); }
+		else if (type == TypeLibrary.GetType(typeof(Runner))) { enemyObj = RunnerPrefab.Clone(pos3); }
+		else if (type == TypeLibrary.GetType(typeof(RunnerElite))) { enemyObj = RunnerElitePrefab.Clone(pos3); }
+		else if (type == TypeLibrary.GetType(typeof(Boss))) { enemyObj = BossPrefab.Clone(pos3); }
 		else
 		{
-			Log.Info( $"Enemy {type} not implemented yet!" );
+			Log.Info($"Enemy {type} not implemented yet!");
 			return;
 		}
 
 		enemy = enemyObj.Components.Get<Enemy>();
 
-		var closestPlayer = GetClosestPlayer( pos );
-		if ( closestPlayer?.Position2D.x > pos.x )
+		var closestPlayer = GetClosestPlayer(pos);
+		if (closestPlayer?.Position2D.x > pos.x)
 			enemy.FlipX = true;
 
 		enemyObj.Name = type.ToString();
 		enemyObj.NetworkSpawn();
 
-		AddThing( enemy );
+		AddThing(enemy);
 		EnemyCount++;
 
-		PlaySfxNearby( "zombie.dirt", pos, pitch: Game.Random.Float( 0.6f, 0.8f ), volume: 0.7f, maxDist: 7.5f );
+		PlaySfxNearby("zombie.dirt", pos, pitch: Game.Random.Float(0.6f, 0.8f), volume: 0.7f, maxDist: 7.5f);
 	}
 
 	[Authority]
-	public void SpawnCoin( Vector2 pos, Vector2 vel, int value = 1 )
+	public void SpawnCoin(Vector2 pos, Vector2 vel, int value = 1)
 	{
 		// todo: spawn larger amounts less often if reaching max coin cap
-		if ( CoinCount >= MAX_COIN_COUNT )
+		if (CoinCount >= MAX_COIN_COUNT)
 			return;
 
-		var coinObj = CoinPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+		var coinObj = CoinPrefab.Clone(new Vector3(pos.x, pos.y, Globals.GetZPos(pos.y)));
 		var coin = coinObj.Components.Get<Coin>();
 		coin.Velocity = vel;
-		coin.SetValue( value );
+		coin.SetValue(value);
 
 		coinObj.NetworkSpawn();
 
-		AddThing( coin );
+		AddThing(coin);
 		CoinCount++;
 
 		return;
 	}
 
-	public Magnet SpawnMagnet( Vector2 pos, Vector2 vel )
+	public Magnet SpawnMagnet(Vector2 pos, Vector2 vel)
 	{
-		var magnetObj = MagnetPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+		var magnetObj = MagnetPrefab.Clone(new Vector3(pos.x, pos.y, Globals.GetZPos(pos.y)));
 		var magnet = magnetObj.Components.Get<Magnet>();
 		magnet.Velocity = vel;
 		magnetObj.NetworkSpawn();
 
 		TimeSinceMagnet = 0f;
 
-		AddThing( magnet );
+		AddThing(magnet);
 
 		return magnet;
 	}
 
-	public void SpawnReviveSoul( Vector2 pos, Vector2 vel )
+	public void SpawnReviveSoul(Vector2 pos, Vector2 vel)
 	{
-		var reviveObj = ReviveSoulPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+		var reviveObj = ReviveSoulPrefab.Clone(new Vector3(pos.x, pos.y, Globals.GetZPos(pos.y)));
 		var revive = reviveObj.Components.Get<ReviveSoul>();
 		revive.Velocity = vel;
 
 		reviveObj.NetworkSpawn();
-		AddThing( revive );
+		AddThing(revive);
 	}
 
-	public void SpawnHealthPack( Vector2 pos, Vector2 vel )
+	public void SpawnHealthPack(Vector2 pos, Vector2 vel)
 	{
-		var healthPackObj = HealthPackPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+		var healthPackObj = HealthPackPrefab.Clone(new Vector3(pos.x, pos.y, Globals.GetZPos(pos.y)));
 		var healthPack = healthPackObj.Components.Get<HealthPack>();
 		healthPack.Velocity = vel;
 
 		healthPackObj.NetworkSpawn();
-		AddThing( healthPack );
+		AddThing(healthPack);
 	}
 
-	public EnemyBullet SpawnEnemyBullet( Vector2 pos, Vector2 dir, float speed )
+	public EnemyBullet SpawnEnemyBullet(Vector2 pos, Vector2 dir, float speed)
 	{
-		var enemyBulletObj = EnemyBulletPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+		var enemyBulletObj = EnemyBulletPrefab.Clone(new Vector3(pos.x, pos.y, Globals.GetZPos(pos.y)));
 		var enemyBullet = enemyBulletObj.Components.Get<EnemyBullet>();
 		enemyBullet.Direction = dir;
 		enemyBullet.Speed = speed;
 
-		if ( dir.x < 0f )
+		if (dir.x < 0f)
 			enemyBullet.Sprite.SpriteFlags = SpriteFlags.HorizontalFlip;
 
 		enemyBulletObj.NetworkSpawn();
-		AddThing( enemyBullet );
+		AddThing(enemyBullet);
 
 		return enemyBullet;
 	}
 
-	public void SpawnEnemySpike( Vector2 pos, bool elite = false )
+	public void SpawnEnemySpike(Vector2 pos, bool elite = false)
 	{
-		if ( elite )
+		if (elite)
 		{
-			var spikeObj = EnemySpikeElitePrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+			var spikeObj = EnemySpikeElitePrefab.Clone(new Vector3(pos.x, pos.y, Globals.GetZPos(pos.y)));
 			var spike = spikeObj.Components.Get<EnemySpikeElite>();
 			spikeObj.NetworkSpawn();
-			AddThing( spike );
+			AddThing(spike);
 		}
 		else
 		{
-			var spikeObj = EnemySpikePrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+			var spikeObj = EnemySpikePrefab.Clone(new Vector3(pos.x, pos.y, Globals.GetZPos(pos.y)));
 			var spike = spikeObj.Components.Get<EnemySpike>();
 			spikeObj.NetworkSpawn();
-			AddThing( spike );
+			AddThing(spike);
 		}
 	}
 
 	[Authority]
-	public void SpawnFire( Vector2 pos, Guid playerId )
+	public void SpawnFire(Vector2 pos, Guid playerId)
 	{
-		var playerObj = Scene.Directory.FindByGuid( playerId );
+		var playerObj = Scene.Directory.FindByGuid(playerId);
 		Player player = playerObj?.Components.Get<Player>() ?? null;
-		if ( player == null )
+		if (player == null)
 			return;
 
-		var fireObj = FirePrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ) );
+		var fireObj = FirePrefab.Clone(new Vector3(pos.x, pos.y, Globals.GetZPos(pos.y)));
 		var fire = fireObj.Components.Get<Fire>();
 		fire.Shooter = player;
 		fire.Lifetime = player.Stats[PlayerStat.FireLifetime];
 
 		fireObj.NetworkSpawn();
-		AddThing( fire );
+		AddThing(fire);
 	}
 
-	public void SpawnBoss( Vector2 pos )
+	public void SpawnBoss(Vector2 pos)
 	{
-		SpawnEnemy( TypeLibrary.GetType( typeof( Boss ) ), pos, forceSpawn: true );
-		PlaySfxNearby( "boss.fanfare", pos, pitch: 1.0f, volume: 1.3f, maxDist: 30f );
+		SpawnEnemy(TypeLibrary.GetType(typeof(Boss)), pos, forceSpawn: true);
+		PlaySfxNearby("boss.fanfare", pos, pitch: 1.0f, volume: 1.3f, maxDist: 30f);
 	}
 
-	private T GetClosest<T>( IEnumerable<T> enumerable, Vector3 pos, float maxRange, bool ignoreZ, T except )
+	private T GetClosest<T>(IEnumerable<T> enumerable, Vector3 pos, float maxRange, bool ignoreZ, T except)
 		where T : Thing
 	{
 		var dists = ignoreZ
-			? enumerable.Select( x => (Thing: x, DistSq: (x.Transform.Position - pos).WithZ( 0f ).LengthSquared) )
-			: enumerable.Select( x => (Thing: x, DistSq: (x.Transform.Position - pos).LengthSquared) );
+			? enumerable.Select(x => (Thing: x, DistSq: (x.Transform.Position - pos).WithZ(0f).LengthSquared))
+			: enumerable.Select(x => (Thing: x, DistSq: (x.Transform.Position - pos).LengthSquared));
 
-		return dists.OrderBy( x => x.DistSq )
+		return dists.OrderBy(x => x.DistSq)
 			//.FirstOrDefault( x => x.DistSq <= maxRange * maxRange && x.Thing != except && (!ignoreZ || x.Thing.Parent == null) )
-			.FirstOrDefault( x => x.DistSq <= maxRange * maxRange && x.Thing != except )
+			.FirstOrDefault(x => x.DistSq <= maxRange * maxRange && x.Thing != except)
 			.Thing;
 	}
 
 	// todo: cache this
-	public Player GetClosestPlayer( Vector3 pos, float maxRange = float.PositiveInfinity, bool alive = true, bool ignoreZ = true, Player except = null )
+	public Player GetClosestPlayer(Vector3 pos, float maxRange = float.PositiveInfinity, bool alive = true, bool ignoreZ = true, Player except = null)
 	{
 		var players = alive
-			? Scene.GetAllComponents<Player>().Where( x => !x.IsDead )
+			? Scene.GetAllComponents<Player>().Where(x => !x.IsDead)
 			: Scene.GetAllComponents<Player>();
 
-		return GetClosest( players, pos, maxRange, ignoreZ, except );
+		return GetClosest(players, pos, maxRange, ignoreZ, except);
 	}
 
-	public GridSquare GetGridSquareForPos( Vector2 pos )
+	public GridSquare GetGridSquareForPos(Vector2 pos)
 	{
-		return new GridSquare( (int)MathF.Floor( pos.x ), (int)MathF.Floor( pos.y ) );
+		return new GridSquare((int)MathF.Floor(pos.x), (int)MathF.Floor(pos.y));
 	}
 
-	public List<Thing> GetThingsInGridSquare( GridSquare gridSquare )
+	public List<Thing> GetThingsInGridSquare(GridSquare gridSquare)
 	{
-		if ( ThingGridPositions.ContainsKey( gridSquare ) )
+		if (ThingGridPositions.ContainsKey(gridSquare))
 		{
 			return ThingGridPositions[gridSquare];
 		}
@@ -486,113 +483,113 @@ public sealed class Manager : Component, Component.INetworkListener
 		return null;
 	}
 
-	public bool IsGridSquareInArena( GridSquare gridSquare )
+	public bool IsGridSquareInArena(GridSquare gridSquare)
 	{
-		return ThingGridPositions.ContainsKey( gridSquare );
+		return ThingGridPositions.ContainsKey(gridSquare);
 	}
 
-	public void RegisterThingGridSquare( Thing thing, GridSquare gridSquare )
+	public void RegisterThingGridSquare(Thing thing, GridSquare gridSquare)
 	{
-		if ( IsGridSquareInArena( gridSquare ) )
-			ThingGridPositions[gridSquare].Add( thing );
+		if (IsGridSquareInArena(gridSquare))
+			ThingGridPositions[gridSquare].Add(thing);
 	}
 
-	public void DeregisterThingGridSquare( Thing thing, GridSquare gridSquare )
+	public void DeregisterThingGridSquare(Thing thing, GridSquare gridSquare)
 	{
-		if ( ThingGridPositions.ContainsKey( gridSquare ) && ThingGridPositions[gridSquare].Contains( thing ) )
+		if (ThingGridPositions.ContainsKey(gridSquare) && ThingGridPositions[gridSquare].Contains(thing))
 		{
-			ThingGridPositions[gridSquare].Remove( thing );
+			ThingGridPositions[gridSquare].Remove(thing);
 		}
 	}
 
-	public void AddThing( Thing thing )
+	public void AddThing(Thing thing)
 	{
 		//_things.Add( thing );
-		thing.GridPos = GetGridSquareForPos( thing.Position2D );
-		RegisterThingGridSquare( thing, thing.GridPos );
+		thing.GridPos = GetGridSquareForPos(thing.Position2D);
+		RegisterThingGridSquare(thing, thing.GridPos);
 	}
 
-	public void RemoveThing( Thing thing )
+	public void RemoveThing(Thing thing)
 	{
-		if ( ThingGridPositions.ContainsKey( thing.GridPos ) )
-			ThingGridPositions[thing.GridPos].Remove( thing );
+		if (ThingGridPositions.ContainsKey(thing.GridPos))
+			ThingGridPositions[thing.GridPos].Remove(thing);
 
-		if ( thing is Enemy ) // counts Crate too
+		if (thing is Enemy) // counts Crate too
 		{
 			EnemyCount--;
 
-			if ( thing is Crate )
+			if (thing is Crate)
 				CrateCount--;
 		}
-		else if ( thing is Coin )
+		else if (thing is Coin)
 		{
 			CoinCount--;
 		}
 	}
 
-	public void HandleThingCollisionForGridSquare( Thing thing, GridSquare gridSquare, float dt )
+	public void HandleThingCollisionForGridSquare(Thing thing, GridSquare gridSquare, float dt)
 	{
-		if ( !ThingGridPositions.ContainsKey( gridSquare ) )
+		if (!ThingGridPositions.ContainsKey(gridSquare))
 			return;
 
 		var things = ThingGridPositions[gridSquare];
-		if ( things.Count == 0 )
+		if (things.Count == 0)
 			return;
 
-		for ( int i = things.Count - 1; i >= 0; i-- )
+		for (int i = things.Count - 1; i >= 0; i--)
 		{
-			if ( i >= things.Count )
+			if (i >= things.Count)
 				continue;
 
-			if ( thing == null || !thing.IsValid || thing.IsRemoved )
+			if (thing == null || !thing.IsValid || thing.IsRemoved)
 				return;
 
 			var other = things[i];
-			if ( other == thing || other.IsRemoved || !other.IsValid )
+			if (other == thing || other.IsRemoved || !other.IsValid)
 				continue;
 
 			bool isValidType = false;
-			foreach ( var t in thing.CollideWith )
+			foreach (var t in thing.CollideWith)
 			{
-				if ( t.IsAssignableFrom( other.GetType() ) )
+				if (t.IsAssignableFrom(other.GetType()))
 				{
 					isValidType = true;
 					break;
 				}
 			}
 
-			if ( !isValidType )
+			if (!isValidType)
 				continue;
 
 			var dist_sqr = (thing.Position2D - other.Position2D).LengthSquared;
-			var total_radius_sqr = MathF.Pow( thing.Radius + other.Radius, 2f );
-			if ( dist_sqr < total_radius_sqr )
+			var total_radius_sqr = MathF.Pow(thing.Radius + other.Radius, 2f);
+			if (dist_sqr < total_radius_sqr)
 			{
-				float percent = Utils.Map( dist_sqr, total_radius_sqr, 0f, 0f, 1f );
-				thing.Colliding( other, percent, dt * thing.TimeScale );
+				float percent = Utils.Map(dist_sqr, total_radius_sqr, 0f, 0f, 1f);
+				thing.Colliding(other, percent, dt * thing.TimeScale);
 			}
 		}
 	}
 
-	public void AddThingsInGridSquare( GridSquare gridSquare, List<Thing> things )
+	public void AddThingsInGridSquare(GridSquare gridSquare, List<Thing> things)
 	{
-		if ( !ThingGridPositions.ContainsKey( gridSquare ) )
+		if (!ThingGridPositions.ContainsKey(gridSquare))
 			return;
 
-		things.AddRange( ThingGridPositions[gridSquare] );
+		things.AddRange(ThingGridPositions[gridSquare]);
 	}
 
 	[Authority]
-	public void PlayerDied( Player player )
+	public void PlayerDied(Player player)
 	{
-		int numPlayersAlive = Scene.GetAllComponents<Player>().Where( x => !x.IsDead ).Count();
-		if ( numPlayersAlive == 0 )
+		int numPlayersAlive = Scene.GetAllComponents<Player>().Where(x => !x.IsDead).Count();
+		if (numPlayersAlive == 0)
 			GameOver();
 	}
 
 	public void GameOver()
 	{
-		if ( IsGameOver )
+		if (IsGameOver)
 			return;
 
 		IsGameOver = true;
@@ -604,7 +601,7 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public void Victory()
 	{
-		if ( IsGameOver )
+		if (IsGameOver)
 			return;
 
 		IsGameOver = true;
@@ -614,71 +611,71 @@ public sealed class Manager : Component, Component.INetworkListener
 		//Sandbox.Services.Stats.SetValue( "victory-time", ElapsedTime.Relative );
 	}
 
-	public BloodSplatter SpawnBloodSplatter( Vector2 pos )
+	public BloodSplatter SpawnBloodSplatter(Vector2 pos)
 	{
-		var bloodObj = BloodSplatterPrefab.Clone( new Vector3( pos.x, pos.y, Globals.BLOOD_DEPTH ) );
+		var bloodObj = BloodSplatterPrefab.Clone(new Vector3(pos.x, pos.y, Globals.BLOOD_DEPTH));
 		var bloodSplatter = bloodObj.Components.Get<BloodSplatter>();
-		bloodSplatter.Lifetime = Utils.Map( _bloodSplatters.Count, 0, 100, 10f, 1f ) * Game.Random.Float( 0.8f, 1.2f );
+		bloodSplatter.Lifetime = Utils.Map(_bloodSplatters.Count, 0, 100, 10f, 1f) * Game.Random.Float(0.8f, 1.2f);
 
-		_bloodSplatters.Add( bloodSplatter );
+		_bloodSplatters.Add(bloodSplatter);
 		return bloodSplatter;
 	}
 
-	public void RemoveBloodSplatter( BloodSplatter blood )
+	public void RemoveBloodSplatter(BloodSplatter blood)
 	{
-		if ( _bloodSplatters.Contains( blood ) )
-			_bloodSplatters.Remove( blood );
+		if (_bloodSplatters.Contains(blood))
+			_bloodSplatters.Remove(blood);
 	}
 
-	public Cloud SpawnCloud( Vector2 pos )
+	public Cloud SpawnCloud(Vector2 pos)
 	{
-		var cloudObj = CloudPrefab.Clone( new Vector3( pos.x, pos.y, Globals.GetZPos( pos.y ) ), new Angles( 0f, -90f, 0f ) );
+		var cloudObj = CloudPrefab.Clone(new Vector3(pos.x, pos.y, Globals.GetZPos(pos.y)), new Angles(0f, -90f, 0f));
 		var cloud = cloudObj.Components.Get<Cloud>();
-		cloud.Lifetime = 0.7f * Game.Random.Float( 0.8f, 1.2f );
+		cloud.Lifetime = 0.7f * Game.Random.Float(0.8f, 1.2f);
 
-		_clouds.Add( cloud );
+		_clouds.Add(cloud);
 		return cloud;
 	}
 
-	public void RemoveCloud( Cloud cloud )
+	public void RemoveCloud(Cloud cloud)
 	{
-		if ( _clouds.Contains( cloud ) )
-			_clouds.Remove( cloud );
+		if (_clouds.Contains(cloud))
+			_clouds.Remove(cloud);
 	}
 
-	public ExplosionEffect SpawnExplosionEffectLocal( Vector2 pos, float scaleModifier = 1f )
+	public ExplosionEffect SpawnExplosionEffectLocal(Vector2 pos, float scaleModifier = 1f)
 	{
-		var explosionObj = ExplosionEffectPrefab.Clone( new Vector3( pos.x, pos.y, 100f ) );
+		var explosionObj = ExplosionEffectPrefab.Clone(new Vector3(pos.x, pos.y, 100f));
 		var explosion = explosionObj.Components.Get<ExplosionEffect>();
 		explosion.Lifetime = 0.5f;
 		explosion.Transform.LocalScale *= scaleModifier;
 
-		_explosions.Add( explosion );
+		_explosions.Add(explosion);
 		return explosion;
 	}
 
-	public void RemoveExplosionEffect( ExplosionEffect explosion )
+	public void RemoveExplosionEffect(ExplosionEffect explosion)
 	{
-		if ( _explosions.Contains( explosion ) )
-			_explosions.Remove( explosion );
+		if (_explosions.Contains(explosion))
+			_explosions.Remove(explosion);
 	}
 
 	[Broadcast]
 	public void Restart()
 	{
-		foreach ( var blood in _bloodSplatters )
+		foreach (var blood in _bloodSplatters)
 			blood.GameObject.Destroy();
 		_bloodSplatters.Clear();
 
-		foreach ( var cloud in _clouds )
+		foreach (var cloud in _clouds)
 			cloud.GameObject.Destroy();
 		_clouds.Clear();
 
-		foreach ( var explosion in _explosions )
+		foreach (var explosion in _explosions)
 			explosion.GameObject.Destroy();
 		_explosions.Clear();
 
-		foreach ( KeyValuePair<GridSquare, List<Thing>> pair in ThingGridPositions )
+		foreach (KeyValuePair<GridSquare, List<Thing>> pair in ThingGridPositions)
 			pair.Value.Clear();
 
 		EnemyCount = 0;
@@ -693,72 +690,72 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		Components.Get<PauseMenu>().IsOpen = false;
 
-		if ( IsProxy )
+		if (IsProxy)
 			return;
 
-		foreach ( Thing thing in Scene.GetAllComponents<Thing>() )
+		foreach (Thing thing in Scene.GetAllComponents<Thing>())
 		{
-			if ( thing is Player player )
+			if (thing is Player player)
 				player.Restart();
 			else
 				thing.DestroyCmd();
 		}
 
-		foreach ( var number in Scene.GetAllComponents<LegacyParticleSystem>() )
+		foreach (var number in Scene.GetAllComponents<LegacyParticleSystem>())
 			number.GameObject.Destroy();
 
 		SpawnStartingThings();
 	}
 
-	public void PlayEnemyDeathSfxLocal( Vector3 worldPos )
+	public void PlayEnemyDeathSfxLocal(Vector3 worldPos)
 	{
-		if ( _numEnemyDeathSfxs >= 3 )
+		if (_numEnemyDeathSfxs >= 3)
 			return;
 
-		PlaySfxNearbyLocal( "enemy.die", worldPos, pitch: Game.Random.Float( 0.85f, 1.15f ), volume: 1f, maxDist: 5.5f );
+		PlaySfxNearbyLocal("enemy.die", worldPos, pitch: Game.Random.Float(0.85f, 1.15f), volume: 1f, maxDist: 5.5f);
 
 		_numEnemyDeathSfxs++;
 	}
 
-	public void PlaySfxNearby( string name, Vector2 worldPos, float pitch, float volume, float maxDist )
+	public void PlaySfxNearby(string name, Vector2 worldPos, float pitch, float volume, float maxDist)
 	{
 		maxDist *= Globals.SFX_DIST_MODIFIER;
 
-		foreach ( Player player in Scene.GetAllComponents<Player>() )
+		foreach (Player player in Scene.GetAllComponents<Player>())
 		{
 			var playerPos = player.Position2D;
 
 			var distSqr = (player.Position2D - worldPos).LengthSquared;
-			if ( distSqr < maxDist * maxDist )
+			if (distSqr < maxDist * maxDist)
 			{
 				var dist = (player.Position2D - worldPos).Length;
-				var falloff = Utils.Map( dist, 0f, maxDist, 1f, 0f, EasingType.SineIn );
+				var falloff = Utils.Map(dist, 0f, maxDist, 1f, 0f, EasingType.SineIn);
 				var pos = playerPos + (worldPos - playerPos) * 0.1f;
 
-				player.PlaySfx( name, pos, pitch * Globals.SFX_PITCH_MODIFIER, volume * falloff );
+				player.PlaySfx(name, pos, pitch * Globals.SFX_PITCH_MODIFIER, volume * falloff);
 			}
 		}
 	}
 
-	public void PlaySfxNearbyLocal( string name, Vector2 worldPos, float pitch, float volume, float maxDist )
+	public void PlaySfxNearbyLocal(string name, Vector2 worldPos, float pitch, float volume, float maxDist)
 	{
 		maxDist *= Globals.SFX_DIST_MODIFIER;
 
 		var player = GetLocalPlayer();
-		if ( player == null )
+		if (player == null)
 			return;
 
 		var playerPos = player.Position2D;
 
 		var distSqr = (player.Position2D - worldPos).LengthSquared;
-		if ( distSqr < maxDist * maxDist )
+		if (distSqr < maxDist * maxDist)
 		{
 			var dist = (player.Position2D - worldPos).Length;
-			var falloff = Utils.Map( dist, 0f, maxDist, 1f, 0f, EasingType.SineIn );
+			var falloff = Utils.Map(dist, 0f, maxDist, 1f, 0f, EasingType.SineIn);
 			var pos = playerPos + (worldPos - playerPos) * 0.1f;
 
-			var sfx = Sound.Play( name, new Vector3( pos.x, pos.y, Globals.SFX_DEPTH ) );
-			if ( sfx != null )
+			var sfx = Sound.Play(name, new Vector3(pos.x, pos.y, Globals.SFX_DEPTH));
+			if (sfx != null)
 			{
 				sfx.Volume = volume * falloff;
 				sfx.Pitch = pitch * Globals.SFX_PITCH_MODIFIER;
@@ -768,9 +765,9 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public Player GetLocalPlayer()
 	{
-		foreach ( var player in Scene.GetAllComponents<Player>() )
+		foreach (var player in Scene.GetAllComponents<Player>())
 		{
-			if ( player.Network.IsOwner )
+			if (player.Network.IsOwner)
 				return player;
 		}
 
