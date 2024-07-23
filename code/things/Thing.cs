@@ -21,8 +21,8 @@ public class Thing : Component
 	public List<Type> CollideWith = new List<Type>();
 	public float TimeScale { get; set; }
 
-	[Sync] public float ShadowOpacity { get; set; }
-	[Sync] public float ShadowScale { get; set; }
+	public float ShadowOpacity { get; set; }
+	public float ShadowScale { get; set; }
 	public SpriteComponent ShadowSprite { get; set; }
 
 	[Sync] public bool SpriteDirty { get; set; }
@@ -52,11 +52,11 @@ public class Thing : Component
 		// todo: optimize?
 		UpdateGridPos();
 
-		if( Sprite != null && SpriteDirty && ShadowSprite != null )
+		if ( Sprite != null && SpriteDirty && ShadowSprite != null )
 		{
 			//Sprite.Size = new Vector2( Scale );
 			ShadowSprite.Transform.LocalScale = new Vector3( ShadowScale * Globals.SPRITE_SCALE, ShadowScale * Globals.SPRITE_SCALE, 1f );
-			ShadowSprite.Tint = Color.Black.WithAlpha(ShadowOpacity);
+			ShadowSprite.Tint = Color.Black.WithAlpha( ShadowOpacity );
 
 			SpriteDirty = false;
 		}
@@ -89,6 +89,11 @@ public class Thing : Component
 
 	protected void SpawnShadow( float size, float opacity )
 	{
+		if ( ShadowSprite.IsValid() )
+		{
+			ShadowSprite.GameObject.Destroy();
+		}
+
 		var shadowObj = Manager.Instance.ShadowPrefab.Clone( Transform.Position );
 		shadowObj.SetParent( GameObject );
 		shadowObj.Transform.LocalPosition = new Vector3( 0f, 0f, Globals.SHADOW_DEPTH_OFFSET );
