@@ -5,7 +5,7 @@
   "Ident": "ss1",
   "Schema": 1,
   "IncludeSourceFiles": false,
-  "Resources": "/textures/*\n/particles/*\n/sounds/*\n/fonts/*\n/cursors/*",
+  "Resources": "/textures/*\n/particles/*\n/fonts/*\n/cursors/*",
   "PackageReferences": [],
   "EditorReferences": null,
   "Metadata": {
