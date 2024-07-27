@@ -189,17 +189,30 @@ public class Boss : Enemy
 		}
 	}
 
+	protected override void UpdateSprite( Player targetPlayer )
+	{
+		if ( Sprite.CurrentAnimation.Name.Contains( "shoot" ) ) return;
+
+		base.UpdateSprite( targetPlayer );
+	}
+
 	public void PrepareToShoot()
 	{
 		_prepareShootTime = 0f;
 		IsShooting = true;
 		_hasShot = false;
-		Sprite.PlayAnimation( "shoot" );
+		BroadcastShootAnim();
 		Manager.Instance.PlaySfxNearby( "boss.prepare", Position2D, pitch: Game.Random.Float( 0.75f, 0.85f ), volume: 1.7f, maxDist: 16f );
 		CanAttack = false;
 		CanAttackAnim = false;
 		AnimSpeed = 1f;
 		DontChangeAnimSpeed = true;
+	}
+
+	[Broadcast]
+	void BroadcastShootAnim()
+	{
+		Sprite.PlayAnimation( "shoot" );
 	}
 
 	public void Shoot()
@@ -227,7 +240,7 @@ public class Boss : Enemy
 		Velocity *= 0.25f;
 		_hasShot = true;
 
-		Sprite.PlayAnimation( "shoot_reverse" );
+		BroadcastReverseShootAnim();
 		Manager.Instance.PlaySfxNearby( "boss.shoot", Position2D, pitch: Game.Random.Float( 0.65f, 0.75f ), volume: 1.4f, maxDist: 9f );
 	}
 
@@ -246,12 +259,24 @@ public class Boss : Enemy
 		_prepareTimer = PREPARE_TIME;
 		IsPreparingToCharge = true;
 		Manager.Instance.PlaySfxNearby( "boss.prepare", Position2D, pitch: Game.Random.Float( 1.05f, 1.1f ), volume: 1.75f, maxDist: 10f );
-		Sprite.PlayAnimation( "charge" );
+		BroadcastChargeAnim();
 		CanTurn = false;
 		CanAttack = false;
 		CanAttackAnim = false;
 		AnimSpeed = 1f;
 		DontChangeAnimSpeed = true;
+	}
+
+	[Broadcast]
+	void BroadcastChargeAnim()
+	{
+		Sprite.PlayAnimation( "charge" );
+	}
+
+	[Broadcast]
+	void BroadcastReverseShootAnim()
+	{
+		Sprite.PlayAnimation( "shoot_reverse" );
 	}
 
 	public void Charge()

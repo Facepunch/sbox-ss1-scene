@@ -13,7 +13,6 @@ public class Exploder : Enemy
 	[Sync] public bool IsExploding { get; set; }
 	private TimeSince _explodeStartTime;
 	private bool _hasExploded;
-	private bool _hasStartedLooping;
 
 	private Guid _playerWhoKilledUsId;
 
@@ -45,8 +44,6 @@ public class Exploder : Enemy
 		CoinValueMin = 1;
 		CoinValueMax = 2;
 
-		Sprite.PlayAnimation( AnimSpawnPath );
-
 		if ( IsProxy )
 			return;
 
@@ -68,14 +65,26 @@ public class Exploder : Enemy
 
 		if ( IsExploding )
 		{
-			if ( !_hasStartedLooping && _explodeStartTime > 0.5f )
-			{
-				Sprite.PlayAnimation( "explode_loop" );
-				_hasStartedLooping = true;
-			}
-
 			if ( !IsProxy && !_hasExploded && _explodeStartTime > EXPLODE_TIME )
 				Explode();
+		}
+	}
+
+
+	protected override void UpdateSprite( Player targetPlayer )
+	{
+		if ( IsExploding )
+		{
+			if ( _explodeStartTime > 0.5f )
+			{
+				Sprite.PlayAnimation( "explode_loop" );
+			}
+			else
+				Sprite.PlayAnimation( "explode_start" );
+		}
+		else
+		{
+			base.UpdateSprite( targetPlayer );
 		}
 	}
 

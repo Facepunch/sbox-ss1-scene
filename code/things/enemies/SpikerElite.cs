@@ -46,11 +46,9 @@ public class SpikerElite : Enemy
 		CoinValueMin = 7;
 		CoinValueMax = 15;
 
-		Sprite.PlayAnimation( AnimSpawnPath );
-
 		if ( IsProxy )
 			return;
-		
+
 		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );
 
@@ -110,6 +108,13 @@ public class SpikerElite : Enemy
 		}
 	}
 
+	protected override void UpdateSprite( Player targetPlayer )
+	{
+		if ( Sprite.CurrentAnimation.Name.Contains( "shoot" ) ) return;
+
+		base.UpdateSprite( targetPlayer );
+	}
+
 	public void StartShooting()
 	{
 		_shotTimer = SHOOT_TIME;
@@ -123,6 +128,12 @@ public class SpikerElite : Enemy
 		Velocity *= 0.25f;
 		DontChangeAnimSpeed = true;
 		AnimSpeed = 1f;
+		BroadcastShootAnim();
+	}
+
+	[Broadcast]
+	void BroadcastShootAnim()
+	{
 		Sprite.PlayAnimation( "shoot" );
 	}
 
@@ -135,7 +146,7 @@ public class SpikerElite : Enemy
 		var target_pos = closestPlayer.Position2D + closestPlayer.Velocity * Game.Random.Float( 0.1f, 3f ) + new Vector2( Game.Random.Float( -1f, 1f ), Game.Random.Float( -1f, 1f ) ) * 1.2f;
 		var BUFFER = 0.3f;
 
-		Manager.Instance.SpawnEnemySpike( 
+		Manager.Instance.SpawnEnemySpike(
 			new Vector2( Math.Clamp( target_pos.x, Manager.Instance.BOUNDS_MIN.x + BUFFER, Manager.Instance.BOUNDS_MAX.x - BUFFER ), Math.Clamp( target_pos.y, Manager.Instance.BOUNDS_MIN.y + BUFFER, Manager.Instance.BOUNDS_MAX.y - BUFFER ) ),
 			elite: true
 		);
@@ -150,8 +161,14 @@ public class SpikerElite : Enemy
 		CanAttack = true;
 		CanAttackAnim = true;
 		CanTurn = true;
-		Sprite.PlayAnimation( AnimIdlePath );
 		DontChangeAnimSpeed = false;
+		BroadcastIdleAnim();
+	}
+
+	[Broadcast]
+	void BroadcastIdleAnim()
+	{
+		Sprite.PlayAnimation( AnimIdlePath );
 	}
 
 	public override void Colliding( Thing other, float percent, float dt )
@@ -180,7 +197,7 @@ public class SpikerElite : Enemy
 
 						player.Damage( dmg );
 
-						if( dmg > 0f )
+						if ( dmg > 0f )
 							OnDamagePlayer( player, dmg );
 					}
 

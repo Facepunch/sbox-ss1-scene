@@ -529,6 +529,8 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	public void HandleThingCollisionForGridSquare( Thing thing, GridSquare gridSquare, float dt )
 	{
+		if ( thing.IsProxy ) return;
+
 		if ( !ThingGridPositions.ContainsKey( gridSquare ) )
 			return;
 
@@ -718,6 +720,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		_numEnemyDeathSfxs++;
 	}
 
+	[Broadcast]
 	public void PlaySfxNearby( string name, Vector2 worldPos, float pitch, float volume, float maxDist )
 	{
 		maxDist *= Globals.SFX_DIST_MODIFIER;

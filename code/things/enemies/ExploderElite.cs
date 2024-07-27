@@ -51,8 +51,6 @@ public class ExploderElite : Enemy
 		CoinValueMin = 2;
 		CoinValueMax = 6;
 
-		Sprite.PlayAnimation( AnimSpawnPath );
-
 		if ( IsProxy )
 			return;
 
@@ -74,14 +72,25 @@ public class ExploderElite : Enemy
 
 		if ( IsExploding )
 		{
-			if ( !_hasStartedLooping && _explodeStartTime > 0.5f )
-			{
-				Sprite.PlayAnimation( "explode_loop" );
-				_hasStartedLooping = true;
-			}
-
 			if ( !IsProxy && !_hasExploded && _explodeStartTime > EXPLODE_TIME )
 				Explode();
+		}
+	}
+
+	protected override void UpdateSprite( Player targetPlayer )
+	{
+		if ( IsExploding )
+		{
+			if ( _explodeStartTime > 0.5f )
+			{
+				Sprite.PlayAnimation( "explode_loop" );
+			}
+			else
+				Sprite.PlayAnimation( "explode_start" );
+		}
+		else
+		{
+			base.UpdateSprite( targetPlayer );
 		}
 	}
 

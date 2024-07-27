@@ -222,9 +222,6 @@ public abstract class Enemy : Thing
 				if ( _aggroTimer > AGGRO_LOSE_TIME )
 				{
 					IsAttacking = false;
-
-					if ( CanAttackAnim )
-						Sprite.PlayAnimation( AnimIdlePath );
 				}
 			}
 			else
@@ -240,15 +237,17 @@ public abstract class Enemy : Thing
 	public virtual void StartAttacking()
 	{
 		IsAttacking = true;
-
-		if ( CanAttackAnim )
-			Sprite.PlayAnimation( AnimAttackPath );
 	}
 
 	protected virtual void UpdateSprite( Player targetPlayer )
 	{
-		if ( !IsAttacking )
+		if ( IsDying ) return;
+
+		else if ( !IsAttacking )
 		{
+			if ( IsSpawning ) Sprite.PlayAnimation( AnimSpawnPath );
+			else Sprite.PlayAnimation( AnimIdlePath );
+
 			if ( !DontChangeAnimSpeed )
 				AnimSpeed = Utils.Map( Utils.FastSin( MoveTimeOffset + Time.Now * 7.5f ), -1f, 1f, 0.75f, 3f, EasingType.ExpoIn );
 
@@ -260,6 +259,7 @@ public abstract class Enemy : Thing
 		}
 		else
 		{
+			Sprite.PlayAnimation( AnimAttackPath );
 			if ( !DontChangeAnimSpeed )
 			{
 				float dist_sqr = (targetPlayer.Position2D - Position2D).LengthSquared;
@@ -315,7 +315,6 @@ public abstract class Enemy : Thing
 		if ( TimeSinceSpawn > SpawnTime )
 		{
 			IsSpawning = false;
-			Sprite.PlayAnimation( AnimIdlePath );
 			ShadowOpacity = ShadowFullOpacity;
 		}
 		else

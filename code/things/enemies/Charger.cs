@@ -52,7 +52,7 @@ public class Charger : Enemy
 
 		if ( IsProxy )
 			return;
-		
+
 		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );
 
@@ -241,7 +241,7 @@ public class Charger : Enemy
 
 						player.Damage( dmg );
 
-						if( dmg > 0f )
+						if ( dmg > 0f )
 							OnDamagePlayer( player, dmg );
 					}
 

@@ -1165,6 +1165,26 @@
           "Surface": "surfaces/default.surface"
         }
       ]
+    },
+    {
+      "__guid": "391bcefe-ff91-4967-8562-a6b04817905b",
+      "Flags": 0,
+      "Name": "spitter",
+      "Position": "5.16703,-1.959636,-498.748",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "__Prefab": "prefabs/spitter.prefab",
+      "__PrefabVariables": {}
+    },
+    {
+      "__guid": "eae2dcbf-d197-4471-851f-0300c83a0b17",
+      "Flags": 0,
+      "Name": "exploder",
+      "Position": "-6.197896,-3.506983,-498.748",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "__Prefab": "prefabs/exploder.prefab",
+      "__PrefabVariables": {}
     }
   ],
   "SceneProperties": {
