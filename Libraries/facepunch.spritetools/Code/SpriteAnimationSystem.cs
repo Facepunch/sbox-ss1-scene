@@ -20,7 +20,11 @@ public class SpriteAnimationSystem : GameObjectSystem
         Parallel.ForEach(sprites, sprite =>
         {
             sprite.UpdateSceneObject();
-            sprite.UpdateAttachments();
         });
+
+        foreach (var sprite in sprites)
+        {
+            sprite.RunBroadcastQueue();
+        }
     }
 }

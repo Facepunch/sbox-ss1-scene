@@ -9,6 +9,7 @@ using Sandbox;
 namespace SpriteTools;
 
 [Icon("emoji_emotions")]
+[Title("2D Sprite Component")]
 public sealed class SpriteComponent : Component, Component.ExecuteInEditor
 {
     /// <summary>
@@ -20,14 +21,17 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
         get => _sprite;
         set
         {
+            if (_sprite == value) return;
             _sprite = value;
             if (_sprite != null)
             {
-                PlayAnimation(StartingAnimationName);
+                PlayAnimation(StartingAnimationName, true);
             }
             else
                 CurrentAnimation = null;
+
             UpdateSprite();
+            ApplyMaterialOffset();
         }
     }
     SpriteResource _sprite;
@@ -63,7 +67,7 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
         }
     }
     Axis _upDirection = Axis.YPositive;
-    Rotation _rotationOffset = Rotation.Identity;
+    Rotation _rotationOffset = Rotation.From(0, -90, 0);
 
     /// <summary>
     /// The color tint of the Sprite.
@@ -169,7 +173,7 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
     [Property, Category("Sprite"), Title("Current Animation"), AnimationName]
     private string StartingAnimationName
     {
-        get => CurrentAnimation?.Name ?? Sprite.Animations.FirstOrDefault()?.Name;
+        get => CurrentAnimation?.Name ?? (Sprite?.Animations?.FirstOrDefault()?.Name ?? "");
         set
         {
             if (Sprite == null) return;
@@ -216,6 +220,11 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
     public Action<string> OnAnimationComplete { get; set; }
 
     /// <summary>
+    /// The current texture atlas that the sprite is using.
+    /// </summary>
+    public TextureAtlas CurrentTexture { get; set; }
+
+    /// <summary>
     /// Whether or not the sprite has any broadcast events.
     /// </summary>
     public bool HasBroadcastEvents => BroadcastEvents.Count > 0;
@@ -224,9 +233,10 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
     {
         get
         {
-            BBox bbox = new BBox(new Vector3(-50, -50, -0.1f), new Vector3(50, 50, 0.1f));
+            var ratio = CurrentTexture?.AspectRatio ?? 1;
+            BBox bbox = new BBox(new Vector3(-50, -50 * ratio, -0.1f), new Vector3(50, 50 * ratio, 0.1f));
             var origin = (CurrentAnimation?.Origin ?? new Vector2(0.5f, 0.5f)) - new Vector2(0.5f, 0.5f);
-            bbox = bbox.Translate(new Vector3(-origin.y, origin.x, 0) * 100f);
+            bbox = bbox.Translate(new Vector3(origin.y, origin.x, 0) * -100f);
             return bbox;
         }
     }
@@ -254,7 +264,6 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
     private bool _flipVertical = false;
 
     internal SceneObject SceneObject { get; set; }
-    TextureAtlas CurrentTexture { get; set; }
 
     protected override void OnStart()
     {
@@ -269,6 +278,15 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
             PlayAnimation(anim.Name);
         }
 
+        if (SpriteMaterial is null)
+        {
+            if (MaterialOverride != null)
+                SpriteMaterial = MaterialOverride.CreateCopy();
+            else
+                SpriteMaterial = Material.Create("spritemat", "shaders/sprite_2d.shader");
+        }
+
+        UpdateSprite();
         UpdateSceneObject();
         ApplySpriteFlags();
         FlashTint = _flashTint;
@@ -309,37 +327,22 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
         base.DrawGizmos();
         if (Game.IsPlaying) return;
 
-        using (Gizmo.Scope("sprite"))
-        {
-            Gizmo.Transform = Gizmo.Transform.WithRotation(Transform.Rotation * _rotationOffset);
-            var bbox = Bounds;
-            Gizmo.Hitbox.BBox(bbox);
+        Gizmo.Transform = Gizmo.Transform.WithRotation(Transform.Rotation * _rotationOffset);
+        var bbox = Bounds;
+        Gizmo.Hitbox.BBox(bbox);
 
-            if (Gizmo.IsHovered || Gizmo.IsSelected)
-            {
-                bbox.Mins.z = 0;
-                bbox.Maxs.z = 0.0f;
-                Gizmo.Draw.Color = Gizmo.IsSelected ? Color.White : Color.Orange;
-                Gizmo.Draw.LineBBox(bbox);
-            }
+        if (Gizmo.IsHovered || Gizmo.IsSelected)
+        {
+            bbox.Mins.z = 0;
+            bbox.Maxs.z = 0.0f;
+            Gizmo.Draw.Color = Gizmo.IsSelected ? Color.White : Color.Orange;
+            Gizmo.Draw.LineBBox(bbox);
         }
     }
 
     internal void UpdateSceneObject()
     {
-        if (SpriteMaterial is null)
-        {
-            if (MaterialOverride != null)
-                SpriteMaterial = MaterialOverride.CreateCopy();
-            else
-                SpriteMaterial = Material.Create("spritemat", "shaders/sprite_2d.shader");
-            if (CurrentTexture is not null)
-            {
-                SpriteMaterial.Set("Texture", CurrentTexture);
-                ApplyMaterialOffset();
-            }
-            SceneObject.SetMaterialOverride(SpriteMaterial);
-        }
+        if (!SceneObject.IsValid()) return;
 
         SceneObject.RenderingEnabled = true;
         SceneObject.Flags.ExcludeGameLayer = CastShadows == ShadowRenderType.ShadowsOnly;
@@ -364,13 +367,13 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
                 var currentFrame = CurrentAnimation.Frames[frame];
                 foreach (var tag in currentFrame.Events)
                 {
-                    BroadcastEvent(tag);
+                    QueueEvent(tag);
                 }
 
                 frame++;
                 if (CurrentAnimation.Looping && frame >= lastFrame)
                     frame = 0;
-                else if (frame >= lastFrame - 1)
+                else if (frame >= lastFrame - 1 && Game.IsPlaying)
                     OnAnimationComplete?.Invoke(CurrentAnimation.Name);
                 CurrentFrameIndex = frame;
                 _timeSinceLastFrame = 0;
@@ -384,13 +387,13 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
                 var currentFrame = CurrentAnimation.Frames[frame];
                 foreach (var tag in currentFrame.Events)
                 {
-                    BroadcastEvent(tag);
+                    QueueEvent(tag);
                 }
 
                 frame--;
                 if (CurrentAnimation.Looping && frame < 0)
                     frame = lastFrame - 1;
-                else if (frame <= 0)
+                else if (frame <= 0 && Game.IsPlaying)
                     OnAnimationComplete?.Invoke(CurrentAnimation.Name);
                 CurrentFrameIndex = frame;
                 _timeSinceLastFrame = 0;
@@ -404,7 +407,7 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
         // Add pivot to transform
         var pos = Transform.Position;
         var rot = Transform.Rotation * _rotationOffset;
-        var scale = Transform.Scale;
+        var scale = Transform.Scale * new Vector3(1f, 1f * (CurrentTexture?.AspectRatio ?? 1f), 1f);
         var origin = CurrentAnimation.Origin - new Vector2(0.5f, 0.5f);
         pos -= new Vector3(origin.y, origin.x, 0) * 100f * scale;
         pos = pos.RotateAround(Transform.Position, rot);
@@ -417,12 +420,10 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
         {
             foreach (var attachment in AttachPoints)
             {
-                var attachPos = CurrentAnimation.GetAttachmentPosition(attachment.Key, CurrentFrameIndex);
-                var origin = CurrentAnimation.Origin - new Vector2(0.5f, 0.5f);
-                var pos = (new Vector3(attachPos.y, attachPos.x, 0) - (Vector3.One.WithZ(0) / 2f) - new Vector3(origin.y, origin.x, 0)) * 100f;
-                pos = pos.RotateAround(Vector3.Zero, _rotationOffset);
-                pos *= Transform.LocalScale;
-                attachment.Value.Transform.LocalPosition = pos;
+                var transform = GetAttachmentTransform(attachment.Key);
+
+                attachment.Value.Transform.LocalPosition = transform.Position;
+                attachment.Value.Transform.LocalRotation = transform.Rotation;
             }
         }
     }
@@ -443,6 +444,7 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
         }
         SpriteMaterial.Set("g_vTiling", tiling);
         SpriteMaterial.Set("g_vOffset", offset);
+        UpdateAttachments();
     }
 
     void ApplySpriteFlags()
@@ -471,6 +473,13 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
             return;
         }
 
+        if (SpriteMaterial is not null && CurrentTexture is not null)
+        {
+            SpriteMaterial.Set("Texture", CurrentTexture);
+            ApplyMaterialOffset();
+            SceneObject.SetMaterialOverride(SpriteMaterial);
+        }
+
         List<string> keysToRemove = BroadcastEvents.Keys.ToList();
 
         foreach (var animation in Sprite.Animations)
@@ -494,6 +503,37 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
         }
     }
 
+    /// <summary>
+    /// Get the global transform of an attachment point. Returns Transform.World if the attachment point does not exist.
+    /// </summary>
+    /// <param name="attachmentName">The name of the attach point</param>
+    public Transform GetAttachmentTransform(string attachmentName)
+    {
+        if (AttachPoints.ContainsKey(attachmentName))
+        {
+            var ratio = CurrentTexture.AspectRatio;
+            var attachPos = CurrentAnimation.GetAttachmentPosition(attachmentName, CurrentFrameIndex);
+            var origin = CurrentAnimation.Origin - new Vector2(0.5f, 0.5f);
+            var rot = Rotation.Identity;
+            var pos = (new Vector3(attachPos.y, attachPos.x, 0) - (Vector3.One.WithZ(0) / 2f) - new Vector3(origin.y, origin.x, 0)) * 100f;
+            pos *= new Vector3(1f, ratio, 1f);
+            pos = pos.RotateAround(Vector3.Zero, _rotationOffset);
+            pos *= Transform.LocalScale;
+
+            if (SpriteFlags.HasFlag(SpriteFlags.HorizontalFlip)) rot *= Rotation.From(180, 0, 0);
+            if (SpriteFlags.HasFlag(SpriteFlags.VerticalFlip)) rot *= Rotation.From(0, 0, 180);
+            pos = pos.RotateAround(origin / 2f * new Vector2(100, 100 * ratio), rot);
+
+            return new Transform(pos, rot, Vector3.One);
+        }
+        return Transform.World;
+    }
+
+    /// <summary>
+    /// Plays an animation from the current Sprite by it's name.
+    /// </summary>
+    /// <param name="animationName">The name of the animation</param>
+    /// <param name="force">Whether or not the animation should be forced. If true this will restart the animation from frame index 0 even if the specified animation is equal to the current animation.</param>
     public void PlayAnimation(string animationName, bool force = false)
     {
         if (Sprite == null) return;
@@ -514,6 +554,21 @@ public sealed class SpriteComponent : Component, Component.ExecuteInEditor
         CurrentTexture = atlas;
         SpriteMaterial?.Set("Texture", CurrentTexture);
         ApplyMaterialOffset();
+    }
+
+    List<string> _queuedEvents = new();
+    void QueueEvent(string tag)
+    {
+        _queuedEvents.Add(tag);
+    }
+
+    internal void RunBroadcastQueue()
+    {
+        foreach (var tag in _queuedEvents)
+        {
+            BroadcastEvent(tag);
+        }
+        _queuedEvents.Clear();
     }
 
     void BroadcastEvent(string tag)
