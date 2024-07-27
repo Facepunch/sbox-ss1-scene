@@ -16,7 +16,10 @@ MainMenu {
 	cursor: "default-cursor";
 
 	.title {
-		align-self: flex-end;
+		position: absolute;
+		top: 10px;
+		right: 40px;
+		//align-self: flex-end;
 		font-size: 102px;
 		text-stroke: 5px black;
 		color: #fff;
@@ -31,6 +34,7 @@ MainMenu {
 
 		.button-container {
 			flex-direction: column;
+			//justify-content: flex-end;
 			justify-content: flex-end;
 			flex-shrink: 0;
 			gap: 8px;
@@ -45,12 +49,15 @@ MainMenu {
 	}
 
 	.button {
-		width: 500px;
+		width: 300px;
 		background-color: #4CAF50;
 		border: none;
 		color: white;
 		padding: 15px 32px;
 		text-align: center;
+		align-content: center;
+		justify-content: center;
+		align-items: center;
 		font-size: 54px;
 		margin: 4px 2px;
 		cursor: pointer;

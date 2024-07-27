@@ -136,7 +136,9 @@ public sealed class Manager : Component, Component.INetworkListener
 		//for( int i = 0; i < 22; i++ )
 		//	SpawnEnemy( TypeLibrary.GetType( typeof( Zombie ) ), new Vector2( Game.Random.Float( -1, 1f ), Game.Random.Float( -1, 1f ) ), forceSpawn: true );
 
-		//SpawnEnemy( TypeLibrary.GetType( typeof( Exploder ) ), new Vector2( -2f, 0f ), forceSpawn: true );
+		//SpawnEnemy( TypeLibrary.GetType( typeof( Exploder ) ), new Vector2( 2f, 0f ), forceSpawn: true );
+		//SpawnEnemy( TypeLibrary.GetType( typeof( ExploderElite ) ), new Vector2( -4f, 0f ), forceSpawn: true );
+		//SpawnEnemy( TypeLibrary.GetType( typeof( Spitter) ), new Vector2( -5f, 0f ), forceSpawn: true );
 
 		//SpawnBoss( new Vector2( 3f, 3f ) );
 		//HasSpawnedBoss = true;
@@ -323,7 +325,10 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		var closestPlayer = GetClosestPlayer( pos );
 		if ( closestPlayer?.Position2D.x > pos.x )
+		{
 			enemy.FlipX = true;
+			enemy.Sprite.SpriteFlags = SpriteFlags.HorizontalFlip;
+		}
 
 		enemyObj.Name = type.ToString();
 		enemyObj.NetworkSpawn( null );

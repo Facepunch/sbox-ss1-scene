@@ -319,6 +319,8 @@ public abstract class Enemy : Thing
 		}
 		else
 		{
+			Sprite.PlayAnimation( AnimSpawnPath );
+
 			if ( _spawnCloudTime > (0.3f / TimeScale) )
 			{
 				var cloud = Manager.Instance.SpawnCloud( Position2D + new Vector2( 0f, 0.05f ) );

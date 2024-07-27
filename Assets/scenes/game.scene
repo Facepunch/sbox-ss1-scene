@@ -1,5 +1,5 @@
 {
-  "__guid": "5a32a485-0aae-40af-a70c-b9ab5b9d7fae",
+  "__guid": "8da6fcb5-0ab0-4c1b-88a7-f4479295f626",
   "GameObjects": [
     {
       "__guid": "0ee658db-c168-4901-afd1-af4fa0ad5c51",
@@ -1165,26 +1165,6 @@
           "Surface": "surfaces/default.surface"
         }
       ]
-    },
-    {
-      "__guid": "391bcefe-ff91-4967-8562-a6b04817905b",
-      "Flags": 0,
-      "Name": "spitter",
-      "Position": "5.16703,-1.959636,-498.748",
-      "Enabled": true,
-      "NetworkMode": 1,
-      "__Prefab": "prefabs/spitter.prefab",
-      "__PrefabVariables": {}
-    },
-    {
-      "__guid": "eae2dcbf-d197-4471-851f-0300c83a0b17",
-      "Flags": 0,
-      "Name": "exploder",
-      "Position": "-6.197896,-3.506983,-498.748",
-      "Enabled": true,
-      "NetworkMode": 1,
-      "__Prefab": "prefabs/exploder.prefab",
-      "__PrefabVariables": {}
     }
   ],
   "SceneProperties": {
