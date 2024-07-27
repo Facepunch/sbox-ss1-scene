@@ -90,6 +90,8 @@ public abstract class Enemy : Thing
 		_animSpeed = 1f;
 		_animSpeedModifier = 1f;
 
+		SpawnShadow( ShadowScale, ShadowOpacity );
+
 		IsSpawning = true;
 		TimeSinceSpawn = 0f;
 		SpawnTime = 1.75f;
@@ -108,13 +110,6 @@ public abstract class Enemy : Thing
 
 		if ( IsProxy )
 			return;
-	}
-
-	protected override void OnStart()
-	{
-		base.OnStart();
-
-		SpawnShadow( ShadowScale, ShadowOpacity );
 	}
 
 	protected override void OnUpdate()

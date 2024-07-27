@@ -21,6 +21,7 @@ public class HealthPack : Thing
 
 		ShadowOpacity = 0.8f;
 		ShadowScale = 0.8f;
+		SpawnShadow( ShadowScale, ShadowOpacity );
 
 		Sprite.Transform.LocalScale = new Vector3( 1f ) * Scale * Globals.SPRITE_SCALE;
 
@@ -35,13 +36,6 @@ public class HealthPack : Thing
 
 		CollideWith.Add( typeof( Enemy ) );
 		CollideWith.Add( typeof( Player ) );
-	}
-
-	protected override void OnStart()
-	{
-		base.OnStart();
-
-		SpawnShadow( ShadowScale, ShadowOpacity );
 	}
 
 	protected override void OnUpdate()
