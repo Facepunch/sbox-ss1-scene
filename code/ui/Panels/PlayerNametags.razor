@@ -1,0 +1,31 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel
+
+<root>
+    @foreach (Player player in Scene.GetAllComponents<Player>())
+    {
+        var screenPos = Scene.Camera.PointToScreenPixels(player.Position2D) * ScaleFromScreen;
+
+        <Nametag style="left: @(screenPos.x)px; top: @(screenPos.y - 140)px;" Player=@player></Nametag>
+
+        @if (player.Network.IsOwner)
+        {
+            <InfoPanel Player=@player></InfoPanel>
+            <StatusPanel Player=@player></StatusPanel>
+
+            @if (player.IsChoosingLevelUpReward && !player.IsDead && !Manager.Instance.IsGameOver)
+            {
+                <ChoicePanel Player=@player></ChoicePanel>
+            }
+        }
+    }
+</root>
+
+@code
+{
+    protected override int BuildHash()
+    {
+        return System.HashCode.Combine(Time.Now);
+    }
+}
