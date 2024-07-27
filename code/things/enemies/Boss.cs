@@ -191,7 +191,8 @@ public class Boss : Enemy
 
 	protected override void UpdateSprite( Player targetPlayer )
 	{
-		if ( Sprite.CurrentAnimation.Name.Contains( "shoot" ) ) return;
+		if ( Sprite.CurrentAnimation.Name.Contains( "shoot" ) || Sprite.CurrentAnimation.Name.Contains( "charge" ) ) 
+			return;
 
 		base.UpdateSprite( targetPlayer );
 	}

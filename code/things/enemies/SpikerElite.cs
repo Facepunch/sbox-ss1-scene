@@ -19,7 +19,7 @@ public class SpikerElite : Enemy
 	protected override void OnAwake()
 	{
 		//OffsetY = -0.82f;
-		ShadowScale = 1.6f;
+		ShadowScale = 1.65f;
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
 

@@ -80,7 +80,9 @@ public class Exploder : Enemy
 				Sprite.PlayAnimation( "explode_loop" );
 			}
 			else
+			{
 				Sprite.PlayAnimation( "explode_start" );
+			}
 		}
 		else
 		{

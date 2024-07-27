@@ -22,7 +22,7 @@ public class Spiker : Enemy
 	protected override void OnAwake()
 	{
 		//OffsetY = -0.58f;
-		ShadowScale = 1.15f;
+		ShadowScale = 1.2f;
 		ShadowFullOpacity = 0.8f;
 		ShadowOpacity = 0f;
 
@@ -109,6 +109,12 @@ public class Spiker : Enemy
 				StartShooting();
 			}
 		}
+	}
+	protected override void UpdateSprite( Player targetPlayer )
+	{
+		if ( Sprite.CurrentAnimation.Name.Contains( "shoot" ) ) return;
+
+		base.UpdateSprite( targetPlayer );
 	}
 
 	public void StartShooting()

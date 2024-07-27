@@ -98,6 +98,13 @@ public class Spitter : Enemy
 		}
 	}
 
+	protected override void UpdateSprite( Player targetPlayer )
+	{
+		if ( Sprite.CurrentAnimation.Name.Contains( "shoot" ) ) return;
+
+		base.UpdateSprite( targetPlayer );
+	}
+
 	public void PrepareToShoot()
 	{
 		_prepareShootTime = 0f;

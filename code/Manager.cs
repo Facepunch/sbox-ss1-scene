@@ -140,8 +140,11 @@ public sealed class Manager : Component, Component.INetworkListener
 		//SpawnEnemy( TypeLibrary.GetType( typeof( ExploderElite ) ), new Vector2( -4f, 0f ), forceSpawn: true );
 		//SpawnEnemy( TypeLibrary.GetType( typeof( Spitter) ), new Vector2( -5f, 0f ), forceSpawn: true );
 
-		//SpawnBoss( new Vector2( 3f, 3f ) );
-		//HasSpawnedBoss = true;
+		//SpawnEnemy( TypeLibrary.GetType( typeof( Spitter ) ), new Vector2( 4f, 0f ), forceSpawn: true );
+		//SpawnEnemy( TypeLibrary.GetType( typeof( SpitterElite ) ), new Vector2( -4f, 0f ), forceSpawn: true );
+
+		SpawnBoss( new Vector2( 3f, 3f ) );
+		HasSpawnedBoss = true;
 	}
 
 	protected override void OnUpdate()
