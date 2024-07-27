@@ -63,6 +63,7 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	private TimeSince _enemySpawnTime;
 	[Sync] public TimeSince ElapsedTime { get; set; }
+	[Sync] public float RunStartTime { get; set; }
 
 	[Sync] public bool IsGameOver { get; private set; }
 	[Sync] public bool IsVictory { get; private set; }
@@ -98,6 +99,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		BOUNDS_MAX_SPAWN = new Vector2( 15.5f, 11.5f );
 
 		ElapsedTime = 0f;
+		RunStartTime = RealTime.Now;
 
 		for ( float x = BOUNDS_MIN.x; x < BOUNDS_MAX.x; x += GRID_SIZE )
 		{
@@ -703,6 +705,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		CoinCount = 0;
 		_enemySpawnTime = 0f;
 		ElapsedTime = 0f;
+		RunStartTime = RealTime.Now;
 		IsGameOver = false;
 		HasSpawnedBoss = false;
 		Boss = null;

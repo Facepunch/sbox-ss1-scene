@@ -23,6 +23,21 @@ PauseMenu {
 		text-shadow: 8px 8px 0px black;
 	}
 
+	.timer {
+		color: #fff;
+		font-size: 42px;
+		font-weight: bold;
+		padding: 4px 10px;
+		//text-shadow: 3px 3px 0px black;
+		text-stroke: 8px #222;
+		white-space: pre;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		background-color: #0002;
+		backdrop-filter: blur( 1px );
+	}
+
 	> .content {
 		flex-grow: 1;
 		flex-direction: column;

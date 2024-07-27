@@ -5,6 +5,14 @@
 
 <root class="@(Manager.Instance.IsPauseMenuOpen && !Manager.Instance.IsGameOver ? "show" : "")">
 	<label class="title">@(Manager.Instance.NumPlayers > 1 ? "Menu" : "Paused")</label>
+
+	@{
+		var time = TimeSpan.FromSeconds( RealTime.Now - Manager.Instance.RunStartTime );
+		string timeStr = time.TotalSeconds > 3600 ? time.ToString(@"hh\:mm\:ss") : time.ToString(@"mm\:ss");
+	}
+
+	<label class="timer">@($"Run Time\n{timeStr}")</label>
+
 	<div class="content">
 		<button onclick=@(() => Manager.Instance.IsPauseMenuOpen = false)>Resume</button>
 		<button class="red" onclick=@(() => Restart())>Restart</button>
@@ -43,5 +51,13 @@
 		Game.ActiveScene.Load(MenuScene);
 	}
 
-	protected override int BuildHash() => System.HashCode.Combine(Manager.Instance.IsPauseMenuOpen);
+	protected override int BuildHash()
+	{
+		var time = TimeSpan.FromSeconds(RealTime.Now - Manager.Instance.RunStartTime);
+
+		return System.HashCode.Combine(
+			Manager.Instance.IsPauseMenuOpen,
+			time.Seconds
+		);
+	}
 }
