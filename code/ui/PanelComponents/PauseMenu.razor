@@ -3,10 +3,10 @@
 @namespace Battlebugs
 @inherits PanelComponent
 
-<root class="@(IsOpen && !Manager.Instance.IsGameOver ? "show" : "")">
-	<label class="title">Menu</label>
+<root class="@(Manager.Instance.IsPauseMenuOpen && !Manager.Instance.IsGameOver ? "show" : "")">
+	<label class="title">@(Manager.Instance.NumPlayers > 1 ? "Menu" : "Paused")</label>
 	<div class="content">
-		<button onclick=@(() => IsOpen = false)>Resume</button>
+		<button onclick=@(() => Manager.Instance.IsPauseMenuOpen = false)>Resume</button>
 		<button class="red" onclick=@(() => Restart())>Restart</button>
 		<button class="red" onclick=@(() => ReturnToMainMenu())>Quit to Main Menu</button>
 	</div>
@@ -18,27 +18,24 @@
 	[Property] SceneFile GameScene { get; set; }
 	[Property] SceneFile MenuScene { get; set; }
 
-	public bool IsOpen { get; set; }
-
 	protected override void OnAwake()
 	{
 		Instance = this;
 	}
 
-	protected override void OnUpdate()
-	{
-		if(Input.EscapePressed)
-		{
-			IsOpen = !IsOpen;
-			Input.EscapePressed = false;
-		}
-	}
+	// protected override void OnUpdate()
+	// {
+	// 	if(Input.EscapePressed)
+	// 	{
+	// 		IsOpen = !IsOpen;
+	// 		Input.EscapePressed = false;
+	// 	}
+	// }
 
 	public void Restart()
 	{
 		// Game.ActiveScene.Load(GameScene);
 		Manager.Instance.Restart();
-		IsOpen = false;
 	}
 
 	public void ReturnToMainMenu()
@@ -46,5 +43,5 @@
 		Game.ActiveScene.Load(MenuScene);
 	}
 
-	protected override int BuildHash() => System.HashCode.Combine(IsOpen);
+	protected override int BuildHash() => System.HashCode.Combine(Manager.Instance.IsPauseMenuOpen);
 }

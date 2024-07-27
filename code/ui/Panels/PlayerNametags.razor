@@ -14,8 +14,8 @@
             <InfoPanel Player=@player></InfoPanel>
             <StatusPanel Player=@player></StatusPanel>
 
-            @if (player.IsChoosingLevelUpReward && !player.IsDead && !Manager.Instance.IsGameOver)
-            {
+			@if(player.IsChoosingLevelUpReward && !player.IsDead && !Manager.Instance.IsGameOver && !Manager.Instance.IsPauseMenuOpen)
+			{
                 <ChoicePanel Player=@player></ChoicePanel>
             }
         }

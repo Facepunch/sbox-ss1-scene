@@ -67,6 +67,8 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Sync] public bool IsGameOver { get; private set; }
 	[Sync] public bool IsVictory { get; private set; }
 
+	[Sync] public bool IsPauseMenuOpen { get; private set; }
+
 	public Vector2 MouseWorldPos { get; private set; }
 
 	public bool HasSpawnedBoss { get; private set; }
@@ -175,8 +177,16 @@ public sealed class Manager : Component, Component.INetworkListener
 		if ( _numEnemyDeathSfxs > 0 )
 			_numEnemyDeathSfxs--;
 
+		Scene.TimeScale = (IsPauseMenuOpen && NumPlayers == 1) ? 0f : 1f;
+
 		if ( IsProxy )
 			return;
+
+		if( Input.EscapePressed )
+		{
+			IsPauseMenuOpen = !IsPauseMenuOpen;
+			Input.EscapePressed = false;
+		}
 
 		HandleEnemySpawn();
 
@@ -699,7 +709,8 @@ public sealed class Manager : Component, Component.INetworkListener
 		TimeSinceMagnet = 0f;
 		Hud.Instance?.FadeIn();
 
-		Components.Get<PauseMenu>().IsOpen = false;
+		//Components.Get<PauseMenu>().IsOpen = false;
+		IsPauseMenuOpen = false;
 
 		if ( IsProxy )
 			return;

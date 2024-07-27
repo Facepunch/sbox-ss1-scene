@@ -343,7 +343,7 @@ public class Player : Thing
 			AimDir = (Manager.Instance.MouseWorldPos - (Position2D + new Vector2( 0f, 0.5f ))).Normal;
 		}
 
-		if ( ArrowAimer != null )
+		if ( ArrowAimer != null && !Manager.Instance.IsPauseMenuOpen )
 		{
 			ArrowAimer.Transform.LocalRotation = new Angles( 0f, MathF.Atan2( AimDir.y, AimDir.x ) * (180f / MathF.PI) - 180f, 0f );
 			ArrowAimer.Transform.LocalPosition = new Vector2( 0f, 0.4f ) + AimDir * Utils.Map( _timeSinceShoot, 0f, 0.25f, 0.6f, 0.55f, EasingType.QuadOut );
@@ -367,7 +367,7 @@ public class Player : Thing
 			HandleRegen( dt );
 		}
 
-		if ( IsChoosingLevelUpReward )
+		if ( IsChoosingLevelUpReward && !Manager.Instance.IsPauseMenuOpen )
 		{
 			if ( Input.Pressed( "reload" ) ) UseReroll();
 			else if ( Input.Pressed( "Slot1" ) ) UseChoiceHotkey( 1 );

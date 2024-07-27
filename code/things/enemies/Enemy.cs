@@ -114,8 +114,8 @@ public abstract class Enemy : Thing
 
 	protected override void OnUpdate()
 	{
-		Gizmo.Draw.Color = Color.White;
-		Gizmo.Draw.Text( $"Anim: {Sprite.CurrentAnimation.Name}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
+		//Gizmo.Draw.Color = Color.White;
+		//Gizmo.Draw.Text( $"Anim: {Sprite.CurrentAnimation.Name}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
 
 		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.05f );
 		//Gizmo.Draw.LineSphere( (Vector3)Position2D, Radius );
