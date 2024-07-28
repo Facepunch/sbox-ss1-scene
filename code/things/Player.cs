@@ -272,17 +272,17 @@ public class Player : Thing
 		{
 			InputVector = new Vector2( -Input.AnalogMove.y, Input.AnalogMove.x );
 
-			if ( Input.Pressed( "Menu" ) )
-			{
-				Manager.Instance.Restart();
-				return;
-			}
+			//if ( Input.Pressed( "Menu" ) )
+			//{
+			//	Manager.Instance.Restart();
+			//	return;
+			//}
 
-			foreach ( KeyValuePair<int, Status> pair in Statuses )
-			{
-				Status status = pair.Value;
-				debug += status.ToString() + "\n";
-			}
+			//foreach ( KeyValuePair<int, Status> pair in Statuses )
+			//{
+			//	Status status = pair.Value;
+			//	debug += status.ToString() + "\n";
+			//}
 		}
 
 		if ( Manager.Instance.IsGameOver )
@@ -378,10 +378,10 @@ public class Player : Thing
 			else if ( Input.Pressed( "Slot6" ) ) UseChoiceHotkey( 6 );
 		}
 
-		if ( Input.Pressed( "use" ) )
-		{
-			AddExperience( 1 );
-		}
+		//if ( Input.Pressed( "use" ) )
+		//{
+		//	AddExperience( 1 );
+		//}
 	}
 
 	void HandleRegen( float dt )
