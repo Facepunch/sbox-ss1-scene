@@ -640,7 +640,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	void BroadcastVictory()
 	{
 		// Just so we send the stat on all clients when multiplayer is working
-		Sandbox.Services.Stats.SetValue( "victory_elapsed_time", FinalRunTime );
+		Sandbox.Services.Stats.SetValue( "victory_elapsed_time", TimeSinceRunStart );
 	}
 
 	public BloodSplatter SpawnBloodSplatter( Vector2 pos )
