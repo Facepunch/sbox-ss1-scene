@@ -9,7 +9,9 @@
 
 		if(Manager.Instance.IsGameOver)
 		{
-			time = TimeSpan.FromSeconds(Manager.Instance.FinalRunTime);
+			time = Manager.Instance.HasSpawnedBoss
+				? TimeSpan.FromSeconds(Manager.Instance.FinalRunTime)
+				: TimeSpan.FromMinutes(15) - TimeSpan.FromSeconds(Manager.Instance.FinalRunTime);
 		} 
 		else
 		{
