@@ -106,12 +106,14 @@ public class Charger : Enemy
 				{
 					_chargeDir = _chargeDir.WithX( Math.Abs( _chargeDir.x ) );
 					_chargeVel = _chargeVel.WithX( Math.Abs( _chargeVel.x ) * 0.1f );
+					FlipX = true;
 					Sprite.SpriteFlags = SpriteFlags.HorizontalFlip;
 				}
 				else if ( Position2D.x > x_max && _chargeDir.x > 0f )
 				{
 					_chargeDir = _chargeDir.WithX( -Math.Abs( _chargeDir.x ) );
 					_chargeVel = _chargeVel.WithX( -Math.Abs( _chargeVel.x ) * 0.1f );
+					FlipX = false;
 					Sprite.SpriteFlags = SpriteFlags.None;
 				}
 
@@ -210,7 +212,9 @@ public class Charger : Enemy
 		_chargeVel = Vector2.Zero;
 		Sprite.PlayAnimation( "charge_loop" );
 		AnimSpeed = 3f;
-		Sprite.SpriteFlags = target_pos.x > Position2D.x ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
+		FlipX = _chargeDir.x > 0f;
+		Sprite.SpriteFlags = FlipX ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
+		//Sprite.SpriteFlags = target_pos.x > Position2D.x ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
 
 		Manager.Instance.PlaySfxNearby( "enemy.roar", Position2D, pitch: Game.Random.Float( 0.925f, 1.075f ), volume: 1f, maxDist: 8f );
 	}

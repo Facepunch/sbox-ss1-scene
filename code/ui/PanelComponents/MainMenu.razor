@@ -10,7 +10,7 @@
 			@if (State == MenuState.Main)
 			{
 				<div class="button" onclick="@(() => ButtonStart(true))">Play</div>
-				<div class="button blue" onclick="@(() => Game.Overlay.ShowBinds())">Settings</div>
+				@* <div class="button blue" onclick="@(() => Game.Overlay.ShowBinds())">Settings</div> *@
 				<div class="button red" onclick="@(() => Quit())">Quit</div>
 
 				@*<div class="button" onclick="@(() => ButtonStart(true))">Start Singleplayer</div>

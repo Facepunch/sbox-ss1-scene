@@ -300,6 +300,8 @@ public class Boss : Enemy
 		_chargeDelayTimer = Game.Random.Float( CHARGE_DELAY_MIN, CHARGE_DELAY_MAX ) * Utils.Map( Health, MaxHealth, 0f, 1f, 0.5f, EasingType.SineIn );
 		_chargeVel = Vector2.Zero;
 
+		FlipX = _chargeDir.x > 0f;
+		Sprite.SpriteFlags = FlipX ? SpriteFlags.HorizontalFlip : SpriteFlags.None;
 		//Sprite.FlipHorizontal = target_pos.x > Position2D.x;
 
 		Manager.Instance.PlaySfxNearby( "boss.charge", Position2D, pitch: Game.Random.Float( 0.9f, 1.05f ), volume: 1.6f, maxDist: 9f );

@@ -64,6 +64,7 @@ public sealed class Manager : Component, Component.INetworkListener
 	private TimeSince _enemySpawnTime;
 	[Sync] public TimeSince ElapsedTime { get; set; }
 	[Sync] public RealTimeSince TimeSinceRunStart { get; set; }
+	[Sync] public float FinalRunTime { get; set; }
 
 	[Sync] public bool IsGameOver { get; private set; }
 	[Sync] public bool IsVictory { get; private set; }
@@ -139,6 +140,9 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		//for( int i = 0; i < 22; i++ )
 		//	SpawnEnemy( TypeLibrary.GetType( typeof( Zombie ) ), new Vector2( Game.Random.Float( -1, 1f ), Game.Random.Float( -1, 1f ) ), forceSpawn: true );
+
+		//SpawnEnemy( TypeLibrary.GetType( typeof( Charger ) ), new Vector2( 2f, 0f ), forceSpawn: true );
+		//SpawnEnemy( TypeLibrary.GetType( typeof( ChargerElite ) ), new Vector2( 2f, 0f ), forceSpawn: true );
 
 		//SpawnEnemy( TypeLibrary.GetType( typeof( Exploder ) ), new Vector2( 2f, 0f ), forceSpawn: true );
 		//SpawnEnemy( TypeLibrary.GetType( typeof( ExploderElite ) ), new Vector2( -4f, 0f ), forceSpawn: true );
@@ -616,6 +620,7 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		IsGameOver = true;
 		IsVictory = false;
+		FinalRunTime = TimeSinceRunStart.Relative;
 	}
 
 	public void Victory()
@@ -625,6 +630,7 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		IsGameOver = true;
 		IsVictory = true;
+		FinalRunTime = TimeSinceRunStart.Relative;
 
 		BroadcastVictory();
 	}
