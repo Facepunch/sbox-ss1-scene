@@ -184,7 +184,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		if ( IsProxy )
 			return;
 
-		if( Input.EscapePressed )
+		if ( Input.EscapePressed )
 		{
 			IsPauseMenuOpen = !IsPauseMenuOpen;
 			Input.EscapePressed = false;
@@ -616,9 +616,6 @@ public sealed class Manager : Component, Component.INetworkListener
 
 		IsGameOver = true;
 		IsVictory = false;
-
-		//Sandbox.Services.Stats.Increment( "failures", 1 );
-		//Sandbox.Services.Stats.SetValue( "failure-time", ElapsedTime.Relative );
 	}
 
 	public void Victory()
@@ -629,8 +626,15 @@ public sealed class Manager : Component, Component.INetworkListener
 		IsGameOver = true;
 		IsVictory = true;
 
-		//Sandbox.Services.Stats.Increment( "victories", 1 );
-		//Sandbox.Services.Stats.SetValue( "victory-time", ElapsedTime.Relative );
+		BroadcastVictory();
+	}
+
+
+	[Broadcast]
+	void BroadcastVictory()
+	{
+		// Just so we send the stat on all clients when multiplayer is working
+		Sandbox.Services.Stats.SetValue( "victory_elapsed_time", TimeSinceRunStart );
 	}
 
 	public BloodSplatter SpawnBloodSplatter( Vector2 pos )

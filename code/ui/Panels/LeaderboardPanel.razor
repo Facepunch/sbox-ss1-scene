@@ -1,0 +1,52 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel
+@attribute [StyleSheet]
+
+<root>
+    @if (Leaderboard is null) return;
+    @if (Leaderboard.Entries.Count() <= 1) return;
+    <label class="header">Leaderboard</label>
+    <div class="entries">
+        @if (true)
+        {
+            var offset = 0;
+            @foreach (var entry in Leaderboard.Entries)
+            {
+                @if (entry.Value <= 15 * 60)
+                {
+                    offset++;
+                    continue;
+                }
+                <div class="entry">
+                    <label class="rank">##@(entry.Rank - offset)</label>
+                    <label class="name">@entry.DisplayName</label>
+                    <label class="value">@entry.FormattedValue</label>
+                </div>
+            }
+        }
+    </div>
+</root>
+
+@code
+{
+    Sandbox.Services.Leaderboards.Board Leaderboard;
+
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        base.OnAfterTreeRender(firstTime);
+
+        if (firstTime)
+        {
+            Leaderboard = Sandbox.Services.Leaderboards.Get("victory_time");
+            Refresh();
+        }
+    }
+
+    async void Refresh()
+    {
+        Leaderboard.MaxEntries = 50;
+        await Leaderboard.Refresh();
+        StateHasChanged();
+    }
+}

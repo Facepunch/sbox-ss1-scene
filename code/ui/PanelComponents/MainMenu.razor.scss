@@ -87,6 +87,14 @@ MainMenu {
 		}
 	}
 
+	LeaderboardPanel
+	{
+		position: absolute;
+		bottom: 32px;
+		right: 32px;
+		width: 300px;
+	}
+
 	.fade_in {
 		position: absolute;
 		width: 100%;

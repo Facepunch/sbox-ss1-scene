@@ -3,7 +3,7 @@
 @inherits PanelComponent
 
 <root>
-	@if(!(Manager.Instance.HasSpawnedBoss && Manager.Instance.IsPauseMenuOpen)) 
+	@if (!(Manager.Instance.HasSpawnedBoss && Manager.Instance.IsPauseMenuOpen))
 	{
 		<TimerPanel></TimerPanel>
 	}
@@ -54,6 +54,6 @@
 
 	protected override int BuildHash()
 	{
-		return System.HashCode.Combine(fadeTime < 0.8f);
+		return System.HashCode.Combine(fadeTime < 0.8f, Manager.Instance.IsGameOver, Manager.Instance.HasSpawnedBoss);
 	}
 }

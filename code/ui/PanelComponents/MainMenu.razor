@@ -14,9 +14,9 @@
 				<div class="button red" onclick="@(() => Quit())">Quit</div>
 
 				@*<div class="button" onclick="@(() => ButtonStart(true))">Start Singleplayer</div>
-				<div class="button" onclick="@(() => ButtonStart())">Start Multiplayer</div>
-				<div class="button blue" onclick="@(() => ButtonLobbies())">Lobbies</div>
-				<div class="button red" onclick="@(() => Quit())">Quit</div>*@
+			<div class="button" onclick="@(() => ButtonStart())">Start Multiplayer</div>
+			<div class="button blue" onclick="@(() => ButtonLobbies())">Lobbies</div>
+			<div class="button red" onclick="@(() => Quit())">Quit</div>*@
 			}
 			else if (State == MenuState.Lobbies)
 			{
@@ -39,6 +39,8 @@
 			</div>
 		}
 	</div>
+
+	<LeaderboardPanel></LeaderboardPanel>
 
 	@if (MenuManager.Instance.ElapsedTime < 0.75f)
 	{
