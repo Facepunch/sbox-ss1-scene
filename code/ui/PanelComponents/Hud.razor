@@ -3,7 +3,10 @@
 @inherits PanelComponent
 
 <root>
-	<TimerPanel></TimerPanel>
+	@if(!(Manager.Instance.HasSpawnedBoss && Manager.Instance.IsPauseMenuOpen)) 
+	{
+		<TimerPanel></TimerPanel>
+	}
 
 	<PlayerNametags></PlayerNametags>
 

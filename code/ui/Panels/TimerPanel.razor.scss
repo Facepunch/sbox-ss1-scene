@@ -12,7 +12,6 @@ TimerPanel {
     }
 
     .label {
-        color: #fff;
         font-size: 42px;
         font-weight: bold;
         font-family: "Mini Pixel-7";
@@ -22,5 +21,13 @@ TimerPanel {
         padding: 4px 10px;
         backdrop-filter: blur( 1px );
         text-stroke: 8px #222;
+    }
+
+    .white {
+        color: #fff;
+    }
+
+    .red {
+        color: #ff7777;
     }
 }
