@@ -63,7 +63,7 @@ public sealed class Manager : Component, Component.INetworkListener
 
 	private TimeSince _enemySpawnTime;
 	[Sync] public TimeSince ElapsedTime { get; set; }
-	[Sync] public float RunStartTime { get; set; }
+	[Sync] public RealTimeSince TimeSinceRunStart { get; set; }
 
 	[Sync] public bool IsGameOver { get; private set; }
 	[Sync] public bool IsVictory { get; private set; }
@@ -99,7 +99,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		BOUNDS_MAX_SPAWN = new Vector2( 15.5f, 11.5f );
 
 		ElapsedTime = 0f;
-		RunStartTime = RealTime.Now;
+		TimeSinceRunStart = 0f;
 
 		for ( float x = BOUNDS_MIN.x; x < BOUNDS_MAX.x; x += GRID_SIZE )
 		{
@@ -140,15 +140,15 @@ public sealed class Manager : Component, Component.INetworkListener
 		//for( int i = 0; i < 22; i++ )
 		//	SpawnEnemy( TypeLibrary.GetType( typeof( Zombie ) ), new Vector2( Game.Random.Float( -1, 1f ), Game.Random.Float( -1, 1f ) ), forceSpawn: true );
 
-		//SpawnEnemy( TypeLibrary.GetType( typeof( Exploder ) ), new Vector2( 2f, 0f ), forceSpawn: true );
-		//SpawnEnemy( TypeLibrary.GetType( typeof( ExploderElite ) ), new Vector2( -4f, 0f ), forceSpawn: true );
-		//SpawnEnemy( TypeLibrary.GetType( typeof( Spitter) ), new Vector2( -5f, 0f ), forceSpawn: true );
+		SpawnEnemy( TypeLibrary.GetType( typeof( Exploder ) ), new Vector2( 2f, 0f ), forceSpawn: true );
+		SpawnEnemy( TypeLibrary.GetType( typeof( ExploderElite ) ), new Vector2( -4f, 0f ), forceSpawn: true );
+		SpawnEnemy( TypeLibrary.GetType( typeof( Spitter) ), new Vector2( -5f, 0f ), forceSpawn: true );
 
-		//SpawnEnemy( TypeLibrary.GetType( typeof( Spitter ) ), new Vector2( 4f, 0f ), forceSpawn: true );
+		SpawnEnemy( TypeLibrary.GetType( typeof( Spiker ) ), new Vector2( 4f, 0f ), forceSpawn: true );
 		//SpawnEnemy( TypeLibrary.GetType( typeof( SpitterElite ) ), new Vector2( -4f, 0f ), forceSpawn: true );
 
-		SpawnBoss( new Vector2( 3f, 3f ) );
-		HasSpawnedBoss = true;
+		//SpawnBoss( new Vector2( 3f, 3f ) );
+		//HasSpawnedBoss = true;
 	}
 
 	protected override void OnUpdate()
@@ -705,7 +705,7 @@ public sealed class Manager : Component, Component.INetworkListener
 		CoinCount = 0;
 		_enemySpawnTime = 0f;
 		ElapsedTime = 0f;
-		RunStartTime = RealTime.Now;
+		TimeSinceRunStart = 0f;
 		IsGameOver = false;
 		HasSpawnedBoss = false;
 		Boss = null;
@@ -748,6 +748,9 @@ public sealed class Manager : Component, Component.INetworkListener
 		maxDist *= Globals.SFX_DIST_MODIFIER;
 
 		var player = GetLocalPlayer();
+		if ( player == null )
+			return;
+
 		var playerPos = player.Position2D;
 
 		var distSqr = (player.Position2D - worldPos).LengthSquared;

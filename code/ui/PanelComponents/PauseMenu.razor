@@ -7,7 +7,7 @@
 	<label class="title">@(Manager.Instance.NumPlayers > 1 ? "Menu" : "Paused")</label>
 
 	@{
-		var time = TimeSpan.FromSeconds( RealTime.Now - Manager.Instance.RunStartTime );
+		var time = TimeSpan.FromSeconds( Manager.Instance.TimeSinceRunStart.Relative );
 		string timeStr = time.TotalSeconds > 3600 ? time.ToString(@"hh\:mm\:ss") : time.ToString(@"mm\:ss");
 	}
 
@@ -53,11 +53,9 @@
 
 	protected override int BuildHash()
 	{
-		var time = TimeSpan.FromSeconds(RealTime.Now - Manager.Instance.RunStartTime);
-
 		return System.HashCode.Combine(
 			Manager.Instance.IsPauseMenuOpen,
-			time.Seconds
+			Manager.Instance.TimeSinceRunStart.Relative
 		);
 	}
 }

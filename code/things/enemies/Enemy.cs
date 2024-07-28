@@ -130,6 +130,12 @@ public abstract class Enemy : Thing
 
 		float dt = Time.Delta;
 
+		var closestPlayer = Manager.Instance.GetClosestPlayer( (Vector3)Position2D );
+		if ( closestPlayer == null )
+			return;
+
+		UpdateSprite( closestPlayer );
+
 		if ( IsSpawning )
 		{
 			HandleSpawning();
@@ -162,12 +168,7 @@ public abstract class Enemy : Thing
 
 		TempWeight *= (1f - dt * 4.7f);
 
-		var closestPlayer = Manager.Instance.GetClosestPlayer( (Vector3)Position2D );
-		if ( closestPlayer == null )
-			return;
-
 		HandleAttacking( closestPlayer, dt );
-		UpdateSprite( closestPlayer );
 	}
 
 	protected virtual void HandleStatuses( float dt )
@@ -314,7 +315,7 @@ public abstract class Enemy : Thing
 		}
 		else
 		{
-			Sprite.PlayAnimation( AnimSpawnPath );
+			//Sprite.PlayAnimation( AnimSpawnPath );
 
 			if ( _spawnCloudTime > (0.3f / TimeScale) )
 			{
