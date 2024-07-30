@@ -258,7 +258,7 @@ public class Player : Thing
 		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.5f );
 		//Gizmo.Draw.Text( $"IsGameOver: {Manager.Instance.IsGameOver}\nIsDead: {IsDead}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
 
-		string debug = "";
+		//string debug = "";
 
 		if ( !_doneFirstUpdate )
 		{

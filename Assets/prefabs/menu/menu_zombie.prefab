@@ -8,6 +8,7 @@
       {
         "__type": "SpriteTools.SpriteComponent",
         "__guid": "fe2892cd-7d29-476c-978d-de0d6525d4e0",
+        "__version": 1,
         "BroadcastEvents": {},
         "CastShadows": "On",
         "CreateAttachPoints": false,
@@ -16,7 +17,8 @@
         "Sprite": "textures/sprites/zombie/zombie.sprite",
         "SpriteFlags": "None",
         "StartingAnimationName": "walk",
-        "Tint": "1,1,1,1"
+        "Tint": "1,1,1,1",
+        "UpDirection": "XNegative"
       },
       {
         "__type": "MenuZombie",
