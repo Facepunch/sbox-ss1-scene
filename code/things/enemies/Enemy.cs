@@ -422,6 +422,8 @@ public abstract class Enemy : Thing
 		if ( IsProxy )
 			return;
 
+		Sandbox.Services.Stats.Increment( "zombies_killed", 1 );
+
 		Player player = null;
 		if ( playerId != Guid.Empty )
 		{
