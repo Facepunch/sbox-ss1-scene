@@ -9,7 +9,7 @@
 		@foreach (var entry in Entries)
 		{
 			<div class="chat_entry">
-				<div class="author" style="color:@(Globals.GetNameColor(entry.author).Rgba);">@entry.author</div>
+				<div class="author">@entry.author</div>
 				<div class="message">@entry.message</div>
 			</div>
 		}

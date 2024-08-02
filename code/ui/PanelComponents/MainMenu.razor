@@ -10,7 +10,6 @@
 			@if (State == MenuState.Main)
 			{
 				<div class="button" onclick="@(() => ButtonStart(true))">Play</div>
-				@* <div class="button blue" onclick="@(() => Game.Overlay.ShowBinds())">Settings</div> *@
 				<div class="button red" onclick="@(() => Quit())">Quit</div>
 
 				@*<div class="button" onclick="@(() => ButtonStart(true))">Start Singleplayer</div>
@@ -73,12 +72,6 @@
 		cameraAngles = Scene.Camera.Transform.Rotation;
 	}
 
-	protected override void OnUpdate()
-	{
-		// var camAngles = cameraAngles + new Angles(Mouse.Position.y - (Screen.Height / 2f), -Mouse.Position.x - (-Screen.Width / 2f), 0) * 0.0015f;
-		// Scene.Camera.Transform.Rotation = Angles.Lerp(Scene.Camera.Transform.Rotation, camAngles, Time.Delta * 5.0f);
-	}
-
 	void ButtonStart(bool isSingleplayer = false)
 	{
 		IsSingleplayerGame = isSingleplayer;
@@ -113,8 +106,9 @@
 	{
 		float timeHash = MenuManager.Instance.ElapsedTime < 0.75f ? MenuManager.Instance.ElapsedTime : 0f;
 		return HashCode.Combine(
-		State,
-		timeHash
+			State,
+			timeHash,
+			Time.Now
 		);
 	}
 }

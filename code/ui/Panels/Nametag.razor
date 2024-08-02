@@ -8,7 +8,7 @@
 		var displayName = Player.Network.OwnerConnection.DisplayName;
 	}
 
-	<label class="name" style="color:@(Globals.GetNameColor(displayName).Rgba);">
+	<label class="name">
 		@displayName.Truncate(12, "..")
 	</label>
 

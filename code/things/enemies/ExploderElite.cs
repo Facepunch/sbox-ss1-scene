@@ -13,7 +13,7 @@ public class ExploderElite : Enemy
 	[Sync] public bool IsExploding { get; set; }
 	private TimeSince _explodeStartTime;
 	private bool _hasExploded;
-	private bool _hasStartedLooping;
+	//private bool _hasStartedLooping;
 
 	private Guid _playerWhoKilledUsId;
 

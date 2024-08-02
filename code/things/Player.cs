@@ -258,8 +258,6 @@ public class Player : Thing
 		//Gizmo.Draw.Color = Color.White.WithAlpha( 0.5f );
 		//Gizmo.Draw.Text( $"IsGameOver: {Manager.Instance.IsGameOver}\nIsDead: {IsDead}", new global::Transform( (Vector3)Position2D + new Vector3( 0f, -0.7f, 0f ) ) );
 
-		//string debug = "";
-
 		if ( !_doneFirstUpdate )
 		{
 			SpawnShadow( ShadowScale, ShadowOpacity );
@@ -276,12 +274,6 @@ public class Player : Thing
 			//{
 			//	Manager.Instance.Restart();
 			//	return;
-			//}
-
-			//foreach ( KeyValuePair<int, Status> pair in Statuses )
-			//{
-			//	Status status = pair.Value;
-			//	debug += status.ToString() + "\n";
 			//}
 		}
 

@@ -26,16 +26,4 @@ public class Globals
 		new Color(0.5f, 0.5f, 1f ),
 		new Color( 1f, 1f, 0.5f )
 	};
-
-	public static Color GetNameColor( string name )
-	{
-		return Color.White;
-
-		int hash = name.GetHashCode();
-
-		//if ( Manager.Instance.NumPlayers <= 1 )
-		//	return Color.White;
-
-		return _nameColors[hash % _nameColors.Count];
-	}
 }
