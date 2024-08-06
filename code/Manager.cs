@@ -144,13 +144,6 @@ public sealed class Manager : Component, Component.INetworkListener
 		//SpawnEnemy( TypeLibrary.GetType( typeof( Charger ) ), new Vector2( 2f, 0f ), forceSpawn: true );
 		//SpawnEnemy( TypeLibrary.GetType( typeof( ChargerElite ) ), new Vector2( 2f, 0f ), forceSpawn: true );
 
-		//SpawnEnemy( TypeLibrary.GetType( typeof( Exploder ) ), new Vector2( 2f, 0f ), forceSpawn: true );
-		//SpawnEnemy( TypeLibrary.GetType( typeof( ExploderElite ) ), new Vector2( -4f, 0f ), forceSpawn: true );
-		//SpawnEnemy( TypeLibrary.GetType( typeof( Spitter) ), new Vector2( -5f, 0f ), forceSpawn: true );
-
-		//SpawnEnemy( TypeLibrary.GetType( typeof( Spiker ) ), new Vector2( 4f, 0f ), forceSpawn: true );
-		//SpawnEnemy( TypeLibrary.GetType( typeof( SpitterElite ) ), new Vector2( -4f, 0f ), forceSpawn: true );
-
 		//SpawnBoss( new Vector2( 3f, 3f ) );
 		//HasSpawnedBoss = true;
 	}
@@ -621,6 +614,17 @@ public sealed class Manager : Component, Component.INetworkListener
 		IsGameOver = true;
 		IsVictory = false;
 		FinalRunTime = TimeSinceRunStart.Relative;
+
+		BroadcastLoss();
+	}
+
+	[Broadcast]
+	void BroadcastLoss()
+	{
+		Sandbox.Services.Stats.SetValue( "death_time", TimeSinceRunStart );
+
+		Sandbox.Services.Stats.SetValue( "death_time_test_add", TimeSinceRunStart );
+		Sandbox.Services.Stats.SetValue( "death_time_test_add_int", TimeSinceRunStart );
 	}
 
 	public void Victory()
@@ -639,8 +643,16 @@ public sealed class Manager : Component, Component.INetworkListener
 	[Broadcast]
 	void BroadcastVictory()
 	{
+		Log.Info( $"BroadcastVictory: {TimeSinceRunStart}" );
+
 		// Just so we send the stat on all clients when multiplayer is working
 		Sandbox.Services.Stats.SetValue( "victory_elapsed_time", TimeSinceRunStart );
+
+		Sandbox.Services.Stats.SetValue( "victory_time_2", TimeSinceRunStart );
+
+		Sandbox.Services.Stats.SetValue( "victory_time_add", TimeSinceRunStart );
+
+		Sandbox.Services.Stats.Increment( "v_int_test", Game.Random.Int(1, 99) );
 	}
 
 	public BloodSplatter SpawnBloodSplatter( Vector2 pos )
